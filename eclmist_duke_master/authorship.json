@@ -1,0 +1,7525 @@
+[
+  {
+    "path": "src/main/java/META-INF/MANIFEST.MF",
+    "fileType": "MF",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "Manifest-Version: 1.0"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "Main-Class: duke.Duke"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 3
+    }
+  },
+  {
+    "path": "src/main/java/duke/Duke.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.Command;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Parser;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Serializer;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "public class Duke {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected TaskList tasks;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected Ui ui;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected Parser parser;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Duke() {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui \u003d new Ui(System.in);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        tasks \u003d new TaskList(Serializer.deserialize());"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        parser \u003d new Parser();"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        new Duke().run();"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void run() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui.printWelcomeMessage();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        boolean shouldExit \u003d false;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        while (!shouldExit) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                String fullCommand \u003d ui.readCommand();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                Command command \u003d parser.parse(fullCommand);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                if (command !\u003d null) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                    command.execute(tasks, ui);"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                    shouldExit \u003d command.isExitCommand();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                ui.printError(e.getMessage());"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 43,
+      "-": 2
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/AddCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.Deadline;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.Event;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.Todo;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class AddCommand extends Command {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected Task.TaskType taskType;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String inputArgs;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor for the Add Command."
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param type The type of task to be added."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param args The arguments required by the construction of the task to be added."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public AddCommand(Task.TaskType type, String args) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.taskType \u003d type;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.inputArgs \u003d args;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Executes the Add Command."
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Adds a new task to the taskList, and output a notification through the ui."
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param taskList The TaskList to add the new Task into."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param ui The Ui used to print any notifications."
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @throws DukeException If an unsupported task type is found."
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) throws DukeException {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        DukeException.throwIf(inputArgs.equals(\"\"), String.format(\"The description of a task cannot be empty!\"));"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        Task taskToAdd \u003d null;"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        switch (taskType) {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case TASK_TYPE_TODO:"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            taskToAdd \u003d new Todo(inputArgs);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case TASK_TYPE_EVENT:"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            String[] splitEventArgs \u003d inputArgs.split(\" /at \");"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            DukeException.throwIf(splitEventArgs.length \u003c 2, String.format(\"Input is missing a \u0027/at\u0027 argument!\"));"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            taskToAdd \u003d new Event(splitEventArgs[0], splitEventArgs[1]);"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case TASK_TYPE_DEADLINE:"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            String[] splitDeadlineArgs \u003d inputArgs.split(\" /by \");"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            DukeException.throwIf(splitDeadlineArgs.length \u003c 2, String.format(\"Input is missing a \u0027/by\u0027 argument!\"));"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            taskToAdd \u003d new Deadline(splitDeadlineArgs[0], splitDeadlineArgs[1]);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            throw new DukeException(\"Unsupported task type selected. Please try again.\");"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assert (taskToAdd !\u003d null);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        taskList.addTask(taskToAdd);"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui.stylizedPrint("
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                \"New task added:\","
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                \"\\t\" + taskToAdd.toString(),"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                String.format(\"You now have %d task(s) in the list.\", taskList.size())"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        );"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 67
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/Command.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public abstract class Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public boolean isExitCommand() {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 14
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/DeleteCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class DeleteCommand extends Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected int indexToDelete;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor for the Delete Command."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param index The index of task to be deleted."
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public DeleteCommand(int index) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.indexToDelete \u003d Math.max(0, index);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Deletes the task in the input TaskList that matches the index that the user has requested to be deleted."
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param taskList The TaskList to delete from."
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param ui The Ui used to print any notifications."
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @throws DukeException If the index to delete is invalid."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) throws DukeException {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        DukeException.throwIf(!taskList.isIndexValid(indexToDelete), \"The input index is out of bounds!\");"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        Task deletedTask \u003d taskList.removeAtIndex(indexToDelete);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui.stylizedPrint("
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                \"You have removed the following task:\\n\","
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                \"\\t\" + deletedTask.toString(),"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                String.format(\"You now have %d task(s) in the list.\", taskList.size()));"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 37
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/DoneCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class DoneCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected int indexToMarkAsDone;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor for the Done Command."
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param index The index of the task to be marked as done."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public DoneCommand(int index) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.indexToMarkAsDone \u003d Math.max(0, index);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param taskList The TaskList to select task from."
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param ui The Ui used to print any notifications."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @throws DukeException If the index to mark is invalid."
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) throws DukeException {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        DukeException.throwIf(!taskList.isIndexValid(indexToMarkAsDone), \"The input index is out of bounds!\");"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        taskList.markAsDone(indexToMarkAsDone);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        // Temp for visualization. TODO: remove this."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        new ListCommand().execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 34
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/ExitCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Serializer;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class ExitCommand extends Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Start the cleanup and exit process of Duke."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Serializes the input TaskList to file, and print a goodbye message."
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param taskList The TaskList to serialize to file."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param ui The Ui used to print any notifications."
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        Serializer.serialize(taskList);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui.printGoodbyeMessage();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public boolean isExitCommand() {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 27
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/FindCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.util.List;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class FindCommand extends Command {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String searchQuery;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor for a Find Command."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param searchQuery The search query to use to find Tasks."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public FindCommand(String searchQuery) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.searchQuery \u003d searchQuery;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Searches the input taskList for entries that match the input search query."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * All matching tasks will be printed."
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param taskList The TaskList to search."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param ui The Ui used to print results."
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @throws DukeException If the search query is empty."
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) throws DukeException {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        DukeException.throwIf(searchQuery.equals(\"\"), \"The search term cannot be empty!\");"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui.printHorizontalBar();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        System.out.println(\"\\tHere are the tasks matching your search query \u0027\" + searchQuery + \"\u0027:\");"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        List\u003cString\u003e names \u003d taskList.findTasks(this.searchQuery);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (int i \u003d 0; i \u003c names.size(); ++i) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            System.out.println(String.format(\"\\t%d. \" + names.get(i), i + 1));"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui.printHorizontalBar();"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 41
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/ListCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class ListCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Prints all tasks that are currently in the TaskList."
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param taskList The TaskList to print tasks from."
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param ui The Ui used to print the tasks."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        if (taskList.size() \u003c\u003d 0) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            ui.stylizedPrint(\"There are currently no tasks.\");"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String[] names \u003d taskList.getNames();"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (int i \u003d 0; i \u003c names.length; ++i) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            names[i] \u003d (i + 1) + \". \" + names[i];"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ui.stylizedPrint(names);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 28
+    }
+  },
+  {
+    "path": "src/main/java/duke/exception/DukeException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.exception;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class DukeException extends Exception {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor for DukeException."
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Create a new DukeException with the input error message."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param message The message associated with the exception."
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public DukeException(String message) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        super(message);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Throws a DukeException if the input condition is true."
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param condition The condition to test."
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param message The message to create the DukeException with, if the condition is true."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @throws DukeException If the condition is true."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public static void throwIf(boolean condition, String message) throws DukeException {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        if (condition) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            throw new DukeException(message);"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 26
+    }
+  },
+  {
+    "path": "src/main/java/duke/io/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.io;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.AddCommand;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.Command;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.DeleteCommand;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.DoneCommand;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.ExitCommand;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.FindCommand;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.ListCommand;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Parse a user\u0027s input into one or more supported Commands."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param input The input command."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return A command created using the parsed inputs."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @throws DukeException If the command is not recognized."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Command parse(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        if (input.equals(\"\")) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Assume is rogue enter input"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String[] inputs \u003d input.split(\" \", 2);"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String command \u003d inputs[0];"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String args \u003d inputs.length \u003e 1 ? inputs[1] : \"\";"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        int operationIndex;"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            operationIndex \u003d Integer.parseInt(args) - 1; // Human index starts from 1. Converting to real index."
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (NumberFormatException e) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            operationIndex \u003d -1;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        switch (command) {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"bye\":"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"quit\":"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"exit\":"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"drop_module\":"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"dropout\":"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"die\":"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"kys\":"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"fuck\":"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Fallthrough"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"withdraw_from_uni\":"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new ExitCommand();"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"list\":"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new ListCommand();"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"find\":"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new FindCommand(args);"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"todo\":"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new AddCommand(Task.TaskType.TASK_TYPE_TODO, args);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"deadline\":"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, args);"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"event\":"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new AddCommand(Task.TaskType.TASK_TYPE_EVENT, args);"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"delete\":"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new DeleteCommand(operationIndex);"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        case \"done\":"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return new DoneCommand(operationIndex);"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            throw new DukeException(\"\u0027\" + command + \"\u0027 is not a recognized command.\" +"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                    \"\\n\\tYou are advised to stop trying to break the system.\");"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 76
+    }
+  },
+  {
+    "path": "src/main/java/duke/io/Serializer.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.io;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.File;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.FileInputStream;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.FileOutputStream;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.ObjectInputStream;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.ObjectOutputStream;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": " * A serializer for saving and loading of duke.Duke data from disk."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class Serializer {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public static final String FILENAME \u003d \"tasks.data\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Serializes the input TaskList to file."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Writes the entire TaskList to Serializer.FILENAME using a File/Object Output Stream."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param taskList The TaskList to serialize to file."
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public static void serialize(TaskList taskList) {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        FileOutputStream fos;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ObjectOutputStream oos;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            fos \u003d new FileOutputStream(FILENAME);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            oos \u003d new ObjectOutputStream(fos);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            oos.writeObject(taskList);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            oos.close();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            System.err.println(e.getMessage());"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * De-serializes the input TaskList to file."
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Reads the entire TaskList from Serializer.FILENAME using a File/Object Input Stream."
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * If the file is not found, corrupted, or unable to be read, this function will return null."
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return A fully populated TaskList that had previously been serialized"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public static TaskList deserialize() {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        FileInputStream fis \u003d null;"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        ObjectInputStream ois \u003d null;"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        TaskList taskList \u003d null;"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            fis \u003d new FileInputStream(FILENAME);"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            ois \u003d new ObjectInputStream(fis);"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            taskList \u003d (TaskList) ois.readObject();"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            ois.close();"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // duke.task.TaskList cannot be loaded"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (ClassNotFoundException e) {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // File is corrupted"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            File file \u003d new File(FILENAME);"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // Try deleting the file and try again."
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            // TODO: This operation is probably not very safe. Think of something else."
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            if (file.delete()) {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                return deserialize();"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return taskList;"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 71
+    }
+  },
+  {
+    "path": "src/main/java/duke/io/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.io;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.InputStream;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected static final String OUTPUT_INDENTATION \u003d \"\\t\";"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected static final String OUTPUT_HORIZONTAL_LINE \u003d \"\\t________________________________________________________\";"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected Scanner scanner;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor of the Ui."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param ioStream An input stream for the Ui object to read inputs from."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Ui(InputStream ioStream) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        scanner \u003d new Scanner(ioStream);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Reads the input stream for a new command."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return A string that contains the input command and its arguments."
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public String readCommand() {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return scanner.nextLine();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Prints the Duke welcome message."
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void printWelcomeMessage() {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        stylizedPrint("
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                \"Hello\","
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                \"What can I do for you?\""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        );"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Prints the Duke goodbye message."
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void printGoodbyeMessage() {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        stylizedPrint(\"Bye. Hope to never see you again!\");"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Prints one or more lines of error messages."
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param error A variable number of strings, each would print a line of error."
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void printError(String... error) {"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        System.out.println(OUTPUT_HORIZONTAL_LINE);"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (int i \u003d 0; i \u003c error.length; ++i) {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            System.out.println(getIndentation(1) + error[i]);"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        System.out.println(OUTPUT_HORIZONTAL_LINE);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Prints a horizontal bar."
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void printHorizontalBar() {"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        System.out.println(OUTPUT_HORIZONTAL_LINE);"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Prints one or more lines of text with ASCII accents."
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param lines A variable number of strings, each would print a line of text."
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void stylizedPrint(String... lines) {"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        stylizedPrint(1, lines);"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Prints one or more lines of text with ASCII accents."
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param numTabs The number of tab indentations for the output text."
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param lines A variable number of strings, each would print a line of text."
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void stylizedPrint(int numTabs, String... lines) {"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        numTabs \u003d Math.max(0, numTabs);"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        System.out.println(OUTPUT_HORIZONTAL_LINE);"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (int i \u003d 0; i \u003c lines.length; ++i) {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            System.out.println(getIndentation(numTabs) + lines[i]);"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        System.out.println(OUTPUT_HORIZONTAL_LINE);"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String getIndentation(int numTabs) {"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String ret \u003d \"\";"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (int i \u003d 0; i \u003c numTabs; ++i) {"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            ret +\u003d OUTPUT_INDENTATION;"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return ret;"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 101
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Deadline.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.time.format.DateTimeParseException;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class Deadline extends Task {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected static final String DATE_OUTPUT_PATTERN \u003d \"MMM dd, yyyy\";"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected LocalDate by;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor of a Deadline."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param description Description of the Deadline."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param by A string representing the date of the Deadline."
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @throws DukeException If input date string is not of the ISO-LOCAL-DATE format (yyyy-mm-dd)."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Deadline(String description, String by) throws DukeException {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            this.by \u003d LocalDate.parse(by);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (DateTimeParseException e) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            throw new DukeException(\"The input \u0027/by\u0027 argument is invalid.\\n\" +"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                    \"\\tExpected ISO-LOCAL-DATE format (e.g.: yyyy-mm-dd, or 2020-08-25)\");"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Overloaded constructor of a Deadline."
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * The LocalDate is passed in directly in this version of the constructor."
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param description The description of the Deadline."
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param by The LocalDate of the Deadline."
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Deadline(String description, LocalDate by) {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.by \u003d by;"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String getTypeIcon() {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return \"[D]\";"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected TaskType getTaskType() {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return TaskType.TASK_TYPE_DEADLINE;"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return super.toString() + \" (by: \" + by.format(DateTimeFormatter.ofPattern(DATE_OUTPUT_PATTERN)) + \")\";"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 57
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Event.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class Event extends Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    // TODO: Implement start/end time"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String time;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor for an Event."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param description The description of the Event."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param time The time of the Event."
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Event(String description, String time) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.time \u003d time;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String getTypeIcon() {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return \"[E]\";"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected TaskType getTaskType() {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return TaskType.TASK_TYPE_EVENT;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return super.toString() + \" (at: \" + time + \")\";"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 33
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Task.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.Serializable;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public abstract class Task implements Serializable {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String description;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected boolean isDone;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor of the Task."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param description Description of the task."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Task(String description) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.description \u003d description;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.isDone \u003d false;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Sets the isDone flag of the task."
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param isDone Whether the task should be marked as done or not done."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void setIsDone(boolean isDone) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.isDone \u003d isDone;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String getStatusIcon() {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return \"[\" + (isDone ? \"\\u2713\" : \"\\u2718\") + \"]\"; //return [tick] or [X] symbols"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected abstract String getTypeIcon();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected abstract TaskType getTaskType();"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return getTypeIcon() + getStatusIcon() + \" \" + description;"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public enum TaskType {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        TASK_TYPE_TODO,"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        TASK_TYPE_EVENT,"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        TASK_TYPE_DEADLINE"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 47
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.io.Serializable;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import java.util.List;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class TaskList implements Serializable {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    private List\u003cTask\u003e taskList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Default constructor for TaskList."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public TaskList() {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        this.taskList \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Copy constructor for TaskList."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param other The TaskList to copy from."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public TaskList(TaskList other) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        if (other \u003d\u003d null) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            this.taskList \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            this.taskList \u003d new ArrayList\u003c\u003e(other.taskList);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Adds a new task to the TaskList."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param task The new task to be added."
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void addTask(Task task) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        taskList.add(task);"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Removes a task from the TaskList."
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param task A reference to the task to be removed."
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void removeTask(Task task) {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        removeAtIndex(taskList.indexOf(task));"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Removes all tasks from the TaskList."
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void removeAllTask() {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        taskList.clear();"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Removes a task from the TaskList by index."
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param index The index of the task to be removed."
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return A reference to the removed task."
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Task removeAtIndex(int index) {"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return taskList.remove(index);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Mark the task at a index as done."
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param index The index of the task to be marked as done."
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void markAsDone(int index) {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        taskList.get(index).setIsDone(true);"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Returns the task at a index."
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param index The index of the task to be returned."
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return The task at the given index."
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Task get(int index) {"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return taskList.get(index);"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Returns the number of elements in the TaskList."
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return The number of elements in the TaskList."
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public int size() {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return taskList.size();"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Checks if a given index is within the bounds of the taskList collection."
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param index The index to be checked."
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return true if the input index is valid; false otherwise."
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public boolean isIndexValid(int index) {"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return index \u003e\u003d 0 \u0026\u0026 index \u003c taskList.size();"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Returns an array of all the names of tasks in the taskList."
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Certain procedures (e.g., Printing of all tasks) requires access to the names of each"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * element in the taskList. This function returns all the names of tasks (from their respective"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * toString() functions) as an array."
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return An array containing the names of every duke.task in the taskList."
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public String[] getNames() {"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String[] names \u003d new String[taskList.size()];"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (int i \u003d 0; i \u003c names.length; ++i) {"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            names[i] \u003d taskList.get(i).toString();"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return names;"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Fuzzy searches all tasks in the TaskList for tasks that match the input search query."
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param searchQuery The search query."
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @return A list of descriptions of tasks that matches the input search query."
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public List\u003cString\u003e findTasks(String searchQuery) {"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String[] args \u003d searchQuery.split(\" \");"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String regexTemplate \u003d \"(?\u003d.*\\\\b%s\\\\b)\";"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        String regex \u003d \".*\";"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (String arg : args) {"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            regex \u003d String.format(regexTemplate, arg) + regex;"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        List\u003cString\u003e matchingTasks \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        for (int i \u003d 0; i \u003c taskList.size(); ++i) {"
+      },
+      {
+        "lineNumber": 137,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            if (taskList.get(i).description.matches(regex)) {"
+      },
+      {
+        "lineNumber": 138,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "                matchingTasks.add(taskList.get(i).description);"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return matchingTasks;"
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 144
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Todo.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class Todo extends Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * Constructor for a Todo."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     * @param description The description of the Todo."
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public Todo(String description) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected String getTypeIcon() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return \"[T]\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    protected TaskType getTaskType() {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        return TaskType.TASK_TYPE_TODO;"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 23
+    }
+  },
+  {
+    "path": "src/test/java/duke/DukeTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.command.AddCommand;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.io.Ui;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "public class DukeTest {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void DukeExceptionThrowIfTest() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        boolean assertionThrown1 \u003d false;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        boolean assertionThrown2 \u003d false;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            DukeException.throwIf(false, \"\");"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            assertionThrown1 \u003d true;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            DukeException.throwIf(true, \"\");"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            assertionThrown2 \u003d true;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assert(assertionThrown1 \u003d\u003d false);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assert(assertionThrown2 \u003d\u003d true);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void addCommandTest() throws DukeException {"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        TaskList taskList \u003d new TaskList();"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        Ui ui \u003d new Ui(System.in);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assertEquals(taskList.size(), 0);"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        new AddCommand(Task.TaskType.TASK_TYPE_TODO, \"Test Todo\").execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assertEquals(taskList.size(), 1);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        new AddCommand(Task.TaskType.TASK_TYPE_EVENT, \"Test Event /at Test Location\").execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assertEquals(taskList.size(), 2);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, \"Test Deadline /by 2020-01-01\").execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assertEquals(taskList.size(), 3);"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    public void dateTimeTest() throws DukeException {"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        TaskList taskList \u003d new TaskList();"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        Ui ui \u003d new Ui(System.in);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, \"Test Deadline /by 2020-01-01\").execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assertEquals(taskList.size(), 1);"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        boolean assertionThrown \u003d false;"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            new AddCommand(Task.TaskType.TASK_TYPE_DEADLINE, \"Test Deadline /by 2020991-01\").execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "            assertionThrown \u003d true;"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assertEquals(taskList.size(), 1);"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "        assert(assertionThrown);"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 67
+    }
+  },
+  {
+    "path": "text-ui-test/expected.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    New todo added:"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    \t[T][✘] some todo"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    You now have 1 tasks in the list"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    New deadline added:"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    \t[D][✘] some deadline (by: 20 march)"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    You now have 2 tasks in the list"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    New event added:"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    \t[E][✘] some event (at: 45 august)"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    You now have 3 tasks in the list"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    1.[T][✓] some todo"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    2.[D][✘] some deadline (by: 20 march)"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    3.[E][✘] some event (at: 45 august)"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    1.[T][✓] some todo"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    2.[D][✓] some deadline (by: 20 march)"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    3.[E][✘] some event (at: 45 august)"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    1.[T][✓] some todo"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    2.[D][✓] some deadline (by: 20 march)"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    3.[E][✓] some event (at: 45 august)"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    Bye. Hope to see you again soon!"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    ____________________________________________________________"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 39
+    }
+  },
+  {
+    "path": "text-ui-test/input.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "todo some todo"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "deadline some deadline /by 20 march"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "event some event /at 45 august"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "done 1"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "done 2"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "done 3"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "bye"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 7
+    }
+  },
+  {
+    "path": "text-ui-test/runtest.bat",
+    "fileType": "bat",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "@ECHO OFF"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "REM create bin directory if it doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "if not exist ..\\bin mkdir ..\\bin"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "REM delete output from previous run"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "del ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "REM compile the code into the bin folder"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "javac  -cp ..\\src -Xlint:none -d ..\\bin ..\\src\\main\\java\\*.java"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "IF ERRORLEVEL 1 ("
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    echo ********** BUILD FAILURE **********"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    exit /b 1"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ")"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "REM no error here, errorlevel \u003d\u003d 0"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "java -classpath ..\\bin Duke \u003c input.txt \u003e ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "REM compare the output to the expected output"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "FC ACTUAL.TXT EXPECTED.TXT"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "PAUSE"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 23
+    }
+  },
+  {
+    "path": "text-ui-test/runtest.sh",
+    "fileType": "sh",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "#!/usr/bin/env bash"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "# create bin directory if it doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "if [ ! -d \"../bin\" ]"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    mkdir ../bin"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "# delete output from previous run"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "if [ -e \"./ACTUAL.TXT\" ]"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    rm ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "# compile the code into the bin folder, terminates if error occurred"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    echo \"********** BUILD FAILURE **********\""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    exit 1"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "java -classpath ../bin Duke \u003c input.txt \u003e ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "# compare the output to the expected output"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "diff ACTUAL.TXT EXPECTED.TXT"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "if [ $? -eq 0 ]"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    echo \"Test result: PASSED\""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    exit 0"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "else"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    echo \"Test result: FAILED\""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "    exit 1"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eclmist"
+        },
+        "content": "fi"
+      }
+    ],
+    "authorContributionMap": {
+      "eclmist": 35
+    }
+  }
+]

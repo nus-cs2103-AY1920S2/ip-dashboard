@@ -1,0 +1,3395 @@
+[
+  {
+    "path": "src/main/java/Deadline.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class Deadline extends Task {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private LocalDate by;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Deadline(String content, String by) {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        super(content);"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.by \u003d LocalDate.parse(by);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toStore() {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return \"[D]\" + super.toStore() + \" (at: \" + this.by.format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) + \")\";"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return \"[D]\" + super.toString() + \" (by: \" + this.by.format(DateTimeFormatter.ofPattern(\"MMM d yyy\")) + \")\";"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 21
+    }
+  },
+  {
+    "path": "src/main/java/Duke.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "public class Duke {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Ui ui \u003d new Ui();"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        ui.showWelcome();"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Storage data \u003d new Storage();"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Tracker tracker \u003d new Tracker();"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Scanner scanner \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Parser command;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        if (data.hasPreviousData()) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            data.loadData(tracker);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        while (true) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                command \u003d new Parser(scanner.next());"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                if (command.isBye()) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    ui.showGoodbye();"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                } else if (command.isList()) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    ui.showList(tracker);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                } else if (command.isDone()) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    int index \u003d scanner.nextInt() - 1;"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    ui.showDone(tracker, index);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    data.saveData(tracker.showList());"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                } else if (command.isDelete()) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    int index \u003d scanner.nextInt() - 1;"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    ui.showDelete(tracker, index);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    data.saveData(tracker.showList());"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                } else {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    Parser content;"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    try {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                        content \u003d new Parser(scanner.nextLine(), command);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                        ui.showAddedTask(tracker, content);"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                        data.saveData(tracker.showList());"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    } catch (DukeException exception) {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                        ui.showError(exception);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            } catch (DukeException exception) {"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                ui.showError(exception);"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "-": 4,
+      "hmtey": 47
+    }
+  },
+  {
+    "path": "src/main/java/DukeException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class DukeException extends Exception {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public DukeException(String message) {"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        super(message);"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 5
+    }
+  },
+  {
+    "path": "src/main/java/Event.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.time.temporal.ChronoUnit;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class Event extends Task {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private LocalDate at;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Event(String content, String at) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        super(content);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.at \u003d LocalDate.parse(at);"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toStore() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return \"[E]\" + super.toStore() + \" (at: \" + this.at.format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd\")) + \")\";"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return \"[E]\" + super.toString() + \" (at: \" + this.at.format(DateTimeFormatter.ofPattern(\"MMM d yyy\")) + \")\";"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 22
+    }
+  },
+  {
+    "path": "src/main/java/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private int type;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private String cmd;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private Task task;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Parser(String command) throws DukeException {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        if (command.equals(\"bye\")|command.equals(\"list\")|command.equals(\"done\")|command.equals(\"todo\")"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                |command.equals(\"deadline\")|command.equals(\"event\")|command.equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            this.cmd \u003d command.toLowerCase();"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            throw new DukeException(\"☹ OOPS!!! I\u0027m sorry, but I dont know what that means :-(\");"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Parser(String content, Parser command) throws DukeException {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        if (content.equals(new String())) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            throw new DukeException(\"☹ OOPS!!! The description of a \""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    + command.getCommand() + \" cannot be empty.\");"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            switch (command.getCommand()) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            case \"todo\":"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                this.task \u003d new ToDo(content.substring(1));"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            case \"event\":"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                String [] eventArray \u003d content.split(\" /at \");"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                this.task \u003d new Event(eventArray[0].substring(1), eventArray[1]);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            case \"deadline\":"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                String [] deadlineArray \u003d content.split(\" /by \");"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                this.task \u003d new Deadline(deadlineArray[0].substring(1), deadlineArray[1]);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public boolean isBye() {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.cmd.equals(\"bye\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public boolean isList() {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.cmd.equals(\"list\");"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public boolean isDone() {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.cmd.equals(\"done\");"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public boolean isDelete() {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.cmd.equals(\"delete\");"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String getCommand() {"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.cmd;"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Task getTask() {"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.task;"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 59
+    }
+  },
+  {
+    "path": "src/main/java/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.io.*;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.nio.file.Path;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.util.LinkedList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.nio.file.Paths;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.nio.file.Files;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static java.nio.file.StandardOpenOption.APPEND;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static java.nio.file.StandardOpenOption.CREATE;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class Storage {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    Path path;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Storage() {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        String currentDirectory \u003d System.getProperty(\"user.dir\");"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Path dataDirectory \u003d java.nio.file.Paths.get(currentDirectory, \"data\");"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.path \u003d java.nio.file.Paths.get(currentDirectory, \"data\", \"duke.txt\");"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        if (!java.nio.file.Files.exists(dataDirectory)) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                java.nio.file.Files.createDirectory(dataDirectory);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            } catch (IOException ex) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                System.out.println(ex.getMessage());"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void saveData(LinkedList\u003cTask\u003e list) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            java.nio.file.Files.deleteIfExists(path);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        } catch (IOException ex) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            System.out.println(ex.getMessage());"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        for (int i \u003d 0; i \u003c list.size(); i++) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            Task task \u003d list.get(i);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            String taskString \u003d task.toStore() + \"\\n\";"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            byte data[] \u003d taskString.getBytes();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            try (OutputStream out \u003d new BufferedOutputStream("
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    Files.newOutputStream(this.path, CREATE, APPEND))) {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                out.write(data, 0, data.length);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            } catch (IOException ex) {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                System.out.println(ex.getMessage());"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void loadData(Tracker tracker) {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        try (InputStream in \u003d Files.newInputStream(this.path);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "             BufferedReader reader \u003d"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                     new BufferedReader(new InputStreamReader(in))) {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            String line \u003d null;"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            int index \u003d 0;"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            while ((line \u003d reader.readLine()) !\u003d null) {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                String taskType \u003d line.substring(1,2);"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                String state \u003d line.substring(4,5);"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                String content \u003d line.substring(7);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                switch (taskType) {"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                case \"T\":"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    tracker.add(new ToDo(content));"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                case \"E\":"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    String[] eventArray \u003d content.split(\" \\\\(at: \");"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    int eContentLength \u003d eventArray[1].length();"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    tracker.add(new Event(eventArray[0], eventArray[1].substring(0, eContentLength - 1)));"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                case \"D\":"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    String[] deadlineArray \u003d content.split(\" \\\\(by: \");"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    int dContentLength \u003d deadlineArray[1].length();"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    tracker.add(new Deadline(deadlineArray[0], deadlineArray[1].substring(0, dContentLength - 1)));"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                if (state.equals(\"\\u2713\")) {"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                    tracker.markDone(index);"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                index++;"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        } catch (IOException x) {"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            System.err.println(x);"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public boolean hasPreviousData() {"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return java.nio.file.Files.exists(this.path);"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 90
+    }
+  },
+  {
+    "path": "src/main/java/Task.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private String content;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private boolean isDone;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Task(String content) {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.content \u003d content;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.isDone \u003d false;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void setDone() {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.isDone \u003d true;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toStore() {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        if (isDone) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            return \"[\\u2713] \" + content;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            return \"[\\u2718] \" + content;"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        if (isDone) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            return \"[\\u2713] \" + content;"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            return \"[\\u2718] \" + content;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 32
+    }
+  },
+  {
+    "path": "src/main/java/ToDo.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class ToDo extends Task {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public ToDo(String content) {"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        super(content);"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toStore() {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return \"[T]\" + super.toString();"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return \"[T]\" + super.toString();"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 16
+    }
+  },
+  {
+    "path": "src/main/java/Tracker.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import java.util.LinkedList;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class Tracker {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private LinkedList\u003cTask\u003e list;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    private int totalTasks;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Tracker() {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.list \u003d new LinkedList();"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.totalTasks \u003d 0;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void add(Task task) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.totalTasks++;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.list.add(task);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void markDone(int index) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Task task \u003d this.list.get(index);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        task.setDone();"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void delete(int index) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        Task task \u003d this.list.get(index);"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.list.remove(index);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        this.totalTasks--;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public LinkedList\u003cTask\u003e showList() {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.list;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public int getTotalTasks() {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        return this.totalTasks;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 35
+    }
+  },
+  {
+    "path": "src/main/java/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public Ui() {"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void showWelcome() {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        String logo \u003d \" ____        _        \\n\""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(logo);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"Hello! I\u0027m Duke\");"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"What can I do for you?\");"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void showGoodbye() {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"Bye. Hope to see you again soon!\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void showList(Tracker tracker) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"Here are the tasks in your list\");"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        for (int i \u003d 0; i \u003c tracker.getTotalTasks(); i++) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            int itemNo \u003d i + 1;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            Task task \u003d tracker.showList().get(i);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "            System.out.println(itemNo + \".\" + task);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void showDone(Tracker tracker, int index) {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"Nice! I\u0027ve marked this task as done\");"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        tracker.markDone(index);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"  \" + tracker.showList().get(index));"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void showDelete(Tracker tracker, int index) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"Noted. I\u0027ve removed this task:\");"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"  \" + tracker.showList().get(index));"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        tracker.delete(index);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void showAddedTask(Tracker tracker, Parser content) {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        tracker.add(content.getTask());"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"Got it. I\u0027ve added this task:\");"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"  \" + content.getTask());"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(\"Now you have \" + tracker.getTotalTasks() + \" task(s) in the list.\");"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void showError(Exception exception) {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        System.out.println(exception.getMessage());"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 51
+    }
+  },
+  {
+    "path": "src/test/java/DeadlineTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.fail;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class DeadlineTest {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void testStringConversion() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        assertEquals(\"[D][✘] drink coffee (by: Oct 15 2019)\", new Deadline(\"drink coffee\", \"2019-10-15\"));"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 12
+    }
+  },
+  {
+    "path": "src/test/java/EventTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.fail;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class EventTest {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void testStringConversion() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        assertEquals(\"[E][✘] drink tea (by: Nov 20 2019)\", new Deadline(\"drink coffee\", \"2019-11-20\"));"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 12
+    }
+  },
+  {
+    "path": "src/test/java/ToDoTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.fail;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "public class ToDoTest {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    public void testStringConversion() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "        assertEquals(\"[T][✘] return book\", new ToDo(\"return book\"));"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 12
+    }
+  },
+  {
+    "path": "text-ui-test/EXPECTED.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": " ____        _"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "|  _ \\ _   _| | _____"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "| | | | | | | |/ / _ \\"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "| |_| | |_| |   \u003c  __/"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "|____/ \\__,_|_|\\_\\___|"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Hello! I\u0027m Duke"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "What can I do for you?"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Got it. I\u0027ve added this task:"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "  [T][✗] borrow book"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Now you have 1 tasks in the list."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Got it. I\u0027ve added this task:"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "  [D][✗] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Now you have 2 tasks in the list."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Got it. I\u0027ve added this task:"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "  [E][✗] project meeting (at: Mon 2-4pm)"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Now you have 3 tasks in the list."
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "Here are the tasks in your list:"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "1.[T][✗] borrow book"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "2.[D][✗] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "3.[E][✗] project meeting (at: Mon 2-4pm)"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 21
+    }
+  },
+  {
+    "path": "text-ui-test/input.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "todo borrow book"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "deadline return book /by Sunday"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "event project meeting /at Mon 2-4pm"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "list"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 4
+    }
+  },
+  {
+    "path": "text-ui-test/runtest.bat",
+    "fileType": "bat",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "@ECHO OFF"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "REM create bin directory if it doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "if not exist ..\\bin mkdir ..\\bin"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "REM delete output from previous run"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "del ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "REM compile the code into the bin folder"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "javac  -cp C:\\Users\\tym\\Desktop\\CS2103T\\duke\\src\\main\\java\\Duke.java"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "IF ERRORLEVEL 1 ("
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    echo ********** BUILD FAILURE **********"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "    exit /b 1"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ")"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "REM no error here, errorlevel \u003d\u003d 0"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "java -classpath C:\\Users\\tym\\Desktop\\CS2103T\\duke\\src\\main\\java\\bin Duke \u003c input.txt \u003e ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "REM compare the output to the expected output"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "hmtey"
+        },
+        "content": "FC ACTUAL.TXT EXPECTED.TXT"
+      }
+    ],
+    "authorContributionMap": {
+      "hmtey": 21
+    }
+  }
+]

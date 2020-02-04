@@ -1,0 +1,5503 @@
+[
+  {
+    "path": "src/main/java/command/AddTaskCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Deadline;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Task;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.ToDo;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Event;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.time.format.DateTimeParseException;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class AddTaskCommand extends Command {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private boolean isExit;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private String input;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public AddTaskCommand(String command, String input) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(command);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.input \u003d input;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "          try {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              // create and add the task to the task list"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              Task taskToAdd \u003d this.generateTask(this.input);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              tasks.addTask(taskToAdd);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              // update and save the file"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              storage.saveFile(tasks.getTaskList());"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              // update the user of the new task list"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              ui.printTaskAddSuccess(taskToAdd, tasks.getTaskList().size());"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "          } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "              throw new DukeException(e.getMessage());"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "          }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Task generateTask(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String[] splitInput \u003d input.split(\" \", 2);"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String taskType \u003d splitInput[0];"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        Task taskToReturn \u003d null;"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String taskDetails \u003d splitInput[1];"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            switch (taskType) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            case \"todo\":"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                // Create a ToDo task and return it"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                taskToReturn \u003d new ToDo(taskDetails);"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            case \"deadline\":"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                taskToReturn \u003d new Deadline(taskDetails);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            case \"event\":"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                taskToReturn \u003d new Event(taskDetails);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (ArrayIndexOutOfBoundsException ae) {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String message \u003d \"Details of a task cannot be empty!\";"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            throw new DukeException(message);"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (DateTimeParseException de) {"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // if the date is entered in a wrong format, throw the error"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String message \u003d \"\\t Wrong date format! Please input your date in the format yyyy-mm-dd\";"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            throw new DukeException(message);"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return taskToReturn;"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 68
+    }
+  },
+  {
+    "path": "src/main/java/command/ByeCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class ByeCommand extends Command {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public ByeCommand(String cmd) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(cmd);"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super.setExit();"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 10
+    }
+  },
+  {
+    "path": "src/main/java/command/Command.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public abstract class Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private String command;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private boolean isExit;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Command(String command) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.command \u003d command;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    protected void setExit() {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.isExit \u003d true;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.isExit;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String getCommandString() {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.command;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 28
+    }
+  },
+  {
+    "path": "src/main/java/command/DeleteCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import command.Command;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class DeleteCommand extends Command {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    int taskNumber;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public DeleteCommand(String command, int taskNumber) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(command);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.taskNumber \u003d taskNumber;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // Remove the task from the task list in tasks"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            Task deletedTask \u003d tasks.deleteTask(taskNumber);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // Update the file by saving it"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            storage.saveFile(tasks.getTaskList());"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // Update user on the deletion of the task"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            ui.printTaskDeleteSuccess(deletedTask, tasks.getTaskList().size());"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            throw new DukeException(e.getMessage());"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 24
+    }
+  },
+  {
+    "path": "src/main/java/command/ListCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Task;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class ListCommand extends Command {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public ListCommand(String command) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(command);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Get the task list from tasks"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        ArrayList\u003cTask\u003e taskList \u003d tasks.getTaskList();"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        ui.printLine();"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Print out the list"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        if (taskList.size() \u003d\u003d 0) {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            System.out.println(\"\\t Your task list is empty!\");"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            System.out.println(\"\\t Here are the tasks in your list:\");"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            for (int i \u003d 0; i \u003c taskList.size(); i++) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                // Print task number first"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                System.out.print(\"\\t \" + (i + 1) + \".\");"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                // Get the task and print it"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                Task currTask \u003d taskList.get(i);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                System.out.println(currTask);"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        ui.printLine();"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 33
+    }
+  },
+  {
+    "path": "src/main/java/command/MarkDoneCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Task;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class MarkDoneCommand extends Command {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private int taskNumber;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public MarkDoneCommand(String command, int taskNumber) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(command);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.taskNumber \u003d taskNumber;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // Mark the task as done"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            Task taskDone \u003d tasks.markTaskDone(taskNumber);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // Update the file by saving it"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            storage.saveFile(tasks.getTaskList());"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // Update the user"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            ui.printMarkDoneSuccess(taskDone);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            throw new DukeException(e.getMessage());"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 30
+    }
+  },
+  {
+    "path": "src/main/java/duke/Duke.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import command.Command;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "public class Duke {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private Ui ui;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private Storage store;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private TaskList taskList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private Parser parser;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Duke(String fileName) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Initialize Ui"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.ui \u003d new Ui();"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Initialize storage"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.store \u003d new Storage(fileName);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Initialize taskList"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.taskList \u003d  new TaskList(this.store.loadFromFilePath());"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.parser \u003d new Parser();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void run() {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        ui.sayHello();"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        boolean endInput \u003d false;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        while (!endInput) {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                String input \u003d ui.readInput();"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                Command command \u003d parser.parse(input);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                command.execute(taskList, ui, store);"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                endInput \u003d command.isExit();"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                // Print any error that is thrown"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                ui.printLine();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                System.out.println(e.getMessage());"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                ui.printLine();"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            } catch (NullPointerException ne) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                ui.flagWrongCommand();"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        ui.sayBye();"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        new Duke(\"list.txt\").run();"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 44,
+      "-": 2
+    }
+  },
+  {
+    "path": "src/main/java/duke/DukeException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class DukeException extends Exception {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public DukeException(String message) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(message);"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 7
+    }
+  },
+  {
+    "path": "src/main/java/duke/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import command.*;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Command parse(String input) throws NullPointerException {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String[] splitInput \u003d input.split(\" \");"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String cmd \u003d splitInput[0];"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        Command command \u003d null;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        switch (cmd) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \"bye\":"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            command \u003d new ByeCommand(cmd);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \"list\":"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            command \u003d new ListCommand(cmd);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \"done\":"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // Read the task number as the next element of splitInput"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            int taskNumber \u003d Integer.parseInt(splitInput[1]);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            command \u003d new MarkDoneCommand(cmd, taskNumber);"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \"delete\":"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            int taskNumberDelete \u003d Integer.parseInt(splitInput[1]);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            command \u003d new DeleteCommand(cmd, taskNumberDelete);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \"todo\":"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \"deadline\":"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \"event\":"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            command \u003d new AddTaskCommand(cmd, input);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return command;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 38
+    }
+  },
+  {
+    "path": "src/main/java/duke/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Task;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.io.*;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.nio.file.Path;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.nio.file.Paths;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.util.List;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class Storage {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private Path filePath;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private File file;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Storage(String fileName) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Load the file"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String currDir \u003d System.getProperty(\"user.dir\");"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.filePath \u003d  Paths.get(currDir, \"list.txt\");"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.file \u003d new File(filePath.toString());"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // create the file if it does not exist"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            if (!file.exists()) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                this.file.createNewFile();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            System.err.println(e.getMessage());"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Path getFilePath() {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.filePath;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public File getFile() {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.file;"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public ArrayList\u003cString\u003e loadFromFilePath() {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        List\u003cString\u003e lines \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            Scanner sc \u003d new Scanner(this.file);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            while (sc.hasNext()) {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                lines.add(sc.nextLine());"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (FileNotFoundException e) {"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            System.out.println(\"Task list save file not found!\");"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return new ArrayList\u003c\u003e(lines);"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void saveFile(ArrayList\u003cTask\u003e taskList) {"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            File file \u003d new File(this.filePath.toString());"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            file.createNewFile();"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            FileWriter fw \u003d new FileWriter(file);"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            BufferedWriter bw \u003d new BufferedWriter(fw);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            for (Task t : taskList) {"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                String taskString \u003d t.toString();"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                bw.write(taskString);"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                bw.newLine();"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            bw.close();"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            fw.close();"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            System.out.println(\"Error saving to file! :-(\");"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 73
+    }
+  },
+  {
+    "path": "src/main/java/duke/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Deadline;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Event;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Task;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.ToDo;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.util.Collections;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class TaskList {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private static ArrayList\u003cTask\u003e taskList;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public TaskList(ArrayList\u003cString\u003e taskListString) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        taskList \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        for (String taskString: taskListString) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            Task task \u003d taskFromString(taskString);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            taskList.add(task);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void addTask(Task task) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        taskList.add(task);"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     * Marks the given task number in the task list as done"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     * @param taskNumber the task number to be marked as done"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Task markTaskDone(int taskNumber) throws DukeException {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            Task taskMarked \u003d taskList.get(taskNumber - 1);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            taskMarked.setDone();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            return taskMarked;"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String errString \u003d \"\\t Sorry! Could not find the specified task number in your task list!\";"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            throw new DukeException(errString);"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Task deleteTask(int taskNumber) throws DukeException {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            Task taskRemoved \u003d taskList.get(taskNumber - 1);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            taskList.remove(taskRemoved);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            return taskRemoved;"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String errString \u003d \"\\t Your task list is empty! You can\u0027t delete from an empty list!\";"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            throw new DukeException(errString);"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     * Generates and returns a task given a task string, read from the save file"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     * Returns null if the task string is not in a valid format."
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     * @param taskString a single line task in a String format read from file"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     * @return Task generated from a TaskString"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private Task taskFromString(String taskString) {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        Task taskToReturn \u003d null;"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String[] strArr \u003d taskString.split(\" \");"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        ArrayList\u003cString\u003e temp \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        Collections.addAll(temp, strArr);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        char type \u003d temp.get(0).charAt(1);"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        //check if the char is Done symbol"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        boolean isDone \u003d temp.get(0).charAt(4) \u003d\u003d \u0027\\u2713\u0027;"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        switch (type){"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \u0027T\u0027:"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // case for ToDo"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            StringBuilder sbt \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            for (int i \u003d 1; i \u003c temp.size(); i++) {"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                sbt.append(temp.get(i));"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                if (i !\u003d (temp.size() - 1)) {"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    sbt.append(\" \");"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String descT \u003d sbt.toString();"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            taskToReturn \u003d new ToDo(descT);"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \u0027D\u0027:"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // case for Deadline"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            StringBuilder sbd \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            for (int i \u003d 1; i \u003c temp.size(); i++) {"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                if (i !\u003d (temp.size() - 1)) {"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    String curr \u003d temp.get(i);"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    if (curr.equals(\"by:\")) {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                        //if equals to colon, replace it with /, don\u0027t add space behind"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                        sbd.append(\"/by \");"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    } else {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                        sbd.append(curr);"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                        sbd.append(\" \");"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                } else {"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    sbd.append(temp.get(i));"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String descD \u003d  sbd.toString();"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            taskToReturn \u003d new Deadline(descD);"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        case \u0027E\u0027:"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            StringBuilder sbe \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            for (int i \u003d 1; i \u003c temp.size(); i++) {"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                if (i !\u003d (temp.size() - 1))  {"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    String curr \u003d temp.get(i);"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    if (curr.equals(\"at:\")) {"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                        sbe.append(\"/at \");"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    } else {"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                        sbe.append(curr);"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                        sbe.append(\" \");"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                } else {"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                    sbe.append(temp.get(i));"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            String descE \u003d sbe.toString();"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            taskToReturn \u003d new Event(descE);"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        if (isDone) {"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            assert taskToReturn !\u003d null;"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            taskToReturn.setDone();"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return taskToReturn;"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return taskList;"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 133
+    }
+  },
+  {
+    "path": "src/main/java/duke/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import task.Task;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private Scanner sc;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Ui() {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.sc \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String readInput() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Read user input"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.sc.nextLine();"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void sayHello() {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Print welcome message"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\tHello! I\u0027m Duke\");"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\tWhat can I do for you?\");"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void sayBye() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Print goodbye message"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\tBye. Hope to see you again soon!\");"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println();"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void printTaskAddSuccess(Task task, int taskListSize) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t Got it. I\u0027ve added this task:\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t  \" + task);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t Now you have \" + taskListSize + \" tasks in the list.\");"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void printTaskDeleteSuccess(Task task, int taskListSize) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t Understood. I\u0027ve deleted this task:\");"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t \" + task);"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t Now you have \" + taskListSize + \" tasks in the list.\");"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void printMarkDoneSuccess(Task task) {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t Alrighty! I\u0027ve marked this task as done:\");"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t \" + task);"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.printLine();"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void flagWrongCommand() {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String sorryStr \u003d \"Sorry! You\u0027ve entered a wrong command, please try again!\\n\";"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String helpStr \u003d \"\\t List of commands: \\n\" + \"\\t  todo\\n\" + \"\\t  event\\n\""
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "                + \"\\t  deadline\\n\" + \"\\t  list\\n\";"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(sorryStr + helpStr);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void printLine() {"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        System.out.println(\"\\t____________________________________________________________\");"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 68
+    }
+  },
+  {
+    "path": "src/main/java/task/Deadline.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "import java.time.format.DateTimeParseException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class Deadline extends Task {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private LocalDate deadline;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Deadline(String task) throws DateTimeParseException {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Split the input task string by the delimiter /by"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // first element in arr will be the description of the task, second elem will be the deadline, both are String"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Pass the description as the argument to the constructor"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(task.split(\"/by\")[0]);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String[] arr \u003d task.split(\"/by\");"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"MMM d yyyy\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            this.deadline \u003d LocalDate.parse(arr[1].trim(), formatter);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } catch (DateTimeParseException e) {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            throw e;"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String getDeadline() {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.deadline.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String description \u003d super.getDescription();"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String status \u003d super.getStatusIcon();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String deadline \u003d this.getDeadline();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return \"[D]\" + \"[\" + status + \"] \" + description + \"by: \" + deadline;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 38
+    }
+  },
+  {
+    "path": "src/main/java/task/Event.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class Event extends Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    private String place;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Event(String task) {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        // Pass the description of the task as the argument to the parent constructor"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(task.split(\"/at\")[0]);"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String[] arr \u003d task.split(\"/at\");"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.place \u003d arr[1].trim();"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String getPlace() {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.place;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String description \u003d super.getDescription();"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String status \u003d super.getStatusIcon();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String place \u003d this.getPlace();"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return \"[E]\" + \"[\" + status + \"] \" + description + \"at: \" + place;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 25
+    }
+  },
+  {
+    "path": "src/main/java/task/Task.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    protected String description;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    protected boolean isDone;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public Task(String description) {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        this.description \u003d description;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String getDescription() {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return this.description;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String getStatusIcon() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        if (isDone) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // return a tick"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            return \"\\u2713\";"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            // return a cross"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "            return \"\\u2718\";"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public void setDone() {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        isDone \u003d true;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String status \u003d this.getStatusIcon();"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String description \u003d this.getDescription();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return \"[\" + status + \"] \" + description;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 35
+    }
+  },
+  {
+    "path": "src/main/java/task/ToDo.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "package task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "public class ToDo extends Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public ToDo(String task) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        super(task);"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        String status \u003d super.getStatusIcon();"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "        return \"[T]\" + \"[\" + status + \"] \" + super.getDescription();"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 13
+    }
+  },
+  {
+    "path": "text-ui-test/ACTUAL.TXT",
+    "fileType": "TXT",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tHello! I\u0027m Duke"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tWhat can I do for you?"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Got it. I\u0027ve added this task:"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t  [T][✘] buy bread"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Now you have 1 tasks in the list"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Got it. I\u0027ve added this task:"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t  [E][✘] meeting  (at: 2pm)"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Now you have 2 tasks in the list"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tHere are the tasks in your list:"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t1.[T][✘] buy bread"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t2.[E][✘] meeting  (at: 2pm)"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tNice! I\u0027ve marked this task as done:"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t[E][✓] meeting  (at: 2pm)"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tBye. Hope to see you again soon!"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 26
+    }
+  },
+  {
+    "path": "text-ui-test/EXPECTED.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tHello! I\u0027m Duke"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tWhat can I do for you?"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Got it. I\u0027ve added this task:"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t  [T][✘] buy bread"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Now you have 1 tasks in the list"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Got it. I\u0027ve added this task:"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t  [E][✘] meeting  (at: 2pm)"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t Now you have 2 tasks in the list"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tHere are the tasks in your list:"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t1.[T][✘] buy bread"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t2.[E][✘] meeting  (at: 2pm)"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tNice! I\u0027ve marked this task as done:"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t[E][✓] meeting  (at: 2pm)"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\tBye. Hope to see you again soon!"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "\t____________________________________________________________"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 26
+    }
+  },
+  {
+    "path": "text-ui-test/input.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "todo buy bread"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "event meeting /at 2pm"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "list"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "done 2"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "bye"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 5
+    }
+  },
+  {
+    "path": "text-ui-test/runtest.sh",
+    "fileType": "sh",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "#!/usr/bin/env bash"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "# create bin directory if it doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "if [ ! -d \"../bin\" ]"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    mkdir ../bin"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "# delete output from previous run"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "if [ -e \"./ACTUAL.TXT\" ]"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    rm ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "# compile the code into the bin folder, terminates if error occurred"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    echo \"********** BUILD FAILURE **********\""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    exit 1"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "java -classpath ../bin Duke \u003c input.txt \u003e ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "# compare the output to the expected output"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "diff ACTUAL.TXT EXPECTED.TXT"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "if [ $? -eq 0 ]"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    echo \"Test result: PASSED\""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    exit 0"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "else"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    echo \"Test result: FAILED\""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "    exit 1"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "eedenong"
+        },
+        "content": "fi"
+      }
+    ],
+    "authorContributionMap": {
+      "eedenong": 34
+    }
+  }
+]

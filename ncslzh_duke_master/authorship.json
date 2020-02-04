@@ -1,0 +1,4545 @@
+[
+  {
+    "path": "src/main/java/duke/Command.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public enum Command {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    BYE,"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    DONE,"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    TODO,"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    DEADLINE,"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    EVENT,"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    LIST,"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    DELETE"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 11
+    }
+  },
+  {
+    "path": "src/main/java/duke/Deadline.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class Deadline extends Task {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    protected LocalDate date;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Deadline(String description, LocalDate date) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.date \u003d date;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String newdate \u003d String.format(\"%d %s %d\", this.date.getDayOfMonth(), this.date.getMonth(), this.date.getYear());"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return \"[D]\" + super.toString() + \" (date: \" + newdate + \")\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toFileFormat() {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return String.format(\"%s | %d | %s | %s\", \"D\", this.isDone ? 1 : 0, this.description, convertDateToString(this.date));"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 23
+    }
+  },
+  {
+    "path": "src/main/java/duke/Duke.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.nio.file.Path;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.nio.file.Paths;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "public class Duke {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private Storage storage;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private Ui ui;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private TaskList tasks;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Duke(Path filePath) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        ui \u003d new Ui();"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        storage \u003d new Storage(filePath);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            tasks \u003d new TaskList(storage.load());"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            ui.showLoadingError(e);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            tasks \u003d new TaskList();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        Duke newDuke \u003d new Duke(Paths.get(\"data\", \"duke.txt\"));"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        newDuke.run();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void run() {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        ui.showGreeting();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        loop:"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        while (true) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                String input \u003d ui.getInput();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                Parser instruction \u003d new Parser(input);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                Command command \u003d instruction.getCommand();"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                switch (command) {"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                case BYE:"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break loop;"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                case DONE:"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    int doneTaskNum \u003d Integer.parseInt(instruction.getParameter());"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    tasks.setAsDone(doneTaskNum);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    ui.showDoneTask(tasks.getTask(doneTaskNum));"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                case TODO:"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    Task newToDo \u003d new ToDo(instruction.getDescription());"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    tasks.addToTasks(newToDo);"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    ui.showAddedTask(tasks, newToDo);"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                case DEADLINE:"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    Task newDeadline \u003d new Deadline(instruction.getDescription(), instruction.getDate());"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    tasks.addToTasks(newDeadline);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    ui.showAddedTask(tasks, newDeadline);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                case EVENT:"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    Task newEvent \u003d new Event(instruction.getDescription(), instruction.getDate());"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    tasks.addToTasks(newEvent);"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    ui.showAddedTask(tasks, newEvent);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                case LIST:"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    ui.showTaskList(tasks);"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                case DELETE:"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    int delTaskNum \u003d Integer.parseInt(instruction.getParameter());"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    Task toBeDeleted \u003d tasks.getTask(delTaskNum);"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    tasks.deleteFromTasks(delTaskNum);"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    ui.showDeletedTask(tasks, toBeDeleted);"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                default:"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    ;"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                ui.showError(e);"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                System.out.print(\"\u003e \");"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        storage.update(tasks);"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        ui.showExitMessage();"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//    public static void doInstructions(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//        String command \u003d getCommand(input);"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//        if (command.equals(\"list\")) {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // show list from ui"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//        } else if (command.equals(\"done\")) {"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            int taskNum \u003d Integer.parseInt(input.split(\" \")[1]);"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // check for"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // 1. invalid task num"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // 2. empty task num"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // 3. if task is already done?"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // implement ui class? if have time to print out done statement"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            tasks.get(taskNum - 1).markAsDone();"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            ui.showDone(tasks.get(taskNum - 1));"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//        } else if (command.equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            int taskNum \u003d Integer.parseInt(input.split(\" \")[1]);"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            String desc \u003d tasks.get(taskNum - 1).toString();"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            tasks.remove(taskNum - 1);"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            numTasks -\u003d 1;"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // show deleted from ui"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//        } else {"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            Task newTask;"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // check for"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // 1. no description"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // 2. no time"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            if (command.equals(\"todo\")) {"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//                newTask \u003d new ToDo(getDescription(input));"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            } else if (command.equals(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//                newTask \u003d new Deadline(getDescription(input), getTime(input));"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            } else { // (command.equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//                newTask \u003d new Event(getDescription(input), getTime(input));"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            }"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            tasks.add(newTask);"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//            // show added from ui"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//        }"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "//    }"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 118,
+      "-": 2
+    }
+  },
+  {
+    "path": "src/main/java/duke/DukeException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class DukeException extends Exception {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public DukeException(String message) {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        super(message);"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 8
+    }
+  },
+  {
+    "path": "src/main/java/duke/Event.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class Event extends Task {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    protected LocalDate date;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Event(String description, LocalDate date) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.date \u003d date;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String newdate \u003d String.format(\"%d %s %d\", this.date.getDayOfMonth(), this.date.getMonth(), this.date.getYear());"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return \"[D]\" + super.toString() + \" (at: \" + newdate + \")\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toFileFormat() {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return String.format(\"%s | %d | %s | %s\", \"D\", this.isDone ? 1 : 0, this.description, convertDateToString(this.date));"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 23
+    }
+  },
+  {
+    "path": "src/main/java/duke/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.util.Arrays;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private Command command;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private String parameter;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private String description;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private LocalDate date;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Parser(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.command \u003d extractCommand(input);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        if (this.command \u003d\u003d Command.DONE || this.command \u003d\u003d Command.DELETE) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            this.parameter \u003d getFirstParameter(input);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                Integer.valueOf(this.parameter);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            } catch (NumberFormatException e) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                throw new DukeException(\"Task number is not an integer.\");"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        } else if (this.command \u003d\u003d Command.TODO) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            this.description \u003d getFirstParameter(input);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        } else if (this.command \u003d\u003d Command.DEADLINE || this.command \u003d\u003d Command.EVENT) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            this.description \u003d getFirstParameter(input);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            this.date \u003d getDate(input);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Command getCommand() {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return this.command;"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String getParameter() {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return this.parameter;"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String getDescription() {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return this.description;"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public LocalDate getDate() {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return this.date;"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static Command extractCommand(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        // if command doesnt exist"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String command \u003d input.split(\" \")[0].toLowerCase();"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        switch (command) {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"bye\":"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return Command.BYE;"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"done\":"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return Command.DONE;"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"todo\":"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return Command.TODO;"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"deadline\":"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return Command.DEADLINE;"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"event\":"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return Command.EVENT;"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"list\":"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return Command.LIST;"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"delete\":"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return Command.DELETE;"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                throw new DukeException(\"Invalid Command.\");"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static String getFirstParameter(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String description \u003d input.split(\" /\")[0];"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String[] descArr \u003d description.split(\" \");"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        if (descArr.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            throw new DukeException(\"☹ Why did you not provide any description?\");"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        // remove verb"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String[] cleaned \u003d Arrays.copyOfRange(descArr, 1, descArr.length);"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return String.join(\" \", cleaned);"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static LocalDate getDate(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String[] tryGetDate \u003d input.split(\" /\");"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        if (tryGetDate.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            throw new DukeException(\"☹ Why did you not provide the time?\");"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String time \u003d tryGetDate[1];"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String[] timeArr \u003d time.split(\" \");"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        // remove verb"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String[] cleaned \u003d Arrays.copyOfRange(timeArr, 1, timeArr.length);"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return convertToLocalDate(String.join(\" \", cleaned));"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static LocalDate convertToLocalDate(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"d/MM/yyyy\");"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return LocalDate.parse(input, formatter);"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 98
+    }
+  },
+  {
+    "path": "src/main/java/duke/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.io.File;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.io.FileWriter;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.nio.file.Files;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.nio.file.Path;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.util.List;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class Storage {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private Path filePath;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private File file;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Storage(Path filePath) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.filePath \u003d filePath;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.file \u003d new File(this.filePath.toString());"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void update(TaskList tasks) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            FileWriter fw \u003d new FileWriter(file);"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            for (int i \u003d 0; i \u003c tasks.getSize(); i++) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                fw.write(String.format(\"%s%n\", tasks.getTask(i + 1).toFileFormat()));"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            fw.close();"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            e.printStackTrace();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public ArrayList\u003cTask\u003e load() throws DukeException {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        ArrayList\u003cTask\u003e tempList \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            List\u003cString\u003e lines \u003d Files.readAllLines(this.filePath);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            for (String line : lines) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                try {"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    Task t \u003d Task.getTaskFromMemory(line);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    tempList.add(t);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    System.out.println(e.getMessage());"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            throw new DukeException(e.getMessage());"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return tempList;"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 50
+    }
+  },
+  {
+    "path": "src/main/java/duke/Task.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class Task {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    protected String description;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    protected boolean isDone;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Task(String description) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.description \u003d description;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.isDone \u003d false;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String getStatusIcon() {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return (isDone ? \"\\u2713\" : \"\\u2718\"); //return tick or X symbols"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void markAsDone() {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.isDone \u003d true;"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static Task getTaskFromMemory(String line) throws DukeException {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        String[] splitted \u003d line.split(\" \\\\| \");"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        switch(splitted[0]) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"T\":"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return new ToDo(splitted[2]);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"D\":"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return new Deadline(splitted[2], convertToLocalDate(splitted[3]));"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            case \"E\":"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                return new Event(splitted[2], convertToLocalDate(splitted[3]));"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                throw new DukeException(\"Invalid file. File may have been corrupted.\");"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return \"[\" + this.getStatusIcon() + \"]\" + \" \" + this.description;"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toFileFormat() {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return String.format(\"%s | %d | %s\", \"T\", this.isDone ? 1 : 0, this.description);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static LocalDate convertToLocalDate(String input) {"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"d/MM/yyyy\");"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return LocalDate.parse(input, formatter);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static String convertDateToString(LocalDate date) {"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        int day \u003d date.getDayOfMonth();"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        int month \u003d date.getMonthValue();"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        int year \u003d date.getYear();"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        if (day \u003c 10) {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            sb.append(\"0\");"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        sb.append(String.valueOf(day) + \"/\");"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        if (month \u003c 10) {"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            sb.append(\"0\");"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        sb.append(String.valueOf(month) + \"/\" + year);"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return sb.toString();"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 68
+    }
+  },
+  {
+    "path": "src/main/java/duke/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class TaskList {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private ArrayList\u003cTask\u003e tasks;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public TaskList() {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.tasks \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public TaskList(ArrayList\u003cTask\u003e tasks) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.tasks \u003d tasks;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public int getSize() {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return tasks.size();"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void addToTasks(Task task) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        tasks.add(task);"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void deleteFromTasks(int taskNum) {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        tasks.remove(taskNum - 1);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void setAsDone(int taskNum) {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        tasks.get(taskNum - 1).markAsDone();"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Task getTask(int taskNum) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return tasks.get(taskNum - 1);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        if (tasks.isEmpty()) {"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            return \"No tasks have been added!\";"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            sb.append(String.format(\"%d. %s\\n\", i + 1, tasks.get(i)));"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return sb.toString();"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 47
+    }
+  },
+  {
+    "path": "src/main/java/duke/ToDo.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class ToDo extends Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public ToDo(String description) {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return \"[T]\" + super.toString();"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 13
+    }
+  },
+  {
+    "path": "src/main/java/duke/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    private Scanner sc;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public Ui() {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        this.sc \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static final String DELIMITER \u003d \"___________________________________________________\";"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void showGreeting() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"\u003e Hello! I\u0027m Duchess\");"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"\u003e What can I do for you?\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.print(\"\u003e \");"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void showExitMessage() {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"\u003e Bye! Hope you don\u0027t come back!\");"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public String getInput() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        return this.sc.nextLine();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void showAddedTask(TaskList tasks, Task task) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"\u003e Alrighty, you added:\");"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"  \" + task.toString());"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.printf(\"\u003e Now you have %d tasks in your list.\\n\", tasks.getSize());"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.print(\"\u003e \");"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void showDeletedTask(TaskList tasks, Task task) {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"\u003e Do you really want to remove this?\");"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"\u003e Fine. I\u0027ve removed:\\n\u003e    \" + task.description);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.printf(\"\u003e Now you have %d tasks in your list\\n\", tasks.getSize());"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.print(\"\u003e \");"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void showDoneTask(Task task) {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"\u003e I\u0027ve finally done this task:\");"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(task);"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.print(\"\u003e \");"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void showError(Exception e) {"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        e.printStackTrace();"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.print(\"\u003e \");"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void showLoadingError(Exception e) {"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"Can\u0027t load saved data\");"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        e.printStackTrace();"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public static void showTaskList(TaskList tasks) {"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(\"Here are the tasks that you will never complete: \");"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(tasks);"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.println(DELIMITER);"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        System.out.print(\"\u003e \");"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 74
+    }
+  },
+  {
+    "path": "src/test/java/duke/DeadlineTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.fail;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class DeadlineTest {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void toString_validInput_success() {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        assertEquals(\"[D][✘] test description (date: 20 APRIL 2015)\","
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                new Deadline(\"test description\", LocalDate.of(2015,04, 20)).toString());"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void toFileFormat_validInput_success() {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        assertEquals(\"D | 0 | test description | 20/04/2015\","
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "                new Deadline(\"test description\", LocalDate.of(2015, 04, 20)).toFileFormat());"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 22
+    }
+  },
+  {
+    "path": "src/test/java/duke/ParserTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.fail;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "public class ParserTest {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void getCommand_validInput_Success() {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            assertEquals(Command.DONE, new Parser(\"done 2\").getCommand());"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            fail();"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    public void getCommand_InvalidInput_exceptionThrown() {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            assertEquals(Command.BYE, new Parser(\"byee\"));"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "            assertEquals(\"Invalid Command.\", e.getMessage());"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 26
+    }
+  },
+  {
+    "path": "text-ui-test/ACTUAL.TXT",
+    "fileType": "TXT",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "___________________________________________________"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Hello! I\u0027m Duchess"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "What can I do for you?"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "___________________________________________________"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Error: ☹ Why did you not provide any description?"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Error: No such command"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Bye! Hope you don\u0027t come back!"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 10
+    }
+  },
+  {
+    "path": "text-ui-test/EXPECTED.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "___________________________________________________"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Hello! I\u0027m Duchess"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "What can I do for you?"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "___________________________________________________"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Error: ☹ Why did you not provide any description?"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Error: No such command"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "Bye! Hope you don\u0027t come back!"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 10
+    }
+  },
+  {
+    "path": "text-ui-test/input.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "todo"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "blah"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "bye"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 3
+    }
+  },
+  {
+    "path": "text-ui-test/runtest.bat",
+    "fileType": "bat",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "@ECHO OFF"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "REM create bin directory if it doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "if not exist ..\\bin mkdir ..\\bin"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "REM delete output from previous run"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "del ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "REM compile the code into the bin folder"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "javac  -cp ..\\src -Xlint:none -d ..\\bin ..\\src\\main\\java\\*.java"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "IF ERRORLEVEL 1 ("
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    echo ********** BUILD FAILURE **********"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "    exit /b 1"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ")"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "REM no error here, errorlevel \u003d\u003d 0"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "java -classpath ..\\bin Duke \u003c input.txt \u003e ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "REM compare the output to the expected output"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ncslzh"
+        },
+        "content": "FC ACTUAL.TXT EXPECTED.TXT"
+      }
+    ],
+    "authorContributionMap": {
+      "ncslzh": 21
+    }
+  }
+]

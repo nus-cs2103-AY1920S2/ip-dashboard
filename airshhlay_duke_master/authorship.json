@@ -1,0 +1,5478 @@
+[
+  {
+    "path": "src/main/java/duke/Duke.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.commands.Command;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.Parser;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.Storage;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.TaskList;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.exceptions.*;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "public class Duke {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        Ui ui \u003d new Ui();"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        Storage storage \u003d new Storage(\"duke/files/tasks.txt\");"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        TaskList taskList \u003d new TaskList(storage.load());"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ui.start();"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        Scanner sc \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        Boolean isRunning \u003d true;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        while (isRunning) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                String userInput \u003d sc.nextLine();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                Command cmd \u003d Parser.parseInput(userInput);"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                isRunning \u003d cmd.execute(storage, taskList, ui);"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                ui.promptMsg();"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            catch(DukeException e) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                ui.errorMsg(e);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                ui.promptMsg();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        sc.close();"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 30,
+      "-": 2
+    }
+  },
+  {
+    "path": "src/main/java/duke/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.tasks.Task;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.Storage;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.exceptions.*;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.io.BufferedReader;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.io.FileReader;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " * The UI class for duke.Duke"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " **/"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected String logoPath \u003d \"duke/files/logo.txt\";"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected String waterDroplets \u003d \"\\uD83D\\uDCA6\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected Storage storage;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void start() {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        try (BufferedReader br \u003d new BufferedReader(new FileReader(logoPath))) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            String line;"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            while ((line \u003d br.readLine()) !\u003d null) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                System.out.println(line); // print logo"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        catch(IOException e) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            e.printStackTrace();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.welcomeMsg();"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.promptMsg();"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void promptMsg(){"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.lineBreak();"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        System.out.print(\"What will SQUIRTLE do? \u003e \");"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void exitMsg() {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.defaultMsg(\"SQUIRTLE shall retreat!!\");"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void listMsg(ArrayList\u003cTask\u003e lst) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.defaultMsg(\"SQUIRTLE has to attack: \");"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        for (int i \u003d 0; i \u003c lst.size(); i++) {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            System.out.println(\"\\t\" + (i + 1) + \". \" + lst.get(i));"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void taskMsg(Task task, int lstSize) {"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.defaultMsg(\"adding: \" + task.toString() + \"\\nSQUIRTLE now has \""
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    + lstSize + \" thing(s) to do!!\");"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void deleteMsg(Task task) {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.defaultMsg(\"SQUIRTLE will forget: \" + task.toString() + \" ~~\");"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void doneMsg(Task task) {"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.defaultMsg(\"SQUIRTLE used water gun on: \" + task.toString() + \"!\\n\\tIt is super effective!!\");"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void lineBreak() {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        String lineBreak \u003d \"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\";"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        System.out.println(lineBreak);"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void errorMsg(DukeException e) {"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        switch(e.error) {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case NUMBER: // error in accessing list, no such task exists"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                System.out.println(\"SQUIRTLE cannot find task!!\");"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case INSUFFICIENT:"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                System.out.println(\"SQUIRTLE needs more info!!\");"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case COMMAND:"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                System.out.println(\"SQUIRTLE doesn\u0027t understand!!\");"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                System.out.println(\"SQUIRTLE error!\");"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void welcomeMsg() {"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        System.out.println(waterDroplets + \" SQUIRTLE!! I\u0027M HERE TO HELP!! SQUIRTLE!!\");"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void defaultMsg(String message) {"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        System.out.println(waterDroplets + \" SQUIRTLE!!\");"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        System.out.println(\"\\t\" + message);"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 95
+    }
+  },
+  {
+    "path": "src/main/java/duke/commands/AddCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.commands;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.*;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.tasks.*;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class AddCommand extends Command {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    Task task;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public AddCommand(Task task) {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.task \u003d task;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public boolean execute (Storage storage, TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        taskList.addTask(task);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        storage.update(taskList.getTaskList());"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ui.taskMsg(task, taskList.getListSize());"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 20
+    }
+  },
+  {
+    "path": "src/main/java/duke/commands/Command.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.commands;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.*;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.exceptions.DukeException;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public abstract class Command {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public abstract boolean execute (Storage storage, TaskList tasks, Ui ui) throws DukeException;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 8
+    }
+  },
+  {
+    "path": "src/main/java/duke/commands/DeleteCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.commands;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.*;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.tasks.*;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.exceptions.DukeException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class DeleteCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    int taskNumber;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public DeleteCommand(int taskNumber) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.taskNumber \u003d taskNumber;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public boolean execute (Storage storage, TaskList taskList, Ui ui) throws DukeException {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        Task task \u003d taskList.deleteTask(this.taskNumber);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        storage.update(taskList.getTaskList());"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ui.deleteMsg(task);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 21
+    }
+  },
+  {
+    "path": "src/main/java/duke/commands/DoneCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.commands;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.*;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.tasks.*;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.exceptions.DukeException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class DoneCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    int taskNumber;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public DoneCommand(int taskNumber) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.taskNumber \u003d taskNumber;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public boolean execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        Task task \u003d taskList.doneTask(this.taskNumber);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        storage.update(taskList.getTaskList());"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ui.doneMsg(task);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 21
+    }
+  },
+  {
+    "path": "src/main/java/duke/commands/ExitCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.commands;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.*;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class ExitCommand extends Command {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public ExitCommand() {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public boolean execute(Storage storage, TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ui.exitMsg();"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return false; // return false to exit"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 15
+    }
+  },
+  {
+    "path": "src/main/java/duke/commands/ListCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.commands;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.*;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class ListCommand extends Command {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public ListCommand() {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public boolean execute (Storage storage, TaskList taskList, Ui ui) { // print out the task list"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ui.listMsg(taskList.getTaskList());"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 16
+    }
+  },
+  {
+    "path": "src/main/java/duke/exceptions/DukeError.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.exceptions;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public enum DukeError {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    NUMBER, // error in accessing list, no such task exists"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    INSUFFICIENT, // error in creation of tasks, insufficient commands"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    COMMAND;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 7
+    }
+  },
+  {
+    "path": "src/main/java/duke/exceptions/DukeException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.exceptions;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class DukeException extends Exception {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public DukeError error;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public DukeException(DukeError error) {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.error \u003d error;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 10
+    }
+  },
+  {
+    "path": "src/main/java/duke/files/logo.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "              _,........__"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            ,-\u0027            \"`-."
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "          ,\u0027                   `-."
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ,\u0027                        \\"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "      ,\u0027                           ."
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "      .\u0027\\               ,\"\".       `"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "     ._.\u0027|             / |  `       \\"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "     |   |            `-.\u0027  ||       `."
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "     |   |            \u0027-._,\u0027||       | \\"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "     .`.,\u0027             `..,\u0027.\u0027       , |`-."
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "     l                       .\u0027`.  _/  |   `."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "     `-.._\u0027-   ,          _ _\u0027   -\" \\  .     `"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "`.\"\"\"\"\"\u0027-.`-...,---------\u0027,\u0027         `. `....__."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ".\u0027        `\"-..___      __,\u0027\\          \\  \\     \\"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\\_ .          |   `\"\"\"\"\u0027    `.           . \\     \\"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "  `.          |              `.          |  .     L"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    `.        |`--...________.\u0027.        j   |     |"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "      `._    .\u0027      |          `.     .|   ,     |"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "         `--,\\       .            `7\"\"\u0027 |  ,      |"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            ` `      `            /     |  |      |    _,-\u0027\"\"\"`-."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "             \\ `.     .          /      |  \u0027      |  ,\u0027          `."
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "              \\  v.__  .        \u0027       .   \\    /| /              \\"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "               \\/    `\"\"\\\"\"\"\"\"\"\"`.       \\   \\  /.\u0027\u0027                |"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                `        .        `._ ___,j.  `/ .-       ,---.     |"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                ,`-.      \\         .\"     `.  |/        j     `    |"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "               /    `.     \\       /         \\ /         |     /    j"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "              |       `-.   7-.._ .          |\"          \u0027         /"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "              |          `./_    `|          |            .     _,\u0027"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "              `.           / `----|          |-............`---\u0027"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                \\          \\      |          |"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "               ,\u0027           )     `.         |"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                7____,,..--\u0027      /          |"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                                  `---.__,--.\u0027"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                  _____             _      _   _"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                 / ____|           (_)    | | | |"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                | (___   __ _ _   _ _ _ __| |_| | ___"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                 \\___ \\ / _` | | | | | \u0027__| __| |/ _ \\"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                 ____) | (_| | |_| | | |  | |_| |  __/"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                |_____/ \\__, |\\__,_|_|_|   \\__|_|\\___|"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                           | |"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                           |_|"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 41
+    }
+  },
+  {
+    "path": "src/main/java/duke/files/tasks.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "T|0|this"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "T|1|that"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "E|0|blah|2020-02-09"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 3
+    }
+  },
+  {
+    "path": "src/main/java/duke/tasks/Deadline.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.tasks;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.TimeParser;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class Deadline extends Task implements TimeParser {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected LocalDate deadline;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Deadline(String description, String deadline) { // constructor for creating new deadline"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.deadline \u003d TimeParser.parseDate(deadline);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super.TYPE \u003d TaskType.DEADLINE;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Deadline(String status, String description, String deadline) { // constructor when parsing tasks from hard disk"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super(status, description);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super.TYPE \u003d TaskType.DEADLINE;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.deadline \u003d TimeParser.parseDate(deadline);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public LocalDate getTaskTime() {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return this.deadline;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return \"[D]\" + super.toString() + \" (by: \" + TimeParser.printDate(this.deadline) + \")\";"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 28
+    }
+  },
+  {
+    "path": "src/main/java/duke/tasks/Event.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.tasks;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.utilities.TimeParser;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class Event extends Task implements TimeParser {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected LocalDate eventTime;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Event(String description, String eventTime) { // constructor for creating new event"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.eventTime \u003d TimeParser.parseDate(eventTime);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super.TYPE \u003d TaskType.EVENT;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Event(String status, String description, String eventTime) { // constructor for parsing tasks from hard disk"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super(status, description);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super.TYPE \u003d TaskType.EVENT;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.eventTime \u003d TimeParser.parseDate(eventTime);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public LocalDate getTaskTime() {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return this.eventTime;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return \"[E]\" + super.toString() + \" (at: \" + TimeParser.printDate(this.eventTime)  + \")\";"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 28
+    }
+  },
+  {
+    "path": "src/main/java/duke/tasks/Task.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.tasks;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected TaskType TYPE;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected String description;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected boolean isDone;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Task(){ // default constructor with no parameters"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Task(String description) { // constructor for duke.tasks.Task when creating new duke.tasks.Task"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.description \u003d description.trim();"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.isDone \u003d false;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Task(String status, String description) { // constructor for duke.tasks.Task, if need to specify status (when parsing tasks from hard disk)"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.isDone \u003d status.equals(\"1\");"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.description \u003d description;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public String getStatusIcon() {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return (isDone ? \"[✔]\" : \"[✘]\"); //return tick or X symbols"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public String getDescription() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return description;"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public int getDoneInt() {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return (isDone ? 1 : 0);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public TaskType getTaskType() {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return this.TYPE;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void markAsDone() {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        isDone \u003d true;"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return getStatusIcon() + \" \" + this.description;"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 46
+    }
+  },
+  {
+    "path": "src/main/java/duke/tasks/TaskType.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.tasks;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public enum TaskType {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    TODO(\"T\"),"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    EVENT(\"E\"),"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    DEADLINE(\"D\");"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    private String shortForm;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    TaskType(String shortForm) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.shortForm \u003d shortForm;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return this.shortForm;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 18
+    }
+  },
+  {
+    "path": "src/main/java/duke/tasks/ToDo.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.tasks;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class ToDo extends Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public ToDo(String description) {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super.TYPE \u003d TaskType.TODO;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public ToDo(String status, String description) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super(status, description);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        super.TYPE \u003d TaskType.TODO;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return \"[T]\" + super.toString();"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 18
+    }
+  },
+  {
+    "path": "src/main/java/duke/utilities/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.utilities;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.commands.*;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.tasks.*;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.exceptions.*;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.util.regex.Pattern;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Parser() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public static String parseTask(Task task) { // parses task into string to load into storage"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        String parsed;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        TaskType taskType \u003d task.getTaskType();"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        switch (taskType) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case TODO:"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                parsed \u003d taskType.toString() + \"|\" + task.getDoneInt() + \"|\" + task.getDescription();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case EVENT:"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                parsed \u003d taskType.toString() + \"|\" + task.getDoneInt() + \"|\" + task.getDescription() + \"|\" + ((Event) task).getTaskTime();"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case DEADLINE:"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                parsed \u003d taskType.toString() + \"|\" + task.getDoneInt() + \"|\" + task.getDescription() + \"|\" + ((Deadline) task).getTaskTime();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                parsed \u003d \"\"; // TODO add error message, change duke.exceptions.DukeException to such task exists"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return parsed;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public static Task parseFile(String line) { // parses line from tasks.txt into a task"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        String[] split \u003d line.split(Pattern.quote(\"|\"));"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        switch (split[0]) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case \"T\":"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return new ToDo(split[1], split[2]);"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case \"E\":"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return new Event(split[1], split[2], split[3]);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            case \"D\":"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return new Deadline(split[1], split[2], split[3]);"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                System.out.println(\"Error in parser parse method\"); // TODO add error message and duke.exceptions.DukeException"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return null;"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public static Command parseInput(String input) throws DukeException {"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            input \u003d input.trim(); // trim any opening and trailing whitespace"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            if (input.equals(\"bye\")) { // parse exit command"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return new ExitCommand();"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            else if (input.equals(\"list\")) { // parse list command"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return new ListCommand();"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            else if (input.startsWith(\"done\")) { // parse done command"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                int taskNumber \u003d Integer.parseInt(input.split(\" \", 2)[1]) - 1;"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return new DoneCommand(taskNumber);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            else if (input.startsWith(\"delete\")) { // parse delete command"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                int taskNumber \u003d Integer.parseInt(input.split(\" \", 2)[1]) - 1;"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                return new DeleteCommand(taskNumber);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            else { // parse task command"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    String[] split \u003d input.split(\" \", 2);"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    TaskType taskType \u003d TaskType.valueOf(split[0].toUpperCase());"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    String taskDetails \u003d split[1];"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    Task task \u003d new Task();"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    switch (taskType) {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                        case TODO:"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            task \u003d new ToDo(taskDetails);"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            break;"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                        case EVENT:"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            String[] eventDetails \u003d taskDetails.split(\"/at\");"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            String eventDescription \u003d eventDetails[0].trim();"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            String eventTime \u003d eventDetails[1].trim();"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            task \u003d new Event(eventDescription, eventTime);"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            break;"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                        case DEADLINE:"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            String[] deadlineDetails \u003d taskDetails.split(\"/by\");"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            String deadlineDescription \u003d deadlineDetails[0].trim();"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            String deadline \u003d deadlineDetails[1].trim();"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            task \u003d new Deadline(deadlineDescription, deadline);"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                            break;"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                    return new AddCommand(task);"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        catch(IndexOutOfBoundsException e) { // catch insufficient commands given"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            throw new DukeException(DukeError.INSUFFICIENT);"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        catch(IllegalArgumentException e) { // catch wrong command given"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            throw new DukeException(DukeError.COMMAND);"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 99
+    }
+  },
+  {
+    "path": "src/main/java/duke/utilities/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.utilities;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.tasks.Task;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.io.*;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class Storage {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    String path;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    Parser parser;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Storage(String path) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.path \u003d path;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.parser \u003d new Parser();"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public ArrayList\u003cTask\u003e load() { // load all tasks from hard disk into an ArrayList of tasks"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        ArrayList\u003cTask\u003e lst \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            File file \u003d new File(path);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            if (!file.exists()) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                file.getParentFile().mkdirs();"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                file.createNewFile();"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            FileReader fr \u003d new FileReader(path);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            BufferedReader br \u003d new BufferedReader(fr);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            String line;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            while ((line \u003d br.readLine()) !\u003d null) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                line \u003d line.replaceAll(\"[^\\\\x00-\\\\x7F]\", \"\");"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                lst.add(parser.parseFile(line));"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        catch (IOException e) {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            System.err.println(e);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return lst;"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public void update(ArrayList\u003cTask\u003e lst) { // update the file in the hard disk whenever the task list changes"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            File file \u003d new File(path);"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            if (!file.exists()) {"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                file.getParentFile().mkdirs();"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                file.createNewFile();"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            FileOutputStream outputStream \u003d new FileOutputStream(path);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            OutputStreamWriter outputStreamWriter \u003d new OutputStreamWriter(outputStream, \"UTF-8\");"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            BufferedWriter bw \u003d new BufferedWriter(outputStreamWriter);"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            for (Task task : lst) {"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                bw.write(parser.parseTask(task));"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                bw.newLine();"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "                bw.flush();"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            bw.close();"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            e.printStackTrace();"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 67
+    }
+  },
+  {
+    "path": "src/main/java/duke/utilities/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.utilities; /**"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " * a class to store, delete and add new tasks"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.tasks.Task;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import duke.exceptions.*;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public class TaskList {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    protected ArrayList\u003cTask\u003e taskList;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public TaskList(ArrayList\u003cTask\u003e taskList) { // initialise the task list with files loaded from storage"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        this.taskList \u003d taskList;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Task deleteTask(int index) throws DukeException { // deletes task at the index provided, and returns the deleted task"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            return taskList.remove(index);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        catch (IndexOutOfBoundsException e) { // throw exception if the task does not exist at index provided"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            throw new DukeException(DukeError.NUMBER);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public Task doneTask(int index) throws DukeException { // marks the task at the index provided as done, and returns the done task"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            Task task;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            task \u003d taskList.get(index);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            task.markAsDone();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            return task;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        catch (IndexOutOfBoundsException e) { // throw exception if the task does not exist at index provided"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "            throw new DukeException(DukeError.NUMBER);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public boolean addTask(Task task) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return taskList.add(task);"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return taskList;"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    public int getListSize() {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return taskList.size();"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 47
+    }
+  },
+  {
+    "path": "src/main/java/duke/utilities/TimeParser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "package duke.utilities;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "import java.time.temporal.ChronoUnit;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "public interface TimeParser {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    static LocalDate parseDate(String date) {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return LocalDate.parse(date, DateTimeFormatter.ofPattern(\"d/MM/yyyy\"));"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    static String printDate(LocalDate date) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "        return date.format(DateTimeFormatter.ofPattern(\"d MMM yyyy\"));"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 14
+    }
+  },
+  {
+    "path": "text-ui-test/ACTUAL.TXT",
+    "fileType": "TXT",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "  ____"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " (.__.)"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\u003c|\u003e"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " /\\"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "_  _"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, what do you want? "
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ give me a command!"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ fine, I will take note of: [T][✘] borrow book"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you made me remember 1 task(s)"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ fine, I will take note of: [D][✘] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you made me remember 2 task(s)"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ fine, I will take note of: [D][✘] project meeting (at: Mon 2-4pm)"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you made me remember 3 task(s)"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you asked to:"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t1. [T][✘] borrow book"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t2. [D][✘] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t3. [D][✘] project meeting (at: Mon 2-4pm)"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, nicely! you\u0027re done with:"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t[D][✔] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you asked to:"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t1. [T][✘] borrow book"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t2. [D][✔] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t3. [D][✘] project meeting (at: Mon 2-4pm)"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, elaborate more!"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, give me a proper command!"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, stop wasting my time! shoo!"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 26
+    }
+  },
+  {
+    "path": "text-ui-test/EXPECTED.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "  ____"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " (.__.)"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\u003c|\u003e"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": " /\\"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "_  _"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, what do you want? "
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ give me a command!"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ fine, I will take note of: [T][✘] borrow book"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you made me remember 1 task(s)"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ fine, I will take note of: [D][✘] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you made me remember 2 task(s)"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ fine, I will take note of: [D][✘] project meeting (at: Mon 2-4pm)"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you made me remember 3 task(s)"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you asked to:"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t1. [T][✘] borrow book"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t2. [D][✘] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t3. [D][✘] project meeting (at: Mon 2-4pm)"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, nicely! you\u0027re done with:"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t[D][✔] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ you asked to:"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t1. [T][✘] borrow book"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t2. [D][✔] return book (by: Sunday)"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "\t3. [D][✘] project meeting (at: Mon 2-4pm)"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, elaborate more!"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, give me a proper command!"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "☛ dude, stop wasting my time! shoo!"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 26
+    }
+  },
+  {
+    "path": "text-ui-test/input.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "todo borrow book"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "deadline return book /by Sunday"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "event project meeting /at Mon 2-4pm"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "list"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "done 2"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "list"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "todo"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "blah"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "bye"
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 9
+    }
+  },
+  {
+    "path": "text-ui-test/runtest.sh",
+    "fileType": "sh",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "#!/usr/bin/env bash"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "# create bin directory if it doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "if [ ! -d \"../bin\" ]"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    mkdir ../bin"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "# delete output from previous run"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "if [ -e \"./ACTUAL.TXT\" ]"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    rm ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "# compile the code into the bin folder, terminates if error occurred"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    echo \"********** BUILD FAILURE **********\""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    exit 1"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "java -classpath ../bin Duke \u003c input.txt \u003e ACTUAL.TXT"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "# compare the output to the expected output"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "diff ACTUAL.TXT EXPECTED.TXT"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "if [ $? -eq 0 ]"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "then"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    echo \"Test result: PASSED\""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    exit 0"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "else"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    echo \"Test result: FAILED\""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "    exit 1"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": "fi"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "airshhlay"
+        },
+        "content": ""
+      }
+    ],
+    "authorContributionMap": {
+      "airshhlay": 35
+    }
+  }
+]
