@@ -521,14 +521,14 @@
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public String toString() {"
+        "content": "    public String saveTask(){"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        return \"     [D]\" + this.getIcon() + \" \" + this.description + \"(by:\" + this.date + \")\";"
+        "content": "        return \"D | \" + this.binary + \" | \" + this.description + \" | \" + this.date;"
       },
       {
         "lineNumber": 12,
@@ -542,11 +542,46 @@
         "author": {
           "gitId": "shunde97"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return \"     [D]\" + this.getIcon() + \" \" + this.description + \"(by:\" + this.date + \")\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "shunde97"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "shunde97": 13
+      "shunde97": 18
     }
   },
   {
@@ -584,453 +619,565 @@
       {
         "lineNumber": 5,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "    public static void main(String[] args) {"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "        String logo \u003d \" ____        _        \\n\""
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 7,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 8,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+        "content": "    private String effect;"
       },
       {
         "lineNumber": 9,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 10,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        ArrayList\u003cTask\u003e list \u003d new ArrayList\u003c\u003e();"
+        "content": "    public Duke(String filePath) {"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        System.out.println(\"Hi! I\u0027m\\n\" + logo);"
+        "content": "        this.ui \u003d new Ui();"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        String effect \u003d \"************************************************************\";"
+        "content": "        this.effect \u003d \"************************************************************\";"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        System.out.println(effect + \"\\nHi! I\u0027m\\n\" + logo);"
+        "content": "        storage \u003d new Storage(filePath);"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        System.out.println(\"What can I do for you?\\n\" + effect);"
+        "content": "        try {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        Scanner sc \u003d new Scanner(System.in);"
+        "content": "            tasks \u003d new TaskList(storage.load());"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        String command \u003d sc.nextLine();"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        System.out.println(command.split(\" \")[0]);"
+        "content": "            ui.showLoadingError(e);"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        while (!command.equals(\"bye\")) {"
+        "content": "            tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            CommandChecker cc \u003d new CommandChecker();"
+        "content": "        }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            try {"
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                cc.checkCommand(command, list);"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                listAction(list, command, effect);"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            } catch (DukeException e) {"
+        "content": "        Scanner sc \u003d new Scanner(System.in);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                System.err.println(e);"
+        "content": "        ui.greet(this.effect);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            }"
+        "content": "        while(!ui.isFinished()) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            command \u003d sc.nextLine();"
+        "content": "            String userInput \u003d sc.nextLine();"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        }"
+        "content": "            ui.handleInput(userInput, effect);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        System.out.println(effect + \"\\n\" + \"Bye! :) Hope to see you again soon!\\n\" + effect);"
+        "content": "            command \u003d sc.nextLine();"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public static ArrayList\u003cTask\u003e listAction(ArrayList\u003cTask\u003e list, String command, String effect) {"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        System.out.println(effect);"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        if (command.equals(\"list\")) {"
+        "content": "    Scanner sc \u003d new Scanner(System.in);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(\"Here are the tasks in your list:\");"
+        "content": "    String command \u003d sc.nextLine();"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            int index \u003d 1;"
+        "content": "        System.out.println(command.split(\" \")[0]);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            for (Task t : list) {"
+        "content": "        while(!command.equals(\"bye\"))"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                System.out.println(index + \".\" + t);"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                index++;"
+        "content": "    {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        } else if (command.split(\" \")[0].equals(\"done\")) {"
+        "content": ""
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            int target \u003d Integer.parseInt(command.substring(5));"
+        "content": "        System.out.println(effect +\"\\n\"+\"Bye! :) Hope to see you again soon!\\n\"+effect);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            Task taskDone \u003d list.get(target - 1);"
+        "content": "}"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            taskDone.markDone();"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(\"Nice! I\u0027ve marked this task as done:\");"
+        "content": "    public static ArrayList\u003cTask\u003e listAction(ArrayList\u003cTask\u003e list, String command, String effect) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(taskDone);"
+        "content": "        System.out.println(effect);"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        } else if (command.split(\" \")[0].equals(\"delete\")) {"
+        "content": "        if (command.equals(\"list\")) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(\"Noted. I\u0027ve removed this task:\");"
+        "content": "            System.out.println(\"Here are the tasks in your list:\");"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(list.get(Integer.parseInt(command.substring(7)) - 1));"
+        "content": "            int index \u003d 1;"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            list.remove(Integer.parseInt(command.substring(7)) - 1);"
+        "content": "            for (Task t : list) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(\"Now you have \" + list.size() + \" tasks in the list.\");"
+        "content": "                System.out.println(index + \".\" + t);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        }"
+        "content": "                index++;"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        else {"
+        "content": "            }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            if (command.startsWith(\"deadline\")) {"
+        "content": "        } else if (command.split(\" \")[0].equals(\"done\")) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                list.add(new Deadline(command.substring(9).split(\"/by\")[0], command.substring(9).split(\"/by\")[1]));"
+        "content": "            int target \u003d Integer.parseInt(command.substring(5));"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            } else if (command.startsWith(\"todo\")) {"
+        "content": "            Task taskDone \u003d list.get(target - 1);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                list.add(new Todo(command.substring(5)));"
+        "content": "            taskDone.markDone();"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            } else if (command.startsWith(\"event\")) {"
+        "content": "            System.out.println(\"Nice! I\u0027ve marked this task as done:\");"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "                list.add(new Event(command.substring(6).split(\"/at\")[0], command.substring(6).split(\"/at\")[1]));"
+        "content": "            System.out.println(taskDone);"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            }"
+        "content": "        } else if (command.split(\" \")[0].equals(\"delete\")) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(\"Got it! I\u0027ve added this task:\\n\" + list.get(list.size() - 1));"
+        "content": "            System.out.println(\"Noted. I\u0027ve removed this task:\");"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            System.out.println(\"Now you have \" + list.size() + \" tasks in the list.\");"
+        "content": "            System.out.println(list.get(Integer.parseInt(command.substring(7)) - 1));"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        }"
+        "content": "            list.remove(Integer.parseInt(command.substring(7)) - 1);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        System.out.println(effect);"
+        "content": "            System.out.println(\"Now you have \" + list.size() + \" tasks in the list.\");"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        return new ArrayList\u003c\u003e(list);"
+        "content": "        } else {"
       },
       {
         "lineNumber": 66,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "            if (command.startsWith(\"deadline\")) {"
       },
       {
         "lineNumber": 67,
         "author": {
-          "gitId": "-"
+          "gitId": "shunde97"
         },
-        "content": "}"
+        "content": "                list.add(new Deadline(command.substring(9).split(\"/by\")[0], command.substring(9).split(\"/by\")[1]));"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "            } else if (command.startsWith(\"todo\")) {"
       },
       {
         "lineNumber": 69,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                list.add(new Todo(command.substring(5)));"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            } else if (command.startsWith(\"event\")) {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                list.add(new Event(command.substring(6).split(\"/at\")[0], command.substring(6).split(\"/at\")[1]));"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            System.out.println(\"Got it! I\u0027ve added this task:\\n\" + list.get(list.size() - 1));"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            System.out.println(\"Now you have \" + list.size() + \" tasks in the list.\");"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        System.out.println(effect);"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return new ArrayList\u003c\u003e(list);"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        new Duke(\"data/data.txt\").run();"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 85,
         "author": {
           "gitId": "shunde97"
         },
@@ -1038,8 +1185,8 @@
       }
     ],
     "authorContributionMap": {
-      "-": 9,
-      "shunde97": 60
+      "-": 5,
+      "shunde97": 80
     }
   },
   {
@@ -1165,14 +1312,14 @@
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public String toString() {"
+        "content": "    public String saveTask(){"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        return \"     [E]\" + this.getIcon() + \" \" + this.description + \"(at:\" + this.deadline + \")\";"
+        "content": "        return \"E | \" + this.binary + \" | \" + this.description + \" | \" + this.deadline;"
       },
       {
         "lineNumber": 12,
@@ -1186,11 +1333,719 @@
         "author": {
           "gitId": "shunde97"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return \"     [E]\" + this.getIcon() + \" \" + this.description + \"(at:\" + this.deadline + \")\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "shunde97"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "shunde97": 13
+      "shunde97": 18
+    }
+  },
+  {
+    "path": "src/main/java/Find.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "public class Find {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "shunde97": 2
+    }
+  },
+  {
+    "path": "src/main/java/LocalDate.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "public class LocalDate {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "shunde97": 2
+    }
+  },
+  {
+    "path": "src/main/java/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    private String userInput;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    private String command;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    private String description;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public Parser (String userInput) {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        this.userInput \u003d userInput;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        this.command \u003d userInput.split(\" \")[0];"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        if (userInput.split(\" \") \u003e 1) {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            this.description \u003d userInput.split(\" \", 2)[1];"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            this.description \u003d \"\";"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public String getCommand() {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return this.command;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public String getDescription() {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return this.description;"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "shunde97": 24
+    }
+  },
+  {
+    "path": "src/main/java/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "import java.io.FileReader;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "import java.io.BufferedReader;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "import java.io.FileWriter;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "import java.io.BufferedWriter;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "import java.io.FileNotFoundException;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "public class Storage {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    ArrayList\u003cTask\u003e listOfTasks \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    private Storage storage;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    String fileName \u003d \"data/data.txt\";"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public Storage() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public ArrayList\u003cTask\u003e loadCurrentData() {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            FileReader fileReader \u003d new FileReader(this.fileName);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            BufferedReader bufferedReader \u003d new BufferedReader(this.fileName);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            while (bufferedReader.readLine() !\u003d null) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                String[] dataLine \u003d bufferedReader.readLine().split(\" | \");"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                Task task;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                if (dataLine[0].startsWith(\"T\")) {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                    task \u003d new Todo(dataLine[2]);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                } else if (dataLine[0].startsWith(\"E\")) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                    task \u003d new Event(dataLine[2], dataLine[3]);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                } else if (dataLine[0].startsWith(\"D\")) {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                    task \u003d new Deadline(dataLine[2], dataLine[3]);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                if (dataLine[1].equals(\"1\")) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                    task.markDone();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                listOfTasks.add(task);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            if (listOfTasks.size() \u003d\u003d 0) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                System.out.println(\"File is empty\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            bufferedReader.close();"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        } catch (FileNotFoundException e) {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            System.out.println(\"Unable to open file: \" + fileName);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            System.out.println(\"Error reading file: \" + fileName);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return listOfTasks;"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public void saveCurrentList(ArrayList\u003cTask\u003e list) {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        FileWriter fileWriter \u003d new FileWriter(this.fileName);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        BufferedWriter bufferedWriter \u003d new BufferedWriter(this.fileName);"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            for (int i \u003d 0; i \u003c list.size(); i++) {"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                Task task \u003d list.get(i);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                bufferedWriter.write(task.saveTask());"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "                bufferedWriter.newLine();"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            bufferedWriter.close();"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "            e.printStackTrace();"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "shunde97": 63
     }
   },
   {
@@ -1223,220 +2078,269 @@
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "    protected String binary;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public Task(String description) {"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        this.description \u003d description;"
+        "content": "    public Task(String description) {"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        this.isDone \u003d false;"
+        "content": "        this.description \u003d description;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "        this.isDone \u003d false;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "        this.binary \u003d \"0\";"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public Task(String description, boolean isDone) {"
+        "content": "    }"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        this.description \u003d description;"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        this.isDone \u003d isDone;"
+        "content": "    public Task(String description, boolean isDone) {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "        this.description \u003d description;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "        this.isDone \u003d isDone;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public String getDescription(){"
+        "content": "    }"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        return this.description;"
+        "content": ""
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "    public String getDescription(){"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "        return this.description;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public String getIcon() {"
+        "content": "    }"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        if (isDone) {"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            return \"[\\u2713]\";"
+        "content": "    public String getIcon() {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        } else {"
+        "content": "        if (isDone) {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "            return \"[\\u2718]\";"
+        "content": "            return \"[\\u2713]\";"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "            return \"[\\u2718]\";"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public void markDone() {"
+        "content": "    }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        this.isDone \u003d true;"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "    public void markDone() {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "        this.isDone \u003d true;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    @Override"
+        "content": "        this.binary \u003d \"1\";"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    public String toString(){"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "        return this.getIcon() + \" \" + this.description;"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "    }"
+        "content": "    public String saveTask(){"
       },
       {
         "lineNumber": 35,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return \"T | \" + this.binary + \" | \" + this.description;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    public String toString(){"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "        return this.getIcon() + \" \" + this.description;"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "shunde97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
         "author": {
           "gitId": "shunde97"
         },
@@ -1444,7 +2348,7 @@
       }
     ],
     "authorContributionMap": {
-      "shunde97": 35
+      "shunde97": 42
     }
   },
   {
@@ -1534,106 +2438,106 @@
     }
   },
   {
-    "path": "text-ui-test/ACTUAL.TXT",
-    "fileType": "TXT",
+    "path": "src/main/java/Ui.java",
+    "fileType": "java",
     "lines": [
       {
         "lineNumber": 1,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Hi! I\u0027m"
+        "content": "import java.util.ArrayList;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "shunde97"
         },
-        "content": " ____        _        "
+        "content": ""
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "|  _ \\ _   _| | _____ "
+        "content": "public class Ui {"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "| | | | | | | |/ / _ \\"
+        "content": ""
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "| |_| | |_| |   \u003c  __/"
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "|____/ \\__,_|_|\\_\\___|"
+        "content": "    public ArrayList\u003cTask\u003e listOfTasks;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "shunde97"
         },
-        "content": ""
+        "content": "    private boolean isFinished;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "************************************************************"
+        "content": "    private String effect;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Hi! I\u0027m"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "shunde97"
         },
-        "content": " ____        _        "
+        "content": "    public Ui() {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "|  _ \\ _   _| | _____ "
+        "content": "        this.listOfTasks \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "| | | | | | | |/ / _ \\"
+        "content": "        this.isFinished \u003d false;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "| |_| | |_| |   \u003c  __/"
+        "content": "        this.effect \u003d \"************************************************************\";"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "|____/ \\__,_|_|\\_\\___|"
+        "content": "    }"
       },
       {
         "lineNumber": 15,
@@ -1647,1056 +2551,146 @@
         "author": {
           "gitId": "shunde97"
         },
-        "content": "What can I do for you?"
+        "content": "    public void greet(String effect) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "************************************************************"
+        "content": "        String logo \u003d \" ____        _        \\n\""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "todo"
+        "content": "                   + \"|  _ \\\\ _   _| | _____ \\n\""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "************************************************************"
+        "content": "                   + \"| | | | | | | |/ / _ \\\\\\n\""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Got it! I\u0027ve added this task:"
+        "content": "                   + \"| |_| | |_| |   \u003c  __/\\n\""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "     [T][?] project for week 2"
+        "content": "                   + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Now you have 1 tasks in the list."
+        "content": "        System.out.println(\"Hi! I\u0027m\\n\"+logo);"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "************************************************************"
+        "content": "        System.out.println(effect +\"\\nHi! I\u0027m\\n\"+logo);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "************************************************************"
+        "content": "        System.out.println(\"What can I do for you?\\n\"+effect);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Got it! I\u0027ve added this task:"
+        "content": "        this.listOfTasks \u003d storage.loadCurrentData();"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "     [E][?] project meeting (at: saturday 3-6pm)"
+        "content": "    }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Now you have 2 tasks in the list."
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "************************************************************"
+        "content": "    public void handleAction(String command, String effect) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "************************************************************"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Got it! I\u0027ve added this task:"
+        "content": "    }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "     [D][?] drop modules (by: this sunday)"
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Now you have 3 tasks in the list."
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Got it! I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 4 tasks in the list."
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [E][?] project meeting (at: saturday 3-6pm)"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "4.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Nice! I\u0027ve marked this task as done:"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [E][?] project meeting (at: saturday 3-6pm)"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "4.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Noted. I\u0027ve removed this task:"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [E][?] project meeting (at: saturday 3-6pm)"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 3 tasks in the list."
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Got it! I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 4 tasks in the list."
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "4.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Bye! :) Hope to see you again soon!"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
+        "content": "}"
       }
     ],
     "authorContributionMap": {
-      "shunde97": 82
+      "shunde97": 32
     }
   },
   {
-    "path": "text-ui-test/EXPECTED.TXT",
-    "fileType": "TXT",
+    "path": "src/main/java/unix.java",
+    "fileType": "java",
     "lines": [
       {
         "lineNumber": 1,
         "author": {
           "gitId": "shunde97"
         },
-        "content": "Hi! I\u0027m"
+        "content": "public class unix {"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "shunde97"
         },
-        "content": " ____        _        "
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "|  _ \\ _   _| | _____ "
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "| | | | | | | |/ / _ \\"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "| |_| | |_| |   \u003c  __/"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "|____/ \\__,_|_|\\_\\___|"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Hi! I\u0027m"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": " ____        _        "
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "|  _ \\ _   _| | _____ "
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "| | | | | | | |/ / _ \\"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "| |_| | |_| |   \u003c  __/"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "|____/ \\__,_|_|\\_\\___|"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "What can I do for you?"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "todo"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Got it! I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 1 tasks in the list."
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Got it! I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [E][?] project meeting (at: saturday 3-6pm)"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 2 tasks in the list."
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Got it! I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 3 tasks in the list."
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Got it! I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 4 tasks in the list."
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [E][?] project meeting (at: saturday 3-6pm)"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "4.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Nice! I\u0027ve marked this task as done:"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [E][?] project meeting (at: saturday 3-6pm)"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "4.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Noted. I\u0027ve removed this task:"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [E][?] project meeting (at: saturday 3-6pm)"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 3 tasks in the list."
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Got it! I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Now you have 4 tasks in the list."
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "1.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "2.     [D][?] drop modules (by: this sunday)"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "3.     [E][?] cny dinner (at: friday 6pm)"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "4.     [T][?] project for week 2"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "Bye! :) Hope to see you again soon!"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "shunde97"
-        },
-        "content": "************************************************************"
+        "content": "}"
       }
     ],
     "authorContributionMap": {
-      "shunde97": 82
+      "shunde97": 2
     }
   },
   {

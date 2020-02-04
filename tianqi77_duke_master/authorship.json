@@ -1,6 +1,2267 @@
 [
   {
+    "path": "data/duke.txt",
+    "fileType": "txt",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "T | 0 | abc"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "D | 0 | abc | today"
+      }
+    ],
+    "authorContributionMap": {
+      "tianqi77": 2
+    }
+  },
+  {
     "path": "src/main/java/Duke.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.io.*;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.util.NoSuchElementException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.util.StringTokenizer;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.nio.charset.StandardCharsets;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "public class Duke {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    private Storage storage;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    private Ui ui;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    private TaskList tasks;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Duke(String filePath) throws Exception{"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        ui \u003d new Ui();"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        storage \u003d new Storage(filePath);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            tasks \u003d storage.load();"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        } catch (FileNotFoundException e) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            ui.showLoadingError();"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            tasks \u003d new TaskList(new ArrayList\u003cTask\u003e());"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void run() throws Exception{"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        BufferedReader br \u003d new BufferedReader(new InputStreamReader(System.in));"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        ui.start();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        boolean a \u003d true;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        while (a) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            Parser ps \u003d new Parser(br.readLine());"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            a \u003d ps.process(ui, tasks);"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            storage.save(tasks);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public static void main(String[] args) throws Exception{"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        new Duke(\"..\\\\..\\\\..\\\\data\\\\duke.txt\").run();"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": " /*   public static void main(String[] args) throws Exception {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "        String logo \u003d \" ____        _        \\n\""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        BufferedReader br \u003d new BufferedReader(new InputStreamReader(System.in));"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        BufferedWriter out \u003d new BufferedWriter(new OutputStreamWriter(new FileOutputStream("
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                java.io.FileDescriptor.out), StandardCharsets.UTF_8));"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        out.write(\"Hello from\\n\" + logo);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        out.write(\"Hello! I\u0027m Duke\\n\" + \"What can I do for you?\\n\");"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        out.flush();"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        String curr \u003d br.readLine();"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        StringTokenizer st \u003d new StringTokenizer(curr);"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        //String cmd \u003d st.nextToken();"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        ArrayList\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e(100);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        Task currTask \u003d null;"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        //Command cmd \u003d Command.valueOf(st.nextToken());"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        while (true) {"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                Command cmd \u003d Command.valueOf(st.nextToken());"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                switch (cmd) {"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    case bye:"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        out.write(\"Bye. Hope to see you again soon!\\n\");"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        br.close();"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        out.close();"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        return;"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    case list:"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        out.write(\"Here are the tasks in your list:\\n\");"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            out.write(String.valueOf(i + 1) + \".\");"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            tasks.get(i).print(out);"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    case done:"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        int idx \u003d Integer.parseInt(st.nextToken()) - 1;"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        tasks.get(idx).done(out);"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    case delete:"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        int index \u003d Integer.parseInt(st.nextToken()) - 1;"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        out.write(\"Noted. I\u0027ve removed this task:\\n\");"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        tasks.remove(index).print(out);"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        int numTask \u003d tasks.size();"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        if (numTask \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            out.write(\"Now you have 1 task in the list.\\n\");"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        } else {"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            out.write(\"Now you have\" + String.valueOf(numTask) + \"tasks in the list.\\n\");"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    case todo:"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        try {"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            st.nextToken();"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            String sub \u003d curr.substring(4);"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            currTask \u003d new Task(sub);"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            tasks.add(currTask);"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            currTask.addTask(out, tasks.size());"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            new DukeException(out, \"OOPS!!! The description of a todo cannot be empty.\");"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    case deadline:"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        try {"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            st.nextToken();"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            int endIdx \u003d curr.indexOf(\" /by \");"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            if (endIdx \u003d\u003d -1) {"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                new DukeException(out, \"OOPS!!! The deadline cannot be empty.\");"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            } else {"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                currTask \u003d new Deadline(curr.substring(8, endIdx), \" (by:\" + curr.substring(endIdx + 4) + \")\");"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                tasks.add(currTask);"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                currTask.addTask(out, tasks.size());"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            }"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        } catch (NoSuchElementException e1) {"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            new DukeException(out, \"OOPS!!! The description of a deadline cannot be empty.\");"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    case event:"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        try {"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            st.nextToken();"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            int endIdx \u003d curr.indexOf(\" /at \");"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            if (endIdx \u003d\u003d -1) {"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                new DukeException(out, \"OOPS!!! The venue cannot be empty.\");"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            } else {"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                currTask \u003d new Deadline(curr.substring(8, endIdx), \" (by:\" + curr.substring(endIdx + 4) + \")\");"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                tasks.add(currTask);"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                                currTask.addTask(out, tasks.size());"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            }"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        } catch (NoSuchElementException e1) {"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            new DukeException(out, \"OOPS!!! The description of an event cannot be empty.\");"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                new DukeException(out, \"OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 137,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            out.flush();"
+      },
+      {
+        "lineNumber": 138,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            curr \u003d br.readLine();"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            st \u003d new StringTokenizer(curr);"
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}*/"
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "class Task{"
+      },
+      {
+        "lineNumber": 145,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public String type \u003d \"[T]\";"
+      },
+      {
+        "lineNumber": 146,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public String status \u003d \"[\" + \"\\u2718\" +\"]\" ;"
+      },
+      {
+        "lineNumber": 147,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public String name;"
+      },
+      {
+        "lineNumber": 148,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Task(String x){"
+      },
+      {
+        "lineNumber": 149,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.name \u003d x;"
+      },
+      {
+        "lineNumber": 150,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 151,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void print(){"
+      },
+      {
+        "lineNumber": 152,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(this.type + this.status + this.name + \"\\n\");"
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void done(){"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.status \u003d\"[\" + \"\\u2713\" +\"]\" ;"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Nice! I\u0027ve marked this task as done:\\n\");"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.print();"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void addTask(BufferedWriter out, int number) throws Exception {"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        out.write(\"Got it. I\u0027ve added this task:\\n\");"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.print();"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        if(number \u003e 1) {"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            out.write(\"Now you have \" + String.valueOf(number) + \" tasks in the list.\\n\");"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }else{"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            out.write(\"Now you have 1 task in the list.\\n\");"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "class Deadline extends Task{"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public String ddl;"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Deadline (String x, String d){"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        super(x);"
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.type \u003d \"[D]\";"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.ddl \u003d d;"
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void print(){"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(this.type + this.status + this.name + this.ddl + \"\\n\");"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "class Event extends Task{"
+      },
+      {
+        "lineNumber": 183,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public String venue;"
+      },
+      {
+        "lineNumber": 184,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Event(String x, String v) {"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        super(x);"
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.type \u003d \"[E]\";"
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.venue \u003d v;"
+      },
+      {
+        "lineNumber": 188,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 190,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void print() {"
+      },
+      {
+        "lineNumber": 191,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(this.type + this.status + this.name + this.venue + \"\\n\");"
+      },
+      {
+        "lineNumber": 192,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 193,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 194,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "class DukeException{"
+      },
+      {
+        "lineNumber": 195,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public DukeException(String msg){"
+      },
+      {
+        "lineNumber": 196,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        String errMsg \u003d \"\\u2639\"+ \" \" + msg+ \"\\n\";"
+      },
+      {
+        "lineNumber": 197,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(errMsg);"
+      },
+      {
+        "lineNumber": 198,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 199,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 200,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "enum Command{"
+      },
+      {
+        "lineNumber": 201,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    bye,"
+      },
+      {
+        "lineNumber": 202,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    list,"
+      },
+      {
+        "lineNumber": 203,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    done,"
+      },
+      {
+        "lineNumber": 204,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    delete,"
+      },
+      {
+        "lineNumber": 205,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    todo,"
+      },
+      {
+        "lineNumber": 206,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    deadline,"
+      },
+      {
+        "lineNumber": 207,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    event,"
+      },
+      {
+        "lineNumber": 208,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tianqi77": 198,
+      "-": 10
+    }
+  },
+  {
+    "path": "src/main/java/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.io.BufferedWriter;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.io.OutputStreamWriter;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.io.FileOutputStream;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.util.NoSuchElementException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.util.StringTokenizer;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.nio.charset.StandardCharsets;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "public class Parser{"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Command cmd;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public String curr;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public StringTokenizer st;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Parser(String s){"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        curr \u003d s;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        st \u003d new StringTokenizer(curr);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        cmd \u003d Command.valueOf(st.nextToken());"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public boolean process(Ui ui, TaskList tasks) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        Task newTask;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            switch (cmd) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                case bye:"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    ui.bye();"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    return false;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                case list:"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    ui.printLine();"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    ui.list();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    tasks.print();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    System.out.println();"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    ui.printLine();"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    return true;"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                case done:"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    ui.printLine();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    try {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        int idx \u003d Integer.parseInt(st.nextToken()) - 1;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        tasks.done(idx);"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.done(tasks.list.get(idx));"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.printLine();"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (NoSuchElementException e1) {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"Please enter a number\");"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (NumberFormatException e2) {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"Please enter a valid number to be done\");"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (IndexOutOfBoundsException e3) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"Number entered is larger than size of task list\");"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    return true;"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                case delete:"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    ui.printLine();"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    try {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        int idx \u003d Integer.parseInt(st.nextToken()) - 1;"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.delete(tasks.delete(idx), tasks.list.size());"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.printLine();"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (NoSuchElementException e1) {"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"Please enter a number\");"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (NumberFormatException e2) {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"Please enter a valid number to be done\");"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (IndexOutOfBoundsException e3) {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"Number entered is larger than size of task list\");"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    return true;"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                case todo:"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    ui.printLine();"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    try {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        st.nextToken();"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        newTask \u003d new Task(curr.substring(4));"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        tasks.add(newTask);"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.add(newTask, tasks.list.size());"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.printLine();"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (NoSuchElementException e1) {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"OOPS!!! The description of a todo cannot be empty.\");"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    return true;"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                case deadline:"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    try {"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        st.nextToken();"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        int endIdx \u003d curr.indexOf(\" /by \");"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        if (endIdx \u003d\u003d -1) {"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            ui.exp(\"OOPS!!! The deadline cannot be empty.\");"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        } else {"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            newTask \u003d new Deadline(curr.substring(8, endIdx), \" (by:\" + curr.substring(endIdx + 4) + \")\");"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            tasks.add(newTask);"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            ui.add(newTask, tasks.list.size());"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (NoSuchElementException e1) {"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"OOPS!!! The description of a deadline cannot be empty.\");"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    return true;"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                case event:"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    try {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        st.nextToken();"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        int endIdx \u003d curr.indexOf(\" /at \");"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        if (endIdx \u003d\u003d -1) {"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            ui.exp(\"OOPS!!! The venue cannot be empty.\");"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        } else {"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            newTask \u003d new Event(curr.substring(5, endIdx), \" (by:\" + curr.substring(endIdx + 4) + \")\");"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            tasks.add(newTask);"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                            ui.add(newTask, tasks.list.size());"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    } catch (NoSuchElementException e1) {"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                        ui.exp(\"OOPS!!! The description of an event cannot be empty.\");"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    return true;"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        } catch (Exception E) {"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            ui.exp(\"OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tianqi77": 109
+    }
+  },
+  {
+    "path": "src/main/java/Storage.java",
     "fileType": "java",
     "lines": [
       {
@@ -15,42 +2276,42 @@
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "import java.io.InputStreamReader;"
+        "content": "import java.io.BufferedWriter;"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "import java.io.BufferedWriter;"
+        "content": "import java.nio.file.NoSuchFileException;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "import java.io.OutputStreamWriter;"
+        "content": "import java.io.FileReader;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "import java.io.FileOutputStream;"
+        "content": "import java.io.FileWriter;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "import java.util.ArrayList;"
+        "content": "import java.io.File;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "import java.util.NoSuchElementException;"
+        "content": "import java.util.ArrayList;"
       },
       {
         "lineNumber": 8,
@@ -64,1442 +2325,1121 @@
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "import java.nio.charset.StandardCharsets;"
+        "content": "public class Storage {"
       },
       {
         "lineNumber": 10,
         "author": {
-          "gitId": "-"
+          "gitId": "tianqi77"
         },
-        "content": "public class Duke {"
+        "content": "    String location;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "    public static void main(String[] args) throws Exception {"
+        "content": "    BufferedWriter out;"
       },
       {
         "lineNumber": 12,
         "author": {
-          "gitId": "-"
+          "gitId": "tianqi77"
         },
-        "content": "        String logo \u003d \" ____        _        \\n\""
+        "content": "    BufferedReader br;"
       },
       {
         "lineNumber": 13,
         "author": {
-          "gitId": "-"
+          "gitId": "tianqi77"
         },
-        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
-          "gitId": "-"
+          "gitId": "tianqi77"
         },
-        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+        "content": "    public Storage(String filepath) throws Exception {"
       },
       {
         "lineNumber": 15,
         "author": {
-          "gitId": "-"
+          "gitId": "tianqi77"
         },
-        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+        "content": "        location \u003d filepath;"
       },
       {
         "lineNumber": 16,
         "author": {
-          "gitId": "-"
+          "gitId": "tianqi77"
         },
-        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+        "content": "        br \u003d new BufferedReader(new FileReader(filepath));"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        BufferedReader br \u003d new BufferedReader(new InputStreamReader(System.in));"
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        BufferedWriter out \u003d new BufferedWriter(new OutputStreamWriter(new FileOutputStream("
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "                java.io.FileDescriptor.out), StandardCharsets.UTF_8));"
+        "content": "    public void save(TaskList tasks) throws Exception{"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        out.write(\"Hello from\\n\" + logo);"
+        "content": "        out  \u003d new BufferedWriter(new FileWriter(location));"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        out.write(\"Hello! I\u0027m Duke\\n\" + \"What can I do for you?\\n\");"
+        "content": "        for(int i \u003d 0; i \u003c tasks.list.size(); i++){"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        out.flush();"
+        "content": "            if(tasks.list.get(i) instanceof Deadline){"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        String curr \u003d br.readLine();"
+        "content": "                out.write(\"D | \");"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        StringTokenizer st \u003d new StringTokenizer(curr);"
+        "content": "            }else if(tasks.list.get(i) instanceof Event){"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        //String cmd \u003d st.nextToken();"
+        "content": "                out.write(\"E | \");"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        ArrayList\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e(100);"
+        "content": "            }else{"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "        Task currTask \u003d null;"
+        "content": "                out.write(\"T | \");"
       },
       {
         "lineNumber": 28,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        //Command cmd \u003d Command.valueOf(st.nextToken());"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        while (true) {"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                Command cmd \u003d Command.valueOf(st.nextToken());"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                switch (cmd) {"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                    case bye:"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        out.write(\"Bye. Hope to see you again soon!\\n\");"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        br.close();"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        out.close();"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        return;"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                    case list:"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        out.write(\"Here are the tasks in your list:\\n\");"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            out.write(String.valueOf(i + 1) + \".\");"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            tasks.get(i).print(out);"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        }"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        break;"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                    case done:"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        int idx \u003d Integer.parseInt(st.nextToken()) - 1;"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        tasks.get(idx).done(out);"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        break;"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                    case delete:"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        int index \u003d Integer.parseInt(st.nextToken()) - 1;"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        out.write(\"Noted. I\u0027ve removed this task:\\n\");"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        tasks.remove(index).print(out);"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        int numTask \u003d tasks.size();"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        if (numTask \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            out.write(\"Now you have 1 task in the list.\\n\");"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        } else {"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            out.write(\"Now you have\" + String.valueOf(numTask) + \"tasks in the list.\\n\");"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        }"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        break;"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                    case todo:"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        try {"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            st.nextToken();"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            String sub \u003d curr.substring(4);"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            currTask \u003d new Task(sub);"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            tasks.add(currTask);"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            currTask.addTask(out, tasks.size());"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            new DukeException(out, \"OOPS!!! The description of a todo cannot be empty.\");"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        }"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        break;"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                    case deadline:"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        try {"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            st.nextToken();"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            int endIdx \u003d curr.indexOf(\" /by \");"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            if (endIdx \u003d\u003d -1) {"
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                new DukeException(out, \"OOPS!!! The deadline cannot be empty.\");"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            } else {"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                currTask \u003d new Deadline(curr.substring(8, endIdx), \" (by:\" + curr.substring(endIdx + 4) + \")\");"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                tasks.add(currTask);"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                currTask.addTask(out, tasks.size());"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            }"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        } catch (NoSuchElementException e1) {"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            new DukeException(out, \"OOPS!!! The description of a deadline cannot be empty.\");"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        }"
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        break;"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                    case event:"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        try {"
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            st.nextToken();"
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            int endIdx \u003d curr.indexOf(\" /at \");"
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            if (endIdx \u003d\u003d -1) {"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                new DukeException(out, \"OOPS!!! The venue cannot be empty.\");"
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            } else {"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                currTask \u003d new Deadline(curr.substring(8, endIdx), \" (by:\" + curr.substring(endIdx + 4) + \")\");"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                tasks.add(currTask);"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                                currTask.addTask(out, tasks.size());"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            }"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        } catch (NoSuchElementException e1) {"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                            new DukeException(out, \"OOPS!!! The description of an event cannot be empty.\");"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        }"
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                        break;"
-      },
-      {
-        "lineNumber": 101,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 102,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 103,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "                new DukeException(out, \"OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
-      },
-      {
-        "lineNumber": 104,
         "author": {
           "gitId": "tianqi77"
         },
         "content": "            }"
       },
       {
-        "lineNumber": 105,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "            out.flush();"
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "            curr \u003d br.readLine();"
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "            st \u003d new StringTokenizer(curr);"
-      },
-      {
-        "lineNumber": 108,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 109,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 110,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "}"
-      },
-      {
-        "lineNumber": 111,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 112,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "class Task{"
-      },
-      {
-        "lineNumber": 113,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public String type \u003d \"[T]\";"
-      },
-      {
-        "lineNumber": 114,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public String status \u003d \"[\" + \"\\u2718\" +\"]\" ;"
-      },
-      {
-        "lineNumber": 115,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public String name;"
-      },
-      {
-        "lineNumber": 116,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public Task(String x){"
-      },
-      {
-        "lineNumber": 117,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.name \u003d x;"
-      },
-      {
-        "lineNumber": 118,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 119,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public void print(BufferedWriter out) throws Exception{"
-      },
-      {
-        "lineNumber": 120,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        out.write(this.type + this.status + this.name + \"\\n\");"
-      },
-      {
-        "lineNumber": 121,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 122,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public void done(BufferedWriter out) throws Exception{"
-      },
-      {
-        "lineNumber": 123,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.status \u003d\"[\" + \"\\u2713\" +\"]\" ;"
-      },
-      {
-        "lineNumber": 124,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        out.write(\"Nice! I\u0027ve marked this task as done:\\n\");"
-      },
-      {
-        "lineNumber": 125,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.print(out);"
-      },
-      {
-        "lineNumber": 126,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 127,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public void addTask(BufferedWriter out, int number) throws Exception {"
-      },
-      {
-        "lineNumber": 128,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        out.write(\"Got it. I\u0027ve added this task:\\n\");"
-      },
-      {
-        "lineNumber": 129,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.print(out);"
-      },
-      {
-        "lineNumber": 130,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        if(number \u003e 1) {"
-      },
-      {
-        "lineNumber": 131,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "            out.write(\"Now you have \" + String.valueOf(number) + \" tasks in the list.\\n\");"
-      },
-      {
-        "lineNumber": 132,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        }else{"
-      },
-      {
-        "lineNumber": 133,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "            out.write(\"Now you have 1 task in the list.\\n\");"
-      },
-      {
-        "lineNumber": 134,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 135,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 136,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "}"
-      },
-      {
-        "lineNumber": 137,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "class Deadline extends Task{"
-      },
-      {
-        "lineNumber": 138,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public String ddl;"
-      },
-      {
-        "lineNumber": 139,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public Deadline (String x, String d){"
-      },
-      {
-        "lineNumber": 140,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        super(x);"
-      },
-      {
-        "lineNumber": 141,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.type \u003d \"[D]\";"
-      },
-      {
-        "lineNumber": 142,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.ddl \u003d d;"
-      },
-      {
-        "lineNumber": 143,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 144,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 145,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public void print(BufferedWriter out) throws Exception{"
-      },
-      {
-        "lineNumber": 146,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        out.write(this.type + this.status + this.name + this.ddl + \"\\n\");"
-      },
-      {
-        "lineNumber": 147,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 148,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 149,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "}"
-      },
-      {
-        "lineNumber": 150,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "class Event extends Task{"
-      },
-      {
-        "lineNumber": 151,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public String venue;"
-      },
-      {
-        "lineNumber": 152,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public Event(String x, String v) {"
-      },
-      {
-        "lineNumber": 153,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        super(x);"
-      },
-      {
-        "lineNumber": 154,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.type \u003d \"[E]\";"
-      },
-      {
-        "lineNumber": 155,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        this.venue \u003d v;"
-      },
-      {
-        "lineNumber": 156,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 157,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 158,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public void print(BufferedWriter out) throws Exception{"
-      },
-      {
-        "lineNumber": 159,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        out.write(this.type + this.status + this.name + this.venue + \"\\n\");"
-      },
-      {
-        "lineNumber": 160,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 161,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "}"
-      },
-      {
-        "lineNumber": 162,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "class DukeException{"
-      },
-      {
-        "lineNumber": 163,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    public DukeException(BufferedWriter out, String msg) throws Exception{"
-      },
-      {
-        "lineNumber": 164,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        String errMsg \u003d \"\\u2639\"+ \" \" + msg+ \"\\n\";"
-      },
-      {
-        "lineNumber": 165,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "        out.write(errMsg);"
-      },
-      {
-        "lineNumber": 166,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 167,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "}"
-      },
-      {
-        "lineNumber": 168,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "enum Command{"
-      },
-      {
-        "lineNumber": 169,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    bye,"
-      },
-      {
-        "lineNumber": 170,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    list,"
-      },
-      {
-        "lineNumber": 171,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    done,"
-      },
-      {
-        "lineNumber": 172,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    delete,"
-      },
-      {
-        "lineNumber": 173,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    todo,"
-      },
-      {
-        "lineNumber": 174,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    deadline,"
-      },
-      {
-        "lineNumber": 175,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "    event,"
-      },
-      {
-        "lineNumber": 176,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tianqi77": 167,
-      "-": 9
-    }
-  },
-  {
-    "path": "text-ui-test/ACTUAL.TXT",
-    "fileType": "TXT",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Hello from"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": " ____        _        "
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "|  _ \\ _   _| | _____ "
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "| | | | | | | |/ / _ \\"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "| |_| | |_| |   \u003c  __/"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "|____/ \\__,_|_|\\_\\___|"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Hello! I\u0027m Duke"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "What can I do for you?"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Got it. I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "  [D][✘] assignment (by: next week)"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Now you have 1 task in the list."
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Got it. I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "  [D][✘] project (by: 2359)"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Now you have 2 tasks in the list."
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Got it. I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "  [T][✘] individual project"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Now you have 3 tasks in the list."
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Here are the tasks in your list:"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "1.[D][✘] assignment (by: next week)"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "2.[D][✘] project (by: 2359)"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "3.[T][✘] individual project"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Got it. I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "  [E][✘] meeting with group members (at: SOC)"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Now you have 4 tasks in the list."
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Got it. I\u0027ve added this task:"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "  [T][✘] teamProject"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Now you have 5 tasks in the list."
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tianqi77"
-        },
-        "content": "Nice! I\u0027ve marked this task as done:"
-      },
-      {
         "lineNumber": 29,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "  [T][✓] individual project"
+        "content": "            if(tasks.list.get(i).status.equals(\"[\" + \"\\u2713\" + \"]\")){"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "Here are the tasks in your list:"
+        "content": "                out.write(\"1 |\");"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "1.[D][✘] assignment (by: next week)"
+        "content": "            }else{"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "2.[D][✘] project (by: 2359)"
+        "content": "                out.write(\"0 |\");"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "3.[T][✓] individual project"
+        "content": "            }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "4.[E][✘] meeting with group members (at: SOC)"
+        "content": "            out.write(tasks.list.get(i).name);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "5.[T][✘] teamProject"
+        "content": "            if(tasks.list.get(i) instanceof Deadline){"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "tianqi77"
         },
-        "content": "Bye. Hope to see you again soon!"
+        "content": "                out.write(\" |\");"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                int len \u003d ((Deadline) tasks.list.get(i)).ddl.length();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                out.write(((Deadline) tasks.list.get(i)).ddl.substring(5, len-1));"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            }else if(tasks.list.get(i) instanceof Event){"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                out.write(\" |\");"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                int len \u003d ((Event) tasks.list.get(i)).venue.length();"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                out.write(((Event) tasks.list.get(i)).venue.substring(5, len-1));"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            out.write(\"\\n\");"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            out.flush();"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        out.close();"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public TaskList load() throws Exception{"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        TaskList tasks \u003d new TaskList(new ArrayList\u003cTask\u003e());"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        String curr \u003d br.readLine();"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        while(curr!\u003dnull){"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            StringTokenizer st \u003d new StringTokenizer(curr);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            String cmd \u003d st.nextToken();"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            st.nextToken();"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            String status \u003d st.nextToken();"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            if(cmd.equals(\"T\")) {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                Task newTask \u003d new Task(curr.substring(7));"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                if(status.equals(\"1\")) {"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    newTask.status \u003d \"[\" + \"\\u2713\" + \"]\";"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                tasks.list.add(newTask);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            }else if(cmd.equals(\"D\")){"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                int idx \u003d curr.substring(7).indexOf(\"|\")+7;"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                Deadline newTask \u003d new Deadline(curr.substring(7,idx-1), \" (by:\" + curr.substring(idx+1) + \")\");"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                if(status.equals(\"1\")) {"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    newTask.status \u003d \"[\" + \"\\u2713\" + \"]\";"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                tasks.list.add(newTask);"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            }else if(cmd.equals(\"E\")){"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                int idx \u003d curr.substring(7).indexOf(\"|\")+7;"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                Event newTask \u003d new Event(curr.substring(7,idx-1), \" (at:\" + curr.substring(idx+1) + \")\");"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                if(status.equals(\"1\")) {"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                    newTask.status \u003d \"[\" + \"\\u2713\" + \"]\";"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "                tasks.list.add(newTask);"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            curr \u003d br.readLine();"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        br.close();"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        return tasks;"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
       }
     ],
     "authorContributionMap": {
-      "tianqi77": 36
+      "tianqi77": 84
+    }
+  },
+  {
+    "path": "src/main/java/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.io.BufferedWriter;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "public class TaskList{"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public ArrayList\u003cTask\u003e list;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public TaskList(ArrayList\u003cTask\u003e l){"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        this.list \u003d l;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void add(Task t){"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        list.add(t);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Task delete(int idx){"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        return list.remove(idx);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void done(int idx){"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        list.get(idx).status \u003d \"[\" + \"\\u2713\" +\"]\" ;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void print(){"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        for(int i \u003d 0; i \u003c list.size(); i++){"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            System.out.print(String.valueOf(i + 1) + \".\");"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            list.get(i).print();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tianqi77": 23
+    }
+  },
+  {
+    "path": "src/main/java/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "public class Ui{"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    String logo \u003d \" ____        _        \\n\""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            + \"|  _ \\\\ _   _| | _____ \\n\""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            + \"| | | | | | | |/ / _ \\\\\\n\""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            + \"| |_| | |_| |   \u003c  __/\\n\""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "            + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public String line \u003d \"_____________________________________________________\\n\";"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public Ui(){"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void start(){"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Hello from\\n\" + logo);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Hello! I\u0027m Duke\\n\" + \"What can I do for you?\\n\");"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.println();"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        printLine();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void printLine(){"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(line);"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void done(Task t){"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Nice! I\u0027ve marked this task as done:\\n\");"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        t.print();"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.println();"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void delete(Task t, int n){"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Noted. I\u0027ve removed this task: \\n\");"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        t.print();"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        currTask(n);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.println();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void list(){"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Here are the tasks in your list:\\n\");"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void add(Task t, int n){"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Got it. I\u0027ve added this task: \\n\");"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        t.print();"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        currTask(n);"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.println();"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void bye(){"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        printLine();"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Bye. Hope to see you again soon!\\n\");"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.println();"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        printLine();;"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void currTask(int n){"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        System.out.print(\"Now you have \" + n + \" tasks in the list. \\n\");"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void exp(String s){"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        new DukeException(s);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    public void showLoadingError(){"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "        exp(\"Sorry, there is a loading error:(\");"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "tianqi77"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tianqi77": 58
     }
   },
   {
