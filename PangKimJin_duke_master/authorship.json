@@ -57,98 +57,98 @@
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    private static void writeToFile(String textToAdd) throws IOException {"
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        FileWriter fw \u003d new FileWriter(\"./\" + \"data/duke.txt\",true);"
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        fw.write(textToAdd);"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        fw.close();"
+        "content": "    private File dataFile;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "    public Duke(String filePath) {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    private static void fileUpdate(File dataFile, ArrayList \u003cTask\u003e arr) {"
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        try {"
+        "content": "        storage \u003d new Storage(filePath);"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            dataFile.delete();"
+        "content": "        dataFile \u003d new File(filePath);"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            for (int i \u003d 0; i \u003c arr.size(); i++) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                writeToFile(arr.get(i).getIcon() + \" | \" + arr.get(i).getStatusBinary() + \" | \" + arr.get(i).getDescription() + \"\\n\");"
+        "content": "            tasks \u003d new TaskList(storage.load());"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "        } catch (InstantiationError e) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            ui.showLoadingError();"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            System.out.println(\"Something went wrong: \" + e.getMessage());"
+        "content": "            tasks \u003d new TaskList(new ArrayList \u003cTask\u003e());"
       },
       {
         "lineNumber": 22,
@@ -174,9 +174,9 @@
       {
         "lineNumber": 25,
         "author": {
-          "gitId": "-"
+          "gitId": "PangKimJin"
         },
-        "content": "    public static void main(String[] args) {"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 26,
@@ -197,49 +197,49 @@
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        System.out.println(\"Hello! I\u0027m Duke\");"
+        "content": "        this.ui.runGreeting();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        System.out.println(\"What can I do for you?\");"
+        "content": "        do {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        ArrayList \u003cTask\u003e arr \u003d new ArrayList\u003cTask\u003e();"
+        "content": "            userInput \u003d sc.nextLine();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        File dataFile \u003d new File(\"./\" + \"data/duke.txt\");"
+        "content": "            Parser parser \u003d new Parser();"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "            String parserOutput \u003d parser.parse(userInput);                // gives parser the user command"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        do {"
+        "content": "            ArrayList \u003cTask\u003e arr \u003d tasks.getArraylist(); // returns the arraylist form of the tasklist"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            userInput \u003d sc.nextLine();"
+        "content": "            switch (parserOutput) {"
       },
       {
         "lineNumber": 35,
@@ -253,469 +253,469 @@
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            // LIST"
+        "content": "                case (\"list\"):"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            if (userInput.equals(\"list\")) {                                                  //Lists out the tasks"
+        "content": "                    System.out.println(\"Here are the tasks in your list: \");"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                System.out.println(\"Here are the tasks in your list: \");"
+        "content": "                    tasks.print();  // sysout all the items in the tasklist"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                for (int i \u003d 1; i \u003c\u003d arr.size(); i++) {"
+        "content": "                    break;"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    System.out.println(i + \".\" + arr.get(i - 1).getIcon() + arr.get(i - 1).status + \" \" + arr.get(i - 1).getDescription());"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "                case (\"done\"):"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "                    int doneTask \u003d Integer.parseInt(userInput.split(\"\\\\s\")[1]);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "                    arr.get(doneTask - 1).setDone();"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            // DONE"
+        "content": "                    System.out.println(\"Nice! I\u0027ve marked this task as done:\");"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"done\")) {"
+        "content": "                    System.out.println(arr.get(doneTask - 1).status + \" \" + arr.get(doneTask - 1).getDescription());"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                int doneTask \u003d Integer.parseInt(userInput.split(\"\\\\s\")[1]);"
+        "content": ""
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                arr.get(doneTask - 1).setDone();"
+        "content": "                    // write the new updated arr to the duke.txt"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                System.out.println(\"Nice! I\u0027ve marked this task as done:\");"
+        "content": "                    storage.fileUpdate(this.dataFile, arr);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                System.out.println(arr.get(doneTask - 1).status + \" \" + arr.get(doneTask - 1).getDescription());"
+        "content": "                    break;"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                fileUpdate(dataFile, arr);"
+        "content": "                case (\"todo\"):"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "                    if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "                        System.out.println(\"\u0026#x2639; OOPS!!! The description of a todo cannot be empty.\");"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            // TO DO"
+        "content": "                    }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"todo\")) {"
+        "content": "                    else {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
+        "content": "                        String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    System.out.println(\"☹ OOPS!!! The description of a todo cannot be empty.\");"
+        "content": "                        String taskDescription \u003d \"\";"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "                        for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                else {"
+        "content": "                            if (i \u003d\u003d 0) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
+        "content": "                                taskDescription +\u003d taskRequest[i];"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String taskDescription \u003d \"\";"
+        "content": "                            } else {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
+        "content": "                                taskDescription +\u003d \" \" + taskRequest[i];"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        if (i \u003d\u003d 0) {"
+        "content": "                            }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                            taskDescription +\u003d taskRequest[i];"
+        "content": "                        }"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        } else {"
+        "content": "                        Task curr \u003d new Task(\"todo\", taskDescription);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                            taskDescription +\u003d \" \" + taskRequest[i];"
+        "content": "                        arr.add(curr);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        }"
+        "content": "                        storage.fileUpdate(dataFile, arr);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    }"
+        "content": "                        if (!userInput.equals(\"bye\")) {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    Task curr \u003d new Task(\"todo\", taskDescription);"
+        "content": "                            System.out.println(\"Got it. I\u0027ve added this task:\");"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    arr.add(curr);"
+        "content": "                            System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    fileUpdate(dataFile, arr);"
+        "content": "                            System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    if (!userInput.equals(\"bye\")) {"
+        "content": "                        }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(\"Got it. I\u0027ve added this task:\");"
+        "content": "                    }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
+        "content": "                    break;"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+        "content": "                case (\"deadline\"):"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    }"
+        "content": "                    if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "                        System.out.println(\"\u0026#x2639; OOPS!!! The description of a deadline cannot be empty.\");"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "                    }"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "                    else {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            // DEADLINE"
+        "content": "                        String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"deadline\")) {"
+        "content": "                        String taskDescriptionDate \u003d \"\";"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
+        "content": "                        for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    System.out.println(\"☹ OOPS!!! The description of a deadline cannot be empty.\");"
+        "content": "                            if (i \u003d\u003d 0) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "                                taskDescriptionDate +\u003d taskRequest[i];"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                else {"
+        "content": "                            } else {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
+        "content": "                                taskDescriptionDate +\u003d \" \" + taskRequest[i];"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String taskDescriptionDate \u003d \"\";"
+        "content": "                            }"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
+        "content": "                        }"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        if (i \u003d\u003d 0) {"
+        "content": "                        String taskDescription \u003d taskDescriptionDate.split(\"/\")[0];"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                            taskDescriptionDate +\u003d taskRequest[i];"
+        "content": "                        Task curr \u003d new Task(\"deadline\", taskDescription);"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        } else {"
+        "content": "                        curr.addDate(taskDescriptionDate.split(\"/\")[1]);"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                            taskDescriptionDate +\u003d \" \" + taskRequest[i];"
+        "content": "                        arr.add(curr);"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        }"
+        "content": "                        storage.fileUpdate(dataFile, arr);"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    }"
+        "content": "                        if (!userInput.equals(\"bye\")) {"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String taskDescription \u003d taskDescriptionDate.split(\"/\")[0];"
+        "content": "                            System.out.println(\"Got it. I\u0027ve added this task:\");"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    Task curr \u003d new Task(\"deadline\", taskDescription);"
+        "content": "                            System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    curr.addDate(taskDescriptionDate.split(\"/\")[1]);"
+        "content": "                            System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    arr.add(curr);"
+        "content": "                        }"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    fileUpdate(dataFile, arr);"
+        "content": "                    }"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    if (!userInput.equals(\"bye\")) {"
+        "content": "                    break;"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(\"Got it. I\u0027ve added this task:\");"
+        "content": "                case (\"event\"):"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
+        "content": "                    if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+        "content": "                        System.out.println(\"\u0026#x2639; OOPS!!! The description of an event cannot be empty.\");"
       },
       {
         "lineNumber": 103,
@@ -729,348 +729,2214 @@
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "                    else {"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "                        String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "                        String taskDescriptionDate \u003d \"\";"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            // EVENT"
+        "content": "                        for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"event\")) {"
+        "content": "                            if (i \u003d\u003d 0) {"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
+        "content": "                                taskDescriptionDate +\u003d taskRequest[i];"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    System.out.println(\"☹ OOPS!!! The description of an event cannot be empty.\");"
+        "content": "                            } else {"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "                                taskDescriptionDate +\u003d \" \" + taskRequest[i];"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                else {"
+        "content": "                            }"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
+        "content": "                        }"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String taskDescriptionDate \u003d \"\";"
+        "content": "                        String taskDescription \u003d taskDescriptionDate.split(\"/\")[0];"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
+        "content": "                        Task curr \u003d new Task(\"event\", taskDescription);"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        if (i \u003d\u003d 0) {"
+        "content": "                        curr.addDate(taskDescriptionDate.split(\"/\")[1]);"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                            taskDescriptionDate +\u003d taskRequest[i];"
+        "content": "                        arr.add(curr);"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        } else {"
+        "content": "                        storage.fileUpdate(dataFile, arr);"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                            taskDescriptionDate +\u003d \" \" + taskRequest[i];"
+        "content": "                        if (!userInput.equals(\"bye\")) {"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        }"
+        "content": "                            System.out.println(\"Got it. I\u0027ve added this task:\");"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    }"
+        "content": "                            System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    String taskDescription \u003d taskDescriptionDate.split(\"/\")[0];"
+        "content": "                            System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    Task curr \u003d new Task(\"event\", taskDescription);"
+        "content": "                        }"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    curr.addDate(taskDescriptionDate.split(\"/\")[1]);"
+        "content": "                    }"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    arr.add(curr);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    fileUpdate(dataFile, arr);"
+        "content": "                case (\"delete\"):"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    if (!userInput.equals(\"bye\")) {"
+        "content": "                    int removedTask \u003d Integer.parseInt(userInput.split(\"\\\\s\")[1]);"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(\"Got it. I\u0027ve added this task:\");"
+        "content": "                    System.out.println(\"Noted. I\u0027ve removed this task:\");"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
+        "content": "                    System.out.println(arr.get(removedTask - 1).getIcon() + arr.get(removedTask - 1).status + \" \" + arr.get(removedTask - 1).getDescription());"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                        System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+        "content": "                    arr.remove(removedTask - 1);"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    }"
+        "content": "                    System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "                    storage.fileUpdate(dataFile, arr);"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "                    break;"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "                default:"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            //DELETE"
+        "content": "                    System.out.println(\"\u0026#x2639; OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"delete\")) {"
+        "content": "            }"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                int removedTask \u003d Integer.parseInt(userInput.split(\"\\\\s\")[1]);"
+        "content": "        } while (!userInput.equals(\"bye\"));"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                System.out.println(\"Noted. I\u0027ve removed this task:\");"
+        "content": "    }"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                System.out.println(arr.get(removedTask - 1).getIcon() + arr.get(removedTask - 1).status + \" \" + arr.get(removedTask - 1).getDescription());"
+        "content": ""
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                arr.remove(removedTask - 1);"
+        "content": "    public static void main(String[] args) {"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+        "content": "        new Duke(\"./\" + \"data/duke.txt\").run();"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                fileUpdate(dataFile, arr);"
+        "content": "    }"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "}"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            else {"
+        "content": "/*"
       },
       {
         "lineNumber": 145,
         "author": {
-          "gitId": "PangKimJin"
+          "gitId": "-"
         },
-        "content": "                System.out.println(\"☹ OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "    private static void writeToFile(String textToAdd) throws IOException {"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "        FileWriter fw \u003d new FileWriter(\"./\" + \"data/duke.txt\",true);"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        } while (!userInput.equals(\"bye\"));"
+        "content": "        fw.write(textToAdd);"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        System.out.println(\"Bye. Hope to see you again soon!\");"
+        "content": "        fw.close();"
       },
       {
         "lineNumber": 151,
         "author": {
-          "gitId": "-"
+          "gitId": "PangKimJin"
         },
         "content": "    }"
       },
       {
         "lineNumber": 152,
         "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    private static void fileUpdate(File dataFile, ArrayList \u003cTask\u003e arr) {"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            dataFile.delete();"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            for (int i \u003d 0; i \u003c arr.size(); i++) {"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                writeToFile(arr.get(i).getIcon() + \" | \" + arr.get(i).getStatusBinary() + \" | \" + arr.get(i).getDescription() + \"\\n\");"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            System.out.println(\"Something went wrong: \" + e.getMessage());"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 164,
+        "author": {
           "gitId": "-"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        Scanner sc \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        String userInput \u003d \"\";"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        System.out.println(\"Hello! I\u0027m Duke\");"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        System.out.println(\"What can I do for you?\");"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        ArrayList \u003cTask\u003e arr \u003d new ArrayList\u003cTask\u003e();"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        File dataFile \u003d new File(\"./\" + \"data/duke.txt\");"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        do {"
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            userInput \u003d sc.nextLine();"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            // LIST"
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            if (userInput.equals(\"list\")) {                                                  //Lists out the tasks"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                System.out.println(\"Here are the tasks in your list: \");"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                for (int i \u003d 1; i \u003c\u003d arr.size(); i++) {"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    System.out.println(i + \".\" + arr.get(i - 1).getIcon() + arr.get(i - 1).status + \" \" + arr.get(i - 1).getDescription());"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 183,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            // DONE"
+      },
+      {
+        "lineNumber": 184,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"done\")) {"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                int doneTask \u003d Integer.parseInt(userInput.split(\"\\\\s\")[1]);"
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                arr.get(doneTask - 1).setDone();"
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                System.out.println(\"Nice! I\u0027ve marked this task as done:\");"
+      },
+      {
+        "lineNumber": 188,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                System.out.println(arr.get(doneTask - 1).status + \" \" + arr.get(doneTask - 1).getDescription());"
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                fileUpdate(dataFile, arr);"
+      },
+      {
+        "lineNumber": 190,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 191,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 192,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            // TO DO"
+      },
+      {
+        "lineNumber": 193,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"todo\")) {"
+      },
+      {
+        "lineNumber": 194,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 195,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    System.out.println(\"\u0026#x2639; OOPS!!! The description of a todo cannot be empty.\");"
+      },
+      {
+        "lineNumber": 196,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 197,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                else {"
+      },
+      {
+        "lineNumber": 198,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
+      },
+      {
+        "lineNumber": 199,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String taskDescription \u003d \"\";"
+      },
+      {
+        "lineNumber": 200,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
+      },
+      {
+        "lineNumber": 201,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        if (i \u003d\u003d 0) {"
+      },
+      {
+        "lineNumber": 202,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                            taskDescription +\u003d taskRequest[i];"
+      },
+      {
+        "lineNumber": 203,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        } else {"
+      },
+      {
+        "lineNumber": 204,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                            taskDescription +\u003d \" \" + taskRequest[i];"
+      },
+      {
+        "lineNumber": 205,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 206,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 207,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    Task curr \u003d new Task(\"todo\", taskDescription);"
+      },
+      {
+        "lineNumber": 208,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    arr.add(curr);"
+      },
+      {
+        "lineNumber": 209,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    fileUpdate(dataFile, arr);"
+      },
+      {
+        "lineNumber": 210,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    if (!userInput.equals(\"bye\")) {"
+      },
+      {
+        "lineNumber": 211,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(\"Got it. I\u0027ve added this task:\");"
+      },
+      {
+        "lineNumber": 212,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
+      },
+      {
+        "lineNumber": 213,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+      },
+      {
+        "lineNumber": 214,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 215,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 216,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 217,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 218,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            // DEADLINE"
+      },
+      {
+        "lineNumber": 219,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 220,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 221,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    System.out.println(\"\u0026#x2639; OOPS!!! The description of a deadline cannot be empty.\");"
+      },
+      {
+        "lineNumber": 222,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 223,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                else {"
+      },
+      {
+        "lineNumber": 224,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
+      },
+      {
+        "lineNumber": 225,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String taskDescriptionDate \u003d \"\";"
+      },
+      {
+        "lineNumber": 226,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
+      },
+      {
+        "lineNumber": 227,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        if (i \u003d\u003d 0) {"
+      },
+      {
+        "lineNumber": 228,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                            taskDescriptionDate +\u003d taskRequest[i];"
+      },
+      {
+        "lineNumber": 229,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        } else {"
+      },
+      {
+        "lineNumber": 230,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                            taskDescriptionDate +\u003d \" \" + taskRequest[i];"
+      },
+      {
+        "lineNumber": 231,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 232,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 233,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String taskDescription \u003d taskDescriptionDate.split(\"/\")[0];"
+      },
+      {
+        "lineNumber": 234,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    Task curr \u003d new Task(\"deadline\", taskDescription);"
+      },
+      {
+        "lineNumber": 235,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    curr.addDate(taskDescriptionDate.split(\"/\")[1]);"
+      },
+      {
+        "lineNumber": 236,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    arr.add(curr);"
+      },
+      {
+        "lineNumber": 237,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    fileUpdate(dataFile, arr);"
+      },
+      {
+        "lineNumber": 238,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    if (!userInput.equals(\"bye\")) {"
+      },
+      {
+        "lineNumber": 239,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(\"Got it. I\u0027ve added this task:\");"
+      },
+      {
+        "lineNumber": 240,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
+      },
+      {
+        "lineNumber": 241,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+      },
+      {
+        "lineNumber": 242,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 243,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 244,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 245,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 246,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            // EVENT"
+      },
+      {
+        "lineNumber": 247,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 248,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                if (userInput.split(\"\\\\s\").length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 249,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    System.out.println(\"\u0026#x2639; OOPS!!! The description of an event cannot be empty.\");"
+      },
+      {
+        "lineNumber": 250,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 251,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                else {"
+      },
+      {
+        "lineNumber": 252,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String[] taskRequest \u003d Arrays.copyOfRange(userInput.split(\"\\\\s\"), 1, userInput.split(\"\\\\s\").length);    // e.g. [return, book]"
+      },
+      {
+        "lineNumber": 253,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String taskDescriptionDate \u003d \"\";"
+      },
+      {
+        "lineNumber": 254,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    for (int i \u003d 0; i \u003c taskRequest.length; i++) {"
+      },
+      {
+        "lineNumber": 255,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        if (i \u003d\u003d 0) {"
+      },
+      {
+        "lineNumber": 256,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                            taskDescriptionDate +\u003d taskRequest[i];"
+      },
+      {
+        "lineNumber": 257,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        } else {"
+      },
+      {
+        "lineNumber": 258,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                            taskDescriptionDate +\u003d \" \" + taskRequest[i];"
+      },
+      {
+        "lineNumber": 259,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 260,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 261,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    String taskDescription \u003d taskDescriptionDate.split(\"/\")[0];"
+      },
+      {
+        "lineNumber": 262,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    Task curr \u003d new Task(\"event\", taskDescription);"
+      },
+      {
+        "lineNumber": 263,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    curr.addDate(taskDescriptionDate.split(\"/\")[1]);"
+      },
+      {
+        "lineNumber": 264,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    arr.add(curr);"
+      },
+      {
+        "lineNumber": 265,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    fileUpdate(dataFile, arr);"
+      },
+      {
+        "lineNumber": 266,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    if (!userInput.equals(\"bye\")) {"
+      },
+      {
+        "lineNumber": 267,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(\"Got it. I\u0027ve added this task:\");"
+      },
+      {
+        "lineNumber": 268,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(curr.getIcon() + curr.status + \" \" + curr.getDescription());"
+      },
+      {
+        "lineNumber": 269,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+      },
+      {
+        "lineNumber": 270,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 271,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 272,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 273,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 274,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            //DELETE"
+      },
+      {
+        "lineNumber": 275,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            else if (userInput.split(\"\\\\s\")[0].equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 276,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                int removedTask \u003d Integer.parseInt(userInput.split(\"\\\\s\")[1]);"
+      },
+      {
+        "lineNumber": 277,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                System.out.println(\"Noted. I\u0027ve removed this task:\");"
+      },
+      {
+        "lineNumber": 278,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                System.out.println(arr.get(removedTask - 1).getIcon() + arr.get(removedTask - 1).status + \" \" + arr.get(removedTask - 1).getDescription());"
+      },
+      {
+        "lineNumber": 279,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                arr.remove(removedTask - 1);"
+      },
+      {
+        "lineNumber": 280,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                System.out.println(\"Now you have \" + arr.size() + \" tasks in the list.\");"
+      },
+      {
+        "lineNumber": 281,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                fileUpdate(dataFile, arr);"
+      },
+      {
+        "lineNumber": 282,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 283,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            else {"
+      },
+      {
+        "lineNumber": 284,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                System.out.println(\"\u0026#x2639; OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+      },
+      {
+        "lineNumber": 285,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 286,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 287,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 288,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        } while (!userInput.equals(\"bye\"));"
+      },
+      {
+        "lineNumber": 289,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        System.out.println(\"Bye. Hope to see you again soon!\");"
+      },
+      {
+        "lineNumber": 290,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 291,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 292,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 293,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "*/"
+      }
+    ],
+    "authorContributionMap": {
+      "-": 5,
+      "PangKimJin": 288
+    }
+  },
+  {
+    "path": "src/main/java/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    private String userInput;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public String parse(String userInput) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        this.userInput \u003d userInput;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        if (userInput.equals(\"list\")) {                                                  //Lists out the tasks"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return \"list\";"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        // DONE"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else if (userInput.split(\"\\\\s\")[0].equals(\"done\")) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return \"done\";"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        // TO DO"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else if (userInput.split(\"\\\\s\")[0].equals(\"todo\")) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return \"todo\";"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        // DEADLINE"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else if (userInput.split(\"\\\\s\")[0].equals(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return \"deadline\";"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        // EVENT"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else if (userInput.split(\"\\\\s\")[0].equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return \"event\";"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        //DELETE"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else if (userInput.split(\"\\\\s\")[0].equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return \"delete\";"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return \"error\";"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "PangKimJin"
         },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "-": 4,
-      "PangKimJin": 148
+      "PangKimJin": 40
+    }
+  },
+  {
+    "path": "src/main/java/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import java.io.File;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import java.io.FileNotFoundException;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import java.io.FileWriter;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import java.util.*;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "public class Storage {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    private String filePath;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public Storage(String filePath) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        this.filePath \u003d filePath;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public ArrayList \u003cTask\u003e load() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        // returns the list of tasks from the duke.txt"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        ArrayList \u003cTask\u003e arr \u003d new ArrayList \u003cTask\u003e();"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            Scanner sc \u003d new Scanner(new File (filePath));"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            while (sc.hasNextLine()) {                                                                                      // looks at duke.txt line by line and creates the respective task and saves it in an arraylist"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                String line \u003d sc.nextLine();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                String taskType \u003d \"\";"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                String taskFormattedDate \u003d \"\";"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                String taskName \u003d line.split(\"\\\\s\")[4];"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                if (line.split(\"\\\\s\")[0].equals(\"[T]\")) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    taskType \u003d \"todo\";"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    Task curr \u003d new Task(taskType, taskName);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    if (line.split(\"\\\\s\")[2] \u003d\u003d \"1\") {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        curr.setDone();"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    arr.add(curr);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                } else if (line.split(\"\\\\s\")[0].equals(\"[D]\")) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    taskType \u003d \"deadline\";"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    taskFormattedDate \u003d line.split(\"by: \")[1].substring(0, line.split(\"by: \")[1].length() - 1);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    Task curr \u003d new Task(taskType, taskName);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    if (Integer.parseInt(line.split(\"\\\\s\")[2]) \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        curr.setDone();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    // TESTING LINE"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    //System.out.println(taskFormattedDate);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    curr.addProcessedDate(taskFormattedDate);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    arr.add(curr);"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                } else {"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    taskType \u003d \"event\";"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    taskFormattedDate \u003d line.split(\"at: \")[1].substring(0, line.split(\"at: \")[1].length() - 1);"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    Task curr \u003d new Task(taskType, taskName);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    if (line.split(\"\\\\s\")[2].equals(1)) {"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                        curr.setDone();"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    curr.addProcessedDate(taskFormattedDate);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                    arr.add(curr);"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return arr;"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        catch (FileNotFoundException e){"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return new ArrayList \u003cTask\u003e();"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void fileUpdate(File dataFile, ArrayList \u003cTask\u003e arr) {"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            writeToFile(\"I love you baby\\n\");"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            //dataFile.delete();"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            new FileWriter(\"./\" + \"data/duke.txt\", false).close();"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            for (int i \u003d 0; i \u003c TaskList.arr.size(); i++) {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                writeToFile(TaskList.arr.get(i).getIcon() + \" | \" + TaskList.arr.get(i).getStatusBinary() + \" | \" + TaskList.arr.get(i).getDescription() + \"\\n\");"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            System.out.println(\"Something went wrong: \" + e.getMessage());"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void writeToFile(String textToAdd) throws IOException {"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        FileWriter fw \u003d new FileWriter(\"./\" + \"data/duke.txt\",true);"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        fw.write(textToAdd);"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        fw.close();"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "PangKimJin": 83
     }
   },
   {
@@ -1159,133 +3025,133 @@
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "    public String fileDate;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    public Task(String type, String name) {"
+        "content": "    public boolean hasProcessedDate \u003d false;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        this.type \u003d type;"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        this.name \u003d name;"
+        "content": "    public Task(String type, String name) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        this.status \u003d \"[✗]\";"
+        "content": "        this.type \u003d type;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": "        this.name \u003d name;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "        this.status \u003d \"[✗]\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    public void setDone() {"
+        "content": "    }"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        this.status \u003d \"[✓]\";"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": "    public void setDone() {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "        this.status \u003d \"[✓]\";"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    public int getStatusBinary() {"
+        "content": "    }"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        if (this.status \u003d\u003d \"[✓]\") {"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return 1;"
+        "content": "    public int getStatusBinary() {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        } else {"
+        "content": "        if (this.status \u003d\u003d \"[✓]\") {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return 0;"
+        "content": "            return 1;"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "            return 0;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 31,
@@ -1299,465 +3165,724 @@
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    public String getIcon() {"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        if (this.type.equals(\"todo\")) {"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return \"[T]\";"
+        "content": "    public String getIcon() {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": "        if (this.type.equals(\"todo\")) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        else if (this.type.equals(\"deadline\")) {"
+        "content": "            return \"[T]\";"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return \"[D]\";"
+        "content": "        }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": "        else if (this.type.equals(\"deadline\")) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        else {                  // event"
+        "content": "            return \"[D]\";"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return \"[E]\";"
+        "content": "        }"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": "        else {                  // event"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": "            return \"[E]\";"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    public String getProcessedDate() {"
+        "content": "    }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        String dateFormatted \u003d \"\";"
+        "content": ""
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        this.date.split(\"\\\\s\");"
+        "content": "    public String getProcessedDate() {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        for (int i \u003d 1; i \u003c this.date.split(\"\\\\s\").length; i++) {"
+        "content": "        String dateFormatted \u003d \"\";"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            if (i \u003d\u003d 1) {"
+        "content": "        this.date.split(\"\\\\s\");"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                dateFormatted +\u003d this.date.split(\"\\\\s\")[i];"
+        "content": "        for (int i \u003d 1; i \u003c this.date.split(\"\\\\s\").length; i++) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "            if (i \u003d\u003d 1) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            else {"
+        "content": "                dateFormatted +\u003d this.date.split(\"\\\\s\")[i];"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                dateFormatted +\u003d \" \" + this.date.split(\"\\\\s\")[i];"
+        "content": "            }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "            else {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": "                dateFormatted +\u003d \" \" + this.date.split(\"\\\\s\")[i];"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        LocalDate ld \u003d LocalDate.parse(dateFormatted);"
+        "content": "            }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        this.processedDate \u003d ld;"
+        "content": "        }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        return ld.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+        "content": "        LocalDate ld \u003d LocalDate.parse(dateFormatted);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": "        this.processedDate \u003d ld;"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "        this.hasProcessedDate \u003d true;"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    public String getDescription() {"
+        "content": "        this.fileDate \u003d ld.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        if (this.type.equals(\"todo\")) {"
+        "content": "        return this.fileDate;"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return this.name;"
+        "content": "    }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        else if (this.type.equals(\"deadline\")) {"
+        "content": "    public String addProcessedDate(String dateFormatted) {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//            String dateFormatted \u003d \"\";"
+        "content": "        System.out.println(dateFormatted);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//            this.date.split(\"\\\\s\");"
+        "content": "        int month \u003d 0;"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//            for (int i \u003d 1; i \u003c this.date.split(\"\\\\s\").length; i++) {"
+        "content": "        int day \u003d Integer.parseInt(dateFormatted.split(\"\\\\s\")[1]);"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//                if (i \u003d\u003d 1) {"
+        "content": "        int year \u003d Integer.parseInt(dateFormatted.split(\"\\\\s\")[2]);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//                    dateFormatted +\u003d this.date.split(\"\\\\s\")[i];"
+        "content": "        if (dateFormatted.split(\"\\\\s\")[0].equals(\"Jan\")) {"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//                }"
+        "content": "            month \u003d 1;"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//                else {"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Feb\")) {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//                    dateFormatted +\u003d \" \" + this.date.split(\"\\\\s\")[i];"
+        "content": "            month \u003d 2;"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//                }"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Mar\")) {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//            }"
+        "content": "            month \u003d 3;"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//            dateFormatted \u003d \"(by: \" + dateFormatted + \")\";"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Apr\")) {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "//            return this.name + dateFormatted;"
+        "content": "            month \u003d 4;"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return this.name + \"(by: \" + this.getProcessedDate() + \")\";"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"May\")) {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": "            month \u003d 5;"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        else {                  // event"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Jun\")) {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            String dateFormatted \u003d \"\";"
+        "content": "            month \u003d 6;"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            this.date.split(\"\\\\s\");"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Jul\")) {"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            for (int i \u003d 1; i \u003c this.date.split(\"\\\\s\").length; i++) {"
+        "content": "            month \u003d 7;"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                if (i \u003d\u003d 1) {"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Aug\")) {"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    dateFormatted +\u003d this.date.split(\"\\\\s\")[i];"
+        "content": "            month \u003d 8;"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Sep\")) {"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                else {"
+        "content": "            month \u003d 9;"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                    dateFormatted +\u003d \" \" + this.date.split(\"\\\\s\")[i];"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Oct\")) {"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "                }"
+        "content": "            month \u003d 10;"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            }"
+        "content": "        } else if (dateFormatted.split(\"\\\\s\")[0].equals(\"Nov\")) {"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            dateFormatted \u003d \"(at: \" + dateFormatted + \")\";"
+        "content": "            month \u003d 11;"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "            return this.name + dateFormatted;"
+        "content": "        } else {"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        }"
+        "content": "            month \u003d 12;"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": ""
+        "content": "        this.processedDate \u003d LocalDate.of(year, month, day);"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    public void addDate(String date) {"
+        "content": "        this.hasProcessedDate \u003d true;"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "        this.date \u003d date;"
+        "content": "        this.fileDate \u003d this.processedDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "PangKimJin"
         },
-        "content": "    }"
+        "content": "        return this.fileDate;"
       },
       {
         "lineNumber": 98,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public String getDescription() {"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        if (this.type.equals(\"todo\")) {"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            return this.name;"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else if (this.type.equals(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//            String dateFormatted \u003d \"\";"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//            this.date.split(\"\\\\s\");"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//            for (int i \u003d 1; i \u003c this.date.split(\"\\\\s\").length; i++) {"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//                if (i \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//                    dateFormatted +\u003d this.date.split(\"\\\\s\")[i];"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//                }"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//                else {"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//                    dateFormatted +\u003d \" \" + this.date.split(\"\\\\s\")[i];"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//                }"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//            }"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//            dateFormatted \u003d \"(by: \" + dateFormatted + \")\";"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "//            return this.name + dateFormatted;"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            if (this.hasProcessedDate \u003d\u003d false) {"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                return this.name + \" (by: \" + this.getProcessedDate() + \")\";"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                return this.name + \" (by: \" + this.fileDate + \")\";"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        else {                  // event"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            if (this.hasProcessedDate \u003d\u003d false) {"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                return this.name + \" (at: \" + this.getProcessedDate() + \")\";"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "                return this.name + \" (at: \" + this.fileDate + \")\";"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public void addDate(String date) {"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        this.date \u003d date;"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 135,
         "author": {
           "gitId": "PangKimJin"
         },
@@ -1765,7 +3890,554 @@
       }
     ],
     "authorContributionMap": {
-      "PangKimJin": 98
+      "PangKimJin": 135
+    }
+  },
+  {
+    "path": "src/main/java/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import java.util.*;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "public class TaskList {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static ArrayList \u003cTask\u003e arr \u003d new ArrayList \u003cTask\u003e();"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public TaskList(ArrayList \u003cTask\u003e al) {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        this.arr \u003d al;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public ArrayList \u003cTask\u003e getArraylist() {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        return arr;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public void print() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        for (int i \u003d 1; i \u003c\u003d arr.size(); i++) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "            System.out.println(i + \".\" + arr.get(i - 1).getIcon() + arr.get(i - 1).status + \" \" + arr.get(i - 1).getDescription());"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public void clear() {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        arr.clear();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "PangKimJin": 22
+    }
+  },
+  {
+    "path": "src/main/java/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public String runGreeting() {"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        System.out.println(\"Hello! I\u0027m Duke\");"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        System.out.println(\"What can I do for you?\");"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        return \"Hello! I\u0027m Duke\" + \"\\n\" + \"What can I do for you?\";"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public void showLoadingError() {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        System.out.println(\"Error\");"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "PangKimJin": 11
+    }
+  },
+  {
+    "path": "src/test/java/DukeTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "public class DukeTest {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void dummyTest() {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        assertEquals(2, 2);"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void uiTest() {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        Duke duke \u003d new Duke(\"./\" + \"data/duke.txt\");"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        //assertEquals(\"Hello! I\u0027m Duke\" + \"\\n\" + \"What can I do for you?\", duke.run());"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        uiTest();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "PangKimJin": 20
+    }
+  },
+  {
+    "path": "src/test/java/UiTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "public class UiTest {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void dummyTest() {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        assertEquals(2, 2);"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void uiTest() {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        Ui ui \u003d new Ui();"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        assertEquals(\"Hello! I\u0027m Duke\" + \"\\n\" + \"What can I do for you?\", ui.runGreeting());"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "        uiTest();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "PangKimJin"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "PangKimJin": 20
     }
   },
   {

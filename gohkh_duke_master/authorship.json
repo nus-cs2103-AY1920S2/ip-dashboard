@@ -1,5 +1,49 @@
 [
   {
+    "path": "src/main/java/duke/Command.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "enum Command {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "gohkh": 5
+    }
+  },
+  {
     "path": "src/main/java/duke/Deadline.java",
     "fileType": "java",
     "lines": [
@@ -248,49 +292,49 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": ""
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.util.List;"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
-          "gitId": "gohkh"
+          "gitId": "-"
         },
-        "content": "import java.util.ArrayList;"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "gohkh"
         },
-        "content": ""
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.nio.file.Paths;"
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.nio.file.Files;"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.io.IOException;"
+        "content": "    private Parser parser;"
       },
       {
         "lineNumber": 11,
@@ -304,42 +348,42 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.util.stream.Stream;"
+        "content": "    private Duke() {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.util.stream.Collectors;"
+        "content": "        storage \u003d Storage.empty();"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "gohkh"
         },
-        "content": ""
+        "content": "        tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "        ui \u003d new Ui(new Scanner(System.in));"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.time.format.DateTimeFormatter;"
+        "content": "        parser \u003d new Parser();"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "import java.time.format.DateTimeParseException;"
+        "content": "    }"
       },
       {
         "lineNumber": 18,
@@ -351,1628 +395,606 @@
       {
         "lineNumber": 19,
         "author": {
-          "gitId": "-"
+          "gitId": "gohkh"
         },
-        "content": "public class Duke {"
+        "content": "    private Duke(String filepath) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    private static List\u003cTask\u003e tasks;"
+        "content": "        storage \u003d new Storage(filepath);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "gohkh"
         },
-        "content": ""
+        "content": "        ui \u003d new Ui(new Scanner(System.in));"
       },
       {
         "lineNumber": 22,
         "author": {
-          "gitId": "-"
+          "gitId": "gohkh"
         },
-        "content": "    public static void main(String[] args) {"
+        "content": "        parser \u003d new Parser();"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        greet();"
+        "content": "        try {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        Scanner sc \u003d new Scanner(System.in);"
+        "content": "            tasks \u003d storage.load();"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        tasks \u003d loadTasks();"
+        "content": "        } catch (StorageException e) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        String input \u003d sc.nextLine();"
+        "content": "            ui.printException(e);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        while (true) {"
+        "content": "            tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "            try {"
+        "content": "        }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                String[] parsedInput \u003d input.strip().split(\"\\\\s+\", 2);"
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                switch (parsedInput[0]) {"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                case \"bye\":"
+        "content": "    public static void main(String[] args) {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    if (parsedInput.length \u003e 1) {"
+        "content": "        new Duke(\"../data/duke.txt\").run();"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new InvalidCommandException();"
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    }"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    exit();"
+        "content": "    private void run() {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    break;"
+        "content": "        ui.greet();"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                case \"list\":"
+        "content": "        while (true) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    if (parsedInput.length \u003e 1) {"
+        "content": "            try {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new InvalidCommandException();"
+        "content": "                String input \u003d ui.getInput();"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    }"
+        "content": "                Command command \u003d parser.parseCommand(input);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    list();"
+        "content": "                String info;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    break;"
+        "content": "                int taskNumber;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                case \"done\":"
+        "content": "                switch (command) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    try {"
+        "content": "                case TODO:"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        int taskNumber \u003d Integer.parseInt(parsedInput[1]);"
+        "content": "                    info \u003d parser.parseTaskInfo(input);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        completeTask(taskNumber);"
+        "content": "                    Todo todo \u003d createTodo(info);"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    } catch (ArrayIndexOutOfBoundsException e) {"
+        "content": "                    tasks.add(todo);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new MissingTaskNumberException();"
+        "content": "                    ui.printTask(todo, tasks.size());"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    } catch (NumberFormatException e) {"
+        "content": "                    break;"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new InvalidTaskException();"
+        "content": "                case DEADLINE:"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    }"
+        "content": "                    info \u003d parser.parseTaskInfo(input);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    break;"
+        "content": "                    Deadline deadline \u003d createDeadline(info);"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                case \"delete\":"
+        "content": "                    tasks.add(deadline);"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    try {"
+        "content": "                    ui.printTask(deadline, tasks.size());"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        int taskNumber \u003d Integer.parseInt(parsedInput[1]);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        deleteTask(taskNumber);"
+        "content": "                case EVENT:"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    } catch (ArrayIndexOutOfBoundsException e) {"
+        "content": "                    info \u003d parser.parseTaskInfo(input);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new MissingTaskNumberException();"
+        "content": "                    Event event \u003d createEvent(info);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    } catch (NumberFormatException e) {"
+        "content": "                    tasks.add(event);"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new InvalidTaskException();"
+        "content": "                    ui.printTask(event, tasks.size());"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    }"
+        "content": "                    break;"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    break;"
+        "content": "                case DONE:"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                case \"todo\":"
+        "content": "                    taskNumber \u003d parser.parseTaskNumber(input);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    try {"
+        "content": "                    Task completedTask \u003d tasks.complete(taskNumber);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        addTodo(parsedInput[1]);"
+        "content": "                    ui.print(\"Nice! I\u0027ve marked this task as done:\\n  \" + completedTask);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    } catch (ArrayIndexOutOfBoundsException e) {"
+        "content": "                    break;"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new EmptyTodoException();"
+        "content": "                case DELETE:"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    }"
+        "content": "                    taskNumber \u003d parser.parseTaskNumber(input);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    break;"
+        "content": "                    Task deletedTask \u003d tasks.delete(taskNumber);"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                case \"deadline\":"
+        "content": "                    ui.print(\"Noted. I\u0027ve removed this task:\\n  \" + deletedTask);"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    try {"
+        "content": "                    break;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        addDeadline(parsedInput[1]);"
+        "content": "                case LIST:"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    } catch (ArrayIndexOutOfBoundsException e) {"
+        "content": "                    ui.print(tasks.list());"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new EmptyDeadlineException();"
+        "content": "                    break;"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    }"
+        "content": "                case BYE:"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    break;"
+        "content": "                    ui.exit();"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                case \"event\":"
+        "content": "                    return;"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    try {"
+        "content": "                default:"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        addEvent(parsedInput[1]);"
+        "content": "                    throw new DukeException(\"Hmm... I\u0027m not sure what\u0027s happening.\");"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    } catch (ArrayIndexOutOfBoundsException e) {"
+        "content": "                }"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                        throw new EmptyEventException();"
+        "content": "                storage.save(tasks);"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    }"
+        "content": "            } catch (DukeException e) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    break;"
+        "content": "                ui.printException(e);"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                default:"
+        "content": "            }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                    throw new InvalidCommandException();"
+        "content": "        }"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                }"
+        "content": "    }"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "            } catch (InvalidCommandException e) {"
+        "content": ""
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "                System.out.println(style(e.getMessage()));"
+        "content": "    private Todo createTodo(String description) {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "            }"
+        "content": "        return new Todo(description);"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "            saveTasks();"
+        "content": "    }"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "            input \u003d sc.nextLine();"
+        "content": ""
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        }"
+        "content": "    private Deadline createDeadline(String info) throws InvalidCommandException {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    }"
+        "content": "        String description \u003d parser.parseDeadlineDescription(info);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "gohkh"
         },
-        "content": ""
+        "content": "        LocalDate date \u003d parser.parseDeadlineDate(info);"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    private static void greet() {"
+        "content": "        return new Deadline(description, date);"
       },
       {
         "lineNumber": 96,
         "author": {
-          "gitId": "-"
+          "gitId": "gohkh"
         },
-        "content": "        String logo \u003d \" ____        _        \\n\""
+        "content": "    }"
       },
       {
         "lineNumber": 97,
         "author": {
-          "gitId": "-"
+          "gitId": "gohkh"
         },
-        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+        "content": ""
       },
       {
         "lineNumber": 98,
         "author": {
-          "gitId": "-"
+          "gitId": "gohkh"
         },
-        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+        "content": "    private Event createEvent(String info) throws InvalidCommandException {"
       },
       {
         "lineNumber": 99,
         "author": {
-          "gitId": "-"
+          "gitId": "gohkh"
         },
-        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+        "content": "        String description \u003d parser.parseEventDescription(info);"
       },
       {
         "lineNumber": 100,
         "author": {
-          "gitId": "-"
+          "gitId": "gohkh"
         },
-        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+        "content": "        String time \u003d parser.parseEventTime(info);"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        String greeting \u003d \"Hello, I\u0027m Duke!\\n\""
+        "content": "        return new Event(description, time);"
       },
       {
         "lineNumber": 102,
         "author": {
-          "gitId": "gohkh"
+          "gitId": "-"
         },
-        "content": "                + \"What can I do for you?\";"
+        "content": "    }"
       },
       {
         "lineNumber": 103,
         "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        System.out.println(logo + style(greeting));"
-      },
-      {
-        "lineNumber": 104,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 105,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void exit() {"
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        String bye \u003d \"Goodbye. Hope to see you again soon!\";"
-      },
-      {
-        "lineNumber": 108,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        System.out.println(style(bye));"
-      },
-      {
-        "lineNumber": 109,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        System.exit(0);"
-      },
-      {
-        "lineNumber": 110,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 111,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 112,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void addTodo(String description) {"
-      },
-      {
-        "lineNumber": 113,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        Todo todo \u003d new Todo(description);"
-      },
-      {
-        "lineNumber": 114,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        tasks.add(todo);"
-      },
-      {
-        "lineNumber": 115,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        printTask(todo);"
-      },
-      {
-        "lineNumber": 116,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 117,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 118,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void addDeadline(String info) throws MissingDeadlineException, InvalidDeadlineException {"
-      },
-      {
-        "lineNumber": 119,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 120,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            String[] parsedInfo \u003d info.split(\"\\\\s*/by\\\\s*\", 2);"
-      },
-      {
-        "lineNumber": 121,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            Deadline deadline \u003d new Deadline(parsedInfo[0], LocalDate.parse(parsedInfo[1]));"
-      },
-      {
-        "lineNumber": 122,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            tasks.add(deadline);"
-      },
-      {
-        "lineNumber": 123,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            printTask(deadline);"
-      },
-      {
-        "lineNumber": 124,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 125,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            throw new MissingDeadlineException();"
-      },
-      {
-        "lineNumber": 126,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } catch (DateTimeParseException e) {"
-      },
-      {
-        "lineNumber": 127,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            throw new InvalidDeadlineException();"
-      },
-      {
-        "lineNumber": 128,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 129,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 130,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 131,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void addEvent(String info) throws MissingTimeException {"
-      },
-      {
-        "lineNumber": 132,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 133,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            String[] parsedInfo \u003d info.split(\"\\\\s*/at\\\\s*\", 2);"
-      },
-      {
-        "lineNumber": 134,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            Event event \u003d new Event(parsedInfo[0], parsedInfo[1]);"
-      },
-      {
-        "lineNumber": 135,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            tasks.add(event);"
-      },
-      {
-        "lineNumber": 136,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            printTask(event);"
-      },
-      {
-        "lineNumber": 137,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 138,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            throw new MissingTimeException();"
-      },
-      {
-        "lineNumber": 139,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 140,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 141,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 142,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void printTask(Task task) {"
-      },
-      {
-        "lineNumber": 143,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        String numberOfTasks;"
-      },
-      {
-        "lineNumber": 144,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        if (tasks.size() \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 145,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            numberOfTasks \u003d \"There is now 1 task in the list.\";"
-      },
-      {
-        "lineNumber": 146,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } else {"
-      },
-      {
-        "lineNumber": 147,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            numberOfTasks \u003d \"There are now \" + tasks.size() + \" tasks in the list.\";"
-      },
-      {
-        "lineNumber": 148,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 149,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        System.out.println(style(\"Got it. I\u0027ve added this task:\\n  \" + task + \"\\n\" + numberOfTasks));"
-      },
-      {
-        "lineNumber": 150,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 151,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 152,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void list() {"
-      },
-      {
-        "lineNumber": 153,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        if (tasks.size() \u003d\u003d 0) {"
-      },
-      {
-        "lineNumber": 154,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            System.out.println(style(\"There are no tasks now.\"));"
-      },
-      {
-        "lineNumber": 155,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } else {"
-      },
-      {
-        "lineNumber": 156,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            StringBuilder list \u003d new StringBuilder();"
-      },
-      {
-        "lineNumber": 157,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            for (int i \u003d 0; i \u003c tasks.size(); i++) {"
-      },
-      {
-        "lineNumber": 158,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                if (i \u003e 0) {"
-      },
-      {
-        "lineNumber": 159,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                    list.append(\"\\n\");"
-      },
-      {
-        "lineNumber": 160,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 161,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                list.append((i + 1) + \". \" + tasks.get(i));"
-      },
-      {
-        "lineNumber": 162,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 163,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            System.out.println(style(list.toString()));"
-      },
-      {
-        "lineNumber": 164,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 165,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 166,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 167,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void completeTask(int taskNumber) throws InvalidTaskNumberException {"
-      },
-      {
-        "lineNumber": 168,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 169,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            int taskIndex \u003d taskNumber - 1;"
-      },
-      {
-        "lineNumber": 170,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            Task completedTask \u003d tasks.get(taskIndex).complete();"
-      },
-      {
-        "lineNumber": 171,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            tasks.set(taskIndex, completedTask);"
-      },
-      {
-        "lineNumber": 172,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            System.out.println(style(\"Nice! I\u0027ve marked this task as done:\\n  \" + completedTask));"
-      },
-      {
-        "lineNumber": 173,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } catch (IndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 174,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            throw new InvalidTaskNumberException(taskNumber);"
-      },
-      {
-        "lineNumber": 175,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 176,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 177,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 178,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void deleteTask(int taskNumber) throws InvalidTaskNumberException {"
-      },
-      {
-        "lineNumber": 179,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 180,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            int taskIndex \u003d taskNumber - 1;"
-      },
-      {
-        "lineNumber": 181,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            Task deletedTask \u003d tasks.remove(taskIndex);"
-      },
-      {
-        "lineNumber": 182,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            System.out.println(style(\"Noted. I\u0027ve removed this task:\\n  \" + deletedTask));"
-      },
-      {
-        "lineNumber": 183,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } catch (IndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 184,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            throw new InvalidTaskNumberException(taskNumber);"
-      },
-      {
-        "lineNumber": 185,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 186,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 187,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 188,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static List\u003cTask\u003e loadTasks() {"
-      },
-      {
-        "lineNumber": 189,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 190,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            return Files.readAllLines(Paths.get(\"../data/duke.txt\"))"
-      },
-      {
-        "lineNumber": 191,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                    .stream()"
-      },
-      {
-        "lineNumber": 192,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                    .flatMap(x -\u003e {"
-      },
-      {
-        "lineNumber": 193,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                            try {"
-      },
-      {
-        "lineNumber": 194,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                Task task;"
-      },
-      {
-        "lineNumber": 195,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                char taskType \u003d x.charAt(1);"
-      },
-      {
-        "lineNumber": 196,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                boolean isDone \u003d (x.charAt(4) \u003d\u003d \u0027\\u2713\u0027);"
-      },
-      {
-        "lineNumber": 197,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                x \u003d x.substring(7);"
-      },
-      {
-        "lineNumber": 198,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                String[] info;"
-      },
-      {
-        "lineNumber": 199,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                switch(taskType) {"
-      },
-      {
-        "lineNumber": 200,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                case \u0027T\u0027:"
-      },
-      {
-        "lineNumber": 201,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    task \u003d new Todo(x);"
-      },
-      {
-        "lineNumber": 202,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    break;"
-      },
-      {
-        "lineNumber": 203,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                case \u0027D\u0027:"
-      },
-      {
-        "lineNumber": 204,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    x \u003d x.substring(0, x.length() - 1);"
-      },
-      {
-        "lineNumber": 205,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    info \u003d x.split(\" \\\\(by: \");"
-      },
-      {
-        "lineNumber": 206,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    task \u003d new Deadline(info[0],"
-      },
-      {
-        "lineNumber": 207,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                            LocalDate.parse(info[1], DateTimeFormatter.ofPattern(\"d MMM yyyy\")));"
-      },
-      {
-        "lineNumber": 208,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    break;"
-      },
-      {
-        "lineNumber": 209,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                case \u0027E\u0027:"
-      },
-      {
-        "lineNumber": 210,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    x \u003d x.substring(0, x.length() - 1);"
-      },
-      {
-        "lineNumber": 211,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    info \u003d x.split(\" \\\\(at: \");"
-      },
-      {
-        "lineNumber": 212,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    task \u003d new Event(info[0], info[1]);"
-      },
-      {
-        "lineNumber": 213,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    break;"
-      },
-      {
-        "lineNumber": 214,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                default:"
-      },
-      {
-        "lineNumber": 215,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    return Stream.empty();"
-      },
-      {
-        "lineNumber": 216,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                }"
-      },
-      {
-        "lineNumber": 217,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                if (isDone) {"
-      },
-      {
-        "lineNumber": 218,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                    task \u003d task.complete();"
-      },
-      {
-        "lineNumber": 219,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                }"
-      },
-      {
-        "lineNumber": 220,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                return Stream.of(task);"
-      },
-      {
-        "lineNumber": 221,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 222,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                                return Stream.empty();"
-      },
-      {
-        "lineNumber": 223,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                            }"
-      },
-      {
-        "lineNumber": 224,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                        })"
-      },
-      {
-        "lineNumber": 225,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                    .collect(Collectors.toList());"
-      },
-      {
-        "lineNumber": 226,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } catch (IOException e) {"
-      },
-      {
-        "lineNumber": 227,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            return new ArrayList\u003c\u003e();"
-      },
-      {
-        "lineNumber": 228,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 229,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 230,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 231,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static void saveTasks() {"
-      },
-      {
-        "lineNumber": 232,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 233,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            if (Files.notExists(Paths.get(\"../data\"))) {"
-      },
-      {
-        "lineNumber": 234,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "                Files.createDirectory(Paths.get(\"../data\"));"
-      },
-      {
-        "lineNumber": 235,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 236,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            Files.write(Paths.get(\"../data/duke.txt\"), tasks.stream().map(x -\u003e x.toString()).collect(Collectors.toList()));"
-      },
-      {
-        "lineNumber": 237,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        } catch (IOException e) {"
-      },
-      {
-        "lineNumber": 238,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            System.out.println(style(\"Unable to save tasks.\"));"
-      },
-      {
-        "lineNumber": 239,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 240,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 241,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 242,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    private static String style(String message) {"
-      },
-      {
-        "lineNumber": 243,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        String horizontalLine \u003d new String(new char[76]).replace(\"\\0\", \"-\");"
-      },
-      {
-        "lineNumber": 244,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        message \u003d horizontalLine + \"\\n\" + message + \"\\n\" + horizontalLine;"
-      },
-      {
-        "lineNumber": 245,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        return message.lines()"
-      },
-      {
-        "lineNumber": 246,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            .map(x -\u003e \"    \" + x + \"\\n\")"
-      },
-      {
-        "lineNumber": 247,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "            .reduce(\"\", (x, y) -\u003e x + y);"
-      },
-      {
-        "lineNumber": 248,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 249,
-        "author": {
           "gitId": "-"
         },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "gohkh": 240,
-      "-": 9
+      "gohkh": 100,
+      "-": 3
     }
   },
   {
-    "path": "src/main/java/duke/EmptyDeadlineException.java",
+    "path": "src/main/java/duke/DukeException.java",
     "fileType": "java",
     "lines": [
       {
@@ -1994,137 +1016,21 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": "class EmptyDeadlineException extends EmptyTaskException {"
+        "content": "class DukeException extends Exception {"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    EmptyDeadlineException() {"
+        "content": "    DukeException(String message) {"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(\"Oops! The description of a deadline cannot be empty.\");"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "gohkh": 7
-    }
-  },
-  {
-    "path": "src/main/java/duke/EmptyEventException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "package duke;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "class EmptyEventException extends EmptyTaskException {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    EmptyEventException() {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        super(\"Oops! The description of an event cannot be empty.\");"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "gohkh": 7
-    }
-  },
-  {
-    "path": "src/main/java/duke/EmptyTaskException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "package duke;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "class EmptyTaskException extends InvalidCommandException {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    EmptyTaskException() {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        super(\"Oops! The description of a task cannot be empty.\");"
+        "content": "        super(message);"
       },
       {
         "lineNumber": 6,
@@ -2145,14 +1051,14 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    EmptyTaskException(String message) {"
+        "content": "    DukeException(String message, Throwable cause) {"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(message);"
+        "content": "        super(message, cause);"
       },
       {
         "lineNumber": 10,
@@ -2171,64 +1077,6 @@
     ],
     "authorContributionMap": {
       "gohkh": 11
-    }
-  },
-  {
-    "path": "src/main/java/duke/EmptyTodoException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "package duke;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "class EmptyTodoException extends EmptyTaskException {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    EmptyTodoException() {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        super(\"Oops! The description of a todo cannot be empty.\");"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "gohkh": 7
     }
   },
   {
@@ -2438,107 +1286,21 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": "class InvalidCommandException extends Exception {"
+        "content": "class InvalidCommandException extends DukeException {"
       },
       {
         "lineNumber": 4,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    InvalidCommandException() {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        super(\"Hmm... I don\u0027t know what that means :(\");"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 8,
         "author": {
           "gitId": "gohkh"
         },
         "content": "    InvalidCommandException(String message) {"
       },
       {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        super(message);"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "gohkh": 11
-    }
-  },
-  {
-    "path": "src/main/java/duke/InvalidDeadlineException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "package duke;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "class InvalidDeadlineException extends InvalidCommandException {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "    InvalidDeadlineException() {"
-      },
-      {
         "lineNumber": 5,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(\"I don\u0027t understand the deadline. Please provide it yyyy-mm-dd format.\");"
+        "content": "        super(message);"
       },
       {
         "lineNumber": 6,
@@ -2560,7 +1322,7 @@
     }
   },
   {
-    "path": "src/main/java/duke/InvalidTaskException.java",
+    "path": "src/main/java/duke/Parser.java",
     "fileType": "java",
     "lines": [
       {
@@ -2582,28 +1344,723 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": "class InvalidTaskException extends InvalidCommandException {"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    InvalidTaskException() {"
+        "content": "import java.time.format.DateTimeParseException;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(\"Hmm... I don\u0027t know which task you mean :(\");"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "gohkh"
         },
+        "content": "class Parser {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    Command parseCommand(String input) throws InvalidCommandException {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        Command command;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        String[] parsedInput \u003d input.strip().split(\"\\\\s+\", 2);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        switch (parsedInput[0]) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        case \"todo\":"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            if (parsedInput.length \u003c 2) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                throw new InvalidCommandException(\"Oops! The description of a todo cannot be empty.\");"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            command \u003d Command.TODO;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        case \"deadline\":"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            if (parsedInput.length \u003c 2) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                throw new InvalidCommandException(\"Oops! The description of a deadline cannot be empty.\");"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            command \u003d Command.DEADLINE;"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        case \"event\":"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            if (parsedInput.length \u003c 2) {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                throw new InvalidCommandException(\"Oops! The description of an event cannot be empty.\");"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            command \u003d Command.EVENT;"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        case \"done\":"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            if (parsedInput.length \u003c 2) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                throw new InvalidCommandException(\"Oh no! The task number is missing.\");"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            command \u003d Command.DONE;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        case \"delete\":"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            if (parsedInput.length \u003c 2) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                throw new InvalidCommandException(\"Oh no! The task number is missing.\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            command \u003d Command.DELETE;"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        case \"list\":"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            if (parsedInput.length \u003e 1) {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                throw new InvalidCommandException(\"Hmm... I don\u0027t understand. Try \\\"list\\\" instead.\");"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            command \u003d Command.LIST;"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        case \"bye\":"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            if (parsedInput.length \u003e 1) {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                throw new InvalidCommandException(\"Hmm... I don\u0027t understand. Try \\\"bye\\\" instead.\");"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            command \u003d Command.BYE;"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new InvalidCommandException(\"Hmm... I don\u0027t know what that means :(\");"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return command;"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "gohkh"
+        },
         "content": "    }"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    String parseTaskInfo(String input) {"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return input.strip().split(\"\\\\s+\", 2)[1];"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    String parseDeadlineDescription(String info) {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return info.split(\"\\\\s*/by\\\\s*\", 2)[0];"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    LocalDate parseDeadlineDate(String info) throws InvalidCommandException {"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return LocalDate.parse(info.split(\"\\\\s*/by\\\\s*\", 2)[1]);"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new InvalidCommandException(\"Oh no! The deadline of the task is missing.\");"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (DateTimeParseException e) {"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new InvalidCommandException(\"I don\u0027t understand the deadline. Please provide it yyyy-mm-dd format.\");"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    String parseEventDescription(String info) {"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return info.split(\"\\\\s*/at\\\\s*\", 2)[0];"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    String parseEventTime(String info) throws InvalidCommandException {"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return info.split(\"\\\\s*/at\\\\s*\", 2)[1];"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new InvalidCommandException(\"Oh no! The time of the event is missing.\");"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    int parseTaskNumber(String input) throws InvalidCommandException {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            String[] parsedInput \u003d input.strip().split(\"\\\\s+\", 2);"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            int taskNumber \u003d Integer.parseInt(parsedInput[1]);"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return taskNumber;"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (NumberFormatException e) {"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new InvalidCommandException(\"Hmm... I don\u0027t know which task you mean :(\");"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "gohkh": 98
+    }
+  },
+  {
+    "path": "src/main/java/duke/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "import java.nio.file.Path;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "import java.nio.file.Paths;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "import java.nio.file.Files;"
       },
       {
         "lineNumber": 7,
@@ -2617,198 +2074,577 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    InvalidTaskException(String message) {"
+        "content": "import java.util.stream.Stream;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(message);"
+        "content": "import java.util.stream.Collectors;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "gohkh": 11
-    }
-  },
-  {
-    "path": "src/main/java/duke/InvalidTaskNumberException.java",
-    "fileType": "java",
-    "lines": [
+        "content": "import java.time.LocalDate;"
+      },
       {
-        "lineNumber": 1,
+        "lineNumber": 12,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "package duke;"
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
-        "lineNumber": 2,
+        "lineNumber": 13,
         "author": {
           "gitId": "gohkh"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 14,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "class InvalidTaskNumberException extends InvalidTaskException {"
+        "content": "class Storage {"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 15,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    InvalidTaskNumberException(int invalidTaskNumber) {"
+        "content": "    private Path file;"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 16,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(\"Oops! \" + invalidTaskNumber + \" doesn\u0027t correspond to any task.\");"
+        "content": ""
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 17,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    Storage(String filepath) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        file \u003d Paths.get(filepath);"
+      },
+      {
+        "lineNumber": 19,
         "author": {
           "gitId": "gohkh"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "gohkh": 7
-    }
-  },
-  {
-    "path": "src/main/java/duke/MissingDeadlineException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "package duke;"
-      },
-      {
-        "lineNumber": 2,
+        "lineNumber": 20,
         "author": {
           "gitId": "gohkh"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 21,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "class MissingDeadlineException extends InvalidCommandException {"
+        "content": "    static Storage empty() {"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 22,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    MissingDeadlineException() {"
+        "content": "        return new EmptyStorage();"
       },
       {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "        super(\"Oh no! The deadline of the task is missing.\");"
-      },
-      {
-        "lineNumber": 6,
+        "lineNumber": 23,
         "author": {
           "gitId": "gohkh"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "gohkh": 7
-    }
-  },
-  {
-    "path": "src/main/java/duke/MissingTaskNumberException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "gohkh"
-        },
-        "content": "package duke;"
-      },
-      {
-        "lineNumber": 2,
+        "lineNumber": 24,
         "author": {
           "gitId": "gohkh"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 25,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "class MissingTaskNumberException extends InvalidCommandException {"
+        "content": "    TaskList load() throws StorageException {"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 26,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    MissingTaskNumberException() {"
+        "content": "        try {"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 27,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(\"Oh no! The task number is missing.\");"
+        "content": "            return new TaskList(Files.readAllLines(file)"
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 28,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                    .stream()"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                    .flatMap(x -\u003e {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                            try {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                Task task;"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                char taskType \u003d x.charAt(1);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                boolean isDone \u003d (x.charAt(4) \u003d\u003d \u0027\\u2713\u0027);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                x \u003d x.substring(7);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                String[] info;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                switch(taskType) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                case \u0027T\u0027:"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    task \u003d new Todo(x);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    break;"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                case \u0027D\u0027:"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    x \u003d x.substring(0, x.length() - 1);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    info \u003d x.split(\" \\\\(by: \");"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    task \u003d new Deadline(info[0],"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                            LocalDate.parse(info[1], DateTimeFormatter.ofPattern(\"d MMM yyyy\")));"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    break;"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                case \u0027E\u0027:"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    x \u003d x.substring(0, x.length() - 1);"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    info \u003d x.split(\" \\\\(at: \");"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    task \u003d new Event(info[0], info[1]);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    break;"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                default:"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    return Stream.empty();"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                }"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                if (isDone) {"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                    task \u003d task.complete();"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                return Stream.of(task);"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                                return Stream.empty();"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                            }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                        })"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                    .collect(Collectors.toList()));"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new StorageException(\"Unable to load tasks from \" + file, e);"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 66,
         "author": {
           "gitId": "gohkh"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 67,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    void save(TaskList tasks) throws StorageException {"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            Files.createDirectories(file.getParent());"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            Files.write(file, tasks.asList().stream().map(Task::toString).collect(Collectors.toList()));"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new StorageException(\"Unable to save tasks to \" + file, e);"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    private static class EmptyStorage extends Storage {"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        EmptyStorage() {"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            super(\"\");"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        @Override"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        TaskList load() {"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return new TaskList();"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        @Override"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        void save(TaskList tasks) {}"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 90,
         "author": {
           "gitId": "gohkh"
         },
@@ -2816,11 +2652,11 @@
       }
     ],
     "authorContributionMap": {
-      "gohkh": 7
+      "gohkh": 90
     }
   },
   {
-    "path": "src/main/java/duke/MissingTimeException.java",
+    "path": "src/main/java/duke/StorageException.java",
     "fileType": "java",
     "lines": [
       {
@@ -2842,21 +2678,21 @@
         "author": {
           "gitId": "gohkh"
         },
-        "content": "class MissingTimeException extends InvalidCommandException {"
+        "content": "class StorageException extends DukeException {"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "    MissingTimeException() {"
+        "content": "    StorageException(String message, Throwable cause) {"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "gohkh"
         },
-        "content": "        super(\"Oh no! The time of the event is missing.\");"
+        "content": "        super(message, cause);"
       },
       {
         "lineNumber": 6,
@@ -3048,6 +2884,528 @@
     }
   },
   {
+    "path": "src/main/java/duke/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "import java.util.List;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "class TaskList {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    private List\u003cTask\u003e tasks;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    TaskList() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        tasks \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    TaskList(List\u003cTask\u003e tasks) {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        this.tasks \u003d new ArrayList\u003c\u003e(tasks);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    TaskList add(Task task) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        tasks.add(task);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return this;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    Task complete(int taskNumber) throws TaskNumberOutOfBoundsException {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            int taskIndex \u003d taskNumber - 1;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            Task completedTask \u003d tasks.get(taskIndex).complete();"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            tasks.set(taskIndex, completedTask);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return completedTask;"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new TaskNumberOutOfBoundsException(taskNumber);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    Task delete(int taskNumber) throws TaskNumberOutOfBoundsException {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            int taskIndex \u003d taskNumber - 1;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            Task deletedTask \u003d tasks.remove(taskIndex);"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return deletedTask;"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            throw new TaskNumberOutOfBoundsException(taskNumber);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    String list() {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        if (tasks.size() \u003d\u003d 0) {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return \"There are no tasks now.\";"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            StringBuilder list \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            for (int i \u003d 0; i \u003c tasks.size(); i++) {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                if (i \u003e 0) {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                    list.append(\"\\n\");"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                list.append((i + 1) + \". \" + tasks.get(i));"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            return list.toString();"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    int size() {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return tasks.size();"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    List\u003cTask\u003e asList() {"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return new ArrayList\u003c\u003e(tasks);"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "gohkh": 65
+    }
+  },
+  {
+    "path": "src/main/java/duke/TaskNumberOutOfBoundsException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "class TaskNumberOutOfBoundsException extends DukeException {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    TaskNumberOutOfBoundsException(int taskNumber) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        super(\"Oops! \" + taskNumber + \" doesn\u0027t correspond to any task.\");"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "gohkh": 7
+    }
+  },
+  {
     "path": "src/main/java/duke/Todo.java",
     "fileType": "java",
     "lines": [
@@ -3201,6 +3559,400 @@
     ],
     "authorContributionMap": {
       "gohkh": 21
+    }
+  },
+  {
+    "path": "src/main/java/duke/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "class Ui {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    private final Scanner sc;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    Ui(Scanner sc) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        this.sc \u003d sc;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    String getInput() {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return sc.nextLine();"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    void greet() {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        String logo \u003d \" ____        _        \\n\""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        System.out.println(logo);"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        print(\"Hello, I\u0027m Duke!\\nWhat can I do for you?\");"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    void exit() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        print(\"Goodbye. Hope to see you again soon!\");"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    void print(String message) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        System.out.println(style(message));"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    void printTask(Task task, int numberOfTasks) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        String status;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        if (numberOfTasks \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            status \u003d \"There is now 1 task in the list.\";"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            status \u003d \"There are now \" + numberOfTasks + \" tasks in the list.\";"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        print(String.format(\"Got it. I\u0027ve added this task:\\n  %s\\n%s\", task, status));"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    void printException(Exception e) {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        print(e.getMessage());"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    private String style(String message) {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        String horizontalLine \u003d new String(new char[76]).replace(\"\\0\", \"-\");"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        message \u003d horizontalLine + \"\\n\" + message + \"\\n\" + horizontalLine;"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "        return message.lines()"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            .map(x -\u003e \"    \" + x + \"\\n\")"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "            .reduce(\"\", (x, y) -\u003e x + y);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "gohkh"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "gohkh": 55
     }
   },
   {
