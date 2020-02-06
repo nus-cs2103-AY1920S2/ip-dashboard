@@ -3346,91 +3346,91 @@
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import tasks.Task;"
+        "content": "import exceptions.DukeException;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import tasks.TaskList;"
+        "content": "import tasks.Task;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "import tasks.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import handlers.Storage;"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import handlers.Ui;"
+        "content": "import handlers.Storage;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "import handlers.Ui;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": " * Handles the command when the user wants a task deleted."
+        "content": "import java.io.IOException;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": " * For the execute method, it removes the task from the tasklist."
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": " * Handles the command when the user wants a task deleted."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "public class DeleteCommand extends Command {"
+        "content": " * For the execute method, it removes the task from the tasklist."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    protected int taskToDelete;"
+        "content": " */"
       },
       {
         "lineNumber": 16,
@@ -3444,115 +3444,192 @@
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    public DeleteCommand(String command, int taskToDelete) {"
+        "content": "public class DeleteCommand extends Command {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        this.command \u003d command;"
+        "content": "    protected int taskToDelete;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        this.taskToDelete \u003d taskToDelete;"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    }"
+        "content": "    public DeleteCommand(String command, int taskToDelete) {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "        this.command \u003d command;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    @Override"
+        "content": "        this.taskToDelete \u003d taskToDelete;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) {"
+        "content": "    }"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        Task taskRemoved \u003d tasks.remove(this.taskToDelete);"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        ui.clearResponse();"
+        "content": "    @Override"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        ui.showDeletedTask(taskRemoved, tasks.numOfTasks());"
+        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    }"
+        "content": "        try {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "            if (this.taskToDelete \u003e tasks.numOfTasks()) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    @Override"
+        "content": "                throw new DukeException(\"☹ OOPS!!! No task to be deleted found!\");"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    public boolean isExit() {"
+        "content": "            } else {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        return false;"
+        "content": "                Task taskRemoved \u003d tasks.remove(this.taskToDelete);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    }"
+        "content": "                ui.clearResponse();"
       },
       {
         "lineNumber": 33,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "                ui.showDeletedTask(taskRemoved, tasks.numOfTasks());"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "            ui.showError(e.getMessage());"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
         "author": {
           "gitId": "loycatherine"
         },
@@ -3560,7 +3637,7 @@
       }
     ],
     "authorContributionMap": {
-      "loycatherine": 33
+      "loycatherine": 44
     }
   },
   {
@@ -3586,234 +3663,290 @@
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import tasks.Task;"
+        "content": "import exceptions.DukeException;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import tasks.TaskList;"
+        "content": "import tasks.Task;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "import tasks.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import handlers.Storage;"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "import handlers.Ui;"
+        "content": "import handlers.Storage;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "import handlers.Ui;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": " * Handles the command when the user completes the task."
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": " * For the execute method, it sets the task to \u0027Done\u0027."
+        "content": " * Handles the command when the user completes the task."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": " */"
+        "content": " * For the execute method, it sets the task to \u0027Done\u0027."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "public class DoneCommand extends Command {"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    protected Task doneTask;"
+        "content": "public class DoneCommand extends Command {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    protected int taskToBeDone;"
+        "content": "    protected Task doneTask;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "    protected int taskToBeDone;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    public DoneCommand(String command, int taskToBeDone) {"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        this.command \u003d command;"
+        "content": "    public DoneCommand(String command, int taskToBeDone) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        this.taskToBeDone \u003d taskToBeDone;"
+        "content": "        this.command \u003d command;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    }"
+        "content": "        this.taskToBeDone \u003d taskToBeDone;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) {"
+        "content": "    @Override"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        //int num \u003d Integer.parseInt(this.command);"
+        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsException {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        this.doneTask \u003d tasks.get(taskToBeDone - 1);"
+        "content": "        try {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        tasks.completedTask(doneTask);"
+        "content": "            if (this.taskToBeDone \u003e tasks.numOfTasks()) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        ui.clearResponse();"
+        "content": "                throw new DukeException(\"☹ OOPS!!! No task to be done found!\");"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        ui.showDoneTask(doneTask);"
+        "content": "            } else {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    }"
+        "content": "                this.doneTask \u003d tasks.get(taskToBeDone - 1);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": ""
+        "content": "                tasks.completedTask(doneTask);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    @Override"
+        "content": "                ui.clearResponse();"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    public boolean isExit() {"
+        "content": "                ui.showDoneTask(doneTask);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        return false;"
+        "content": "            }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "    }"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 36,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "            ui.showError(e.getMessage());"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
         "author": {
           "gitId": "loycatherine"
         },
@@ -3821,7 +3954,7 @@
       }
     ],
     "authorContributionMap": {
-      "loycatherine": 36
+      "loycatherine": 44
     }
   },
   {
@@ -4653,6 +4786,78 @@
     ],
     "authorContributionMap": {
       "loycatherine": 14
+    }
+  },
+  {
+    "path": "src/main/java/exceptions/TaskDoneException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "package exceptions;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "public class TaskDoneException extends Exception {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    public TaskDoneException() {};"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "        return \"☹ OOPS!!! Task is already completed!\";"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "loycatherine"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "loycatherine": 9
     }
   },
   {
@@ -6630,7 +6835,7 @@
         "author": {
           "gitId": "loycatherine"
         },
-        "content": "        setResponse(\"Nice! I\u0027ve marked this done as done: \");"
+        "content": "        setResponse(\"Nice! I\u0027ve marked this task as done: \");"
       },
       {
         "lineNumber": 82,
