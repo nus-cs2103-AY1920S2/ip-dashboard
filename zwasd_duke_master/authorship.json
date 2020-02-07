@@ -424,14 +424,14 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.cli.Cli;"
+        "content": "import duke.cli.Cli;"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.gui.Launcher;"
+        "content": "import duke.gui.Gui;"
       },
       {
         "lineNumber": 4,
@@ -445,59 +445,73 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "/**"
+        "content": "import javafx.application.Application;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": " * Executes a new Duke instance."
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public class Main {"
+        "content": " * Executes a new Duke instance."
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public static void main(String[] args) {"
+        "content": " */"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        new Duke(\"data/tasks.txt\").run(new Cli(\"Duke\"));"
+        "content": "public class Main {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        // new Duke(\"data/tasks.txt\").run(new Launcher());"
+        "content": "    public static void main(String[] args) {"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": "        // new Duke(\"data/tasks.txt\").run(new Cli(\"Duke\"));"
       },
       {
         "lineNumber": 13,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        Application.launch(Gui.class, args);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
         "author": {
           "gitId": "zwasd"
         },
@@ -505,7 +519,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 13
+      "zwasd": 15
     }
   },
   {
@@ -559,7 +573,7 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.cli.Cli;"
+        "content": "import duke.cli.Cli;"
       },
       {
         "lineNumber": 8,
@@ -706,192 +720,220 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "    public String getResponse(Command command) throws DukeException {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Runs the Duke bot with an interface."
+        "content": "        return command.execute(tasks, storage);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * @param cli The command line interface."
+        "content": "    }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void run(Cli cli) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        cli.showWelcome();"
+        "content": "     * Runs the Duke bot with an interface."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        cli.showMessage(Message.GREET);"
+        "content": "     * @param cli The command line interface."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        cli.newLine();"
+        "content": "     */"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    public void run(Cli cli) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        boolean isExit \u003d false;"
+        "content": "        cli.showWelcome();"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        while (!isExit) {"
+        "content": "        cli.showMessage(Message.GREET);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            try {"
+        "content": "        cli.newLine();"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                cli.showPrompt();"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                String userCommand \u003d cli.readCommand();"
+        "content": "        boolean isExit \u003d false;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                cli.newLine();"
+        "content": "        while (!isExit) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "            try {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                Command command \u003d Parser.parse(userCommand);"
+        "content": "                cli.showPrompt();"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                command.execute(tasks, cli, storage);"
+        "content": "                String userCommand \u003d cli.readCommand();"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                isExit \u003d command.isExit();"
+        "content": "                cli.newLine();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            } catch (Exception e) {"
+        "content": ""
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                cli.showMessage(e.getMessage());"
+        "content": "                Command command \u003d Parser.parse(userCommand);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            }"
+        "content": "                cli.showMessage(command.execute(tasks, storage));"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            cli.newLine();"
+        "content": "                isExit \u003d command.isExit();"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        }"
+        "content": "            } catch (DukeException e) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "                cli.showMessage(e.getMessage());"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        cli.close();"
+        "content": "            }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": "            cli.newLine();"
       },
       {
         "lineNumber": 55,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        cli.close();"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 59,
         "author": {
           "gitId": "zwasd"
         },
@@ -899,7 +941,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 55
+      "zwasd": 59
     }
   },
   {
@@ -3135,6 +3177,484 @@
     }
   },
   {
+    "path": "src/main/java/duke/cli/Cli.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "package duke.cli;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": " * The user interface of the application. Displays messages to the user."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "public class Cli {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private String botName;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private Scanner in;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public Cli(String botName) {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        this.botName \u003d botName;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        this.in \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Displays welcome message."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public void showWelcome() {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        String logo \u003d \" ____        _        \\n\""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\\n\";"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        String comment \u003d \"Your personal assistant chatbot.\\n\";"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        System.out.println(\"Hello from\\n\" + logo + comment);"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Displays a response message from the Duke bot."
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @param message The response message."
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public void showMessage(String message) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        System.out.println(botName + \": \" + message);"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Displays the prompt before user enters command."
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public void showPrompt() {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        System.out.print(\"You: \");"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Displays a new line."
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public void newLine() {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        System.out.println();"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Reads a line of command from the input."
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @return the String of the command read."
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public String readCommand() {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        return in.nextLine().strip();"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Closes the scanner."
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public void close() {"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        in.close();"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "zwasd": 67
+    }
+  },
+  {
     "path": "src/main/java/duke/command/AddCommand.java",
     "fileType": "java",
     "lines": [
@@ -3192,521 +3712,514 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.common.ErrorMessage;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.ErrorMessage;"
+        "content": "import duke.common.Message;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.Message;"
+        "content": "import duke.task.Deadline;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.Deadline;"
+        "content": "import duke.task.Event;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.Event;"
+        "content": "import duke.task.Task;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.Task;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskList;"
+        "content": "import duke.task.TaskType;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskType;"
+        "content": "import duke.task.Todo;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.Todo;"
+        "content": ""
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "public class AddCommand extends Command {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public class AddCommand extends Command {"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    private TaskType type;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    private TaskType type;"
+        "content": "    private String description;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    private String description;"
+        "content": "    private HashMap\u003cString, Object\u003e details;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    private HashMap\u003cString, Object\u003e details;"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Creates an AddCommand object given the type and description of the task."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Creates an AddCommand object given the type and description of the task."
+        "content": "     * @param type The type of task to be added."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * @param type The type of task to be added."
+        "content": "     * @param description The description of the task."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * @param description The description of the task."
+        "content": "     */"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public AddCommand(TaskType type, String description) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public AddCommand(TaskType type, String description) {"
+        "content": "        this.type \u003d type;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.type \u003d type;"
+        "content": "        this.description \u003d description;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.description \u003d description;"
+        "content": "        this.details \u003d new HashMap\u003c\u003e();"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.details \u003d new HashMap\u003c\u003e();"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Creates an AddCommand object given the type, description and details of the task."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Creates an AddCommand object given the type, description and details of the task."
+        "content": "     * @param type The type of task to be added."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * @param type The type of task to be added."
+        "content": "     * @param description The description of the task."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * @param description The description of the task."
+        "content": "     * @param details The details specific to the task type."
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * @param details The details specific to the task type."
+        "content": "     */"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public AddCommand(TaskType type, String description,"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public AddCommand(TaskType type, String description,"
+        "content": "            HashMap\u003cString, Object\u003e details) {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            HashMap\u003cString, Object\u003e details) {"
+        "content": "        this.type \u003d type;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.type \u003d type;"
+        "content": "        this.description \u003d description;"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.description \u003d description;"
+        "content": "        this.details \u003d details;"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.details \u003d details;"
+        "content": "    }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Executes the command. Check for the type of task to be added, and add"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Executes the command. Check for the type of task to be added, and add"
+        "content": "     * the relevant task to task list. The current list of tasks are then saved."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * the relevant task to task list. The current list of tasks are then saved."
+        "content": "     */"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public String execute(TaskList tasks, Storage storage)"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage)"
+        "content": "            throws DukeException {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            throws DukeException {"
+        "content": "        Task task;"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        Task task;"
+        "content": ""
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "        switch (this.type) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        switch (this.type) {"
+        "content": "        case TODO:"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        case TODO:"
+        "content": "            task \u003d new Todo(false, description);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            task \u003d new Todo(false, description);"
+        "content": "            break;"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            break;"
+        "content": "        case DEADLINE:"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        case DEADLINE:"
+        "content": "            task \u003d new Deadline(false, description,"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            task \u003d new Deadline(false, description,"
+        "content": "                    (LocalDateTime) details.get(\"datetime\"));"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                    (LocalDateTime) details.get(\"datetime\"));"
+        "content": "            break;"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            break;"
+        "content": "        case EVENT:"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        case EVENT:"
+        "content": "            task \u003d new Event(false, description,"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            task \u003d new Event(false, description,"
+        "content": "                    (LocalDateTime) details.get(\"datetime\"));"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                    (LocalDateTime) details.get(\"datetime\"));"
+        "content": "            break;"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            break;"
+        "content": "        default:"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        default:"
+        "content": "            throw new DukeException(ErrorMessage.COMMAND_NOT_FOUND);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            throw new DukeException(ErrorMessage.COMMAND_NOT_FOUND);"
+        "content": "        }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "        tasks.add(task);"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        tasks.add(task);"
+        "content": "        storage.save(tasks);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        storage.save(tasks);"
+        "content": "        "
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        "
+        "content": "        String output \u003d Message.TASK_ADDED + \"\\n\""
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        String output \u003d Message.TASK_ADDED + \"\\n\""
+        "content": "                + Message.DIVIDER + \"\\n\""
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.DIVIDER + \"\\n\""
+        "content": "                + \"  \" + task + \"\\n\""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + \"  \" + task + \"\\n\""
+        "content": "                + Message.DIVIDER + \"\\n\""
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.DIVIDER + \"\\n\""
+        "content": "                + Message.showNumberOfTasks(tasks.getLength());"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.showNumberOfTasks(tasks.getLength());"
+        "content": "        return output;"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        ui.showMessage(output);"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "zwasd"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 82,
+        "lineNumber": 81,
         "author": {
           "gitId": "zwasd"
         },
@@ -3714,7 +4227,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 82
+      "zwasd": 81
     }
   },
   {
@@ -3740,38 +4253,94 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public abstract class Command implements Executable {"
+        "content": "import duke.DukeException;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "import duke.Storage;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public boolean isExit() {"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        return false;"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": "public class Command implements Executable {"
       },
       {
         "lineNumber": 8,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public String execute(TaskList tasks, Storage storage) throws DukeException {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        return \"\";"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    };"
+      },
+      {
+        "lineNumber": 16,
         "author": {
           "gitId": "zwasd"
         },
@@ -3779,7 +4348,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 8
+      "zwasd": 16
     }
   },
   {
@@ -3819,238 +4388,238 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.common.ErrorMessage;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.ErrorMessage;"
+        "content": "import duke.common.Message;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.Message;"
+        "content": "import duke.task.Task;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.Task;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "public class DeleteCommand extends Command {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public class DeleteCommand extends Command {"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    private int index;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    private int index;"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    public DeleteCommand(int index) {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public DeleteCommand(int index) {"
+        "content": "        this.index \u003d index;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.index \u003d index;"
+        "content": "    }"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Executes the command and deletes the task with the given index."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Executes the command and deletes the task with the given index."
+        "content": "     * Then, displays the response to the user."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Then, displays the response to the user."
+        "content": "     */"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public String execute(TaskList tasks, Storage storage)"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage)"
+        "content": "            throws DukeException {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            throws DukeException {"
+        "content": "        if (index \u003c 1 || index \u003e tasks.getLength()) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        if (index \u003c 1 || index \u003e tasks.getLength()) {"
+        "content": "            throw new DukeException(ErrorMessage.INVALID_INDEX);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            throw new DukeException(ErrorMessage.INVALID_INDEX);"
+        "content": "        }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        }"
+        "content": "        "
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        "
+        "content": "        Task task \u003d tasks.getTask(index);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        Task task \u003d tasks.getTask(index);"
+        "content": "        tasks.deleteTask(index);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        tasks.deleteTask(index);"
+        "content": "        storage.save(tasks);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        storage.save(tasks);"
+        "content": "        "
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        "
+        "content": "        String output \u003d Message.DELETE_MESSAGE + \"\\n\""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        String output \u003d Message.DELETE_MESSAGE + \"\\n\""
+        "content": "                + Message.DIVIDER + \"\\n\""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.DIVIDER + \"\\n\""
+        "content": "                + \"  \" + task + \"\\n\""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + \"  \" + task + \"\\n\""
+        "content": "                + Message.DIVIDER + \"\\n\""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.DIVIDER + \"\\n\""
+        "content": "                + Message.showNumberOfTasks(tasks.getLength()) + \"\\n\";"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.showNumberOfTasks(tasks.getLength()) + \"\\n\";"
+        "content": ""
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        ui.showMessage(output);"
+        "content": "        return output;"
       },
       {
         "lineNumber": 39,
@@ -4122,52 +4691,45 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "public interface Executable {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public interface Executable {"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    public String execute(TaskList tasks, Storage storage)"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage)"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "zwasd"
-        },
         "content": "            throws DukeException;"
       },
       {
-        "lineNumber": 12,
+        "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
@@ -4175,7 +4737,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 12
+      "zwasd": 11
     }
   },
   {
@@ -4208,115 +4770,108 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.common.Message;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.Message;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "public class ExitCommand extends Command {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public class ExitCommand extends Command {"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public boolean isExit() {"
+        "content": "        return true;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        return true;"
+        "content": "    }"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Executes the command and display an exit message."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Executes the command and display an exit message."
+        "content": "     */"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) {"
+        "content": "        return Message.EXIT_MESSAGE;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        ui.showMessage(Message.EXIT_MESSAGE);"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "zwasd"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 20,
+        "lineNumber": 19,
         "author": {
           "gitId": "zwasd"
         },
@@ -4324,7 +4879,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 20
+      "zwasd": 19
     }
   },
   {
@@ -4357,248 +4912,241 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.common.Message;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.Message;"
+        "content": "import duke.task.Task;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.Task;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "public class FindCommand extends Command {"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public class FindCommand extends Command {"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    private String search;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    private String search;"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    public FindCommand(String search) {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public FindCommand(String search) {"
+        "content": "        this.search \u003d search;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.search \u003d search;"
+        "content": "    }"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Executes the command and display tasks that matches the search"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Executes the command and display tasks that matches the search"
+        "content": "     * string."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * string."
+        "content": "     */"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) {"
+        "content": "        String output \u003d Message.FIND_MESSAGE + \"\\n\";"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        String output \u003d Message.FIND_MESSAGE + \"\\n\";"
+        "content": "        output +\u003d Message.DIVIDER + \"\\n\";"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        output +\u003d Message.DIVIDER + \"\\n\";"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "        int taskCount \u003d 0;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        int taskCount \u003d 0;"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "        for (int i \u003d 1; i \u003c\u003d tasks.getLength(); i++) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        for (int i \u003d 1; i \u003c\u003d tasks.getLength(); i++) {"
+        "content": "            Task task \u003d tasks.getTask(i);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            Task task \u003d tasks.getTask(i);"
+        "content": "            if (task.getDescription().contains(search)) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            if (task.getDescription().contains(search)) {"
+        "content": "                output +\u003d i + \".\" + task + \"\\n\";"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                output +\u003d i + \".\" + task + \"\\n\";"
+        "content": "                taskCount++;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                taskCount++;"
+        "content": "            }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            }"
+        "content": "        }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "        output +\u003d Message.DIVIDER + \"\\n\";"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        output +\u003d Message.DIVIDER + \"\\n\";"
+        "content": "        output +\u003d Message.showNumberOfTasksFound(taskCount);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        output +\u003d Message.showNumberOfTasksFound(taskCount);"
+        "content": "        return output;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        ui.showMessage(output);"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "zwasd"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 39,
+        "lineNumber": 38,
         "author": {
           "gitId": "zwasd"
         },
@@ -4606,7 +5154,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 39
+      "zwasd": 38
     }
   },
   {
@@ -4639,101 +5187,94 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.common.Message;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.Message;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "public class ListCommand extends Command {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public class ListCommand extends Command {"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Executes the command and lists all the tasks."
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Executes the command and lists all the tasks."
+        "content": "     */"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) {"
+        "content": "        String output \u003d Message.LIST_MESSAGE + \"\\n\""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        String output \u003d Message.LIST_MESSAGE + \"\\n\""
+        "content": "                + tasks.toString();"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + tasks.toString();"
+        "content": "        return output;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        ui.showMessage(output);"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "zwasd"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 18,
+        "lineNumber": 17,
         "author": {
           "gitId": "zwasd"
         },
@@ -4741,7 +5282,7 @@
       }
     ],
     "authorContributionMap": {
-      "zwasd": 18
+      "zwasd": 17
     }
   },
   {
@@ -4781,231 +5322,231 @@
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.common.ErrorMessage;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.ErrorMessage;"
+        "content": "import duke.common.Message;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.common.Message;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "import duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "public class MarkCommand extends Command {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "public class MarkCommand extends Command {"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    private int index;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    private int index;"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "zwasd"
         },
-        "content": ""
+        "content": "    public MarkCommand(int index) {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public MarkCommand(int index) {"
+        "content": "        this.index \u003d index;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        this.index \u003d index;"
+        "content": "    }"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": "    "
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    "
+        "content": "    /**"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    /**"
+        "content": "     * Executes the command and mark the index in the list as done."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Executes the command and mark the index in the list as done."
+        "content": "     * Then, displays the response to the user."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     * Then, displays the response to the user."
+        "content": "     */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "     */"
+        "content": "    public String execute(TaskList tasks, Storage storage)"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage)"
+        "content": "            throws DukeException {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            throws DukeException {"
+        "content": "        if (index \u003c 1 || index \u003e tasks.getLength()) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        if (index \u003c 1 || index \u003e tasks.getLength()) {"
+        "content": "            throw new DukeException(ErrorMessage.INVALID_INDEX);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "            throw new DukeException(ErrorMessage.INVALID_INDEX);"
+        "content": "        }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        }"
+        "content": "        "
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        "
+        "content": "        tasks.markDone(index);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        tasks.markDone(index);"
+        "content": "        storage.save(tasks);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        storage.save(tasks);"
+        "content": "        "
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        "
+        "content": "        String output \u003d Message.MARK_DONE + \"\\n\""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        String output \u003d Message.MARK_DONE + \"\\n\""
+        "content": "                + Message.DIVIDER + \"\\n\""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.DIVIDER + \"\\n\""
+        "content": "                + tasks.getTask(index) + \"\\n\""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + tasks.getTask(index) + \"\\n\""
+        "content": "                + Message.DIVIDER + \"\\n\";"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "                + Message.DIVIDER + \"\\n\";"
+        "content": "        return output;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "        ui.showMessage(output);"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "    }"
+        "content": "}"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "zwasd"
         },
-        "content": "}"
+        "content": ""
       },
       {
         "lineNumber": 38,
@@ -5013,17 +5554,10 @@
           "gitId": "zwasd"
         },
         "content": ""
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
       }
     ],
     "authorContributionMap": {
-      "zwasd": 39
+      "zwasd": 38
     }
   },
   {
@@ -5476,6 +6010,1543 @@
     ],
     "authorContributionMap": {
       "zwasd": 40
+    }
+  },
+  {
+    "path": "src/main/java/duke/gui/DialogBox.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "package duke.gui;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.collections.FXCollections;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.collections.ObservableList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.geometry.Pos;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.Node;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.control.Label;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.image.ImageView;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.layout.HBox;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.shape.Circle;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "public class DialogBox extends HBox {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private Label text;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private ImageView displayPicture;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Creates a dialog box given the label and image."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @param l The text messages."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @param iv The avatar image."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public DialogBox(Label l, ImageView iv) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        text \u003d l;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        displayPicture \u003d iv;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        Circle circle \u003d new Circle(50, 50, 50);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        displayPicture.setClip(circle);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        text.setWrapText(true);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        displayPicture.setFitWidth(100.0);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        displayPicture.setFitHeight(100.0);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        this.setAlignment(Pos.TOP_RIGHT);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        this.getChildren().addAll(text, displayPicture);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Flips the dialog box such that the ImageView is on the left and text on the right."
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private void flip() {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        this.setAlignment(Pos.TOP_LEFT);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        ObservableList\u003cNode\u003e tmp \u003d FXCollections.observableArrayList(this.getChildren());"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        FXCollections.reverse(tmp);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        this.getChildren().setAll(tmp);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Gets user dialog box."
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @param l The text messages."
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @param iv The avatar image."
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @return A dialog box."
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public static DialogBox getUserDialog(Label l, ImageView iv) {"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        return new DialogBox(l, iv);"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Gets duke dialog box."
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @param l The text messages."
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @param iv The avatar image."
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * @return A dialog box."
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public static DialogBox getDukeDialog(Label l, ImageView iv) {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        var db \u003d new DialogBox(l, iv);"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        db.flip();"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        return db;"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "zwasd": 68
+    }
+  },
+  {
+    "path": "src/main/java/duke/gui/Gui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "package duke.gui;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import duke.Duke;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import duke.DukeException;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import duke.Parser;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import duke.command.Command;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.application.Application;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.Scene;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.control.Button;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.control.Label;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.control.ScrollPane;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.control.TextField;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.image.Image;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.image.ImageView;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.layout.AnchorPane;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.layout.Region;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.scene.layout.VBox;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "import javafx.stage.Stage;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "public class Gui extends Application {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    Duke duke;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    String filePath;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    //Step 1. Setting up required components"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private ScrollPane scrollPane;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private VBox dialogContainer;"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private TextField userInput;"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private Button sendButton;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private Scene scene;"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private Image userImg \u003d new Image(this.getClass()"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            .getResourceAsStream(\"/images/DaUser.png\"));"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private Image dukeImg \u003d new Image(this.getClass()"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            .getResourceAsStream(\"/images/DaDuke.png\"));"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     * the dialog container. Clears the user input after processing."
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private void handleUserInput() {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        Label userText \u003d new Label(userInput.getText());"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        Command command \u003d new Command();"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        String response;"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            command \u003d Parser.parse(userInput.getText());"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            response \u003d duke.getResponse(command);"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        System.out.println(response);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        Label dukeText \u003d new Label(response);"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        dialogContainer.getChildren().addAll("
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                DialogBox.getUserDialog(userText, new ImageView(userImg)),"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        );"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        userInput.clear();"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        if (command.isExit()) {"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            exit();"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    private void exit() {"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        new Thread(new Runnable() {"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            public void run() {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                try {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                    Thread.sleep(100);"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                } catch (InterruptedException e) {"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                    e.printStackTrace();"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "                System.exit(0);"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        }).start();"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public void init() throws Exception {"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        super.init();"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        filePath \u003d \"data/tasks.txt\";"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        duke \u003d new Duke(filePath);"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    public void start(Stage stage) {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        //The container for the content of the chat to scroll."
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scrollPane \u003d new ScrollPane();"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        dialogContainer \u003d new VBox();"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scrollPane.setContent(dialogContainer);"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        userInput \u003d new TextField();"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        sendButton \u003d new Button(\"Send\");"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        AnchorPane mainLayout \u003d new AnchorPane();"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scene \u003d new Scene(mainLayout);"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    "
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        stage.setScene(scene);"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        stage.show();"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        //Step 2. Formatting the window to look as expected"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        stage.setTitle(\"Duke\");"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        stage.setResizable(false);"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        stage.setMinHeight(600.0);"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        stage.setMinWidth(400.0);"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        mainLayout.setPrefSize(400.0, 600.0);"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scrollPane.setPrefSize(400, 545);"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scrollPane.setVvalue(1.0);"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        scrollPane.setFitToWidth(true);"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        // You will need to import `javafx.scene.layout.Region` for this. "
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        userInput.setPrefWidth(325.0);"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        sendButton.setPrefWidth(74.0);"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        AnchorPane.setTopAnchor(scrollPane, 1.0);"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        AnchorPane.setBottomAnchor(sendButton, 1.0);"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        AnchorPane.setRightAnchor(sendButton, 1.0);"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        "
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        AnchorPane.setLeftAnchor(userInput, 1.0);"
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        AnchorPane.setBottomAnchor(userInput, 1.0);"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 137,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        //Step 3. Add functionality to handle user input."
+      },
+      {
+        "lineNumber": 138,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        sendButton.setOnMouseClicked((event) -\u003e {"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            handleUserInput();"
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        });"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    "
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        userInput.setOnAction((event) -\u003e {"
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "            handleUserInput();"
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        });"
+      },
+      {
+        "lineNumber": 145,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 146,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        //Scroll down to the end every time dialogContainer\u0027s height changes."
+      },
+      {
+        "lineNumber": 147,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "        dialogContainer.heightProperty().addListener((observable) -\u003e scrollPane.setVvalue(1.0));"
+      },
+      {
+        "lineNumber": 148,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 149,
+        "author": {
+          "gitId": "zwasd"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "zwasd": 149
     }
   },
   {
@@ -7149,2445 +9220,6 @@
     ],
     "authorContributionMap": {
       "zwasd": 17
-    }
-  },
-  {
-    "path": "src/main/java/duke/ui/Ui.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "package duke.ui;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import java.util.Scanner;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "public abstract class Ui {"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private String botName;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Scanner in;"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public Ui() {"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.botName \u003d \"\";"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.in \u003d new Scanner(System.in);"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": " "
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays welcome message."
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void showWelcome() {"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        String logo \u003d \" ____        _        \\n\""
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\\n\";"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        String comment \u003d \"Your personal assistant chatbot.\\n\";"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.println(\"Hello from\\n\" + logo + comment);"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays a response message from the Duke bot."
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param message The response message."
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void showMessage(String message) {"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.println(botName + \": \" + message);"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays the prompt before user enters command."
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void showPrompt() {"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.print(\"You: \");"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays a new line."
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void newLine() {"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.println();"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Reads a line of command from the input."
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @return the String of the command read."
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public String readCommand() {"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        return in.nextLine().strip();"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Closes the scanner."
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void close() {"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        in.close();"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "zwasd": 64
-    }
-  },
-  {
-    "path": "src/main/java/duke/ui/cli/Cli.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "package duke.ui.cli;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import duke.ui.Ui;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import java.util.Scanner;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "/**"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": " * The user interface of the application. Displays messages to the user."
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": " */"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "public class Cli extends Ui {"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private String botName;"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Scanner in;"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public Cli(String botName) {"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.botName \u003d botName;"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.in \u003d new Scanner(System.in);"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays welcome message."
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void showWelcome() {"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        String logo \u003d \" ____        _        \\n\""
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\\n\";"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        String comment \u003d \"Your personal assistant chatbot.\\n\";"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.println(\"Hello from\\n\" + logo + comment);"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays a response message from the Duke bot."
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param message The response message."
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void showMessage(String message) {"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.println(botName + \": \" + message);"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays the prompt before user enters command."
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void showPrompt() {"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.print(\"You: \");"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Displays a new line."
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void newLine() {"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        System.out.println();"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Reads a line of command from the input."
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @return the String of the command read."
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public String readCommand() {"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        return in.nextLine().strip();"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Closes the scanner."
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void close() {"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        in.close();"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "zwasd": 69
-    }
-  },
-  {
-    "path": "src/main/java/duke/ui/gui/DialogBox.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "package duke.ui.gui;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.collections.FXCollections;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.collections.ObservableList;"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.geometry.Pos;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.Node;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.control.Label;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.image.ImageView;"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.layout.HBox;"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "public class DialogBox extends HBox {"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Label text;"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private ImageView displayPicture;"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Creates a dialog box given the label and image."
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param l The text messages."
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param iv The avatar image."
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public DialogBox(Label l, ImageView iv) {"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        text \u003d l;"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        displayPicture \u003d iv;"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        text.setWrapText(true);"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        displayPicture.setFitWidth(100.0);"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        displayPicture.setFitHeight(100.0);"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.setAlignment(Pos.TOP_RIGHT);"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.getChildren().addAll(text, displayPicture);"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Flips the dialog box such that the ImageView is on the left and text on the right."
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private void flip() {"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.setAlignment(Pos.TOP_LEFT);"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        ObservableList\u003cNode\u003e tmp \u003d FXCollections.observableArrayList(this.getChildren());"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        FXCollections.reverse(tmp);"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.getChildren().setAll(tmp);"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Gets user dialog box."
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param l The text messages."
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param iv The avatar image."
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @return A dialog box."
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public static DialogBox getUserDialog(Label l, ImageView iv) {"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        return new DialogBox(l, iv);"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Gets duke dialog box."
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param l The text messages."
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @param iv The avatar image."
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * @return A dialog box."
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public static DialogBox getDukeDialog(Label l, ImageView iv) {"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        var db \u003d new DialogBox(l, iv);"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        db.flip();"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        return db;"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "zwasd": 64
-    }
-  },
-  {
-    "path": "src/main/java/duke/ui/gui/Gui.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "package duke.ui.gui;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import duke.Duke;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.application.Application;"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.Scene;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.control.Button;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.control.Label;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.control.ScrollPane;"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.control.TextField;"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.image.Image;"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.image.ImageView;"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.layout.AnchorPane;"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.layout.Region;"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.scene.layout.VBox;"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.stage.Stage;"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "public class Gui extends Application {"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    Duke duke;"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    //Step 1. Setting up required components"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private ScrollPane scrollPane;"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private VBox dialogContainer;"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private TextField userInput;"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Button sendButton;"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Scene scene;"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Image userImg \u003d new Image(this.getClass()"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "            .getResourceAsStream(\"/images/DaUser.png\"));"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Image dukeImg \u003d new Image(this.getClass()"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "            .getResourceAsStream(\"/images/DaDuke.png\"));"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Iteration 2:"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * the dialog container. Clears the user input after processing."
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private void handleUserInput() {"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        Label userText \u003d new Label(userInput.getText());"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        Label dukeText \u003d new Label(getResponse(userInput.getText()));"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        dialogContainer.getChildren().addAll("
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                DialogBox.getUserDialog(userText, new ImageView(userImg)),"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImg))"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        );"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        userInput.clear();"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * You should have your own function to generate a response to user input."
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     * Replace this stub with your completed method."
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private String getResponse(String input) {"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        return input;"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void start(Stage stage) {"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        duke \u003d new Duke(\"data/tasks.txt\");"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "         "
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        //The container for the content of the chat to scroll."
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scrollPane \u003d new ScrollPane();"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        dialogContainer \u003d new VBox();"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scrollPane.setContent(dialogContainer);"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        userInput \u003d new TextField();"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        sendButton \u003d new Button(\"Send\");"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    "
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        AnchorPane mainLayout \u003d new AnchorPane();"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scene \u003d new Scene(mainLayout);"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    "
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        stage.setScene(scene);"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        stage.show();"
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        //Step 2. Formatting the window to look as expected"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        stage.setTitle(\"Duke\");"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        stage.setResizable(false);"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        stage.setMinHeight(600.0);"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        stage.setMinWidth(400.0);"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        mainLayout.setPrefSize(400.0, 600.0);"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scrollPane.setPrefSize(400, 545);"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);"
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scrollPane.setVvalue(1.0);"
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        scrollPane.setFitToWidth(true);"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        // You will need to import `javafx.scene.layout.Region` for this. "
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        userInput.setPrefWidth(325.0);"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        sendButton.setPrefWidth(74.0);"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        AnchorPane.setTopAnchor(scrollPane, 1.0);"
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 101,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        AnchorPane.setBottomAnchor(sendButton, 1.0);"
-      },
-      {
-        "lineNumber": 102,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        AnchorPane.setRightAnchor(sendButton, 1.0);"
-      },
-      {
-        "lineNumber": 103,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 104,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        AnchorPane.setLeftAnchor(userInput, 1.0);"
-      },
-      {
-        "lineNumber": 105,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        AnchorPane.setBottomAnchor(userInput, 1.0);"
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        //Step 3. Add functionality to handle user input."
-      },
-      {
-        "lineNumber": 108,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        sendButton.setOnMouseClicked((event) -\u003e {"
-      },
-      {
-        "lineNumber": 109,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "            handleUserInput();"
-      },
-      {
-        "lineNumber": 110,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        });"
-      },
-      {
-        "lineNumber": 111,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    "
-      },
-      {
-        "lineNumber": 112,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        userInput.setOnAction((event) -\u003e {"
-      },
-      {
-        "lineNumber": 113,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "            handleUserInput();"
-      },
-      {
-        "lineNumber": 114,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        });"
-      },
-      {
-        "lineNumber": 115,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 116,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        //Scroll down to the end every time dialogContainer\u0027s height changes."
-      },
-      {
-        "lineNumber": 117,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        dialogContainer.heightProperty().addListener((observable) -\u003e scrollPane.setVvalue(1.0));"
-      },
-      {
-        "lineNumber": 118,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 119,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "zwasd": 119
-    }
-  },
-  {
-    "path": "src/main/java/duke/ui/gui/Launcher.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "package duke.ui.gui;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import duke.ui.Ui;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "// import javafx.application.Application;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "import javafx.stage.Stage;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "/**"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": " * A launcher class to workaround classpath issues."
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": " */"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "public class Launcher extends Ui {"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    private Gui gui;"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public Launcher() {"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        this.gui \u003d new Gui();"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void launch() {"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        gui.start(new Stage());"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    public void showMessage(String message) {"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "        "
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "zwasd"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "zwasd": 26
     }
   },
   {
