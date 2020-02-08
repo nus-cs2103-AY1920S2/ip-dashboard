@@ -1688,752 +1688,969 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public Duke(String listPath, String arrayPath) {"
+        "content": "    public Duke(String listPath, String prevListPath,"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "                String arrayPath, String prevArrayPath) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        storage \u003d new Storage(listPath, arrayPath);"
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        try {"
+        "content": "        storage \u003d new Storage(listPath, prevListPath, arrayPath, prevArrayPath);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            tasks \u003d new TaskList(storage.load());"
+        "content": "        try {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            tasks \u003d new TaskList(storage.load());"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            ui.showLoadingError();"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            tasks \u003d new TaskList();"
+        "content": "            ui.showLoadingError();"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "            tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public Duke() {"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    public Duke() {}"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "     * Sets up and runs Duke to begin accepting user commands. Send \u0027bye\u0027 to close the program."
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Sets up and runs Duke to begin accepting user commands. Send \u0027bye\u0027 to close the program."
+        "content": "     */"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void run() {"
+        "content": "        ui.showWelcome();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        ui.showWelcome();"
+        "content": "        Scanner scanner \u003d new Scanner(System.in);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        Scanner scanner \u003d new Scanner(System.in);"
+        "content": "        boolean isBye \u003d false;"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        boolean isBye \u003d false;"
+        "content": "        String input;"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String input;"
+        "content": "        Boolean marked;"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        while (!isBye) {"
+        "content": ""
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            input \u003d scanner.nextLine();"
+        "content": "        while (!isBye) {"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            isBye \u003d Parser.isBye(input);"
+        "content": "            input \u003d scanner.nextLine();"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            isBye \u003d Parser.isBye(input);"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            try {"
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String command \u003d Parser.parseCommand(input);"
+        "content": "            if (!isBye) {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                assert !command.equalsIgnoreCase(\"bye\");"
+        "content": "                try {"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String[] inputArr \u003d input.split(\" \");"
+        "content": "                    String command \u003d Parser.parseCommand(input);"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                try {"
+        "content": "                    assert !command.equalsIgnoreCase(\"bye\");"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    int taskIndex;"
+        "content": "                    String[] inputArr \u003d input.split(\" \");"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    Task selected;"
+        "content": "                    try {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                        int taskIndex;"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    switch (command) {"
+        "content": "                        Task selected;"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    case (\"list\"):"
+        "content": ""
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showList(storage.loadList());"
+        "content": "                        switch (command) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        break;"
+        "content": "                            case (\"list\"):"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                                ui.showList(storage.loadList());"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    case (\"done\"):"
+        "content": "                                break;"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        taskIndex \u003d Integer.parseInt(inputArr[1]) - 1;"
+        "content": ""
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        selected \u003d tasks.getTaskList().get(taskIndex);"
+        "content": "                            case (\"done\"):"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        tasks.markDone(taskIndex);"
+        "content": "                                storage.saveLastState(tasks.getTaskList());"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showDoneTask(selected);"
+        "content": "                                taskIndex \u003d Integer.parseInt(inputArr[1]) - 1;"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        storage.save(tasks.getTaskList());"
+        "content": "                                selected \u003d tasks.getTaskList().get(taskIndex);"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        break;"
+        "content": "                                marked \u003d tasks.markDone(taskIndex);"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                                if (marked) {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    case (\"delete\"):"
+        "content": "                                    ui.showDoneTask(selected);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        taskIndex \u003d Integer.parseInt(inputArr[1]) - 1;"
+        "content": "                                } else {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        selected \u003d tasks.getTaskList().get(taskIndex);"
+        "content": "                                    ui.showError(\"Honk! Task is already done.\");"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        tasks.deleteTask(taskIndex);"
+        "content": "                                }"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showDeleteTask(selected, tasks.getTaskList());"
+        "content": "                                storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        storage.save(tasks.getTaskList());"
+        "content": "                                break;"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        break;"
+        "content": ""
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                            case (\"undone\"):"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    case (\"find\"):"
+        "content": "                                storage.saveLastState(tasks.getTaskList());"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        String search \u003d \"\";"
+        "content": "                                taskIndex \u003d Integer.parseInt(inputArr[1]) - 1;"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        for (int i \u003d 1; i \u003c inputArr.length; i++) {"
+        "content": "                                selected \u003d tasks.getTaskList().get(taskIndex);"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                            search +\u003d inputArr[i];"
+        "content": "                                marked \u003d tasks.markUndone(taskIndex);"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                            search +\u003d (i \u003d\u003d inputArr.length - 1) ? \"\" : \" \";"
+        "content": "                                if (marked) {"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        }"
+        "content": "                                    ui.showUndoneTask(selected);"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ArrayList\u003cTask\u003e foundTasks \u003d tasks.findTask(search);"
+        "content": "                                } else {"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showFoundTasks(foundTasks);"
+        "content": "                                    ui.showError(\"Honk! Task is already marked undone.\");"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        break;"
+        "content": "                                }"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                                storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    case (\"todo\"):"
+        "content": "                                break;"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        Todo addedTodo \u003d tasks.createTodo(inputArr);"
+        "content": ""
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showAddTask(addedTodo, tasks.getTaskList());"
+        "content": "                            case (\"delete\"):"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        storage.save(tasks.getTaskList());"
+        "content": "                                storage.saveLastState(tasks.getTaskList());"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        break;"
+        "content": "                                taskIndex \u003d Integer.parseInt(inputArr[1]) - 1;"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                                selected \u003d tasks.getTaskList().get(taskIndex);"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    case (\"event\"):"
+        "content": "                                tasks.deleteTask(taskIndex);"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        Event addedEvent \u003d tasks.createEvent(input);"
+        "content": "                                ui.showDeleteTask(selected, tasks.getTaskList());"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showAddTask(addedEvent, tasks.getTaskList());"
+        "content": "                                storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        storage.save(tasks.getTaskList());"
+        "content": "                                break;"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        break;"
+        "content": ""
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                            case (\"find\"):"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    case (\"deadline\"):"
+        "content": "                                String search \u003d \"\";"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        Deadline addedDeadline \u003d tasks.createDeadline(input);"
+        "content": "                                for (int i \u003d 1; i \u003c inputArr.length; i++) {"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showAddTask(addedDeadline, tasks.getTaskList());"
+        "content": "                                    search +\u003d inputArr[i];"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        storage.save(tasks.getTaskList());"
+        "content": "                                    search +\u003d (i \u003d\u003d inputArr.length - 1) ? \"\" : \" \";"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        break;"
+        "content": "                                }"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                                ArrayList\u003cTask\u003e foundTasks \u003d tasks.findTask(search);"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    default:"
+        "content": "                                ui.showFoundTasks(foundTasks);"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        ui.showError(\"Honk! Something went wrong.\");"
+        "content": "                                break;"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    }"
+        "content": ""
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                } catch (IOException e) {"
+        "content": "                            case (\"todo\"):"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    ui.showError(\"Honk! Something went wrong.\");"
+        "content": "                                storage.saveLastState(tasks.getTaskList());"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                } catch (GooseTaskExistenceException | GooseEmptyDescriptionException"
+        "content": "                                Todo addedTodo \u003d tasks.createTodo(inputArr);"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        | GooseIllegalFormatException e) {"
+        "content": "                                ui.showAddTask(addedTodo, tasks.getTaskList());"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    ui.showError(e.getMessage());"
+        "content": "                                storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                }"
+        "content": "                                break;"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            } catch (GooseUnrecognisedException e) {"
+        "content": ""
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                ui.showError(e.getMessage());"
+        "content": "                            case (\"event\"):"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "                                storage.saveLastState(tasks.getTaskList());"
       },
       {
         "lineNumber": 141,
         "author": {
-          "gitId": "-"
+          "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "                                Event addedEvent \u003d tasks.createEvent(input);"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        ui.showBye();"
+        "content": "                                ui.showAddTask(addedEvent, tasks.getTaskList());"
       },
       {
         "lineNumber": 143,
         "author": {
-          "gitId": "-"
+          "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "                                storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                                break;"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void start(Stage stage) {"
+        "content": "                            case (\"deadline\"):"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "                                storage.saveLastState(tasks.getTaskList());"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                                Deadline addedDeadline \u003d tasks.createDeadline(input);"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public static void main(String[] args) {"
+        "content": "                                ui.showAddTask(addedDeadline, tasks.getTaskList());"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        new Duke(\"duke.txt\", \"mainList.txt\").run();"
+        "content": "                                storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "                                break;"
       },
       {
         "lineNumber": 152,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                            case (\"undo\"):"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                                tasks \u003d new TaskList(storage.undoAndLoad());"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                                ui.showUndoMessage();"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                                ui.showList(storage.loadList());"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                                break;"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                            default:"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                                ui.showError(\"Honk! Something went wrong.\");"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        ui.showError(\"Honk! Something went wrong.\");"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    } catch (GooseTaskExistenceException | GooseEmptyDescriptionException"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                            | GooseIllegalFormatException e) {"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        ui.showError(e.getMessage());"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                } catch (GooseUnrecognisedException e) {"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    ui.showError(e.getMessage());"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        ui.showBye();"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public void start(Stage stage) {"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        new Duke(\"duke.txt\", \"duke_prev.txt\", \"mainList.txt\", \"mainList_prev.txt\").run();"
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 183,
         "author": {
           "gitId": "suwoons"
         },
@@ -2442,7 +2659,7 @@
     ],
     "authorContributionMap": {
       "-": 2,
-      "suwoons": 150
+      "suwoons": 181
     }
   },
   {
@@ -4150,7 +4367,7 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return inputArr[0].equals(\"done\") || inputArr[0].equals(\"deadline\")"
+        "content": "        return inputArr[0].equals(\"done\") || inputArr[0].equals(\"deadline\") || inputArr[0].equals(\"undone\")"
       },
       {
         "lineNumber": 28,
@@ -4164,17 +4381,24 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                || inputArr[0].equals(\"find\") || isBye(inputArr[0]) || input.equalsIgnoreCase(\"list\");"
+        "content": "                || inputArr[0].equals(\"find\") || isBye(inputArr[0]) || input.equalsIgnoreCase(\"list\")"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "                || inputArr[0].equals(\"undo\");"
       },
       {
         "lineNumber": 31,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
         "author": {
           "gitId": "suwoons"
         },
@@ -4182,7 +4406,7 @@
       }
     ],
     "authorContributionMap": {
-      "suwoons": 31
+      "suwoons": 32
     }
   },
   {
@@ -4278,462 +4502,462 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    private String arrayPath;"
+        "content": "    private String prevListPath;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    private Ui ui;"
+        "content": "    private String arrayPath;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    private String prevArrayPath;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Constructor for storage class to handle saving and loading to and from hard disk."
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param listPath Relative file path for storing the list"
+        "content": "     * Constructor for storage class to handle saving and loading to and from hard disk."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param arrayPath Relative file path for storing the array"
+        "content": "     *"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     * @param listPath Relative file path for storing the list"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public Storage(String listPath, String arrayPath) {"
+        "content": "     * @param arrayPath Relative file path for storing the array"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        this.listPath \u003d listPath;"
+        "content": "     */"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        this.arrayPath \u003d arrayPath;"
+        "content": "    public Storage(String listPath, String prevListPath,"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        this.ui \u003d new Ui();"
+        "content": "                   String arrayPath, String prevArrayPath) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "        this.listPath \u003d listPath;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        this.prevListPath \u003d prevListPath;"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        this.arrayPath \u003d arrayPath;"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Writes to respective list and array files to store the updated data in the hard disk."
+        "content": "        this.prevArrayPath \u003d prevArrayPath;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "        this.ui \u003d new Ui();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param taskList Updated task list based on user commands"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws IOException If error is encountered in FileWriter"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void save(ArrayList\u003cTask\u003e taskList) throws IOException { // saves to both duke.txt and array.txt"
+        "content": "     * Writes to respective list and array files to store the updated data in the hard disk."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        // save mainList array"
+        "content": "     *"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        File arrayFile \u003d new File(arrayPath);"
+        "content": "     * @param taskList Updated task list based on user commands"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        arrayFile.createNewFile();"
+        "content": "     * @throws IOException If error is encountered in FileWriter"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        FileWriter af \u003d new FileWriter(arrayPath);"
+        "content": "    public void save(ArrayList\u003cTask\u003e taskList) throws IOException { // saves to both duke.txt and array.txt"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String stringList \u003d \"\";"
+        "content": "        // save mainList array"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (Task task : taskList) {"
+        "content": "        File arrayFile \u003d new File(arrayPath);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (task instanceof Event) {"
+        "content": "        arrayFile.createNewFile();"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                Event e \u003d (Event) task;"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String doneStr \u003d e.isDone ? \"1\" : \"0\";"
+        "content": "        FileWriter af \u003d new FileWriter(arrayPath);"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String eventString \u003d \"event|\" + doneStr + \"|\" + e.description + \"|\" + e.atDate + \"|\""
+        "content": "        String stringList \u003d \"\";"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        + e.time24Hr + System.lineSeparator();"
+        "content": "        for (Task task : taskList) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                stringList +\u003d eventString;"
+        "content": "            if (task instanceof Event) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            } else if (task instanceof  Deadline) {"
+        "content": "                Event e \u003d (Event) task;"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                Deadline d \u003d (Deadline) task;"
+        "content": "                String doneStr \u003d e.isDone ? \"1\" : \"0\";"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String doneStr \u003d d.isDone ? \"1\" : \"0\";"
+        "content": "                String eventString \u003d \"event|\" + doneStr + \"|\" + e.description + \"|\" + e.atDate + \"|\""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String deadlineString \u003d \"deadline|\" + doneStr + \"|\" + d.description + \"|\" + d.byDate + \"|\""
+        "content": "                        + e.time24Hr + System.lineSeparator();"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                        + d.time24Hr + System.lineSeparator();"
+        "content": "                stringList +\u003d eventString;"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                stringList +\u003d deadlineString;"
+        "content": "            } else if (task instanceof  Deadline) {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            } else if (task instanceof Todo) {"
+        "content": "                Deadline d \u003d (Deadline) task;"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                Todo t \u003d (Todo) task;"
+        "content": "                String doneStr \u003d d.isDone ? \"1\" : \"0\";"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String doneStr \u003d t.isDone ? \"1\" : \"0\";"
+        "content": "                String deadlineString \u003d \"deadline|\" + doneStr + \"|\" + d.description + \"|\" + d.byDate + \"|\""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String todoString \u003d \"todo|\" + doneStr + \"|\" + t.description + System.lineSeparator();"
+        "content": "                        + d.time24Hr + System.lineSeparator();"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                stringList +\u003d todoString;"
+        "content": "                stringList +\u003d deadlineString;"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "            } else if (task instanceof Todo) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "                Todo t \u003d (Todo) task;"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        af.write(stringList);"
+        "content": "                String doneStr \u003d t.isDone ? \"1\" : \"0\";"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        af.close();"
+        "content": "                String todoString \u003d \"todo|\" + doneStr + \"|\" + t.description + System.lineSeparator();"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                stringList +\u003d todoString;"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        // save list"
+        "content": "            }"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        File listFile \u003d new File(listPath);"
+        "content": "        }"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        listFile.createNewFile();"
+        "content": "        af.write(stringList);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        af.close();"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        FileWriter fw \u003d new FileWriter(listPath);"
+        "content": ""
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String text \u003d \"\";"
+        "content": "        // save list"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (taskList.size() !\u003d 0) {"
+        "content": "        File listFile \u003d new File(listPath);"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            for (int i \u003d 0; i \u003c taskList.size(); i++) {"
+        "content": "        listFile.createNewFile();"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                if (taskList.get(i) \u003d\u003d null) {"
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    break;"
+        "content": "        FileWriter fw \u003d new FileWriter(listPath);"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                }"
+        "content": "        String text \u003d \"\";"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                int indexNum \u003d i + 1;"
+        "content": "        if (taskList.size() !\u003d 0) {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String item \u003d \" \" + indexNum + \".\" + taskList.get(i).toString();"
+        "content": "            for (int i \u003d 0; i \u003c taskList.size(); i++) {"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                if (i !\u003d taskList.size() - 1) {"
+        "content": "                if (taskList.get(i) \u003d\u003d null) {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    item +\u003d \"\\n\";"
+        "content": "                    break;"
       },
       {
         "lineNumber": 79,
@@ -4747,514 +4971,1389 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                text +\u003d item;"
+        "content": "                int indexNum \u003d i + 1;"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "                String item \u003d \" \" + indexNum + \".\" + taskList.get(i).toString();"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "                if (i !\u003d taskList.size() - 1) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        fw.write(text);"
+        "content": "                    item +\u003d \"\\n\";"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        fw.close();"
+        "content": "                }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "                text +\u003d item;"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            }"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Loads task list as an ArrayList."
+        "content": "        fw.write(text);"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "        fw.close();"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return ArrayList of Tasks based on stored data"
+        "content": "    }"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws IOException If array file not found on hard disk"
+        "content": ""
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public ArrayList\u003cTask\u003e load() throws IOException {"
+        "content": "     * Loads task list as an ArrayList."
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        File f \u003d new File(arrayPath);"
+        "content": "     *"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        f.createNewFile();"
+        "content": "     * @return ArrayList of Tasks based on stored data"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        File lf \u003d new File(listPath);"
+        "content": "     * @throws IOException If array file not found on hard disk"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        lf.createNewFile();"
+        "content": "     */"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    public ArrayList\u003cTask\u003e load() throws IOException {"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        Scanner s \u003d new Scanner(f);"
+        "content": "        File f \u003d new File(arrayPath);"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (f.length() \u003d\u003d 0) {"
+        "content": "        f.createNewFile();"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            return new ArrayList\u003c\u003e();"
+        "content": "        File lf \u003d new File(listPath);"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        } else {"
+        "content": "        lf.createNewFile();"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            ArrayList\u003cTask\u003e ml \u003d new ArrayList\u003c\u003e();"
+        "content": ""
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            while (s.hasNextLine()) {"
+        "content": "        Scanner s \u003d new Scanner(f);"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String[] taskArr \u003d s.nextLine().split(\"\\\\|\");"
+        "content": "        if (f.length() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String type \u003d taskArr[0];"
+        "content": "            return new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                boolean isDone \u003d Integer.parseInt(taskArr[1]) !\u003d 0;"
+        "content": "        } else {"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                String description \u003d taskArr[2];"
+        "content": "            ArrayList\u003cTask\u003e ml \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            while (s.hasNextLine()) {"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                switch (type) {"
+        "content": "                String[] taskArr \u003d s.nextLine().split(\"\\\\|\");"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                case \"todo\":"
+        "content": "                String type \u003d taskArr[0];"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    Todo addTodo \u003d new Todo(description, isDone);"
+        "content": "                boolean isDone \u003d Integer.parseInt(taskArr[1]) !\u003d 0;"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    ml.add(addTodo);"
+        "content": "                String description \u003d taskArr[2];"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    break;"
+        "content": ""
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                case \"deadline\":"
+        "content": "                switch (type) {"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    String byDate \u003d taskArr[3];"
+        "content": "                case \"todo\":"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    String deadlineTime \u003d taskArr[4];"
+        "content": "                    Todo addTodo \u003d new Todo(description, isDone);"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    Deadline addDeadline \u003d new Deadline(description, byDate, deadlineTime, isDone);"
+        "content": "                    ml.add(addTodo);"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    ml.add(addDeadline);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    break;"
+        "content": "                case \"deadline\":"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                case \"event\":"
+        "content": "                    String byDate \u003d taskArr[3];"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    String atDate \u003d taskArr[3];"
+        "content": "                    String deadlineTime \u003d taskArr[4];"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    String eventTime \u003d taskArr[4];"
+        "content": "                    Deadline addDeadline \u003d new Deadline(description, byDate, deadlineTime, isDone);"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    Event addEvent \u003d new Event(description, atDate, eventTime, isDone);"
+        "content": "                    ml.add(addDeadline);"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    ml.add(addEvent);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    break;"
+        "content": "                case \"event\":"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                default:"
+        "content": "                    String atDate \u003d taskArr[3];"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    ui.showError(\"Format error! Honk!\");"
+        "content": "                    String eventTime \u003d taskArr[4];"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                }"
+        "content": "                    Event addEvent \u003d new Event(description, atDate, eventTime, isDone);"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "                    ml.add(addEvent);"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            return ml;"
+        "content": "                    break;"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "                default:"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "                    ui.showError(\"Format error! Honk!\");"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                }"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "            }"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Loads task list as a String."
+        "content": "            return ml;"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "        }"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return String representing indexed task list"
+        "content": "    }"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws FileNotFoundException If list file not found in hard disk"
+        "content": ""
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "    private ArrayList\u003cTask\u003e loadPrevious() throws IOException {"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public String loadList() throws FileNotFoundException {"
+        "content": "        File f \u003d new File(prevArrayPath);"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        File f \u003d new File(listPath); // create a File for the given file path"
+        "content": "        f.createNewFile();"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        Scanner s \u003d new Scanner(f); // create a Scanner using the File as the source"
+        "content": "        File lf \u003d new File(prevListPath);"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (f.length() \u003d\u003d 0) { // if the file is empty or doesn\u0027t exist"
+        "content": "        lf.createNewFile();"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            return \"  You haven\u0027t added any tasks. Honk...\";"
+        "content": ""
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "        Scanner s \u003d new Scanner(f);"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String printedList \u003d \"\";"
+        "content": "        if (f.length() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        while (s.hasNextLine()) {"
+        "content": "            return new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            printedList +\u003d s.nextLine() + \"\\n\";"
+        "content": "        } else {"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "            ArrayList\u003cTask\u003e ml \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return printedList;"
+        "content": "            while (s.hasNextLine()) {"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "                String[] taskArr \u003d s.nextLine().split(\"\\\\|\");"
       },
       {
         "lineNumber": 153,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String type \u003d taskArr[0];"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                boolean isDone \u003d Integer.parseInt(taskArr[1]) !\u003d 0;"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String description \u003d taskArr[2];"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                switch (type) {"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    case \"todo\":"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        Todo addTodo \u003d new Todo(description, isDone);"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        ml.add(addTodo);"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    case \"deadline\":"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        String byDate \u003d taskArr[3];"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        String deadlineTime \u003d taskArr[4];"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        Deadline addDeadline \u003d new Deadline(description, byDate, deadlineTime, isDone);"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        ml.add(addDeadline);"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    case \"event\":"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        String atDate \u003d taskArr[3];"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        String eventTime \u003d taskArr[4];"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        Event addEvent \u003d new Event(description, atDate, eventTime, isDone);"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        ml.add(addEvent);"
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    default:"
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        ui.showError(\"Format error! Honk!\");"
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            return ml;"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 183,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * Loads task list as a String."
+      },
+      {
+        "lineNumber": 184,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @return String representing indexed task list"
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @throws FileNotFoundException If list file not found in hard disk"
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 188,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public String loadList() throws FileNotFoundException {"
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        File f \u003d new File(listPath); // create a File for the given file path"
+      },
+      {
+        "lineNumber": 190,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        Scanner s \u003d new Scanner(f); // create a Scanner using the File as the source"
+      },
+      {
+        "lineNumber": 191,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        if (f.length() \u003d\u003d 0) { // if the file is empty or doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 192,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            return \"  You haven\u0027t added any tasks. Honk...\";"
+      },
+      {
+        "lineNumber": 193,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 194,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String printedList \u003d \"\";"
+      },
+      {
+        "lineNumber": 195,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        while (s.hasNextLine()) {"
+      },
+      {
+        "lineNumber": 196,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            printedList +\u003d s.nextLine() + \"\\n\";"
+      },
+      {
+        "lineNumber": 197,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 198,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        return printedList;"
+      },
+      {
+        "lineNumber": 199,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 200,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 201,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 202,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * Writes to respective prev list and prev array files to store the data in the hard disk before"
+      },
+      {
+        "lineNumber": 203,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * it was updated. This allows user to carry out the undo command."
+      },
+      {
+        "lineNumber": 204,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 205,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @param taskList Task list before update"
+      },
+      {
+        "lineNumber": 206,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @throws IOException If error is encountered in FileWriter"
+      },
+      {
+        "lineNumber": 207,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 208,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public void saveLastState(ArrayList\u003cTask\u003e taskList) throws IOException {"
+      },
+      {
+        "lineNumber": 209,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        // save prev mainList array"
+      },
+      {
+        "lineNumber": 210,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        File arrayFile \u003d new File(prevArrayPath);"
+      },
+      {
+        "lineNumber": 211,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        arrayFile.createNewFile();"
+      },
+      {
+        "lineNumber": 212,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 213,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        FileWriter af \u003d new FileWriter(prevArrayPath);"
+      },
+      {
+        "lineNumber": 214,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String stringList \u003d \"\";"
+      },
+      {
+        "lineNumber": 215,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        for (Task task : taskList) {"
+      },
+      {
+        "lineNumber": 216,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            if (task instanceof Event) {"
+      },
+      {
+        "lineNumber": 217,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                Event e \u003d (Event) task;"
+      },
+      {
+        "lineNumber": 218,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String doneStr \u003d e.isDone ? \"1\" : \"0\";"
+      },
+      {
+        "lineNumber": 219,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String eventString \u003d \"event|\" + doneStr + \"|\" + e.description + \"|\" + e.atDate + \"|\""
+      },
+      {
+        "lineNumber": 220,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        + e.time24Hr + System.lineSeparator();"
+      },
+      {
+        "lineNumber": 221,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                stringList +\u003d eventString;"
+      },
+      {
+        "lineNumber": 222,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            } else if (task instanceof  Deadline) {"
+      },
+      {
+        "lineNumber": 223,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                Deadline d \u003d (Deadline) task;"
+      },
+      {
+        "lineNumber": 224,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String doneStr \u003d d.isDone ? \"1\" : \"0\";"
+      },
+      {
+        "lineNumber": 225,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String deadlineString \u003d \"deadline|\" + doneStr + \"|\" + d.description + \"|\" + d.byDate + \"|\""
+      },
+      {
+        "lineNumber": 226,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                        + d.time24Hr + System.lineSeparator();"
+      },
+      {
+        "lineNumber": 227,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                stringList +\u003d deadlineString;"
+      },
+      {
+        "lineNumber": 228,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            } else if (task instanceof Todo) {"
+      },
+      {
+        "lineNumber": 229,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                Todo t \u003d (Todo) task;"
+      },
+      {
+        "lineNumber": 230,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String doneStr \u003d t.isDone ? \"1\" : \"0\";"
+      },
+      {
+        "lineNumber": 231,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String todoString \u003d \"todo|\" + doneStr + \"|\" + t.description + System.lineSeparator();"
+      },
+      {
+        "lineNumber": 232,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                stringList +\u003d todoString;"
+      },
+      {
+        "lineNumber": 233,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 234,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 235,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        af.write(stringList);"
+      },
+      {
+        "lineNumber": 236,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        af.close();"
+      },
+      {
+        "lineNumber": 237,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 238,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        // save prev list"
+      },
+      {
+        "lineNumber": 239,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        File listFile \u003d new File(prevListPath);"
+      },
+      {
+        "lineNumber": 240,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        listFile.createNewFile();"
+      },
+      {
+        "lineNumber": 241,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 242,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        FileWriter fw \u003d new FileWriter(prevListPath);"
+      },
+      {
+        "lineNumber": 243,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String text \u003d \"\";"
+      },
+      {
+        "lineNumber": 244,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        if (taskList.size() !\u003d 0) {"
+      },
+      {
+        "lineNumber": 245,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            for (int i \u003d 0; i \u003c taskList.size(); i++) {"
+      },
+      {
+        "lineNumber": 246,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                if (taskList.get(i) \u003d\u003d null) {"
+      },
+      {
+        "lineNumber": 247,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 248,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 249,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                int indexNum \u003d i + 1;"
+      },
+      {
+        "lineNumber": 250,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                String item \u003d \" \" + indexNum + \".\" + taskList.get(i).toString();"
+      },
+      {
+        "lineNumber": 251,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                if (i !\u003d taskList.size() - 1) {"
+      },
+      {
+        "lineNumber": 252,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                    item +\u003d \"\\n\";"
+      },
+      {
+        "lineNumber": 253,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 254,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                text +\u003d item;"
+      },
+      {
+        "lineNumber": 255,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 256,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 257,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        fw.write(text);"
+      },
+      {
+        "lineNumber": 258,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        fw.close();"
+      },
+      {
+        "lineNumber": 259,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 260,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 261,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 262,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * Saves the current state, as the previous state, and retrieves the saved state as the current state."
+      },
+      {
+        "lineNumber": 263,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * When a user does \u0027undo\u0027 after an \u0027undo\u0027, the list goes back to its initial state before any \u0027undo\u0027"
+      },
+      {
+        "lineNumber": 264,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * command was inputted."
+      },
+      {
+        "lineNumber": 265,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 266,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @return Updated ArrayList of tasks after the undo command"
+      },
+      {
+        "lineNumber": 267,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @throws IOException When load() or loadPrevious() encounters IO error"
+      },
+      {
+        "lineNumber": 268,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 269,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public ArrayList\u003cTask\u003e undoAndLoad() throws IOException {"
+      },
+      {
+        "lineNumber": 270,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        ArrayList\u003cTask\u003e currentTasks \u003d new ArrayList\u003c\u003e(load());"
+      },
+      {
+        "lineNumber": 271,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        ArrayList\u003cTask\u003e previousTasks \u003d new ArrayList\u003c\u003e(loadPrevious());"
+      },
+      {
+        "lineNumber": 272,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 273,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        save(previousTasks);"
+      },
+      {
+        "lineNumber": 274,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        saveLastState(currentTasks);"
+      },
+      {
+        "lineNumber": 275,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 276,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        return load();"
+      },
+      {
+        "lineNumber": 277,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 278,
         "author": {
           "gitId": "suwoons"
         },
@@ -5262,7 +6361,7 @@
       }
     ],
     "authorContributionMap": {
-      "suwoons": 153
+      "suwoons": 278
     }
   },
   {
@@ -5470,73 +6569,164 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Mark isDone as true."
+        "content": "     * Retrieves done status of the task."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void markAsDone() {"
+        "content": "     * @return Boolean representing whether task has been marked as done."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        this.isDone \u003d true;"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "    public Boolean getIsDone() {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        return this.isDone;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    @Override"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public String toString() {"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return description;"
+        "content": "    /**"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "     * Mark isDone as true."
       },
       {
         "lineNumber": 39,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public void markAsDone() {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        this.isDone \u003d true;"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public void markAsUndone() {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        this.isDone \u003d false;"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        return description;"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
         "author": {
           "gitId": "suwoons"
         },
@@ -5544,7 +6734,7 @@
       }
     ],
     "authorContributionMap": {
-      "suwoons": 39
+      "suwoons": 52
     }
   },
   {
@@ -5598,1270 +6788,1466 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    private ArrayList\u003cTask\u003e taskList;"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    private ArrayList\u003cTask\u003e taskList;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    // load from storage"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public TaskList(ArrayList\u003cTask\u003e taskList) {"
+        "content": "    // load from storage"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        this.taskList \u003d taskList;"
+        "content": "    public TaskList(ArrayList\u003cTask\u003e taskList) {"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "        this.ui \u003d new Ui();"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        this.taskList \u003d taskList;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    // create new empty list"
+        "content": "    }"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public TaskList() {"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        this.taskList \u003d new ArrayList\u003c\u003e();"
+        "content": "    // create new empty list"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "    public TaskList() {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        this.ui \u003d new Ui();"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        this.taskList \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Returns task list as an ArrayList."
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return Task list as an ArrayList of Tasks"
+        "content": "    /**"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     * Returns task list as an ArrayList."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
+        "content": "     *"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return this.taskList;"
+        "content": "     * @return Task list as an ArrayList of Tasks"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        return this.taskList;"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Creates a new Event based on user input and adds it to the task list."
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param input Valid user command in the form \"event event_description /at DD/MM/YYYY HHMM\""
+        "content": "    /**"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return Event that was created"
+        "content": "     * Creates a new Event based on user input and adds it to the task list."
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws GooseEmptyDescriptionException If no description provided"
+        "content": "     *"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws GooseIllegalFormatException If format is not valid"
+        "content": "     * @param input Valid user command in the form \"event event_description /at DD/MM/YYYY HHMM\""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     * @return Event that was created"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public Event createEvent(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {"
+        "content": "     * @throws GooseEmptyDescriptionException If no description provided"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String[] eventArr \u003d input.split(\" /at \");"
+        "content": "     * @throws GooseIllegalFormatException If format is not valid"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String[] descriptionSplit \u003d eventArr[0].split(\" \");"
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String description \u003d \"\";"
+        "content": "    public Event createEvent(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (int i \u003d 1; i \u003c descriptionSplit.length; i++) {"
+        "content": "        String[] eventArr \u003d input.split(\" /at \");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (i \u003d\u003d descriptionSplit.length - 1) {"
+        "content": "        String[] descriptionSplit \u003d eventArr[0].split(\" \");"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                description +\u003d descriptionSplit[i];"
+        "content": "        String description \u003d \"\";"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            } else {"
+        "content": "        for (int i \u003d 1; i \u003c descriptionSplit.length; i++) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                description +\u003d descriptionSplit[i] + \" \";"
+        "content": "            if (i \u003d\u003d descriptionSplit.length - 1) {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "                description +\u003d descriptionSplit[i];"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "            } else {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                description +\u003d descriptionSplit[i] + \" \";"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (description.isEmpty()) {"
+        "content": "            }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            throw new GooseEmptyDescriptionException(\"Honk! Description of an event cannot be empty.\");"
+        "content": "        }"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        } else {"
+        "content": ""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (eventArr.length \u003d\u003d 1) {"
+        "content": "        if (description.isEmpty()) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                throw new GooseIllegalFormatException(\"Honk! No event date specified.\");"
+        "content": "            throw new GooseEmptyDescriptionException(\"Honk! Description of an event cannot be empty.\");"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            if (eventArr.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            eventArr \u003d eventArr[1].split(\" \");"
+        "content": "                throw new GooseIllegalFormatException(\"Honk! No event date specified.\");"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            String date \u003d parseDate(eventArr[0]);"
+        "content": "            }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            String time \u003d eventArr[1];"
+        "content": ""
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            taskList.add(new Event(description, date, time));"
+        "content": "            eventArr \u003d eventArr[1].split(\" \");"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            return (Event) taskList.get(taskList.size() - 1);"
+        "content": "            String date \u003d parseDate(eventArr[0]);"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "            String time \u003d eventArr[1];"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "            taskList.add(new Event(description, date, time));"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            return (Event) taskList.get(taskList.size() - 1);"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Creates a new Deadline based on user input and adds it to the task list."
+        "content": "    }"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param input Valid user command in the form \"deadline deadline_description /by DD/MM/YYYY HHMM\""
+        "content": "    /**"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return Deadline that was created"
+        "content": "     * Creates a new Deadline based on user input and adds it to the task list."
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws GooseEmptyDescriptionException If no description provided"
+        "content": "     *"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws GooseIllegalFormatException If format is not valid"
+        "content": "     * @param input Valid user command in the form \"deadline deadline_description /by DD/MM/YYYY HHMM\""
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     * @return Deadline that was created"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public Deadline createDeadline(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {"
+        "content": "     * @throws GooseEmptyDescriptionException If no description provided"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String[] deadlineArr \u003d input.split(\" /by \");"
+        "content": "     * @throws GooseIllegalFormatException If format is not valid"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String[] descriptionSplit \u003d deadlineArr[0].split(\" \");"
+        "content": "     */"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String description \u003d \"\";"
+        "content": "    public Deadline createDeadline(String input) throws GooseEmptyDescriptionException, GooseIllegalFormatException {"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (int i \u003d 1; i \u003c descriptionSplit.length; i++) {"
+        "content": "        String[] deadlineArr \u003d input.split(\" /by \");"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (i \u003d\u003d descriptionSplit.length - 1) {"
+        "content": "        String[] descriptionSplit \u003d deadlineArr[0].split(\" \");"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                description +\u003d descriptionSplit[i];"
+        "content": "        String description \u003d \"\";"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            } else {"
+        "content": "        for (int i \u003d 1; i \u003c descriptionSplit.length; i++) {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                description +\u003d descriptionSplit[i] + \" \";"
+        "content": "            if (i \u003d\u003d descriptionSplit.length - 1) {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "                description +\u003d descriptionSplit[i];"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "            } else {"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                description +\u003d descriptionSplit[i] + \" \";"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (description.isEmpty()) {"
+        "content": "            }"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            throw new GooseEmptyDescriptionException(\"Honk! Description of a deadline cannot be empty.\");"
+        "content": "        }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        } else {"
+        "content": ""
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (deadlineArr.length \u003d\u003d 1) {"
+        "content": "        if (description.isEmpty()) {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                throw new GooseIllegalFormatException(\"Honk! No deadline specified.\");"
+        "content": "            throw new GooseEmptyDescriptionException(\"Honk! Description of a deadline cannot be empty.\");"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            if (deadlineArr.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            deadlineArr \u003d deadlineArr[1].split(\" \");"
+        "content": "                throw new GooseIllegalFormatException(\"Honk! No deadline specified.\");"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            String date \u003d parseDate(deadlineArr[0]);"
+        "content": "            }"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            String time \u003d deadlineArr[1];"
+        "content": ""
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            taskList.add(new Deadline(description, date, time));"
+        "content": "            deadlineArr \u003d deadlineArr[1].split(\" \");"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            return (Deadline) taskList.get(taskList.size() - 1);"
+        "content": "            String date \u003d parseDate(deadlineArr[0]);"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "            String time \u003d deadlineArr[1];"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "            taskList.add(new Deadline(description, date, time));"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            return (Deadline) taskList.get(taskList.size() - 1);"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Creates a new Todo based on user input and adds it to the task list."
+        "content": "    }"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param inputArr String array of split user input string"
+        "content": "    /**"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return Todo that was created"
+        "content": "     * Creates a new Todo based on user input and adds it to the task list."
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws GooseEmptyDescriptionException If no description provided"
+        "content": "     *"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     * @param inputArr String array of split user input string"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public Todo createTodo(String[] inputArr) throws GooseEmptyDescriptionException {"
+        "content": "     * @return Todo that was created"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String description \u003d \"\";"
+        "content": "     * @throws GooseEmptyDescriptionException If no description provided"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (int i \u003d 1; i \u003c inputArr.length; i++) {"
+        "content": "     */"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (i \u003d\u003d inputArr.length - 1) {"
+        "content": "    public Todo createTodo(String[] inputArr) throws GooseEmptyDescriptionException {"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                description +\u003d inputArr[i];"
+        "content": "        String description \u003d \"\";"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            } else {"
+        "content": "        for (int i \u003d 1; i \u003c inputArr.length; i++) {"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                description +\u003d inputArr[i] + \" \";"
+        "content": "            if (i \u003d\u003d inputArr.length - 1) {"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "                description +\u003d inputArr[i];"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "            } else {"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "                description +\u003d inputArr[i] + \" \";"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (description.isEmpty()) {"
+        "content": "            }"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            throw new GooseEmptyDescriptionException(\"Honk! Description of a todo cannot be empty.\");"
+        "content": "        }"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        } else {"
+        "content": ""
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            taskList.add(new Todo(description));"
+        "content": "        if (description.isEmpty()) {"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            return (Todo) taskList.get(taskList.size() - 1);"
+        "content": "            throw new GooseEmptyDescriptionException(\"Honk! Description of a todo cannot be empty.\");"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "            taskList.add(new Todo(description));"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            return (Todo) taskList.get(taskList.size() - 1);"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Deletes task from task list array based on the index provided."
+        "content": "    }"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param index Index of task to be deleted from task list"
+        "content": "    /**"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return Updated task list as an ArrayList"
+        "content": "     * Deletes task from task list array based on the index provided."
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws GooseTaskExistenceException If index is out of bounds"
+        "content": "     *"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     * @param index Index of task to be deleted from task list"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public ArrayList\u003cTask\u003e deleteTask(int index) throws GooseTaskExistenceException {"
+        "content": "     * @return Updated task list as an ArrayList"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (index \u003e\u003d taskList.size() || index \u003c 0) {"
+        "content": "     * @throws GooseTaskExistenceException If index is out of bounds"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            throw new GooseTaskExistenceException(\"You trick Goose? Task \" + taskList.size()"
+        "content": "     */"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                    + \" doesn\u0027t exist. Honk...\");"
+        "content": "    public ArrayList\u003cTask\u003e deleteTask(int index) throws GooseTaskExistenceException {"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "        if (index \u003e\u003d taskList.size() || index \u003c 0) {"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            throw new GooseTaskExistenceException(\"You trick Goose? Task \" + taskList.size()"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        taskList.remove(index);"
+        "content": "                    + \" doesn\u0027t exist. Honk...\");"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return this.taskList;"
+        "content": "        }"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        taskList.remove(index);"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "        return this.taskList;"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Marks task as done from task list array based on the index provided."
+        "content": "    }"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param index Index of task to be marked as done from task list"
+        "content": "    /**"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return Updated task list as an ArrayList"
+        "content": "     * Marks task as done from task list array based on the index provided."
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @throws GooseTaskExistenceException If index is out of bounds"
+        "content": "     *"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "     * @param index Index of task to be marked as done from task list"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public ArrayList\u003cTask\u003e markDone(int index) throws GooseTaskExistenceException {"
+        "content": "     * @return Updated task list as an ArrayList"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (index \u003e\u003d taskList.size() || index \u003c 0) {"
+        "content": "     * @throws GooseTaskExistenceException If index is out of bounds"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            throw new GooseTaskExistenceException(\"You trick Goose? This task doesn\u0027t exist. Honk...\");"
+        "content": "     */"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "    public Boolean markDone(int index) throws GooseTaskExistenceException {"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        if (index \u003e\u003d taskList.size() || index \u003c 0) {"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        Task selected \u003d taskList.get(index);"
+        "content": "            throw new GooseTaskExistenceException(\"You trick Goose? This task doesn\u0027t exist. Honk...\");"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        selected.markAsDone();"
+        "content": "        }"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return this.taskList;"
+        "content": ""
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "        Task selected \u003d taskList.get(index);"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        if (selected.getIsDone()) {"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "            return false;"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Finds and returns an ArrayList of tasks from the task list which contain the search keyword."
+        "content": "        } else {"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param search Search keyword"
+        "content": "            selected.markAsDone();"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return ArrayList of Tasks from the task list which contain the search keyword"
+        "content": "            return true;"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "        }"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public ArrayList\u003cTask\u003e findTask(String search) {"
+        "content": "    }"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        ArrayList\u003cTask\u003e foundTasks \u003d new ArrayList\u003c\u003e();"
+        "content": ""
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (int i \u003d 0; i \u003c taskList.size(); i++) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            Task selected \u003d taskList.get(i);"
+        "content": "     * Marks task as undone from task list array based on the index provided."
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (selected.description.contains(search)) {"
+        "content": "     *"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                foundTasks.add(selected);"
+        "content": "     * @param index Index of task to be marked as undone from task list"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "     * @return Updated task list as an ArrayList"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "     * @throws GooseTaskExistenceException If index is out of bounds"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return foundTasks;"
+        "content": "    public Boolean markUndone(int index) throws GooseTaskExistenceException {"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "        if (index \u003e\u003d taskList.size() || index \u003c 0) {"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            throw new GooseTaskExistenceException(\"You trick Goose? This task doesn\u0027t exist. Honk...\");"
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    private static String parseDate(String date) {"
+        "content": "        }"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String[] dateArr \u003d date.split(\"/\");"
+        "content": ""
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String day \u003d dateArr[0];"
+        "content": "        Task selected \u003d taskList.get(index);"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (Integer.parseInt(day) \u003c 10) {"
+        "content": "        if (!selected.getIsDone()) {"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            day \u003d \"0\" + day;"
+        "content": "            return false;"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String month \u003d dateArr[1];"
+        "content": "            selected.markAsUndone();"
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        if (Integer.parseInt(month) \u003c 10) {"
+        "content": "            return true;"
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            month \u003d \"0\" + month;"
+        "content": "        }"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String year \u003d dateArr[2];"
+        "content": ""
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return year + \"-\" + month + \"-\" + day;"
+        "content": "     * Finds and returns an ArrayList of tasks from the task list which contain the search keyword."
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "     * @param search Search keyword"
       },
       {
         "lineNumber": 188,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @return ArrayList of Tasks from the task list which contain the search keyword"
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 190,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public ArrayList\u003cTask\u003e findTask(String search) {"
+      },
+      {
+        "lineNumber": 191,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        ArrayList\u003cTask\u003e foundTasks \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 192,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        for (int i \u003d 0; i \u003c taskList.size(); i++) {"
+      },
+      {
+        "lineNumber": 193,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            Task selected \u003d taskList.get(i);"
+      },
+      {
+        "lineNumber": 194,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            if (selected.description.contains(search)) {"
+      },
+      {
+        "lineNumber": 195,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "                foundTasks.add(selected);"
+      },
+      {
+        "lineNumber": 196,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 197,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 198,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 199,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        return foundTasks;"
+      },
+      {
+        "lineNumber": 200,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 201,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 202,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    private static String parseDate(String date) {"
+      },
+      {
+        "lineNumber": 203,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String[] dateArr \u003d date.split(\"/\");"
+      },
+      {
+        "lineNumber": 204,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String day \u003d dateArr[0];"
+      },
+      {
+        "lineNumber": 205,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        if (Integer.parseInt(day) \u003c 10) {"
+      },
+      {
+        "lineNumber": 206,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            day \u003d \"0\" + day;"
+      },
+      {
+        "lineNumber": 207,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 208,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String month \u003d dateArr[1];"
+      },
+      {
+        "lineNumber": 209,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        if (Integer.parseInt(month) \u003c 10) {"
+      },
+      {
+        "lineNumber": 210,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            month \u003d \"0\" + month;"
+      },
+      {
+        "lineNumber": 211,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 212,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String year \u003d dateArr[2];"
+      },
+      {
+        "lineNumber": 213,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 214,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        return year + \"-\" + month + \"-\" + day;"
+      },
+      {
+        "lineNumber": 215,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 216,
         "author": {
           "gitId": "suwoons"
         },
@@ -6869,7 +8255,7 @@
       }
     ],
     "authorContributionMap": {
-      "suwoons": 188
+      "suwoons": 216
     }
   },
   {
@@ -7317,7 +8703,7 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        System.out.println(wrapLine(\"Honk! Here\u0027s your task list: \\n\" + taskList));"
+        "content": "        System.out.println(wrapLine(\"Honk! Here\u0027s your current task list: \\n\" + taskList));"
       },
       {
         "lineNumber": 43,
@@ -7492,7 +8878,7 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Message to be displayed after task has been deleted."
+        "content": "     * Message to be displayed after task has been marked as undone."
       },
       {
         "lineNumber": 68,
@@ -7506,84 +8892,84 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param deletedTask Task that was deleted"
+        "content": "     * @param doneTask Task that was marked as undone"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param taskList Updated task list"
+        "content": "     */"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "    public void showUndoneTask(Task doneTask) {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void showDeleteTask(Task deletedTask, ArrayList\u003cTask\u003e taskList) {"
+        "content": "        String undoneHeader \u003d \"Hope you complete it soon! I\u0027ve honked it as undone:\\n  \";"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String deleteHeader \u003d \"Honk! Removed this task from the list:\\n  \";"
+        "content": "        System.out.println(wrapLine(undoneHeader + doneTask));"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        System.out.println(wrapLine(deleteHeader + deletedTask + showCount(taskList)));"
+        "content": "    }"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "     * Message to be displayed after task has been deleted."
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Displays list of found tasks when a user uses the \u0027find\u0027 command."
+        "content": "     *"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "     * @param deletedTask Task that was deleted"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param foundTasks ArrayList of tasks which match the search"
+        "content": "     * @param taskList Updated task list"
       },
       {
         "lineNumber": 81,
@@ -7597,28 +8983,28 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void showFoundTasks(ArrayList\u003cTask\u003e foundTasks) {"
+        "content": "    public void showDeleteTask(Task deletedTask, ArrayList\u003cTask\u003e taskList) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String foundHeader \u003d foundTasks.isEmpty()"
+        "content": "        String deleteHeader \u003d \"Honk! Removed this task from the list:\\n  \";"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                ? \"Goose didn\u0027t find anything, honk...\""
+        "content": "        System.out.println(wrapLine(deleteHeader + deletedTask + showCount(taskList)));"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                : \"Honk! Here are the matching tasks in your list:\\n\";"
+        "content": "    }"
       },
       {
         "lineNumber": 86,
@@ -7632,301 +9018,301 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        // print list of found tasks"
+        "content": "    /**"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String foundList \u003d \"\";"
+        "content": "     * Displays list of found tasks when a user uses the \u0027find\u0027 command."
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (int i \u003d 0; i \u003c foundTasks.size(); i++) {"
+        "content": "     *"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            int indexNum \u003d i + 1;"
+        "content": "     * @param foundTasks ArrayList of tasks which match the search"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            String item \u003d \" \" + indexNum + \".\" + foundTasks.get(i).toString();"
+        "content": "     */"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            if (i !\u003d foundTasks.size() - 1) {"
+        "content": "    public void showFoundTasks(ArrayList\u003cTask\u003e foundTasks) {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                item +\u003d \"\\n\";"
+        "content": "        String foundHeader \u003d foundTasks.isEmpty()"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            }"
+        "content": "                ? \"Goose didn\u0027t find anything, honk...\""
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            foundList +\u003d item;"
+        "content": "                : \"Honk! Here are the matching tasks in your list:\\n\";"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        // print list of found tasks"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        System.out.println(wrapLine(foundHeader + foundList));"
+        "content": "        String foundList \u003d \"\";"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "        for (int i \u003d 0; i \u003c foundTasks.size(); i++) {"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "            int indexNum \u003d i + 1;"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "            String item \u003d \" \" + indexNum + \".\" + foundTasks.get(i).toString();"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Displays count of current tasks in task list."
+        "content": "            if (i !\u003d foundTasks.size() - 1) {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "                item +\u003d \"\\n\";"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param taskList Current task list as an ArrayList"
+        "content": "            }"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return String containing formatted message regarding task count of task list."
+        "content": "            foundList +\u003d item;"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "        }"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    private String showCount(ArrayList\u003cTask\u003e taskList) {"
+        "content": ""
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String count \u003d taskList.size() \u003d\u003d 1"
+        "content": "        System.out.println(wrapLine(foundHeader + foundList));"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                ? \"\\n\\n Now you have \" + taskList.size() + \" task in the list.\""
+        "content": "    }"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "                : \"\\n\\n Now you have \" + taskList.size() + \" tasks in the list.\";"
+        "content": ""
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return count;"
+        "content": "    /**"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "     * Displays message after undo command has been executed."
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    // Exceptions"
+        "content": "    public void showUndoMessage() {"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "        System.out.println(wrapLine(\"I have unhonked your previous command.\\n \" +"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "                \"Use \\\u0027undo\\\u0027 to undo your undo. Honk!\"));"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Displays loading error message."
+        "content": "    }"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void showLoadingError() {"
+        "content": "    /**"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        System.out.println(wrapLine(\"Honk! Loading error!\"));"
+        "content": "     * Displays count of current tasks in task list."
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "     * @param taskList Current task list as an ArrayList"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    /**"
+        "content": "     * @return String containing formatted message regarding task count of task list."
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Displays formatted error message."
+        "content": "     */"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "    private String showCount(ArrayList\u003cTask\u003e taskList) {"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param msg Error message to be displayed"
+        "content": "        String count \u003d taskList.size() \u003d\u003d 1"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "                ? \"\\n\\n Now you have \" + taskList.size() + \" task in the list.\""
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public void showError(String msg) {"
+        "content": "                : \"\\n\\n Now you have \" + taskList.size() + \" tasks in the list.\";"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        System.out.println(wrapLine(msg));"
+        "content": "        return count;"
       },
       {
         "lineNumber": 130,
@@ -7947,7 +9333,7 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    // Formatting"
+        "content": "    // Exceptions"
       },
       {
         "lineNumber": 133,
@@ -7968,143 +9354,269 @@
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * Wraps message in appropriate format to be displayed."
+        "content": "     * Displays loading error message."
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @param msg Message to be wrapped"
+        "content": "    public void showLoadingError() {"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     * @return String containing formatted message"
+        "content": "        System.out.println(wrapLine(\"Honk! Loading error!\"));"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    public String wrapLine(String msg) {"
+        "content": ""
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String top \u003d \"\";"
+        "content": "    /**"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (int i \u003d 0; i \u003c maxLength; i++) {"
+        "content": "     * Displays formatted error message."
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            top +\u003d \"_\";"
+        "content": "     *"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "     * @param msg Error message to be displayed"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        top +\u003d \"\\n\";"
+        "content": "     */"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    public void showError(String msg) {"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String bottom \u003d \"__  \";"
+        "content": "        System.out.println(wrapLine(msg));"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        for (int i \u003d 0; i \u003c maxLength - 4; i++) {"
+        "content": "    }"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "            bottom +\u003d \"_\";"
+        "content": ""
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        }"
+        "content": "    // Formatting"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        String bottomArrow \u003d \"\\n   /\\n\";"
+        "content": ""
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "suwoons"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "        return top + \"\\n\" + \" \" + msg + \"\\n\" + bottom + bottomArrow;"
+        "content": "     * Wraps message in appropriate format to be displayed."
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "suwoons"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 155,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @param msg Message to be wrapped"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     * @return String containing formatted message"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    public String wrapLine(String msg) {"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String top \u003d \"\";"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        for (int i \u003d 0; i \u003c maxLength; i++) {"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            top +\u003d \"_\";"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        top +\u003d \"\\n\";"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String bottom \u003d \"__  \";"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        for (int i \u003d 0; i \u003c maxLength - 4; i++) {"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "            bottom +\u003d \"_\";"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        String bottomArrow \u003d \"\\n   /\\n\";"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "        return top + \"\\n\" + \" \" + msg + \"\\n\" + bottom + bottomArrow;"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "suwoons"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 173,
         "author": {
           "gitId": "suwoons"
         },
@@ -8112,39 +9624,7 @@
       }
     ],
     "authorContributionMap": {
-      "suwoons": 155
-    }
-  },
-  {
-    "path": "src/main/java/duke.txt",
-    "fileType": "txt",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "suwoons"
-        },
-        "content": " 1.[D][N] homework (by: Jan 1 2020, 11.59pm)"
-      }
-    ],
-    "authorContributionMap": {
-      "suwoons": 1
-    }
-  },
-  {
-    "path": "src/main/java/mainList.txt",
-    "fileType": "txt",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "suwoons"
-        },
-        "content": "deadline|0|homework|2020-01-01|2359"
-      }
-    ],
-    "authorContributionMap": {
-      "suwoons": 1
+      "suwoons": 173
     }
   },
   {
