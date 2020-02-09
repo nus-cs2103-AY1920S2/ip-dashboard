@@ -951,444 +951,402 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        try {"
+        "content": "        tasks \u003d new TaskList(dukeStorage.readFromFile());"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            tasks \u003d new TaskList(dukeStorage.readFromFile());"
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } catch (exception.DukeException e) {"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            textUi.showError(e.getMessage());"
+        "content": "    /**"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            tasks \u003d new TaskList();"
+        "content": "     * Returns a string of duke\u0027s respond base on the user input command."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "     * @param text user input text."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     * @return duke\u0027s response"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "    public String getResponse(String text) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns a string of duke\u0027s respond base on the user input command."
+        "content": "        try {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param text user input text."
+        "content": "            Command c \u003d Parser.parse(text.trim());"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return duke\u0027s response"
+        "content": "            String commandResult \u003d c.execute(tasks, textUi, dukeStorage);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "            if(commandResult.equals(\"     It is time to say goodbye :(\")){"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String getResponse(String text) {"
+        "content": "                this.isFinished \u003d true;"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        try {"
+        "content": "            }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            Command c \u003d Parser.parse(text.trim());"
+        "content": "            return commandResult;"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            boolean isExit \u003d c.isExit();"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            String commandResult \u003d c.execute(tasks, textUi, dukeStorage);"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            if(commandResult.equals(\"     It is time to say goodbye :(\")){"
+        "content": "        }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                this.isFinished \u003d true;"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return commandResult;"
+        "content": "    /**"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "     * Takes in the user inputs and excutes each command."
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return e.getMessage();"
+        "content": "     */"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        textUi.showWelcome();"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "        boolean isExit \u003d false;"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "        while (!isExit) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Takes in the user inputs and excutes each command."
+        "content": "            try {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "                String fullCommand \u003d textUi.readCommand();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void run() {"
+        "content": "                Command c \u003d Parser.parse(fullCommand);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        textUi.showWelcome();"
+        "content": "                String commandResult \u003d c.execute(tasks, textUi, dukeStorage);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        boolean isExit \u003d false;"
+        "content": "                System.out.println(commandResult);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        while (!isExit) {"
+        "content": "                isExit \u003d c.isExit();"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            try {"
+        "content": "            } catch (DukeException e) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                String fullCommand \u003d textUi.readCommand();"
+        "content": "                textUi.showError(e.getMessage());"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Command c \u003d Parser.parse(fullCommand);"
+        "content": ""
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                String commandResult \u003d c.execute(tasks, textUi, dukeStorage);"
+        "content": "            }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                System.out.println(commandResult);"
+        "content": "        }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                isExit \u003d c.isExit();"
+        "content": "        exit();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            } catch (DukeException e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                textUi.showError(e.getMessage());"
+        "content": ""
       },
       {
         "lineNumber": 66,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        exit();"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 72,
         "author": {
           "gitId": "-"
         },
         "content": "    public static void main(String[] args) {"
       },
       {
-        "lineNumber": 73,
+        "lineNumber": 67,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "          new Duke().run();"
       },
       {
-        "lineNumber": 74,
+        "lineNumber": 68,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "      }"
       },
       {
-        "lineNumber": 75,
+        "lineNumber": 69,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": ""
       },
       {
-        "lineNumber": 76,
+        "lineNumber": 70,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "    /**"
       },
       {
-        "lineNumber": 77,
+        "lineNumber": 71,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "     * Ends the conversation and exits the system."
       },
       {
-        "lineNumber": 78,
+        "lineNumber": 72,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "     */"
       },
       {
-        "lineNumber": 79,
+        "lineNumber": 73,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "    public void exit() {"
       },
       {
-        "lineNumber": 80,
+        "lineNumber": 74,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "        textUi.showGoodBye();"
       },
       {
-        "lineNumber": 81,
+        "lineNumber": 75,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "        System.exit(0);"
       },
       {
-        "lineNumber": 82,
+        "lineNumber": 76,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 83,
+        "lineNumber": 77,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": ""
       },
       {
-        "lineNumber": 84,
+        "lineNumber": 78,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "    public boolean isFinished() {"
       },
       {
-        "lineNumber": 85,
+        "lineNumber": 79,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
         "content": "        return this.isFinished;"
       },
       {
-        "lineNumber": 86,
+        "lineNumber": 80,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 87,
+        "lineNumber": 81,
         "author": {
           "gitId": "-"
         },
@@ -1396,7 +1354,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 83,
+      "WANG-Yuchen-Alice": 77,
       "-": 4
     }
   },
@@ -2388,59 +2346,52 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        //textUi.showAddingTask(thisTask, tasks);"
+        "content": "        return textUi.showAddingTask_Str(thisTask, tasks);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return textUi.showAddingTask_Str(thisTask, tasks);"
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public boolean isExit() {"
+        "content": "        return false;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return false;"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
         "content": ""
       },
       {
-        "lineNumber": 40,
+        "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -2448,7 +2399,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 40
+      "WANG-Yuchen-Alice": 39
     }
   },
   {
@@ -2854,115 +2805,108 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        //textUi.showDeletingTask(this.index, tasks);"
+        "content": "        String res \u003d textUi.showDeletingTask_Str(this.index, tasks);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        String res \u003d textUi.showDeletingTask_Str(this.index, tasks);"
+        "content": "        tasks.delete(this.index);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        tasks.delete(this.index);"
+        "content": "        storage.writeToFile(tasks.getList());"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        storage.writeToFile(tasks.getList());"
+        "content": "        return res;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return res;"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     * Returns whether the current command is an exit command."
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns whether the current command is an exit command."
+        "content": "     *"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     * @return a boolean value representing the property of the current command"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return a boolean value representing the property of the current command"
+        "content": "     */"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public boolean isExit() {"
+        "content": "        return false;"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return false;"
+        "content": "    }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
         "content": ""
       },
       {
-        "lineNumber": 49,
+        "lineNumber": 48,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -2970,7 +2914,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 49
+      "WANG-Yuchen-Alice": 48
     }
   },
   {
@@ -3136,115 +3080,101 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @throws DukeException a duke exception representing errors in user input or storage"
+        "content": "     */"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "    public String execute(TaskList tasks, TextUi textUi, Storage storage) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {"
+        "content": "        return textUi.displayList_Str(tasks, storage);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        //textUi.displayList(tasks, storage);"
+        "content": "    }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return textUi.displayList_Str(tasks, storage);"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     * Returns whether the current command is an exit command."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns whether the current command is an exit command."
+        "content": "     * @return a boolean value representing the property of the current command"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return a boolean value representing the property of the current command"
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        return false;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public boolean isExit() {"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return false;"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
         "content": ""
       },
       {
-        "lineNumber": 39,
+        "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -3252,7 +3182,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 39
+      "WANG-Yuchen-Alice": 37
     }
   },
   {
@@ -3495,101 +3425,108 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        tasks.done(this.index);"
+        "content": "        //add an assertion to check the range of this.index"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        storage.writeToFile(tasks.getList());"
+        "content": "        assert (this.index \u003c\u003d tasks.getList().size() \u0026\u0026 this.index \u003e\u003d 0): \"out of bound\";"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        //textUi.showDoneTask(this.index, tasks);"
+        "content": "        tasks.done(this.index);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return textUi.showDoneTask_Str(this.index, tasks);"
+        "content": "        storage.writeToFile(tasks.getList());"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        return textUi.showDoneTask_Str(this.index, tasks);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns whether the current command is an exit command."
+        "content": "    /**"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     * Returns whether the current command is an exit command."
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return a boolean value representing the property of the current command"
+        "content": "     *"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "     * @return a boolean value representing the property of the current command"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public boolean isExit() {"
+        "content": "     */"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return false;"
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        return false;"
       },
       {
         "lineNumber": 48,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 49,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -3597,7 +3534,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 48
+      "WANG-Yuchen-Alice": 49
     }
   },
   {
@@ -4369,94 +4306,87 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        //textUi.findList(tasks, searchingItem);"
+        "content": "        return textUi.findList_Str(tasks, searchingItem);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return textUi.findList_Str(tasks, searchingItem);"
+        "content": "    }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     * Returns whether the current command is an exit command."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns whether the current command is an exit command."
+        "content": "     *"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     * @return a boolean value representing the property of the current command"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return a boolean value representing the property of the current command"
+        "content": "     */"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public boolean isExit() {"
+        "content": "        return false;"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return false;"
+        "content": "    }"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
         "content": ""
       },
       {
-        "lineNumber": 42,
+        "lineNumber": 41,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -4464,7 +4394,387 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 42
+      "WANG-Yuchen-Alice": 41
+    }
+  },
+  {
+    "path": "src/main/java/command/ReminderCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "package command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "import common.Storage;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "import task.TaskList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "import exception.DukeException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "import ui.TextUi;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": " * Represents a command that show reminders of undone tasks."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "public class ReminderCommand extends Command {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    protected int filter \u003d -1;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public ReminderCommand() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        super();"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public ReminderCommand(int filter) {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        super();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        this.filter \u003d filter;"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * Executes the \"showing reminders\" type of command."
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @param tasks   A TaskList containing all tasks"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @param textUi a TextUi object that handles user-system interaction"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @param storage A Storage object which specifies the location of the data"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @return the execution result in terms of a string"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @throws DukeException"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public String execute(TaskList tasks, TextUi textUi, Storage storage) throws DukeException {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        if (this.filter \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return textUi.remindTasks(tasks, \u0027T\u0027);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        } else if(this.filter \u003d\u003d 2) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return textUi.remindTasks(tasks, \u0027E\u0027);"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        } else if(this.filter \u003d\u003d 3) {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return textUi.remindTasks(tasks, \u0027D\u0027);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return textUi.remindTasks(tasks, \u0027A\u0027);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * Returns whether the current command is an exit command."
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @return a boolean value representing the property of the current command"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "WANG-Yuchen-Alice": 53
     }
   },
   {
@@ -4539,7 +4849,7 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            + \"|  _ \\\\ _   _| | _____ \\n\""
+        "content": "            + \"|  _ \\\\ _  _| | _____ \\n\""
       },
       {
         "lineNumber": 11,
@@ -4560,7 +4870,7 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+        "content": "            + \"|____/ \\\\__,|_|\\\\_\\\\___|\\n\";"
       },
       {
         "lineNumber": 14,
@@ -4609,7 +4919,7 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public static final String MESSAGE_INVALIDCOMMAND \u003d \"The done message is not valid.\";"
+        "content": "    public static final String MESSAGE_INVALIDCOMMAND \u003d \"I\u0027m sorry but this command is not valid.\";"
       },
       {
         "lineNumber": 21,
@@ -4637,11 +4947,25 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
+        "content": "    public static final String MESSAGE_SHOWRELATED \u003d \"     Here are all related undone tasks:\";"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public static final String MESSAGE_NOTHING \u003d \"you have nothing left in the list.\";"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 24
+      "WANG-Yuchen-Alice": 26
     }
   },
   {
@@ -4877,255 +5201,241 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @throws DukeException when file can not be located or written on"
+        "content": "     */"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "    public ArrayList\u003cTask\u003e readFromFile() {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public ArrayList\u003cTask\u003e readFromFile() throws DukeException {"
+        "content": "        try {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        try {"
+        "content": "            String thisLine;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            String thisLine;"
+        "content": "            ArrayList\u003cTask\u003e builtList \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            ArrayList\u003cTask\u003e builtList \u003d new ArrayList\u003c\u003e();"
+        "content": "            File f \u003d new File(this.filePath);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            File f \u003d new File(this.filePath);"
+        "content": "            Scanner fileScanner \u003d new Scanner(f);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            Scanner fileScanner \u003d new Scanner(f);"
+        "content": "            while (fileScanner.hasNext()) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            while (fileScanner.hasNext()) {"
+        "content": "                thisLine \u003d fileScanner.nextLine();"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                thisLine \u003d fileScanner.nextLine();"
+        "content": "                builtList.add(new FileParser(thisLine).lineToTask());"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                builtList.add(new FileParser(thisLine).lineToTask());"
+        "content": "            }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "            return builtList;"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return builtList;"
+        "content": "        } catch (IOException exp) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } catch (IOException exp) {"
+        "content": "            return new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new ArrayList\u003c\u003e();"
+        "content": "        }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     * Writes to the file based on the content of the array list of tasks."
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Writes to the file based on the content of the array list of tasks."
+        "content": "     *"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     * @param existedList the task list"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param existedList the task list"
+        "content": "     * @throws DukeException when the storage file cannot be accessed"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @throws DukeException when the storage file cannot be accessed"
+        "content": "     */"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "    public void writeToFile(ArrayList\u003cTask\u003e existedList) throws DukeException {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void writeToFile(ArrayList\u003cTask\u003e existedList) throws DukeException {"
+        "content": "        try {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        try {"
+        "content": "            FileWriter fw \u003d new FileWriter(this.filePath);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            FileWriter fw \u003d new FileWriter(this.filePath);"
+        "content": "            for (Task task : existedList) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            for (Task task : existedList) {"
+        "content": "                fw.write(task.toStringFileFormat() + \"\\n\");"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                fw.write(task.toStringFileFormat() + \"\\n\");"
+        "content": "            }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "            fw.close();"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            fw.close();"
+        "content": "        } catch (IOException exp) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } catch (IOException exp) {"
+        "content": "            throw new DukeException(\"IOException detected\");"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            System.out.println(exp);"
+        "content": "        }"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            throw new DukeException(\"IOException detected\");"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 69,
+        "lineNumber": 67,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -5133,7 +5443,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 69
+      "WANG-Yuchen-Alice": 67
     }
   },
   {
@@ -5567,185 +5877,143 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        boolean isDone \u003d false;"
+        "content": "        boolean isDone;"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        if (words[1].trim().equals(\"1\")) {"
+        "content": "        isDone \u003d words[1].trim().equals(\"1\");"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            isDone \u003d true;"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } else {"
+        "content": "        String name \u003d words[2].trim();"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            isDone \u003d false;"
+        "content": "        String duration;"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "        String category \u003d words[0].trim();"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        String name \u003d words[2].trim();"
+        "content": "        switch (category) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        String duration \u003d \"\";"
+        "content": "        case \"T\":"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "            return new Todo(name, isDone);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        String category \u003d words[0].trim();"
+        "content": "        case \"E\":"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        switch (category) {"
+        "content": "            duration \u003d words[3];"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        case \"T\":"
+        "content": "            return new Event(name, duration, isDone);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new Todo(name, isDone);"
+        "content": "        case \"D\":"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        case \"E\":"
+        "content": "            duration \u003d words[3];"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            duration \u003d words[3];"
+        "content": "            return new Deadline(name, duration, isDone);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new Event(name, duration, isDone);"
+        "content": "        default:"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        case \"D\":"
+        "content": "            return new Task(name, isDone);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            duration \u003d words[3];"
+        "content": "        }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new Deadline(name, duration, isDone);"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        default:"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            return new Task(name, isDone);"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 59,
+        "lineNumber": 53,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -5753,7 +6021,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 59
+      "WANG-Yuchen-Alice": 53
     }
   },
   {
@@ -5835,119 +6103,119 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import task.Todo;"
+        "content": "import command.ReminderCommand;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import task.Event;"
+        "content": "import task.Todo;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import task.Deadline;"
+        "content": "import task.Event;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import common.Message;"
+        "content": "import task.Deadline;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import exception.DukeException;"
+        "content": "import common.Message;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "import exception.DukeException;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": " * Represents a parser between command input and command objects."
+        "content": "/**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": " */"
+        "content": " * Represents a parser between command input and command objects."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "public class Parser {"
+        "content": " */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Converts user inputs to command objects."
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     * Converts user inputs to command objects."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param input the input string of the user"
+        "content": "     *"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return a command object"
+        "content": "     * @param input the input string of the user"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @throws DukeException when input is not valid"
+        "content": "     * @return a command object"
       },
       {
         "lineNumber": 28,
@@ -5961,7 +6229,7 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public static Command parse(String input) throws DukeException {"
+        "content": "    public static Command parse(String input) {"
       },
       {
         "lineNumber": 30,
@@ -6059,423 +6327,591 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        if (keyword.equalsIgnoreCase(\"bye\")) {"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new ExitCommand();"
+        "content": "        if(keyword.equalsIgnoreCase(\"reminders\")) {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "            return handleReminder(words);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        if (input.equalsIgnoreCase(\"list\")) {"
+        "content": "        }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new DisplayCommand();"
+        "content": ""
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "        if (keyword.equalsIgnoreCase(\"bye\")) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        int thisIndex;"
+        "content": "            return new ExitCommand();"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        if (keyword.equalsIgnoreCase(\"done\")) {"
+        "content": "        }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            try {"
+        "content": "        if (input.equalsIgnoreCase(\"list\")) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                if (words.length !\u003d 2) {"
+        "content": "            return new DisplayCommand();"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
+        "content": "        }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                }"
+        "content": "        int thisIndex;"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                thisIndex \u003d Integer.parseInt(input.substring(5));"
+        "content": "        if (keyword.equalsIgnoreCase(\"done\")) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            } catch (Exception exp) {"
+        "content": "            try {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                return new ErrorCommand();"
+        "content": "                if (words.length !\u003d 2) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new DoneCommand(thisIndex);"
+        "content": "                }"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } else if (keyword.equalsIgnoreCase(\"delete\")) {"
+        "content": "                thisIndex \u003d Integer.parseInt(input.substring(5));"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            try {"
+        "content": "            } catch (Exception exp) {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                if (words.length !\u003d 2) {"
+        "content": "                return new ErrorCommand();"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
+        "content": "            }"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                }"
+        "content": "            return new DoneCommand(thisIndex);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                thisIndex \u003d Integer.parseInt(input.substring(7));"
+        "content": "        } else if (keyword.equalsIgnoreCase(\"delete\")) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            } catch (Exception exp) {"
+        "content": "            try {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                return new ErrorCommand();"
+        "content": "                if (words.length !\u003d 2) {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new DeleteCommand(thisIndex);"
+        "content": "                }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } else if (keyword.equalsIgnoreCase(\"todo\")) {"
+        "content": "                thisIndex \u003d Integer.parseInt(input.substring(7));"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            try {"
+        "content": "            } catch (Exception exp) {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                if (words.length \u003c 2) {"
+        "content": "                return new ErrorCommand();"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
+        "content": "            }"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                }"
+        "content": "            return new DeleteCommand(thisIndex);"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            } catch (DukeException exp) {"
+        "content": "        } else if (keyword.equalsIgnoreCase(\"todo\")) {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                return new ErrorCommand();"
+        "content": "            try {"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "                if (words.length \u003c 2) {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new AddCommand(new Todo(input.substring(5).trim()));"
+        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } else if (keyword.equalsIgnoreCase(\"event\")) {"
+        "content": "                }"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            String[] eventWords \u003d input.split(\"/at \");"
+        "content": "            } catch (DukeException exp) {"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            try {"
+        "content": "                return new ErrorCommand();"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                if (words.length \u003c 4 || stamps.length \u003c 2 || eventWords.length \u003c 2) {"
+        "content": "            }"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
+        "content": "            return new AddCommand(new Todo(input.substring(5).trim()));"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                }"
+        "content": "        } else if (keyword.equalsIgnoreCase(\"event\")) {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            } catch (DukeException exp) {"
+        "content": "            String[] eventWords \u003d input.split(\"/at \");"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                return new ErrorCommand();"
+        "content": "            try {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "                if (words.length \u003c 4 || stamps.length \u003c 2 || eventWords.length \u003c 2) {"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new AddCommand(new Event(stamps[0].substring(6), eventWords[1]));"
+        "content": "                    throw new DukeException(Message.MESSAGE_INVALIDCOMMAND);"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } else if (keyword.equalsIgnoreCase(\"deadline\")) {"
+        "content": "                }"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            String[] ddlWords \u003d input.split(\"/by \");"
+        "content": "            } catch (DukeException exp) {"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            try {"
+        "content": "                return new ErrorCommand();"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                if (words.length \u003c 4 || stamps.length \u003c 2 || ddlWords.length \u003c 2) {"
+        "content": "            }"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    throw new DukeException(\"The content of a deadline must be complete.\");"
+        "content": "            return new AddCommand(new Event(stamps[0].substring(6), eventWords[1]));"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                }"
+        "content": "        } else if (keyword.equalsIgnoreCase(\"deadline\")) {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            } catch (DukeException exp) {"
+        "content": "            String[] ddlWords \u003d input.split(\"/by \");"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                return new ErrorCommand();"
+        "content": "            try {"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "                if (words.length \u003c 4 || stamps.length \u003c 2 || ddlWords.length \u003c 2) {"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new AddCommand(new Deadline(stamps[0].substring(9), ddlWords[1]));"
+        "content": "                    throw new DukeException(\"The content of a deadline must be complete.\");"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } else {"
+        "content": "                }"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return new ErrorCommand();"
+        "content": "            } catch (DukeException exp) {"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "                return new ErrorCommand();"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "            }"
       },
       {
         "lineNumber": 103,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return new AddCommand(new Deadline(stamps[0].substring(9), ddlWords[1]));"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return new ErrorCommand();"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public static Command handleReminder(String[] words) {"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        if(words.length \u003d\u003d 1){"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return new ReminderCommand();"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        } else if (words.length \u003d\u003d 2){"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            String taskType \u003d words[1];"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            if (taskType.equalsIgnoreCase(\"todo\")) {"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "                return new ReminderCommand(1);"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            } else if (taskType.equalsIgnoreCase(\"event\")) {"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "                return new ReminderCommand(2);"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            } else if (taskType.equalsIgnoreCase(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "                return new ReminderCommand(3);"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "                return new ErrorCommand();"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            return new ErrorCommand();"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 127,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -6483,7 +6919,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 103
+      "WANG-Yuchen-Alice": 127
     }
   },
   {
@@ -6523,444 +6959,360 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import java.text.SimpleDateFormat;"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import java.util.Date;"
+        "content": "/**"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import java.text.ParseException;"
+        "content": " * Represents a time formatter which translates between forms of date representation."
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "/**"
+        "content": "public class TimeFormatter {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": " * Represents a time formatter which translates between forms of date representation."
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": " */"
+        "content": "    private String strDate;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "public class TimeFormatter {"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    private String strDate;"
+        "content": "     * Constructor of TimeFormatter class."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     * @param strDate the original string of date"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Constructor of TimeFormatter class."
+        "content": "     */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "    public TimeFormatter(String strDate) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param strDate the original string of date"
+        "content": "        this.strDate \u003d strDate.trim();"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public TimeFormatter(String strDate) {"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        this.strDate \u003d strDate.trim();"
+        "content": "    /**"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     * Checks if the input date format is valid for translation."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     * @return a boolean value whether the format is valid"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Checks if the input date format is valid for translation."
+        "content": "     */"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "    public boolean checkValidDateFormat() {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return a boolean value whether the format is valid"
+        "content": "        if (this.strDate.trim().equals(\"\")) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "            return false;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public boolean checkValidDateFormat() {"
+        "content": "        }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        if (this.strDate.trim().equals(\"\")) {"
+        "content": "        return Integer.parseInt(this.strDate.substring(5, 7)) \u003c\u003d 12;"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return false;"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        SimpleDateFormat sdFormat \u003d new SimpleDateFormat(\"yyyy-MM-dd\");"
+        "content": "    /**"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        try {"
+        "content": "     * Converts the original date to a desired format."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            Date javaDate \u003d sdFormat.parse(this.strDate);"
+        "content": "     *"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            if (Integer.valueOf(this.strDate.substring(5,7)) \u003e 12) {"
+        "content": "     * @return the string of the desired format of date"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                return false;"
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            }"
+        "content": "    public String toDesiredFormat() {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return true;"
+        "content": "        LocalDate localDate \u003d LocalDate.parse(this.strDate);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } catch (ParseException e) { /* Date format is invalid */"
+        "content": "        return localDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            return false;"
+        "content": "    }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     * Processes the date object."
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Converts the original date to a desired format."
+        "content": "     * @return the original or modified version of date"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return the string of the desired format of date"
+        "content": "    public String processDate() {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        if (!this.checkValidDateFormat()) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String toDesiredFormat() {"
+        "content": "            return this.strDate;"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        LocalDate localDate \u003d LocalDate.parse(this.strDate);"
+        "content": "        } else {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return localDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+        "content": "            return this.toDesiredFormat();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * Processes the date object."
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * @return the original or modified version of date"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    public String processDate() {"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        if (!this.checkValidDateFormat()) {"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            return this.strDate;"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        } else {"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            return this.toDesiredFormat();"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 68,
+        "lineNumber": 56,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -6968,7 +7320,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 68
+      "WANG-Yuchen-Alice": 56
     }
   },
   {
@@ -7985,7 +8337,7 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        String mark \u003d \"\";"
+        "content": "        String mark;"
       },
       {
         "lineNumber": 46,
@@ -8090,7 +8442,7 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        int num \u003d -1;"
+        "content": "        int num;"
       },
       {
         "lineNumber": 61,
@@ -8582,11 +8934,228 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * Represents the list of tasks in one string."
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @return a string representing all the tasks in the list"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public String toListString() {"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        for (int i \u003d 0; i \u003c this.list.size(); i++) {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            sb.append(\"     \" + (i + 1) + \". \" + this.list.get(i).toString() + \"\\n\");"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        return sb.toString();"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * Represents the list of undone tasks in one string."
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     * @return a string representing all the undone tasks in the list"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    public String toUndoneListString() {"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        int marker \u003d 1;"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        for (int i \u003d 0; i \u003c this.list.size(); i++) {"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            if (this.list.get(i).isDone) {"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "                continue;"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            sb.append(\"     \" + marker + \". \" + this.list.get(i).toString() + \"\\n\");"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "            marker ++;"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "        return sb.toString();"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "WANG-Yuchen-Alice"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 61
+      "WANG-Yuchen-Alice": 92
     }
   },
   {
@@ -9211,161 +9780,161 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "import task.Todo;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import java.io.PrintStream;"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "import java.util.Scanner;"
+        "content": "import java.io.PrintStream;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "import java.util.Scanner;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "public class TextUi {"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "public class TextUi {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    private Scanner sc;"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    private PrintStream out;"
+        "content": "    private Scanner sc;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    private PrintStream out;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Constructs new TextUi object to handle user-system interactions."
+        "content": "    /**"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "     * Constructs new TextUi object to handle user-system interactions."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public TextUi() {"
+        "content": "     */"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        this.sc \u003d new Scanner(System.in);"
+        "content": "    public TextUi() {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        this.out \u003d new PrintStream(System.out);"
+        "content": "        this.sc \u003d new Scanner(System.in);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        this.out \u003d new PrintStream(System.out);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Shows (lines of) message(s) to the user."
+        "content": "    /**"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "     * Shows (lines of) message(s) to the user."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param message the message that is to be shown to the user"
+        "content": "     *"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "     * @param message the message that is to be shown to the user"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /** The Java varargs feature has been implemented in previous levels. */"
+        "content": "     */"
       },
       {
         "lineNumber": 32,
@@ -9603,924 +10172,924 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Shows the dividing line."
+        "content": "     * Returns messages after adding a task to the task list."
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void showLine() {"
+        "content": "     * @param givenTask the newly added task object"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        showToUser(Message.MESSAGE_LINE);"
+        "content": "     * @param tasks the current task list"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    public String showAddingTask_Str(Task givenTask, TaskList tasks){"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Shows messages after adding a task to the task list."
+        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "        sb.append(Message.MESSAGE_GOTIT + \"\\n\");"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param givenTask the newly added task object"
+        "content": "        sb.append(\"     \" + givenTask.toString() + \"\\n\");"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param tasks the current task list"
+        "content": "        sb.append(\"     Now you have \" + tasks.getList().size() + \" tasks in the list.\" + \"\\n\");"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void showAddingTask(Task givenTask, TaskList tasks) {"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        showToUser("
+        "content": "    }"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_LINE,"
+        "content": ""
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_GOTIT,"
+        "content": "    /**"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                \"     \" + givenTask.toString(),"
+        "content": "     * Returns the deleted task message to the user."
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                \"     Now you have \" + tasks.getList().size() + \" tasks in the list.\","
+        "content": "     *"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_LINE"
+        "content": "     * @param index the index of the deleted task in the task list"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        );"
+        "content": "     * @param tasks the task list"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    public String showDeletingTask_Str(int index, TaskList tasks) {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns messages after adding a task to the task list."
+        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "        sb.append(Message.MESSAGE_DELETEIT + \"\\n\");"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param givenTask the newly added task object"
+        "content": "        sb.append(\"     \" + tasks.getList().get(index).toString() + \"\\n\");"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param tasks the current task list"
+        "content": "        sb.append(\"     Now you have \" + (tasks.getList().size() - 1) + \" tasks in the list.\" + \"\\n\");"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String showAddingTask_Str(Task givenTask, TaskList tasks){"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "    }"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
+        "content": ""
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_GOTIT + \"\\n\");"
+        "content": "    /**"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(\"     \" + givenTask.toString() + \"\\n\");"
+        "content": "     * Returns the done task message to the user."
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(\"     Now you have \" + tasks.getList().size() + \" tasks in the list.\" + \"\\n\");"
+        "content": "     *"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_LINE);"
+        "content": "     * @param index the index of the done task in the task list"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return sb.toString();"
+        "content": "     * @param tasks the task list"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    public String showDoneTask_Str(int index, TaskList tasks) {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Presents the deleted task to the user."
+        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "        sb.append(Message.MESSAGE_MARKASDONE + \"\\n\");"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param index the index of the deleted task in the task list"
+        "content": "        sb.append(\"     \" + tasks.getList().get(index).toString() + \"\\n\");"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param tasks the task list"
+        "content": "        sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void showDeletingTask(int index, TaskList tasks) {"
+        "content": "    }"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        showToUser("
+        "content": ""
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_LINE,"
+        "content": "    /**"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_DELETEIT,"
+        "content": "     * Shows the error message to the user."
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                \"     \" + tasks.getList().get(index).toString(),"
+        "content": "     *"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                \"     Now you have \" + (tasks.getList().size() - 1) + \" tasks in the list.\","
+        "content": "     * @param errorMessage the error message generated by the dukeException"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_LINE"
+        "content": "     */"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        );"
+        "content": "    public void showError(String errorMessage) {"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        showToUser("
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "                new DukeException(errorMessage).toString()"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "        );"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns the deleted task message to the user."
+        "content": ""
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param index the index of the deleted task in the task list"
+        "content": ""
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param tasks the task list"
+        "content": "    /**"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "     * Returns the error message to the user."
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String showDeletingTask_Str(int index, TaskList tasks) {"
+        "content": "     *"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "     * @param errorMessage the error message generated by the dukeException"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
+        "content": "     */"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_DELETEIT + \"\\n\");"
+        "content": "    public String showError_Str(String errorMessage) {"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(\"     \" + tasks.getList().get(index).toString() + \"\\n\");"
+        "content": "        return new DukeException(errorMessage).toString();"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(\"     Now you have \" + (tasks.getList().size() - 1) + \" tasks in the list.\" + \"\\n\");"
+        "content": "    }"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_LINE);"
+        "content": ""
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return sb.toString();"
+        "content": "    /**"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     * Takes in the command from the user."
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     * @return the command of the user"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Presents the done task to the user."
+        "content": "     */"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "    public String readCommand() {"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param index the index of the done task in the task list"
+        "content": "        String input \u003d sc.nextLine().trim();"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param tasks the task list"
+        "content": "        while (input.equals(\"\")) {"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "            input \u003d sc.nextLine();"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void showDoneTask(int index, TaskList tasks) {"
+        "content": "        }"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        showToUser("
+        "content": "        return input;"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_LINE,"
+        "content": "    }"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_MARKASDONE,"
+        "content": ""
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                \"     \" + tasks.getList().get(index).toString(),"
+        "content": "    /**"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_LINE"
+        "content": "     * Returns the string of task list to to the user."
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        );"
+        "content": "     *"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     * @param tasks the task list"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     * @param dukeStorage the storage"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns the done task message to the user."
+        "content": "    public String displayList_Str(TaskList tasks, Storage dukeStorage) {"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param index the index of the done task in the task list"
+        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param tasks the task list"
+        "content": "        sb.append(Message.MESSAGE_SHOWLIST + \"\\n\");"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        try {"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String showDoneTask_Str(int index, TaskList tasks) {"
+        "content": "            tasks.renewList(dukeStorage.readFromFile());"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "        } catch (Exception exp) {"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
+        "content": "            sb.append(\"     Something went wrong with the file.\" + \"\\n\" + \"     Better say \u0027bye\u0027 now.\");"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_MARKASDONE + \"\\n\");"
+        "content": "            sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(\"     \" + tasks.getList().get(index).toString() + \"\\n\");"
+        "content": "            return sb.toString();"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        sb.append(Message.MESSAGE_LINE);"
+        "content": "        }"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return sb.toString();"
+        "content": "        if (tasks.getList().isEmpty()) {"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "            sb.append(Message.MESSAGE_EMPTYLIST + \"\\n\");"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "            sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "            return sb.toString();"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Shows the error message to the user."
+        "content": "        } else {"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "            sb.append(tasks.toListString());"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param errorMessage the error message generated by the dukeException"
+        "content": "            sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        }"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void showError(String errorMessage) {"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        showToUser("
+        "content": "    }"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                new DukeException(errorMessage).toString()"
+        "content": ""
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        );"
+        "content": "    /**"
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     * Returns the string of tasks in the task list which contain the keyword."
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "     * @param tasks the task list"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "     * @param item the keyword of the user-targeted tasks"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Returns the error message to the user."
+        "content": "     */"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "    public String findList_Str(TaskList tasks, String item) {"
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param errorMessage the error message generated by the dukeException"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String showError_Str(String errorMessage) {"
+        "content": "        sb.append(Message.MESSAGE_FIND + \"\\n\");"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return new DukeException(errorMessage).toString();"
+        "content": "        int marker \u003d 1;"
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        String thisItem;"
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "        for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    /**"
+        "content": "            thisItem \u003d tasks.getList().get(i).toString();"
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Takes in the command from the user."
+        "content": "            if (thisItem.toLowerCase().contains(item.toLowerCase())) {"
       },
       {
         "lineNumber": 188,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     *"
+        "content": "                sb.append(\"     \").append(marker).append(\". \").append(thisItem).append(\"\\n\");"
       },
       {
         "lineNumber": 189,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @return the command of the user"
+        "content": "                marker++;"
       },
       {
         "lineNumber": 190,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "            }"
       },
       {
         "lineNumber": 191,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public String readCommand() {"
+        "content": "        }"
       },
       {
         "lineNumber": 192,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        String input \u003d sc.nextLine().trim();"
+        "content": "        if (marker \u003d\u003d 1) {"
       },
       {
         "lineNumber": 193,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        while (input.equals(\"\")) {"
+        "content": "            sb.append(Message.MESSAGE_NULL + \"\\n\");"
       },
       {
         "lineNumber": 194,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            input \u003d sc.nextLine();"
+        "content": "        }"
       },
       {
         "lineNumber": 195,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "        sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 196,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        return input;"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 197,
@@ -10548,7 +11117,7 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * Displays the task list to to the user."
+        "content": "     * Shows a list of specified-type tasks that are undone."
       },
       {
         "lineNumber": 201,
@@ -10562,168 +11131,168 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param tasks the task list"
+        "content": "     * @param tasks the list of tasks stored in the text file"
       },
       {
         "lineNumber": 203,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     * @param dukeStorage the storage"
+        "content": "     * @param taskType the specified type of tasks that are required"
       },
       {
         "lineNumber": 204,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "     */"
+        "content": "     * @return a string of tasks that are required"
       },
       {
         "lineNumber": 205,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    public void displayList(TaskList tasks, Storage dukeStorage) {"
+        "content": "     */"
       },
       {
         "lineNumber": 206,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        showToUser("
+        "content": "    public String remindTasks(TaskList tasks, char taskType) {"
       },
       {
         "lineNumber": 207,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_LINE,"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 208,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                Message.MESSAGE_SHOWLIST"
+        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
       },
       {
         "lineNumber": 209,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        );"
+        "content": "        sb.append(Message.MESSAGE_SHOWRELATED + \"\\n\");"
       },
       {
         "lineNumber": 210,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        try {"
+        "content": "        if(taskType \u003d\u003d \u0027A\u0027) {"
       },
       {
         "lineNumber": 211,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            tasks.renewList(dukeStorage.readFromFile());"
+        "content": "            sb.append(tasks.toUndoneListString());"
       },
       {
         "lineNumber": 212,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } catch (Exception exp) {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 213,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            showToUser("
+        "content": "            int marker \u003d 1;"
       },
       {
         "lineNumber": 214,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    \"Something went wrong with the file.\","
+        "content": "            Task thisTask;"
       },
       {
         "lineNumber": 215,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    \"Better say \u0027bye\u0027 now.\""
+        "content": "            for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
       },
       {
         "lineNumber": 216,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            );"
+        "content": "                thisTask \u003d tasks.getList().get(i);"
       },
       {
         "lineNumber": 217,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "                if (thisTask.toString().charAt(1) \u003d\u003d taskType \u0026\u0026 !thisTask.isDone) {"
       },
       {
         "lineNumber": 218,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        if (tasks.getList().isEmpty()) {"
+        "content": "                    sb.append(\"     \").append(marker).append(\". \").append(thisTask).append(\"\\n\");"
       },
       {
         "lineNumber": 219,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            showToUser("
+        "content": "                    marker++;"
       },
       {
         "lineNumber": 220,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    Message.MESSAGE_EMPTYLIST,"
+        "content": "                }"
       },
       {
         "lineNumber": 221,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                    Message.MESSAGE_LINE"
+        "content": "            }"
       },
       {
         "lineNumber": 222,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            );"
+        "content": "            if (marker \u003d\u003d 1) {"
       },
       {
         "lineNumber": 223,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        } else {"
+        "content": "                sb.append(\"     For this type, \" + Message.MESSAGE_NOTHING + \"\\n\");"
       },
       {
         "lineNumber": 224,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
+        "content": "            } else {"
       },
       {
         "lineNumber": 225,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "                showToUser(\"     \" + (i + 1) + \". \" + tasks.getList().get(i).toString());"
+        "content": "                sb.append(\"     Try to finish them soon ~\" + \"\\n\");"
       },
       {
         "lineNumber": 226,
@@ -10737,605 +11306,31 @@
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "            showLine();"
+        "content": "        }"
       },
       {
         "lineNumber": 228,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "        }"
+        "content": "        sb.append(Message.MESSAGE_LINE);"
       },
       {
         "lineNumber": 229,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": "    }"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 230,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 231,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 232,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * Returns the string of task list to to the user."
-      },
-      {
-        "lineNumber": 233,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 234,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * @param tasks the task list"
-      },
-      {
-        "lineNumber": 235,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * @param dukeStorage the storage"
-      },
-      {
-        "lineNumber": 236,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 237,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    public String displayList_Str(TaskList tasks, Storage dukeStorage) {"
-      },
-      {
-        "lineNumber": 238,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
-      },
-      {
-        "lineNumber": 239,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
-      },
-      {
-        "lineNumber": 240,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        sb.append(Message.MESSAGE_SHOWLIST + \"\\n\");"
-      },
-      {
-        "lineNumber": 241,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 242,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 243,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            tasks.renewList(dukeStorage.readFromFile());"
-      },
-      {
-        "lineNumber": 244,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        } catch (Exception exp) {"
-      },
-      {
-        "lineNumber": 245,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            sb.append(\"     Something went wrong with the file.\" + \"\\n\" + \"     Better say \u0027bye\u0027 now.\");"
-      },
-      {
-        "lineNumber": 246,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            sb.append(Message.MESSAGE_LINE);"
-      },
-      {
-        "lineNumber": 247,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            return sb.toString();"
-      },
-      {
-        "lineNumber": 248,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 249,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        if (tasks.getList().isEmpty()) {"
-      },
-      {
-        "lineNumber": 250,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            sb.append(Message.MESSAGE_EMPTYLIST + \"\\n\");"
-      },
-      {
-        "lineNumber": 251,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            sb.append(Message.MESSAGE_LINE);"
-      },
-      {
-        "lineNumber": 252,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            return sb.toString();"
-      },
-      {
-        "lineNumber": 253,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        } else {"
-      },
-      {
-        "lineNumber": 254,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
-      },
-      {
-        "lineNumber": 255,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "                sb.append(\"     \" + (i + 1) + \". \" + tasks.getList().get(i).toString() + \"\\n\");"
-      },
-      {
-        "lineNumber": 256,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 257,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            sb.append(Message.MESSAGE_LINE);"
-      },
-      {
-        "lineNumber": 258,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 259,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        return sb.toString();"
-      },
-      {
-        "lineNumber": 260,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 261,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 262,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 263,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * Finds the tasks in the task list which contain the keyword."
-      },
-      {
-        "lineNumber": 264,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 265,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * @param tasks the task list"
-      },
-      {
-        "lineNumber": 266,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * @param item the keyword of the user-targeted tasks"
-      },
-      {
-        "lineNumber": 267,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 268,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    public void findList(TaskList tasks, String item) {"
-      },
-      {
-        "lineNumber": 269,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        showToUser("
-      },
-      {
-        "lineNumber": 270,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "                Message.MESSAGE_LINE,"
-      },
-      {
-        "lineNumber": 271,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "                Message.MESSAGE_FIND"
-      },
-      {
-        "lineNumber": 272,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        );"
-      },
-      {
-        "lineNumber": 273,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        int marker \u003d 1;"
-      },
-      {
-        "lineNumber": 274,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        String thisItem;"
-      },
-      {
-        "lineNumber": 275,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
-      },
-      {
-        "lineNumber": 276,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            thisItem \u003d tasks.getList().get(i).toString();"
-      },
-      {
-        "lineNumber": 277,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            if (thisItem.toLowerCase().contains(item.toLowerCase())) {"
-      },
-      {
-        "lineNumber": 278,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "                showToUser(\"     \" + marker + \". \" + thisItem);"
-      },
-      {
-        "lineNumber": 279,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "                marker++;"
-      },
-      {
-        "lineNumber": 280,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 281,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 282,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        if (marker \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 283,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            showToUser(Message.MESSAGE_NULL);"
-      },
-      {
-        "lineNumber": 284,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 285,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        showLine();"
-      },
-      {
-        "lineNumber": 286,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 287,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 288,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 289,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * Returns the string of tasks in the task list which contain the keyword."
-      },
-      {
-        "lineNumber": 290,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 291,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * @param tasks the task list"
-      },
-      {
-        "lineNumber": 292,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     * @param item the keyword of the user-targeted tasks"
-      },
-      {
-        "lineNumber": 293,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 294,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    public String findList_Str(TaskList tasks, String item) {"
-      },
-      {
-        "lineNumber": 295,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
-      },
-      {
-        "lineNumber": 296,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        sb.append(Message.MESSAGE_LINE + \"\\n\");"
-      },
-      {
-        "lineNumber": 297,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        sb.append(Message.MESSAGE_FIND + \"\\n\");"
-      },
-      {
-        "lineNumber": 298,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        int marker \u003d 1;"
-      },
-      {
-        "lineNumber": 299,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        String thisItem;"
-      },
-      {
-        "lineNumber": 300,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
-      },
-      {
-        "lineNumber": 301,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            thisItem \u003d tasks.getList().get(i).toString();"
-      },
-      {
-        "lineNumber": 302,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            if (thisItem.toLowerCase().contains(item.toLowerCase())) {"
-      },
-      {
-        "lineNumber": 303,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "                sb.append(\"     \" + marker + \". \" + thisItem + \"\\n\");"
-      },
-      {
-        "lineNumber": 304,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "                marker++;"
-      },
-      {
-        "lineNumber": 305,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 306,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 307,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        if (marker \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 308,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "            sb.append(Message.MESSAGE_NULL + \"\\n\");"
-      },
-      {
-        "lineNumber": 309,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 310,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        sb.append(Message.MESSAGE_LINE);"
-      },
-      {
-        "lineNumber": 311,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "        return sb.toString();"
-      },
-      {
-        "lineNumber": 312,
-        "author": {
-          "gitId": "WANG-Yuchen-Alice"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 313,
         "author": {
           "gitId": "WANG-Yuchen-Alice"
         },
@@ -11343,7 +11338,7 @@
       }
     ],
     "authorContributionMap": {
-      "WANG-Yuchen-Alice": 313
+      "WANG-Yuchen-Alice": 231
     }
   },
   {

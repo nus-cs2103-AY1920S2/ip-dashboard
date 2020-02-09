@@ -278,17 +278,87 @@
             "deletions": 200
           }
         ]
+      },
+      {
+        "insertions": 101,
+        "deletions": 53,
+        "date": "2020-02-07",
+        "commitResults": [
+          {
+            "hash": "345d8453da5e107adb6feb0f69124c20e3b40be9",
+            "messageTitle": "Refactor Parser to split parse method into smaller methods",
+            "messageBody": "Parser.parse now calls Parser.parseSingleWordCommand and\nParser.parseCommandWithArguments, applying them sequentially\nand checking if each returned null before trying the next\n\nUpdate Test for Parser so empty String should result in error\nmessage about incomplete command instead of not understanding the\ncommand\n",
+            "insertions": 101,
+            "deletions": 53
+          }
+        ]
+      },
+      {
+        "insertions": 75,
+        "deletions": 98,
+        "date": "2020-02-08",
+        "commitResults": [
+          {
+            "hash": "0783d8291334dac7f76566f2218a94c2d34cd4c7",
+            "messageTitle": "Refactor all TaskList enumerating methods and calls to consistently use Stream API",
+            "messageBody": "Previously, getAllTasks returned a List\u003cTask\u003e while showAllTasks returned a String[].\nFurthermore each calling method implemented their own filtering/formatting and basically\nconsumed the collection immediately. Using the Stream API, the new formatFilteredTasks\nand its derivative showFilteredTasks take care of filtering and formatting, while\nreturning an unconsumed Stream\u003cString\u003e, bypassing intermediate data structures\n\nUpdate build to v0.2\n\nUpdate TaskListTest to reflect changes to TaskList\n",
+            "insertions": 41,
+            "deletions": 62
+          },
+          {
+            "hash": "ee38ad551e4e31c53b45e30694201979f671c518",
+            "messageTitle": "Minor refactor of Parser.parseCommandWithArguments to extract Deadline parsing and Event parsing into their own methods",
+            "messageBody": "",
+            "insertions": 18,
+            "deletions": 8
+          },
+          {
+            "hash": "03fb93e14c0c79d5868a371d932ad7c82a0a5448",
+            "messageTitle": "Fix bug in Parser.parse",
+            "messageBody": "Previously invalid single word commands or empty strings result in a null usage message\nin the error message. Now correct error messages with relevant usage info is given\n\nImprove DialogBox in GUI\n\nFont size increase and change from Label to Text allows DialogBox to expand to show\nentire message without truncating text with ellipsis\n",
+            "insertions": 16,
+            "deletions": 28
+          }
+        ]
+      },
+      {
+        "insertions": 175,
+        "deletions": 15,
+        "date": "2020-02-09",
+        "commitResults": [
+          {
+            "hash": "04ca96592ed25161bef10d9a17a6faef6caf7c5f",
+            "messageTitle": "Refactor Duke class for looser coupling with dependencies",
+            "messageBody": "Remove implementation-specific details from Duke, key of which were:\n- Platform.exit() to exit javafx application\n- Concrete classes Gui and TextStorage\nDuke now only depends on Interfaces, relegates specifying of dependencies to DukeFactory\nwhich has benefits of easier stubbing for unit testing\n\nCreate DukeTest unit testing class to test simple serve() behavior\n",
+            "insertions": 170,
+            "deletions": 13
+          },
+          {
+            "hash": "5b8a1d96de451b2a875e294d325597f9a2d2c3a4",
+            "messageTitle": "Setup Travis-CI",
+            "messageBody": "Remove configuration files that were accidentally included in the project\n",
+            "insertions": 2,
+            "deletions": 2
+          },
+          {
+            "hash": "531f4ba4e953e1f5ac68534311cff63ff20d15f8",
+            "messageTitle": "Add assertions to Gui and Parser",
+            "messageBody": "Most of the methods already check their assumptions and catch exceptional cases, thus\nvery few assertions are added\n",
+            "insertions": 3,
+            "deletions": 0
+          }
+        ]
       }
     ]
   },
   "authorFinalContributionMap": {
-    "CornCobs": 1518
+    "CornCobs": 1715
   },
   "authorFileTypeContributionMap": {
     "CornCobs": {
-      "java": 1400,
+      "java": 1596,
       "md": 0,
-      "fxml": 39,
+      "fxml": 40,
       "sh": 0,
       "bat": 18,
       "gradle": 35,
@@ -296,7 +366,7 @@
     }
   },
   "authorContributionVariance": {
-    "CornCobs": 73032.25
+    "CornCobs": 57162.07
   },
   "authorDisplayNameMap": {
     "CornCobs": "CS2103-W15- 2 CHIN..OASH"
