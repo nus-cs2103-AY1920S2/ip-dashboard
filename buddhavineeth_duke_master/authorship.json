@@ -78,7 +78,7 @@
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    archiveVersion \u003d \"0.1.3\""
+        "content": "    archiveVersion \u003d \"0.1.4\""
       },
       {
         "lineNumber": 12,
@@ -358,7 +358,7 @@
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    mainClassName \u003d \"duke.Duke\""
+        "content": "    mainClassName \u003d \"duke.Launcher\""
       },
       {
         "lineNumber": 52,
@@ -1056,266 +1056,266 @@
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "/**"
+        "content": " * Represents the main logic flow of the Duke Application."
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": " * Represents the main logic flow of the Duke Application."
+        "content": " * A \u003ccode\u003eStorage\u003c/code\u003e object stores all list data into disk."
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": " * A \u003ccode\u003eStorage\u003c/code\u003e object stores all list data into disk."
+        "content": " * A \u003ccode\u003eTaskList\u003c/code\u003e object stores list of user tasks in RAM."
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": " * A \u003ccode\u003eTaskList\u003c/code\u003e object stores list of user tasks in RAM."
+        "content": " * A \u003ccode\u003eUi\u003c/code\u003e object handles input and generates the response for user."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": " * A \u003ccode\u003eUi\u003c/code\u003e object handles input and generates the response for user."
+        "content": " */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": " */"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "public class Duke {"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    private Storage storage;"
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    private TaskList tasks;"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    private Ui ui;"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    /**"
+        "content": "     * Creates a Duke object."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * Creates a Duke object."
+        "content": "     * @param filePath The location of the file that stores all user list history."
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @param filePath The location of the file that stores all user list history."
+        "content": "     */"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     */"
+        "content": "    public Duke(String filePath) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    public Duke(String filePath) {"
+        "content": "        this.ui \u003d new Ui();"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        this.ui \u003d new Ui();"
+        "content": "        this.storage \u003d new Storage(filePath);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        this.storage \u003d new Storage(filePath);"
+        "content": "        try {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        try {"
+        "content": "            this.tasks \u003d new TaskList(storage.load());"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            this.tasks \u003d new TaskList(storage.load());"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "            this.ui.showLoadingError();"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            this.ui.showLoadingError();"
+        "content": "            this.tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            this.tasks \u003d new TaskList();"
+        "content": "        }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    /**"
+        "content": "     * Runs instruction by user and returns the corresponding response generated by its ui."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * Runs instruction by user and returns the corresponding response generated by its ui."
+        "content": "     * @param instruction The String of user input."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @param instruction The String of user input."
+        "content": "     * @return A relevant response to the user input."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @return A relevant response to the user input."
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     */"
+        "content": "    public String run(String instruction) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    public String run(String instruction) {"
+        "content": "        String result \u003d \"\";"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        String result \u003d \"\";"
+        "content": "        try {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        try {"
+        "content": "            Command c \u003d Parser.parse(instruction);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            Command c \u003d Parser.parse(instruction);"
+        "content": "            result \u003d c.execute(tasks, ui);"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            result \u003d c.execute(tasks, ui);"
+        "content": "            assert !result.equals(\"\") : \"No result was returned.\";"
       },
       {
         "lineNumber": 45,
@@ -4274,486 +4274,507 @@
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        return taskList.toString() + \"\\n\";"
+        "content": "        if (taskList.getList().isEmpty()) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    }"
+        "content": "            return \"There are no tasks in the list yet.\";"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    /**"
+        "content": "        return taskList.toString() + \"\\n\";"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * Returns output of successful Done command."
+        "content": "    }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @param completed the task that is marked as completed."
+        "content": ""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @return An output of a completed Done command."
+        "content": "    /**"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     */"
+        "content": "     * Returns output of successful Done command."
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    public String showDoneMessage(Task completed) {"
+        "content": "     * @param completed the task that is marked as completed."
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        return \"Hooray! You\u0027ve finally managed to finish this task:\" + \"\\n\" + completed.toString() + \"\\n\";"
+        "content": "     * @return An output of a completed Done command."
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "    public String showDoneMessage(Task completed) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    /**"
+        "content": "        return \"Hooray! You\u0027ve finally managed to finish this task:\" + \"\\n\" + completed.toString() + \"\\n\";"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * Returns output of a successful Delete Command."
+        "content": "    }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @param deleted the task that is to be deleted from taskList."
+        "content": ""
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @return An output of a completed Delete command."
+        "content": "    /**"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     */"
+        "content": "     * Returns output of a successful Delete Command."
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    public String showDeleteMessage(Task deleted) {"
+        "content": "     * @param deleted the task that is to be deleted from taskList."
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        return \"Got it! I\u0027ve removed this task:\" + \"\\n\" + deleted.toString() + \"\\n\";"
+        "content": "     * @return An output of a completed Delete command."
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "    public String showDeleteMessage(Task deleted) {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    /**"
+        "content": "        return \"Got it! I\u0027ve removed this task:\" + \"\\n\" + deleted.toString() + \"\\n\";"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * Returns output of a Whatsup Command."
+        "content": "    }"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @param tasks the tasks that are on the same day that is queried."
+        "content": ""
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @return An output of a completed Whatsup command."
+        "content": "    /**"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     */"
+        "content": "     * Returns output of a Whatsup Command."
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    public String showWhatsupMessage(ArrayList\u003cTask\u003e tasks) {"
+        "content": "     * @param tasks the tasks that are on the same day that is queried."
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        if (tasks.isEmpty()) {"
+        "content": "     * @return An output of a completed Whatsup command."
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            return \"You have nothing assigned on that day.\";"
+        "content": "     */"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        }"
+        "content": "    public String showWhatsupMessage(ArrayList\u003cTask\u003e tasks) {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        String result \u003d \"The tasks you have on that day are:\" + \"\\n\";"
+        "content": "        if (tasks.isEmpty()) {"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        for (Task task: tasks) {"
+        "content": "            return \"You have nothing assigned on that day.\";"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            result +\u003d task.toString() + \"\\n\";"
+        "content": "        }"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        }"
+        "content": "        String result \u003d \"The tasks you have on that day are:\" + \"\\n\";"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        return result;"
+        "content": "        for (Task task: tasks) {"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    }"
+        "content": "            result +\u003d task.toString() + \"\\n\";"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    /**"
+        "content": "        return result;"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * Returns output of a successful Add command."
+        "content": "    }"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @param newTask either a Event, Deadline or To-do task object."
+        "content": ""
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @return An output of a successful Add command."
+        "content": "    /**"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     */"
+        "content": "     * Returns output of a successful Add command."
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    public String showAddTaskMessage(Task newTask) {"
+        "content": "     * @param newTask either a Event, Deadline or To-do task object."
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        String identifier;"
+        "content": "     * @return An output of a successful Add command."
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        if (newTask instanceof Todo) {"
+        "content": "     */"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            identifier \u003d \"to do\";"
+        "content": "    public String showAddTaskMessage(Task newTask) {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        } else if (newTask instanceof Deadline) {"
+        "content": "        String identifier;"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            identifier \u003d \"deadline\";"
+        "content": "        if (newTask instanceof Todo) {"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        } else {"
+        "content": "            identifier \u003d \"to do\";"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            identifier \u003d \"event\";"
+        "content": "        } else if (newTask instanceof Deadline) {"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        }"
+        "content": "            identifier \u003d \"deadline\";"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        return \"Awesome! I\u0027ve added this \" + identifier + \" :\" + \"\\n\" + newTask.toString();"
+        "content": "        } else {"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    }"
+        "content": "            identifier \u003d \"event\";"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    /**"
+        "content": "        return \"Awesome! I\u0027ve added this \" + identifier + \" :\" + \"\\n\" + newTask.toString();"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * Returns output of a Find Command."
+        "content": "    }"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @param tasks The list of tasks that match a keyword queried by user."
+        "content": ""
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     * @return A String of tasks that match what user queried."
+        "content": "    /**"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "     */"
+        "content": "     * Returns output of a Find Command."
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    public String showFindMessage(ArrayList\u003cTask\u003e tasks) {"
+        "content": "     * @param tasks The list of tasks that match a keyword queried by user."
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        if (tasks.isEmpty()) {"
+        "content": "     * @return A String of tasks that match what user queried."
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            return \"There were no tasks matching what you said.\";"
+        "content": "     */"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        }"
+        "content": "    public String showFindMessage(ArrayList\u003cTask\u003e tasks) {"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        String result \u003d \"Here you go, this is probably what you were finding:\" + \"\\n\";"
+        "content": "        if (tasks.isEmpty()) {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        for (Task task: tasks) {"
+        "content": "            return \"There were no tasks matching what you said.\";"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "            result +\u003d task.toString() + \"\\n\";"
+        "content": "        }"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        }"
+        "content": "        String result \u003d \"Here you go, this is probably what you were finding:\" + \"\\n\";"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        return result;"
+        "content": "        for (Task task: tasks) {"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "    }"
+        "content": "            result +\u003d task.toString() + \"\\n\";"
       },
       {
         "lineNumber": 126,
+        "author": {
+          "gitId": "buddhavineeth"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "buddhavineeth"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "buddhavineeth"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 129,
         "author": {
           "gitId": "buddhavineeth"
         },
@@ -4761,7 +4782,7 @@
       }
     ],
     "authorContributionMap": {
-      "buddhavineeth": 126
+      "buddhavineeth": 129
     }
   },
   {
@@ -8345,7 +8366,7 @@
         "author": {
           "gitId": "buddhavineeth"
         },
-        "content": "        \u003cTextField fx:id\u003d\"userInput\" layoutY\u003d\"558.0\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"324.0\" text\u003d\"Hello\" AnchorPane.bottomAnchor\u003d\"1.0\" /\u003e"
+        "content": "        \u003cTextField fx:id\u003d\"userInput\" layoutY\u003d\"558.0\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"324.0\" text\u003d\"list\" AnchorPane.bottomAnchor\u003d\"1.0\" /\u003e"
       },
       {
         "lineNumber": 12,

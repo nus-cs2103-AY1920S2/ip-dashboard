@@ -685,22 +685,6 @@
     }
   },
   {
-    "path": "src/data/tasks.txt",
-    "fileType": "txt",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "Exeexe93"
-        },
-        "content": "T | 1 | list"
-      }
-    ],
-    "authorContributionMap": {
-      "Exeexe93": 1
-    }
-  },
-  {
     "path": "src/main/java/duke/Duke.java",
     "fileType": "java",
     "lines": [
@@ -5431,7 +5415,7 @@
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            e.printStackTrace();"
+        "content": "            System.out.println(e.getMessage());"
       },
       {
         "lineNumber": 51,
@@ -9270,154 +9254,154 @@
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        Task task;"
+        "content": "        switch (line[0]) {"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        switch (line[0]) {"
+        "content": "        case \"T\":"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        case \"T\":"
+        "content": "            return generateTodo(line);"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            task \u003d new Todo(line[2]);"
+        "content": "        case \"E\":"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            if (line[1].equals(\"1\")) {"
+        "content": "            return generateEvent(line);"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "                task.setStatusDone();"
+        "content": "        case \"D\":"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            }"
+        "content": "            return generateDeadline(line);"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            return task;"
+        "content": "        default:"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        case \"E\":"
+        "content": "            throw new DukeException(\"Data corrupted! I am unable to determine which task it belongs to.\");"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            task \u003d new Event(line[2], line[3]);"
+        "content": "        }"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            if (line[1].equals(\"1\")) {"
+        "content": "    }"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "                task.setStatusDone();"
+        "content": ""
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            }"
+        "content": "    /**"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            return task;"
+        "content": "     * Generate todo and set done if the index 1 of the data given is \"1\"."
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        case \"D\":"
+        "content": "     *"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            task \u003d new Deadline(line[2], line[3]);"
+        "content": "     * @param data Description of Todo is at index 2 and done status at index 1."
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            if (line[1].equals(\"1\")) {"
+        "content": "     * @return Todo task that is generated."
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "                task.setStatusDone();"
+        "content": "     */"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            }"
+        "content": "    private Task generateTodo(String[] data) {"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            return task;"
+        "content": "        Task task \u003d new Todo(data[2]);"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        default:"
+        "content": "        if (data[1].equals(\"1\")) {"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            throw new DukeException(\"Data corrupted! I am unable to determine which task it belongs to.\");"
+        "content": "            task.setStatusDone();"
       },
       {
         "lineNumber": 135,
@@ -9431,829 +9415,1032 @@
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "        return task;"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * Close the scanner."
+        "content": "    /**"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     */"
+        "content": "     * Generate event and set done if the index 1 of the data given is \"1\"."
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    public void closeScanner() {"
+        "content": "     *"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        taskScanner.close();"
+        "content": "     * @param data Description of Event is at index 2, date of event is at index 3 amd done status at index 1."
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "     * @return Event task that is generated."
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    /**"
+        "content": "    private Task generateEvent(String[] data) throws DukeException {"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * Save tasks to hard disk."
+        "content": "        Task task \u003d new Event(data[2], data[3]);"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     *"
+        "content": "        if (data[1].equals(\"1\")) {"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @param taskList taskList to retrieve the tasks"
+        "content": "            task.setStatusDone();"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @throws DukeException occurs when encounter IO Exception"
+        "content": "        }"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     */"
+        "content": "        return task;"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    public void saveTasks(TaskList taskList) throws DukeException {"
+        "content": "    }"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        int numOfTasks \u003d taskList.getAmountOfTask();"
+        "content": ""
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        int num \u003d 1;"
+        "content": "    /**"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        createFile(absolutePath);"
+        "content": "     * Generate event and set done if the index 1 of the data  given is \"1\"."
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        clearFile(absolutePath);"
+        "content": "     *"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        while (numOfTasks !\u003d 0) {"
+        "content": "     * @param data Description of Event is at index 2, date and time are at index 3 and done status at index 1."
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            addTask(taskList.getTask(num));"
+        "content": "     * @return Deadline task that is generated."
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            num++;"
+        "content": "     */"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            numOfTasks--;"
+        "content": "    private Task generateDeadline(String[] data) throws DukeException {"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        }"
+        "content": "        Task task \u003d new Deadline(data[2], data[3]);"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "        if (data[1].equals(\"1\")) {"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "            task.setStatusDone();"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * Clear all contents inside the file at the path."
+        "content": "        return task;"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @param path file located at"
+        "content": ""
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    public void clearFile(String path) throws DukeException {"
+        "content": "     * Close the scanner."
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        writeToHardDisk(\"\", path, false);"
+        "content": "     */"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "    public void closeScanner() {"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "        taskScanner.close();"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * Create file when no file exist at the path."
+        "content": ""
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @param path path the file located at"
+        "content": "     * Save tasks to hard disk."
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @throws DukeException occurs when IOException happens"
+        "content": "     *"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     */"
+        "content": "     * @param taskList taskList to retrieve the tasks"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    public void createFile(String path) throws DukeException {"
+        "content": "     * @throws DukeException occurs when encounter IO Exception"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            File file \u003d new File(path);"
+        "content": "    public void saveTasks(TaskList taskList) throws DukeException {"
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            file.createNewFile();"
+        "content": "        int numOfTasks \u003d taskList.getAmountOfTask();"
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        int num \u003d 1;"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            throw new DukeException(\"Sorry! I am unable to create new file at the path!\");"
+        "content": "        createFile(absolutePath);"
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        }"
+        "content": "        clearFile(absolutePath);"
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "        while (numOfTasks !\u003d 0) {"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "            addTask(taskList.getTask(num));"
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    /**"
+        "content": "            num++;"
       },
       {
         "lineNumber": 188,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * Add task to the file in hard disk."
+        "content": "            numOfTasks--;"
       },
       {
         "lineNumber": 189,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     *"
+        "content": "        }"
       },
       {
         "lineNumber": 190,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @param task task to be added"
+        "content": "    }"
       },
       {
         "lineNumber": 191,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @throws DukeException occurs when IO Exception occurs"
+        "content": ""
       },
       {
         "lineNumber": 192,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 193,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    public void addTask(Task task) throws DukeException {"
+        "content": "     * Clear all contents inside the file at the path."
       },
       {
         "lineNumber": 194,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        String taskType;"
+        "content": "     *"
       },
       {
         "lineNumber": 195,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        int status;"
+        "content": "     * @param path file located at"
       },
       {
         "lineNumber": 196,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        String period;"
+        "content": "     */"
       },
       {
         "lineNumber": 197,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        String taskDescription;"
+        "content": "    public void clearFile(String path) throws DukeException {"
       },
       {
         "lineNumber": 198,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        switch (task.getType()) {"
+        "content": "        writeToHardDisk(\"\", path, false);"
       },
       {
         "lineNumber": 199,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        case \"todo\":"
+        "content": "    }"
       },
       {
         "lineNumber": 200,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            taskType \u003d \"T\";"
+        "content": ""
       },
       {
         "lineNumber": 201,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            status \u003d task.getStatus() ? 1 : 0;"
+        "content": "    /**"
       },
       {
         "lineNumber": 202,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            taskDescription \u003d task.getDescription();"
+        "content": "     * Create file when no file exist at the path."
       },
       {
         "lineNumber": 203,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            writeToHardDisk(taskType + \" | \" + status + \" | \" + taskDescription + \"\\n\","
+        "content": "     *"
       },
       {
         "lineNumber": 204,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "                    absolutePath, true);"
+        "content": "     * @param path path the file located at"
       },
       {
         "lineNumber": 205,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            break;"
+        "content": "     * @throws DukeException occurs when IOException happens"
       },
       {
         "lineNumber": 206,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        case \"event\":"
+        "content": "     */"
       },
       {
         "lineNumber": 207,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            taskType \u003d \"E\";"
+        "content": "    public void createFile(String path) throws DukeException {"
       },
       {
         "lineNumber": 208,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            status \u003d task.getStatus() ? 1 : 0;"
+        "content": "        try {"
       },
       {
         "lineNumber": 209,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            taskDescription \u003d task.getDescription();"
+        "content": "            File file \u003d new File(path);"
       },
       {
         "lineNumber": 210,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            period \u003d task.getPeriod();"
+        "content": "            file.createNewFile();"
       },
       {
         "lineNumber": 211,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            writeToHardDisk(taskType + \" | \" + status + \" | \" + taskDescription + \" | \" + period + \"\\n\","
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 212,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "                    absolutePath, true);"
+        "content": "            throw new DukeException(\"Sorry! I am unable to create new file at the path!\");"
       },
       {
         "lineNumber": 213,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            break;"
+        "content": "        }"
       },
       {
         "lineNumber": 214,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        case \"deadline\":"
+        "content": "    }"
       },
       {
         "lineNumber": 215,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            taskType \u003d \"D\";"
+        "content": ""
       },
       {
         "lineNumber": 216,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            status \u003d task.getStatus() ? 1 : 0;"
+        "content": "    /**"
       },
       {
         "lineNumber": 217,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            taskDescription \u003d task.getDescription();"
+        "content": "     * Add task to the file in hard disk."
       },
       {
         "lineNumber": 218,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            period \u003d task.getPeriod();"
+        "content": "     *"
       },
       {
         "lineNumber": 219,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            writeToHardDisk(taskType + \" | \" + status + \" | \" + taskDescription + \" | \" + period + \"\\n\","
+        "content": "     * @param task task to be added"
       },
       {
         "lineNumber": 220,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "                    absolutePath, true);"
+        "content": "     * @throws DukeException occurs when IO Exception occurs"
       },
       {
         "lineNumber": 221,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            break;"
+        "content": "     */"
       },
       {
         "lineNumber": 222,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        default:"
+        "content": "    public void addTask(Task task) throws DukeException {"
       },
       {
         "lineNumber": 223,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            throw new DukeException(\"Warning! I do not know what format to save the task as!\");"
+        "content": "        String taskType;"
       },
       {
         "lineNumber": 224,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        }"
+        "content": "        int status;"
       },
       {
         "lineNumber": 225,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "        String period;"
       },
       {
         "lineNumber": 226,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "        String taskDescription;"
       },
       {
         "lineNumber": 227,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    /**"
+        "content": "        switch (task.getType()) {"
       },
       {
         "lineNumber": 228,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * Get path where the files stored at hard disk."
+        "content": "        case \"todo\":"
       },
       {
         "lineNumber": 229,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     *"
+        "content": "            taskType \u003d \"T\";"
       },
       {
         "lineNumber": 230,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @return path object"
+        "content": "            status \u003d task.getStatus() ? 1 : 0;"
       },
       {
         "lineNumber": 231,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     */"
+        "content": "            taskDescription \u003d task.getDescription();"
       },
       {
         "lineNumber": 232,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    public Path getPath() {"
+        "content": "            writeToHardDisk(taskType + \" | \" + status + \" | \" + taskDescription + \"\\n\","
       },
       {
         "lineNumber": 233,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        return filePath;"
+        "content": "                    absolutePath, true);"
       },
       {
         "lineNumber": 234,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "            break;"
       },
       {
         "lineNumber": 235,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "        case \"event\":"
       },
       {
         "lineNumber": 236,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    /**"
+        "content": "            taskType \u003d \"E\";"
       },
       {
         "lineNumber": 237,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * Write a line to the file in hard disk."
+        "content": "            status \u003d task.getStatus() ? 1 : 0;"
       },
       {
         "lineNumber": 238,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     *"
+        "content": "            taskDescription \u003d task.getDescription();"
       },
       {
         "lineNumber": 239,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @param sentence   sentence that write to the file"
+        "content": "            period \u003d task.getPeriod();"
       },
       {
         "lineNumber": 240,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @param path       path that the file located"
+        "content": "            writeToHardDisk(taskType + \" | \" + status + \" | \" + taskDescription + \" | \" + period + \"\\n\","
       },
       {
         "lineNumber": 241,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @param appendMode true: append, false: overwrite the file"
+        "content": "                    absolutePath, true);"
       },
       {
         "lineNumber": 242,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     * @throws DukeException occurs when IO Exception occurs"
+        "content": "            break;"
       },
       {
         "lineNumber": 243,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "     */"
+        "content": "        case \"deadline\":"
       },
       {
         "lineNumber": 244,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    public void writeToHardDisk(String sentence, String path, boolean appendMode) throws DukeException {"
+        "content": "            taskType \u003d \"D\";"
       },
       {
         "lineNumber": 245,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        try {"
+        "content": "            status \u003d task.getStatus() ? 1 : 0;"
       },
       {
         "lineNumber": 246,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            fw \u003d new FileWriter(path, appendMode);"
+        "content": "            taskDescription \u003d task.getDescription();"
       },
       {
         "lineNumber": 247,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            fw.write(sentence);"
+        "content": "            period \u003d task.getPeriod();"
       },
       {
         "lineNumber": 248,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            fw.close();"
+        "content": "            writeToHardDisk(taskType + \" | \" + status + \" | \" + taskDescription + \" | \" + period + \"\\n\","
       },
       {
         "lineNumber": 249,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "                    absolutePath, true);"
       },
       {
         "lineNumber": 250,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "            throw new DukeException(\"Oops! There are error occurs: \" + e.getMessage());"
+        "content": "            break;"
       },
       {
         "lineNumber": 251,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        }"
+        "content": "        default:"
       },
       {
         "lineNumber": 252,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": ""
+        "content": "            throw new DukeException(\"Warning! I do not know what format to save the task as!\");"
       },
       {
         "lineNumber": 253,
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 254,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 255,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 256,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 257,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     * Get path where the files stored at hard disk."
+      },
+      {
+        "lineNumber": 258,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 259,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     * @return path object"
+      },
+      {
+        "lineNumber": 260,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 261,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "    public Path getPath() {"
+      },
+      {
+        "lineNumber": 262,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "        return filePath;"
+      },
+      {
+        "lineNumber": 263,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 264,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 265,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 266,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     * Write a line to the file in hard disk."
+      },
+      {
+        "lineNumber": 267,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 268,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     * @param sentence   sentence that write to the file"
+      },
+      {
+        "lineNumber": 269,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     * @param path       path that the file located"
+      },
+      {
+        "lineNumber": 270,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     * @param appendMode true: append, false: overwrite the file"
+      },
+      {
+        "lineNumber": 271,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     * @throws DukeException occurs when IO Exception occurs"
+      },
+      {
+        "lineNumber": 272,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 273,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "    public void writeToHardDisk(String sentence, String path, boolean appendMode) throws DukeException {"
+      },
+      {
+        "lineNumber": 274,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 275,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "            fw \u003d new FileWriter(path, appendMode);"
+      },
+      {
+        "lineNumber": 276,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "            fw.write(sentence);"
+      },
+      {
+        "lineNumber": 277,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "            fw.close();"
+      },
+      {
+        "lineNumber": 278,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 279,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "            throw new DukeException(\"Oops! There are error occurs: \" + e.getMessage());"
+      },
+      {
+        "lineNumber": 280,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 281,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 282,
+        "author": {
+          "gitId": "Exeexe93"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 283,
         "author": {
           "gitId": "Exeexe93"
         },
@@ -10261,7 +10448,7 @@
       }
     ],
     "authorContributionMap": {
-      "Exeexe93": 254
+      "Exeexe93": 283
     }
   },
   {
@@ -15845,7 +16032,7 @@
         "author": {
           "gitId": "Exeexe93"
         },
-        "content": "        \u003cLabel fx:id\u003d\"dialog\" alignment\u003d\"TOP_LEFT\" text\u003d\"Label\" wrapText\u003d\"true\"\u003e"
+        "content": "        \u003cLabel fx:id\u003d\"dialog\" alignment\u003d\"TOP_LEFT\" minHeight\u003d\"-Infinity\" text\u003d\"Label\" wrapText\u003d\"true\"\u003e"
       },
       {
         "lineNumber": 11,

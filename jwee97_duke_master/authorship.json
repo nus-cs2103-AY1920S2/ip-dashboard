@@ -1,115 +1,982 @@
 [
   {
-    "path": "src/main/java/DateAndTime.java",
+    "path": "src/main/java/duke/AddCommand.java",
     "fileType": "java",
     "lines": [
       {
         "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Add command."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class AddCommand implements Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        if (task.contains(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            String[] retrieveDateArray \u003d task.split(\" /by \");"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            if (retrieveDateArray.length \u003c 2) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                throw new DukeException(ui.showDeadlineDescriptionError());"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            String[] retrieveTaskArray \u003d retrieveDateArray[0].split(\" \", 2);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            Deadline deadline \u003d new Deadline(retrieveTaskArray[1], retrieveDateArray[1]);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            taskList.setListArray(deadline);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            ui.showTaskAddedMessage(deadline, taskList);"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            storage.saveToFile(deadline.toString());"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(task.contains(\"event\")){"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            String[] retrieveDateArray \u003d task.split(\" /at \");"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            if(retrieveDateArray.length \u003c 2){"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                throw new DukeException(ui.showEventDescriptionError());"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            String[] retrieveTaskArray \u003d retrieveDateArray[0].split(\" \", 2);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            Event event \u003d new Event(retrieveTaskArray[1], retrieveDateArray[1]);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            taskList.setListArray(event);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            ui.showTaskAddedMessage(event, taskList);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            storage.saveToFile(event.toString());"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else {"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            String[] retrieveTaskArray \u003d task.split(\" \", 2);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            if(retrieveTaskArray.length \u003c 2){"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                throw new DukeException(ui.showTodoDescriptionError());"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            Todo todo \u003d new Todo(retrieveTaskArray[1]);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            taskList.setListArray(todo);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            ui.showTaskAddedMessage(todo, taskList);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            storage.saveToFile(todo.toString());"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 55
+    }
+  },
+  {
+    "path": "src/main/java/duke/ByeCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Bye command."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class ByeCommand implements Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        storage.newSave(taskList);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        ui.showGoodbyeMessage();"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 21
+    }
+  },
+  {
+    "path": "src/main/java/duke/Command.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The interface Command."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public interface Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Function for all execution commands."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param task     the task"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param taskList the task list"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param ui       the ui"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param storage  the storage"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @throws IOException   the io exception"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @throws DukeException the duke exception"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException;"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Function to check if duke will exit."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the boolean"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public boolean isExit();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 29
+    }
+  },
+  {
+    "path": "src/main/java/duke/DateAndTime.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
         "author": {
           "gitId": "jwee97"
         },
         "content": "import java.time.LocalDate;"
       },
       {
-        "lineNumber": 2,
+        "lineNumber": 4,
         "author": {
           "gitId": "jwee97"
         },
         "content": "import java.time.format.DateTimeFormatter;"
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 5,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Date and time."
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 9,
         "author": {
           "gitId": "jwee97"
         },
         "content": "public class DateAndTime {"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 10,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 11,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    private LocalDate date;"
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 12,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 8,
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new Date and time."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param dateInString the date in string"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 18,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    public DateAndTime(String dateInString) {"
       },
       {
-        "lineNumber": 9,
+        "lineNumber": 19,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        this.date \u003d LocalDate.parse(dateInString);"
       },
       {
-        "lineNumber": 10,
+        "lineNumber": 20,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 11,
+        "lineNumber": 21,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 12,
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Formats date to string."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the string"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 27,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    public String formatDateToString() {"
       },
       {
-        "lineNumber": 13,
+        "lineNumber": 28,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        return date.format(DateTimeFormatter.ofPattern(\"dd MMM yyyy\"));"
       },
       {
-        "lineNumber": 14,
+        "lineNumber": 29,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 15,
+        "lineNumber": 30,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 16,
+        "lineNumber": 31,
         "author": {
           "gitId": "jwee97"
         },
@@ -117,120 +984,239 @@
       }
     ],
     "authorContributionMap": {
-      "jwee97": 16
+      "jwee97": 31
     }
   },
   {
-    "path": "src/main/java/Deadline.java",
+    "path": "src/main/java/duke/Deadline.java",
     "fileType": "java",
     "lines": [
       {
         "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Deadline."
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 6,
         "author": {
           "gitId": "jwee97"
         },
         "content": "public class Deadline extends Task {"
       },
       {
-        "lineNumber": 2,
+        "lineNumber": 7,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The Date and time."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 11,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    DateAndTime dateAndTime;"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The Date."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 15,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    protected String date;"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 16,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new Deadline."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param description the description"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param date        the date"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 23,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    public Deadline(String description, String date) {"
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 24,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        super(description);"
       },
       {
-        "lineNumber": 8,
+        "lineNumber": 25,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        this.date \u003d date;"
       },
       {
-        "lineNumber": 9,
+        "lineNumber": 26,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        dateAndTime \u003d new DateAndTime(date);"
       },
       {
-        "lineNumber": 10,
+        "lineNumber": 27,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 11,
+        "lineNumber": 28,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 12,
+        "lineNumber": 29,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    @Override"
       },
       {
-        "lineNumber": 13,
+        "lineNumber": 30,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    public String toString() {"
       },
       {
-        "lineNumber": 14,
+        "lineNumber": 31,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        return \"[D]\" + super.toString() + \" (by: \" + dateAndTime.formatDateToString() + \")\";"
       },
       {
-        "lineNumber": 15,
+        "lineNumber": 32,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 16,
+        "lineNumber": 33,
         "author": {
           "gitId": "jwee97"
         },
@@ -238,57 +1224,516 @@
       }
     ],
     "authorContributionMap": {
-      "jwee97": 16
+      "jwee97": 33
     }
   },
   {
-    "path": "src/main/java/DukeException.java",
+    "path": "src/main/java/duke/DeleteCommand.java",
     "fileType": "java",
     "lines": [
       {
         "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Delete command."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class DeleteCommand implements Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        String[] split \u003d task.split(\" \");"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        int num \u003d Integer.parseInt(split[1]);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        if(num \u003e taskList.getArraySize() || num \u003c\u003d 0) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            throw new DukeException(ui.showTaskDoesNotExistMessage());"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        ui.showTaskDeletedMessage(taskList, num);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        taskList.deleteTask(num);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 28
+    }
+  },
+  {
+    "path": "src/main/java/duke/DoneCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Done command."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class DoneCommand implements Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        String[] split \u003d task.split(\" \");"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        int num \u003d Integer.parseInt(split[1]);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        Task toComplete \u003d taskList.getTask(num);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        toComplete.setCompleted(true);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        ui.showTaskDoneMessage(toComplete, num);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 25
+    }
+  },
+  {
+    "path": "src/main/java/duke/DukeException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Duke exception."
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 6,
         "author": {
           "gitId": "jwee97"
         },
         "content": "public class DukeException extends Exception{"
       },
       {
-        "lineNumber": 2,
+        "lineNumber": 7,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 8,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public DukeException(String errorMessage){"
+        "content": "    /**"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new Duke exception."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param errorMessage the error message"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public DukeException(String errorMessage) {"
+      },
+      {
+        "lineNumber": 14,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        super(errorMessage);"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 15,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 16,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 17,
         "author": {
           "gitId": "jwee97"
         },
@@ -296,906 +1741,343 @@
       }
     ],
     "authorContributionMap": {
-      "jwee97": 7
+      "jwee97": 17
     }
   },
   {
-    "path": "src/main/java/Event.java",
+    "path": "src/main/java/duke/Event.java",
     "fileType": "java",
     "lines": [
       {
         "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Event."
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 6,
         "author": {
           "gitId": "jwee97"
         },
         "content": "public class Event extends Task {"
       },
       {
-        "lineNumber": 2,
+        "lineNumber": 7,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The Date and time."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 11,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    DateAndTime dateAndTime;"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The Date."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 15,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    protected String date;"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 16,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new Event."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param description the description"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param date        the date"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 23,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    public Event(String description, String date) {"
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 24,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        super(description);"
       },
       {
-        "lineNumber": 8,
+        "lineNumber": 25,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        this.date \u003d date;"
       },
       {
-        "lineNumber": 9,
+        "lineNumber": 26,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        dateAndTime \u003d new DateAndTime(date);"
       },
       {
-        "lineNumber": 10,
+        "lineNumber": 27,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 11,
+        "lineNumber": 28,
         "author": {
           "gitId": "jwee97"
         },
         "content": ""
       },
       {
-        "lineNumber": 12,
+        "lineNumber": 29,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    @Override"
       },
       {
-        "lineNumber": 13,
+        "lineNumber": 30,
         "author": {
           "gitId": "jwee97"
         },
         "content": "    public String toString() {"
       },
       {
-        "lineNumber": 14,
+        "lineNumber": 31,
         "author": {
           "gitId": "jwee97"
         },
         "content": "        return \"[E]\" + super.toString() + \" (at: \" + dateAndTime.formatDateToString() + \")\";"
       },
       {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "jwee97": 16
-    }
-  },
-  {
-    "path": "src/main/java/Main.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "import java.io.IOException;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "import java.util.Scanner;"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "public class Main {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    public static void main(String[] args) throws DukeException{"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        Scanner sc \u003d new Scanner(System.in);"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        MyList list \u003d new MyList();"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        Storage storage \u003d new Storage();"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        storage.loadFile(list);"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        System.out.println(\"Hello Master\\nWhat can I do for you today?\");"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        while(sc.hasNext()){"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "            try{"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                String word \u003d sc.nextLine();"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                if(word.equals(\"bye\")){"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    storage.newSave(list);"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    System.out.println(\"Have a nice day sir!\");"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    break;"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                else if(word.equals(\"list\")){"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printList();"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                else if(word.contains(\"done\")){"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    String[] split \u003d word.split(\" \");"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    int num \u003d Integer.parseInt(split[1]);"
-      },
-      {
         "lineNumber": 32,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                    Task toComplete \u003d list.getTask(num);"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                    toComplete.setCompleted(true);"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    System.out.println(\"I shall mark task \" + num + \" as completed\");"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    System.out.println(toComplete);"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                else if(word.contains(\"deadline\")){"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    String[] retrieveDateArray \u003d word.split(\" /by \");"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    if(retrieveDateArray.length \u003c 2){"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                        throw new DukeException(\"Sorry, the description of a deadline cannot be empty\");"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    }"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    String[] retrieveTaskArray \u003d retrieveDateArray[0].split(\" \", 2);"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    Deadline deadline \u003d new Deadline(retrieveTaskArray[1], retrieveDateArray[1]);"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.setListArray(deadline);"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printTaskAdded(deadline);"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printCounter();"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    storage.saveToFile(deadline.toString());"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                else if(word.contains(\"event\")){"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    String[] retrieveDateArray \u003d word.split(\" /at \");"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    if(retrieveDateArray.length \u003c 2){"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                        throw new DukeException(\"Sorry, the description of an event cannot be empty\");"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    }"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    String[] retrieveTaskArray \u003d retrieveDateArray[0].split(\" \", 2);"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    Event event \u003d new Event(retrieveTaskArray[1], retrieveDateArray[1]);"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.setListArray(event);"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printTaskAdded(event);"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printCounter();"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    storage.saveToFile(event.toString());"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                else if(word.contains(\"todo\")){"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    String[] retrieveTaskArray \u003d word.split(\" \", 2);"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    if(retrieveTaskArray.length \u003c 2){"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                        throw new DukeException(\"Sorry, the description of a todo cannot be empty\");"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    }"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    Todo todo \u003d new Todo(retrieveTaskArray[1]);"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.setListArray(todo);"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printTaskAdded(todo);"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printCounter();"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    storage.saveToFile(todo.toString());"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                else if(word.contains(\"delete\")){"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    String[] split \u003d word.split(\" \");"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    int num \u003d Integer.parseInt(split[1]);"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.deleteTask(num);"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    list.printCounter();"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                else {"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                    throw new DukeException(\"I\u0027m sorry, but I do not understand what you mean\");"
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "            } catch(DukeException | IOException e) {"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "                System.out.println(e.getMessage());"
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        sc.close();"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "-"
-        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "jwee97": 94,
-      "-": 2
+      "jwee97": 33
     }
   },
   {
-    "path": "src/main/java/MyList.java",
+    "path": "src/main/java/duke/FindCommand.java",
     "fileType": "java",
     "lines": [
       {
         "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
         "author": {
           "gitId": "jwee97"
         },
         "content": "import java.util.ArrayList;"
       },
       {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "public class MyList {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
         "lineNumber": 5,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public MyList(){}"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    private ArrayList\u003cTask\u003e listArray \u003d new ArrayList\u003c\u003e();"
+        "content": " * The type Find command."
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    private int counter \u003d 0;"
+        "content": " */"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "public class FindCommand implements Command {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void setListArray(Task task){"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        this.listArray.add(task);"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        counter++;"
+        "content": "    @Override"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {"
       },
       {
         "lineNumber": 14,
@@ -1209,21 +2091,21 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public int getArraySize() {"
+        "content": "        String[] split \u003d task.split(\" \", 2);"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        return listArray.size();"
+        "content": "        String taskToFind \u003d split[1];"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "        ArrayList\u003cTask\u003e matchedTask \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 18,
@@ -1237,21 +2119,21 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void printTaskAdded(Task task) {"
+        "content": "        for(int i \u003d 0; i \u003c taskList.getArraySize(); i++) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        System.out.println(\"added: \" + task.toString());"
+        "content": "            Task currTask \u003d taskList.getTask(i+1);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "            String taskName \u003d currTask.getItem();"
       },
       {
         "lineNumber": 22,
@@ -1265,171 +2147,143 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public Task getTask(int num) {"
+        "content": "            if(taskName.contains(taskToFind)) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        return listArray.get(num-1);"
+        "content": "                matchedTask.add(currTask);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "            }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void deleteTask(int num) {"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        System.out.println(\"Noted! The task \" + listArray.get(num-1).getItem() + \" will be removed\");"
+        "content": "        if(matchedTask.isEmpty()) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        listArray.remove(num-1);"
+        "content": "            ui.showNoTaskFoundMessage();"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        counter--;"
+        "content": "        } else {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "            ui.showFoundResultsMessage();"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "            for(int i \u003d 0; i \u003c matchedTask.size(); i++) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void printCounter() {"
+        "content": "                System.out.println((i+1) + \". \" + matchedTask.get(i).toString());"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        if(counter \u003c\u003d 1){"
+        "content": "            }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            System.out.println(\"You have \" + counter + \" task on the agenda\");"
+        "content": "        }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        } else {"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            System.out.println(\"You have \" + counter + \" tasks on the agenda\");"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "    @Override"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void printList() {"
+        "content": "        return false;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        for(int i\u003d0; i\u003ccounter; i++){"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "            System.out.println(i+1 + \". \" + listArray.get(i));"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "jwee97"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 47,
+        "lineNumber": 43,
         "author": {
           "gitId": "jwee97"
         },
@@ -1437,11 +2291,11 @@
       }
     ],
     "authorContributionMap": {
-      "jwee97": 47
+      "jwee97": 43
     }
   },
   {
-    "path": "src/main/java/Storage.java",
+    "path": "src/main/java/duke/ListCommand.java",
     "fileType": "java",
     "lines": [
       {
@@ -1449,182 +2303,331 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.awt.desktop.SystemEventListener;"
+        "content": "package duke;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.io.File;"
+        "content": ""
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.io.FileNotFoundException;"
+        "content": "import java.io.IOException;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.io.FileWriter;"
+        "content": ""
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.io.IOException;"
+        "content": "/**"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.text.ParseException;"
+        "content": " * The type List command."
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.text.SimpleDateFormat;"
+        "content": " */"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.util.Date;"
+        "content": "public class ListCommand implements Command {"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "import java.util.Scanner;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "public class Storage {"
+        "content": "    public void execute(String task, MyList taskList, Ui ui, Storage storage) throws IOException, DukeException {"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "        ui.showTaskList(taskList);"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    String filePath \u003d \"data/duke.txt\";"
+        "content": "    }"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    SimpleDateFormat dateInput \u003d new SimpleDateFormat(\"dd MMM yyyy\");"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    SimpleDateFormat dateOutput \u003d new SimpleDateFormat(\"yyyy-MM-dd\");"
+        "content": "    @Override"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void loadFile(MyList myList) {"
+        "content": "        return false;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        try {"
+        "content": "    }"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            File file \u003d new File(filePath);"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            Scanner sc \u003d new Scanner(file);"
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 20
+    }
+  },
+  {
+    "path": "src/main/java/duke/Main.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Main."
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class Main {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The entry point of application."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param args the input arguments"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @throws DukeException the duke exception"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public static void main(String[] args) throws DukeException{"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        Scanner sc \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        MyList taskList \u003d new MyList();"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        Storage storage \u003d new Storage();"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            while(sc.hasNextLine()) {"
+        "content": "        storage.loadFile(taskList);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                String listItem \u003d sc.nextLine();"
+        "content": "        Ui ui \u003d new Ui();"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                String[] splitStringArr \u003d splitString(listItem);"
+        "content": "        Parser parser \u003d new Parser(ui);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                String task \u003d splitStringArr[0];"
+        "content": "        boolean isExit \u003d false;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                String status \u003d splitStringArr[1];"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                String name \u003d splitStringArr[2];"
+        "content": "        ui.showStartMessage();"
       },
       {
         "lineNumber": 27,
@@ -1638,175 +2641,985 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                switch (task) {"
+        "content": "        while(!isExit) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                case \"T\": Todo todo \u003d new Todo(name);"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          todo.setCompleted(status);"
+        "content": "            try{"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          myList.setListArray(todo);"
+        "content": "                String word \u003d sc.nextLine();"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          break;"
+        "content": "                Command command \u003d parser.parseCommand(word);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                case \"D\": String[] deadlineArray \u003d name.split(\" \\\\(by: \");"
+        "content": "                command.execute(word, taskList, ui, storage);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          String deadlineDate \u003d deadlineArray[1].substring(0, deadlineArray[1].indexOf(\")\"));"
+        "content": "                isExit \u003d command.isExit();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          Date parseDeadlineDate \u003d dateInput.parse(deadlineDate);"
+        "content": "            } catch(DukeException e) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          String formatDeadlineDate \u003d dateOutput.format(parseDeadlineDate);"
+        "content": "                System.out.println(e.getMessage());"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          Deadline deadline \u003d new Deadline(deadlineArray[0], formatDeadlineDate);"
+        "content": "            } catch(IOException e) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          deadline.setCompleted(status);"
+        "content": "                System.out.println(e.getMessage());"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          myList.setListArray(deadline);"
+        "content": "            }"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          break;"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                case \"E\": String[] eventArray \u003d name.split(\" \\\\(at: \");"
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          String eventDate \u003d eventArray[1].substring(0, eventArray[1].indexOf(\")\"));"
+        "content": ""
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          Date parseEventDate \u003d dateInput.parse(eventDate);"
+        "content": "        sc.close();"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          String formatEventDate \u003d dateOutput.format(parseEventDate);"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
-          "gitId": "jwee97"
+          "gitId": "-"
         },
-        "content": "                          Event event \u003d new Event(eventArray[0], formatEventDate);"
+        "content": "    }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          event.setCompleted(status);"
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 45,
+      "-": 2
+    }
+  },
+  {
+    "path": "src/main/java/duke/MyList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type MyList."
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class MyList {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new list for tasks."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public MyList(){}"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    private ArrayList\u003cTask\u003e listArray \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    private int counter \u003d 0;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Sets list array."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param task the task"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void setListArray(Task task){"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        this.listArray.add(task);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        counter++;"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Gets array size."
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the array size"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public int getArraySize() {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return listArray.size();"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Gets task."
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param num the num"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the task"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public Task getTask(int num) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return listArray.get(num-1);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          myList.setListArray(event);"
+        "content": "    /**"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                          break;"
+        "content": "     * Deletes task."
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "                }"
+        "content": "     *"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            }"
+        "content": "     * @param num the num"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        } catch (FileNotFoundException | ParseException e) {"
+        "content": "     */"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            e.printStackTrace();"
+        "content": "    public void deleteTask(int num) {"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        listArray.remove(num-1);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        counter--;"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Prints list."
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void printList() {"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        for(int i\u003d0; i\u003ccounter; i++){"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            System.out.println(i+1 + \". \" + listArray.get(i));"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 66
+    }
+  },
+  {
+    "path": "src/main/java/duke/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Parser."
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    private Ui ui;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new Parser."
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param ui the ui"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public Parser(Ui ui) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        this.ui \u003d ui;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Parses command given by the user."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param command the command"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the command"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @throws DukeException the duke exception"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public Command parseCommand(String command) throws DukeException {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        if (command.contains(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new AddCommand();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(command.contains(\"event\")) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new AddCommand();"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(command.contains(\"todo\")) {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new AddCommand();"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(command.contains(\"bye\")) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new ByeCommand();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(command.contains(\"done\")) {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new DoneCommand();"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(command.contains(\"delete\")) {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new DeleteCommand();"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(command.contains(\"list\")) {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new ListCommand();"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else if(command.contains(\"find\")){"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            return new FindCommand();"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        else {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            throw new DukeException(ui.showWrongCommandError());"
       },
       {
         "lineNumber": 53,
@@ -1814,6 +3627,1890 @@
           "gitId": "jwee97"
         },
         "content": "        }"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 57
+    }
+  },
+  {
+    "path": "src/main/java/duke/Storage.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.File;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.FileNotFoundException;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.FileWriter;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.text.ParseException;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.text.SimpleDateFormat;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.util.Date;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Storage."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class Storage {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The File path."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    String filePath \u003d \"data/duke.txt\";"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The Date input."
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    SimpleDateFormat dateInput \u003d new SimpleDateFormat(\"dd MMM yyyy\");"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * The Date output."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    SimpleDateFormat dateOutput \u003d new SimpleDateFormat(\"yyyy-MM-dd\");"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Loads file."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param myList the my list"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void loadFile(MyList myList) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            File file \u003d new File(filePath);"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            Scanner sc \u003d new Scanner(file);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            while(sc.hasNextLine()) {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                String listItem \u003d sc.nextLine();"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                String[] splitStringArr \u003d splitString(listItem);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                String task \u003d splitStringArr[0];"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                String status \u003d splitStringArr[1];"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                String name \u003d splitStringArr[2];"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                switch (task) {"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                case \"T\": Todo todo \u003d new Todo(name);"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          todo.setCompleted(status);"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          myList.setListArray(todo);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          break;"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                case \"D\": String[] deadlineArray \u003d name.split(\" \\\\(by: \");"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          String deadlineDate \u003d deadlineArray[1].substring(0, deadlineArray[1].indexOf(\")\"));"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          Date parseDeadlineDate \u003d dateInput.parse(deadlineDate);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          String formatDeadlineDate \u003d dateOutput.format(parseDeadlineDate);"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          Deadline deadline \u003d new Deadline(deadlineArray[0], formatDeadlineDate);"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          deadline.setCompleted(status);"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          myList.setListArray(deadline);"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          break;"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                case \"E\": String[] eventArray \u003d name.split(\" \\\\(at: \");"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          String eventDate \u003d eventArray[1].substring(0, eventArray[1].indexOf(\")\"));"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          Date parseEventDate \u003d dateInput.parse(eventDate);"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          String formatEventDate \u003d dateOutput.format(parseEventDate);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          Event event \u003d new Event(eventArray[0], formatEventDate);"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          event.setCompleted(status);"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          myList.setListArray(event);"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                          break;"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        } catch (FileNotFoundException | ParseException e) {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            e.printStackTrace();"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Saves to file."
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param string the string"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @throws IOException the io exception"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void saveToFile(String string) throws IOException {"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        File file \u003d new File(filePath);"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        FileWriter fileWriter \u003d new FileWriter(file, true);"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        fileWriter.write(string + \"\\n\");"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        fileWriter.close();"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Saves the file upon using the bye command on duke."
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param list the list"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @throws IOException the io exception"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void newSave(MyList list) throws IOException {"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        File file \u003d new File(filePath);"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        FileWriter fileWriter \u003d new FileWriter(file, false);"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        for(int i \u003d 1; i \u003c\u003d list.getArraySize(); i++) {"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            fileWriter.write(list.getTask(i).toString());"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        fileWriter.close();"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    private String[] splitString(String string) {"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        String[] result \u003d new String[3];"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        String[] splitString \u003d string.split(\"\\\\]\");"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        String[] retrieveTask \u003d splitString[0].split(\"\\\\[\");"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        String[] retrieveStatus \u003d splitString[1].split(\"\\\\[\");"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        result[0] \u003d retrieveTask[1];"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        result[1] \u003d retrieveStatus[1];"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        result[2] \u003d splitString[2].substring(1);"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 113
+    }
+  },
+  {
+    "path": "src/main/java/duke/Task.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Task."
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class Task{"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    private String item;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    private boolean isCompleted;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new Task."
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param item the item"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public Task(String item) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        this.item \u003d item;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        isCompleted \u003d false;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Prints the item added."
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the string"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String printItemAdded() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return item + \" has been added to list\";"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Gets the name of the item."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the item"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String getItem() {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return this.item;"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Sets the boolean of the task completeness by taking in a boolean."
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param isCompleted the is completed"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void setCompleted(boolean isCompleted) {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        this.isCompleted \u003d isCompleted;"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Sets the boolean of the task completeness by taking in a unicode."
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param string the string"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void setCompleted(String string) {"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        if(string.equals(\"\\u2713\")) {"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "            this.isCompleted \u003d true;"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Gets the status icon."
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the status icon"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String getStatusIcon() {"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return (isCompleted ? \"\\u2713\" : \"\\u2718\"); //return tick or X symbols"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return \"[\" + getStatusIcon() + \"] \" + item;"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 73
+    }
+  },
+  {
+    "path": "src/main/java/duke/Todo.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Todo."
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class Todo extends Task {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Instantiates a new Todo."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param description the description"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public Todo(String description) {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return \"[T]\" + super.toString();"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "jwee97": 21
+    }
+  },
+  {
+    "path": "src/main/java/duke/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "package duke;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " * The type Ui."
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows start message."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void showStartMessage() {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"Hello Sir\\nWhat can I do for you today?\");"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows goodbye message."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void showGoodbyeMessage() {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"Have a nice day sir!\");"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows task done message."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param task       the task"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param taskNumber the task number"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void showTaskDoneMessage(Task task, int taskNumber) {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"I shall mark task \" + taskNumber + \" as completed\");"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(task.toString());"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows task list."
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param taskList the task list"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void showTaskList(MyList taskList) {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"Here are the list of task:\");"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        taskList.printList();"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"You have \" + taskList.getArraySize() + \" task\");"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows task added message."
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param task     the task"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @param taskList the task list"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void showTaskAddedMessage(Task task, MyList taskList) {"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"I have added the following task:\");"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(task.toString());"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"You now have \" + taskList.getArraySize() + \" task\");"
       },
       {
         "lineNumber": 54,
@@ -1834,192 +5531,500 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void saveToFile(String string) throws IOException {"
+        "content": "    /**"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        File file \u003d new File(filePath);"
+        "content": "     * Shows task deleted message."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        FileWriter fileWriter \u003d new FileWriter(file, true);"
+        "content": "     *"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        fileWriter.write(string + \"\\n\");"
+        "content": "     * @param taskList   the task list"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        fileWriter.close();"
+        "content": "     * @param taskNumber the task number"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "    public void showTaskDeletedMessage(MyList taskList, int taskNumber) {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public void newSave(MyList list) throws IOException {"
+        "content": "        Task taskToDelete \u003d taskList.getTask(taskNumber);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        File file \u003d new File(filePath);"
+        "content": "        String taskName \u003d taskToDelete.getItem();"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        FileWriter fileWriter \u003d new FileWriter(file, false);"
+        "content": "        System.out.println(\"I shall delete task: \" + taskName);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        for(int i \u003d 1; i \u003c\u003d list.getArraySize(); i++) {"
+        "content": "    }"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "            fileWriter.write(list.getTask(i).toString());"
+        "content": ""
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        }"
+        "content": "    /**"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        fileWriter.close();"
+        "content": "     * Shows wrong command error."
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "     * @return the string"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    private String[] splitString(String string) {"
+        "content": "     */"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        String[] result \u003d new String[3];"
+        "content": "    public String showWrongCommandError() {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        String[] splitString \u003d string.split(\"\\\\]\");"
+        "content": "        return \"You have entered a command I do not understand\";"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        String[] retrieveTask \u003d splitString[0].split(\"\\\\[\");"
+        "content": "    }"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        String[] retrieveStatus \u003d splitString[1].split(\"\\\\[\");"
+        "content": ""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        result[0] \u003d retrieveTask[1];"
+        "content": "    /**"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        result[1] \u003d retrieveStatus[1];"
+        "content": "     * Shows deadline description error."
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        result[2] \u003d splitString[2].substring(1);"
+        "content": "     *"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        return result;"
+        "content": "     * @return the string"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "    public String showDeadlineDescriptionError() {"
       },
       {
         "lineNumber": 83,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return \"Sorry, the description of a deadline cannot be empty\";"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows event description error."
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the string"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String showEventDescriptionError() {"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return \"Sorry, the description of an event cannot be empty\";"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows todo description error."
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the string"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String showTodoDescriptionError() {"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return \"Sorry, the description of todo cannot be empty\";"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows task does not exist message."
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * @return the string"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public String showTaskDoesNotExistMessage() {"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        return \"Unable to delete a task that does not exist\";"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Show found results message."
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void showFoundResultsMessage() {"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"Here are the matching tasks in your list:\");"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     * Shows message if no task matches the find."
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    public void showNoTaskFoundMessage() {"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        System.out.println(\"No task found that matches your description\");"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 127,
         "author": {
           "gitId": "jwee97"
         },
@@ -2027,11 +6032,11 @@
       }
     ],
     "authorContributionMap": {
-      "jwee97": 83
+      "jwee97": 127
     }
   },
   {
-    "path": "src/main/java/Task.java",
+    "path": "src/test/java/EventTest.java",
     "fileType": "java",
     "lines": [
       {
@@ -2039,7 +6044,7 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "public class Task{"
+        "content": "import duke.Event;"
       },
       {
         "lineNumber": 2,
@@ -2053,14 +6058,14 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    private String item;"
+        "content": "import org.junit.jupiter.api.Test;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    private boolean isCompleted;"
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
       },
       {
         "lineNumber": 5,
@@ -2074,49 +6079,49 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public Task(String item) {"
+        "content": "public class EventTest {"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        this.item \u003d item;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        isCompleted \u003d false;"
+        "content": "    @Test"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "    public void test() {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "        Event event \u003d new Event(\"Major Exam\", \"2020-04-05\");"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public String printItemAdded() {"
+        "content": "        String result \u003d event.toString();"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        return item + \" has been added to list\";"
+        "content": "        assertEquals(\"[E][✘] Major Exam (at: 05 Apr 2020)\", result);"
       },
       {
         "lineNumber": 13,
@@ -2137,176 +6142,15 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public String getItem() {"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        return this.item;"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    public void setCompleted(boolean isCompleted) {"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        this.isCompleted \u003d isCompleted;"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    public void setCompleted(String string) {"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        if(string.equals(\"\\u2713\")) {"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "            this.isCompleted \u003d true;"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    public String getStatusIcon() {"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        return (isCompleted ? \"\\u2713\" : \"\\u2718\"); //return tick or X symbols"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "        return \"[\" + getStatusIcon() + \"] \" + item;"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "jwee97"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "jwee97"
-        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "jwee97": 38
+      "jwee97": 15
     }
   },
   {
-    "path": "src/main/java/Todo.java",
+    "path": "src/test/java/TodoTest.java",
     "fileType": "java",
     "lines": [
       {
@@ -2314,7 +6158,7 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "public class Todo extends Task {"
+        "content": "import duke.Todo;"
       },
       {
         "lineNumber": 2,
@@ -2328,59 +6172,87 @@
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public Todo(String description) {"
+        "content": "import org.junit.jupiter.api.Test;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        super(description);"
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "jwee97"
         },
-        "content": ""
+        "content": "public class TodoTest {"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    public String toString() {"
+        "content": "    @Test"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "        return \"[T]\" + super.toString();"
+        "content": "    public void test() {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "jwee97"
         },
-        "content": "    }"
+        "content": "        Todo todo \u003d new Todo(\"Read 10 Books\");"
       },
       {
         "lineNumber": 11,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        String result \u003d todo.toString();"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "        assertEquals(\"[T][✘] Read 10 Books\", result);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "jwee97"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
         "author": {
           "gitId": "jwee97"
         },
@@ -2388,7 +6260,7 @@
       }
     ],
     "authorContributionMap": {
-      "jwee97": 11
+      "jwee97": 15
     }
   },
   {
