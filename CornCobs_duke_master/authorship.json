@@ -183,7 +183,7 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    archiveVersion \u003d \"0.2\""
+        "content": "    archiveVersion \u003d \"0.2.1\""
       },
       {
         "lineNumber": 27,
@@ -2690,6 +2690,953 @@
     }
   },
   {
+    "path": "src/main/java/dude/command/HelpCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "package dude.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.parser.Parser;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.component.IUserInterface;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.component.TaskList;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.HashMap;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.Map;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "public class HelpCommand extends Command {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /** Mappings from commands to descriptions of their behavior. */"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static final Map\u003cString, String\u003e COMMAND_INFO \u003d new HashMap\u003c\u003e();"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    static {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"help\", \"Summons these help pages\");"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"bye\", \"Exits the program\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"list\", \"Shows all current tasks\");"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"today\", \"Shows all tasks occurring on today\");"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"done\", \"Marks the indicated task as done.\");"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"delete\", \"Deletes the indicated task from the list.\");"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"check\", \"Shows all tasks occurring on the given date.\");"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"todo\", \"Adds a new uncompleted todo task\");"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"deadline\", \"Adds a new uncompleted deadline with given due date\");"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"event\", \"Adds a new uncompleted event with given start and end dates\");"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        COMMAND_INFO.put(\"find\", \"Shows all tasks with descriptions that contain the given keyword\");"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private String helpTopic;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Initializes a HelpCommand which, when executed, displays usage information for all commands."
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public HelpCommand() {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        this.helpTopic \u003d \"all\";"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Initializes a HelpCommand which, when executed, displays information about the topic given."
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param helpTopic the topic to receive help from. Can be a command or -date, specified in Parser.USAGES."
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public HelpCommand(String helpTopic) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        this.helpTopic \u003d helpTopic;"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Shows useful help messages to the user regarding the topic given."
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param tasks the current TaskList before the command is executed. Can be modified by execute."
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param ui the IUserInterface to report results of successful commands."
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @throws CommandExecutionException if helpTopic is not a command or -date."
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public void execute(TaskList tasks, IUserInterface ui) throws CommandExecutionException {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        switch (helpTopic) {"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"all\":"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            helpAll(ui);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"-date\":"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            helpDate(ui);"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            helpCommand(helpTopic, ui);"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            break;"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private void helpAll(IUserInterface ui) {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ui.respond(() -\u003e {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            ui.speak(\"Hey man! I\u0027m Dude, the chillest chatbot you\u0027ve ever seen.\");"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            ui.speak(\"I can help you keep track of your tasks,\""
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                    + \" just tell me what you want in one of these formats:\""
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                    + System.lineSeparator());"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            for (String usageMsg : Parser.USAGES.values()) {"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                ui.speak(\"  \" + usageMsg);"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        });"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private void helpCommand(String command, IUserInterface ui) throws CommandExecutionException {"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        if (!COMMAND_INFO.containsKey(command)) {"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            throw new CommandExecutionException(\"I can\u0027t help you with that!\");"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        String additionalHelpMessage \u003d \"\";"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        if (isIndexedCommand(command)) {"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            additionalHelpMessage \u003d \"Use list, today, check or find to see each tasks\u0027 index.\";"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } else if (isDateCommand(command)) {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            additionalHelpMessage \u003d \"Use \u0027help -date\u0027 to learn more about the different date formats.\";"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ui.respond(command, \"\", COMMAND_INFO.get(command), \"\","
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"USAGE: \", \"\", Parser.USAGES.get(command), \"\", additionalHelpMessage);"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private void helpDate(IUserInterface ui) {"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ui.respond(\"I\u0027m great at understanding my dates\","
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"Of course I\u0027m great at understanding your dates, too!\","
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"You can tell me your dates in any of these ways:\");"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ui.respond(\"1. yyyy-mm-dd\", \"\","
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"Example: 2020-02-02\", \"\","
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"Nice and easy, I can\u0027t go wrong with this\");"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ui.respond(\"2. d MMM yyyy\", \"\","
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"Example: 2 Feb 2020\", \"\","
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"Even easier to remember and type!\");"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ui.respond(\"3. dayOfWeek [+number]\", \"\","
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"Examples:\", \"Monday +4\", \"Tue\", \"Sun +3\", \"\","
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"If just a day of the week is given, say Tue or Wed, the date is \""
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                + \"taken to be the next closest day from today. Eg. \u0027Tue\u0027 refers to \""
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                + \"next Tuesday.\","
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"If a number n is specified, the date is the given day n weeks from now. \""
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                + \"Eg. \u0027Monday +4\u0027 refers to the Monday 4 weeks from now\");"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ui.respond(\"4. number [day(s) | week(s) | month(s) | year(s)]\", \"\","
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"Examples:\", \"10 days\", \"4 weeks\", \"1 year\", \"\","
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                \"The given duration after today. Eg. If today is 2020-02-09, \u002710 days\u0027 \""
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                + \"would be 2020-02-19\");"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private boolean isIndexedCommand(String command) {"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        return command.equals(\"done\") || command.equals(\"delete\");"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private boolean isDateCommand(String command) {"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        switch (command) {"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"check\":"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"deadline\":"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"event\":"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return true;"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return false;"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "CornCobs": 134
+    }
+  },
+  {
     "path": "src/main/java/dude/command/ListCommand.java",
     "fileType": "java",
     "lines": [
@@ -3486,14 +4433,14 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "import dude.parser.Parser;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "public class Duke {"
+        "content": "import dude.parser.ParsingException;"
       },
       {
         "lineNumber": 7,
@@ -3507,311 +4454,325 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    private IStorage storage;"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    private TaskList tasks;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    private IUserInterface ui;"
+        "content": "    private IStorage storage;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    /**"
+        "content": "    private IUserInterface ui;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Initializes Duke chat bot with injected user interface, task list and storage services."
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param storage object that manages persistence of Duke\u0027s tasks."
+        "content": "     * Initializes Duke chat bot with injected user interface, task list and storage services."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param tasks initial tasks that Duke starts with."
+        "content": "     *"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param ui object that manages interaction with user"
+        "content": "     * @param storage object that manages persistence of Duke\u0027s tasks."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     */"
+        "content": "     * @param tasks initial tasks that Duke starts with."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    public Duke(IStorage storage, TaskList tasks, IUserInterface ui) {"
+        "content": "     * @param ui object that manages interaction with user"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        this.storage \u003d storage;"
+        "content": "     */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        this.tasks \u003d tasks;"
+        "content": "    public Duke(IStorage storage, TaskList tasks, IUserInterface ui) {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        this.ui \u003d ui;"
+        "content": "        this.storage \u003d storage;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "        this.tasks \u003d tasks;"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "        this.ui \u003d ui;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Saves the current TaskList by calling saveSession from the IStorage class used."
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @throws SecurityException if a security violation occurs while attempting to create the directory or save file."
+        "content": "     * Saves the current TaskList by calling saveSession from the IStorage class used."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    public void saveState() {"
+        "content": "     * @throws SecurityException if a security violation occurs while attempting to create the directory or save file."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        this.storage.saveSession(ui, tasks);"
+        "content": "     */"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "    public void saveState() {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "        this.storage.saveSession(ui, tasks);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Takes user input and responds to commands appropriately."
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Closes app when \"bye\" is given as input."
+        "content": "    /**"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     */"
+        "content": "     * Takes user input and responds to commands appropriately."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    public void serve() {"
+        "content": "     * Closes app when \"bye\" is given as input."
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            String msg \u003d ui.readCommand();"
+        "content": "    public void serve() {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            Command command \u003d Parser.parse(msg);"
+        "content": "        try {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            command.execute(tasks, ui);"
+        "content": "            String msg \u003d ui.readCommand();"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            if (command.isExit()) {"
+        "content": "            Command command \u003d Parser.parse(msg);"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                ui.close();"
+        "content": "            command.execute(tasks, ui);"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            }"
+        "content": "            if (command.isExit()) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        } catch (ParsingException e) {"
+        "content": "                ui.close();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            ui.respondParsingError(e.getMessage(), e.getUsageMsgs());"
+        "content": "            }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        } catch (CommandExecutionException e) {"
+        "content": "        } catch (ParsingException e) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            ui.respondError(e.getMessage());"
+        "content": "            ui.respondParsingError(e.getMessage(), e.getUsageMsg());"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        }"
+        "content": "        } catch (CommandExecutionException e) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "            ui.respondError(e.getMessage());"
       },
       {
         "lineNumber": 52,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
         "author": {
           "gitId": "CornCobs"
         },
@@ -3819,7 +4780,7 @@
       }
     ],
     "authorContributionMap": {
-      "CornCobs": 52
+      "CornCobs": 54
     }
   },
   {
@@ -4922,14 +5883,14 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param errorMsg A message describing the problem with the user\u0027s input."
+        "content": "     * @param errorMsg a message describing the problem with the user\u0027s input."
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param usageMsgs variable number of strings describing the correct format of input."
+        "content": "     * @param usageMsg a string describing the correct format of input."
       },
       {
         "lineNumber": 41,
@@ -4943,234 +5904,192 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    default void respondParsingError(String errorMsg, String... usageMsgs) {"
+        "content": "    default void respondParsingError(String errorMsg, String usageMsg) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        respond(() -\u003e {"
+        "content": "        respond(errorMsg,"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            speak(errorMsg);"
+        "content": "                \"Maybe you could try this:\" + System.lineSeparator(),"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            speak(\"Just tell me what you want to do like this:\" + System.lineSeparator());"
+        "content": "                \"  \" + usageMsg);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            for (String usageMsg : usageMsgs) {"
+        "content": "    }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                speak(\"  \" + usageMsg);"
+        "content": ""
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            }"
+        "content": "    /**"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            speak(\"\");"
+        "content": "     * Displays an error message to the user when an invalid command is given."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            speak(\"Then we\u0027re chill\");"
+        "content": "     *"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        });"
+        "content": "     * @param errorMsg a message describing the problem with the user\u0027s input."
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "    default void respondError(String errorMsg) {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    /**"
+        "content": "        respond(errorMsg);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Displays an error message to the user when an invalid command is given."
+        "content": "    }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param errorMsg A message describing the problem with the user\u0027s input."
+        "content": "    /**"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     */"
+        "content": "     * Speaks a single sentence to the user."
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    default void respondError(String errorMsg) {"
+        "content": "     * The only primitive exposed to construct a response to pass to respond(Runnable r)."
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        respond(errorMsg);"
+        "content": "     *"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "     * @param str the sentence to speak to the user."
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    /**"
+        "content": "    void speak(String str);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Speaks a single sentence to the user."
+        "content": ""
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * The only primitive exposed to construct a response to pass to respond(Runnable r)."
+        "content": "    /**"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     *"
+        "content": "     * Closes resources associated with the UI."
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param str the sentence to speak to the user."
+        "content": "     */"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    void speak(String str);"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Closes resources associated with the UI."
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "CornCobs"
-        },
         "content": "    void close();"
       },
       {
-        "lineNumber": 75,
+        "lineNumber": 69,
         "author": {
           "gitId": "CornCobs"
         },
@@ -5178,7 +6097,7 @@
       }
     ],
     "authorContributionMap": {
-      "CornCobs": 75
+      "CornCobs": 69
     }
   },
   {
@@ -5671,1424 +6590,6 @@
     ],
     "authorContributionMap": {
       "CornCobs": 69
-    }
-  },
-  {
-    "path": "src/main/java/dude/component/Parser.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "package dude.component;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.AddTaskCommand;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.ByeCommand;"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.CheckDateCommand;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.Command;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.DeleteCommand;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.DoneCommand;"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.FindCommand;"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.command.ListCommand;"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.task.Deadline;"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.task.Event;"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.task.Todo;"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import java.time.LocalDate;"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import java.time.format.DateTimeParseException;"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import java.util.Map;"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "public class Parser {"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /** Mappings from commands to their usage messages. */"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static final Map\u003cString, String\u003e USAGES \u003d"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            Map.of("
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"bye\", \"bye\","
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"list\", \"list\","
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"today\", \"today\","
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"done\", \"done index_of_task\","
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"delete\", \"delete index_of_task\","
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"check\", \"check yyyy-mm-dd\","
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"todo\", \"todo description\","
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"deadline\", \"deadline description /by yyyy-mm-dd\","
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"event\", \"event description /from yyyy-mm-dd /to yyyy-mm-dd\","
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"find\", \"find word\""
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            );"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /** Regex for whitespace, for greater clarity. */"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static final String WHITESPACE \u003d \"\\\\s+\";"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Takes raw user input and attempts to parse it to dispatch to the relevant Command with the correct arguments."
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Throws the custom checked exception ParsingException if user input is malformed."
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * The only valid messages are those that follow the usage messages in usages exactly."
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @param msg raw user input."
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @return Command that the user intends to execute."
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @throws ParsingException if message is syntactically incorrect."
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    public static Command parse(String msg) throws ParsingException {"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        String[] cmdAndBody \u003d msg.strip().split(WHITESPACE, 2);"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        Command command;"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        if (cmdAndBody.length \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            command \u003d parseSingleWordCommand(cmdAndBody[0]);"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        } else {"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            assert cmdAndBody.length \u003d\u003d 2 :"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    \"If length of array from String.split with limit 2 !\u003d 1, it should be 2\";"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                command \u003d parseCommandWithArguments(cmdAndBody[0], cmdAndBody[1]);"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                throw new ParsingException(\"Look\u0027s like your command is incomplete, mate\","
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                        USAGES.get(cmdAndBody[0]));"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        if (command \u003d\u003d null) {"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            throw new ParsingException(\"Sorry mate, I didn\u0027t catch your drift\","
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "                    USAGES.values().toArray(new String[0]));"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        return command;"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Attempts to match the user\u0027s message with single word commands bye, list, today."
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Returns null otherwise."
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static Command parseSingleWordCommand(String command) {"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        switch (command) {"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"bye\":"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new ByeCommand();"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"list\":"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new ListCommand();"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"today\":"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new CheckDateCommand(LocalDate.now());"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        default:"
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return null;"
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Attempts to match the user\u0027s message with a complex command with arguments."
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * The possible commands are done, delete, check, todo, deadline, event and find."
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Returns null otherwise."
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @param command the command name"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @param args the argument body"
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @return the parsed command or null if the command name does not match"
-      },
-      {
-        "lineNumber": 101,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @throws ParsingException if the argument bodies are incorrect"
-      },
-      {
-        "lineNumber": 102,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @throws ArrayIndexOutOfBoundsException if the incorrect argument count or format is given"
-      },
-      {
-        "lineNumber": 103,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 104,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static Command parseCommandWithArguments(String command, String args) throws ParsingException {"
-      },
-      {
-        "lineNumber": 105,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        switch (command) {"
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"done\":"
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            int indexDone \u003d parseNumericalArgument(args, \"done\");"
-      },
-      {
-        "lineNumber": 108,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new DoneCommand(indexDone);"
-      },
-      {
-        "lineNumber": 109,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 110,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"delete\":"
-      },
-      {
-        "lineNumber": 111,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            int indexDelete \u003d parseNumericalArgument(args, \"delete\");"
-      },
-      {
-        "lineNumber": 112,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new DeleteCommand(indexDelete);"
-      },
-      {
-        "lineNumber": 113,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 114,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"check\":"
-      },
-      {
-        "lineNumber": 115,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            LocalDate checkDate \u003d parseDate(args, \"check\");"
-      },
-      {
-        "lineNumber": 116,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new CheckDateCommand(checkDate);"
-      },
-      {
-        "lineNumber": 117,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 118,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"todo\":"
-      },
-      {
-        "lineNumber": 119,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new AddTaskCommand(new Todo(args, false));"
-      },
-      {
-        "lineNumber": 120,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 121,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"deadline\":"
-      },
-      {
-        "lineNumber": 122,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            Deadline deadline \u003d parseDeadline(args);"
-      },
-      {
-        "lineNumber": 123,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new AddTaskCommand(deadline);"
-      },
-      {
-        "lineNumber": 124,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 125,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"event\":"
-      },
-      {
-        "lineNumber": 126,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            Event event \u003d parseEvent(args);"
-      },
-      {
-        "lineNumber": 127,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new AddTaskCommand(event);"
-      },
-      {
-        "lineNumber": 128,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 129,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        case \"find\":"
-      },
-      {
-        "lineNumber": 130,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return new FindCommand(args);"
-      },
-      {
-        "lineNumber": 131,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 132,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        default:"
-      },
-      {
-        "lineNumber": 133,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return null;"
-      },
-      {
-        "lineNumber": 134,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 135,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 136,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 137,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static int parseNumericalArgument(String arg, String command) throws ParsingException {"
-      },
-      {
-        "lineNumber": 138,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 139,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return Integer.parseInt(arg);"
-      },
-      {
-        "lineNumber": 140,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        } catch (NumberFormatException e) {"
-      },
-      {
-        "lineNumber": 141,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            throw new ParsingException(\"That\u0027s not a number, dude!\", USAGES.get(command));"
-      },
-      {
-        "lineNumber": 142,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 143,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 144,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 145,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static LocalDate parseDate(String dateString, String command) throws ParsingException {"
-      },
-      {
-        "lineNumber": 146,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 147,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            return LocalDate.parse(dateString);"
-      },
-      {
-        "lineNumber": 148,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        } catch (DateTimeParseException e) {"
-      },
-      {
-        "lineNumber": 149,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            throw new ParsingException(\"I don\u0027t understand this date: \" + dateString, USAGES.get(command));"
-      },
-      {
-        "lineNumber": 150,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 151,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 152,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 153,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static Event parseEvent(String args) throws ParsingException {"
-      },
-      {
-        "lineNumber": 154,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        String[] eventArgs \u003d args.split(WHITESPACE + \"/from\" + WHITESPACE, 2);"
-      },
-      {
-        "lineNumber": 155,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        String[] eventDateStrings \u003d eventArgs[1].split(WHITESPACE + \"/to\" + WHITESPACE, 2);"
-      },
-      {
-        "lineNumber": 156,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        LocalDate from \u003d parseDate(eventDateStrings[0], \"event\");"
-      },
-      {
-        "lineNumber": 157,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        LocalDate to \u003d parseDate(eventDateStrings[1], \"event\");"
-      },
-      {
-        "lineNumber": 158,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        return new Event(eventArgs[0], from, to, false);"
-      },
-      {
-        "lineNumber": 159,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 160,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 161,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private static Deadline parseDeadline(String args) throws ParsingException {"
-      },
-      {
-        "lineNumber": 162,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        String[] deadlineArgs \u003d args.split(WHITESPACE + \"/by\" + WHITESPACE, 2);"
-      },
-      {
-        "lineNumber": 163,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        LocalDate by \u003d parseDate(deadlineArgs[1], \"deadline\");"
-      },
-      {
-        "lineNumber": 164,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        return new Deadline(deadlineArgs[0], by, false);"
-      },
-      {
-        "lineNumber": 165,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 166,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "CornCobs": 166
-    }
-  },
-  {
-    "path": "src/main/java/dude/component/ParsingException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "package dude.component;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "public class ParsingException extends Exception {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private String[] usageMsgs;"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Initializes a ParsingException when one need not report the cause of the Exception to users,"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * thus no information is stored."
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    public ParsingException() {"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        super();"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Initializes the ParsingException carrying information of the error in parsing as well as the proper usage,"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * for users to learn the proper commands to communicate with Dude."
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @param errorMsg message explaining what went wrong in parsing."
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @param usageMsgs message(s) showing possible commands."
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    public ParsingException(String errorMsg, String... usageMsgs) {"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        super(errorMsg);"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        this.usageMsgs \u003d usageMsgs;"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * Returns all proper usages of the command that lead to this ParsingException."
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     * @return an array of Strings of proper usage messages."
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    public String[] getUsageMsgs() {"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        return usageMsgs;"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "CornCobs": 34
     }
   },
   {
@@ -7858,133 +7359,1663 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import dude.task.Todo;"
+        "content": "import dude.parser.ParsingException;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import dude.task.Deadline;"
+        "content": "import dude.task.Todo;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import dude.task.Event;"
+        "content": "import dude.task.Deadline;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "import dude.task.Event;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import java.io.File;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import java.io.FileNotFoundException;"
+        "content": "import java.io.File;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import java.io.PrintWriter;"
+        "content": "import java.io.FileNotFoundException;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import java.util.Scanner;"
+        "content": "import java.io.PrintWriter;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "import java.util.Scanner;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import java.time.LocalDate;"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "import java.time.format.DateTimeParseException;"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "import java.time.format.DateTimeParseException;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": " * Hard-coded plaintext file-based implementation of IStorage interface."
+        "content": "/**"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": " * Session TaskList data is saved to data/dude.txt relative to where the CLI is run from."
+        "content": " * Hard-coded plaintext file-based implementation of IStorage interface."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": " * Requires the app to have file and directory reading and writing permissions."
+        "content": " * Session TaskList data is saved to data/dude.txt relative to where the CLI is run from."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": " */"
+        "content": " * Requires the app to have file and directory reading and writing permissions."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "public class TextStorage implements IStorage {"
+        "content": " */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "CornCobs"
         },
+        "content": "public class TextStorage implements IStorage {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "CornCobs"
+        },
         "content": "    private static final File storeFile \u003d new File(\"data/dude.txt\");"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Loads the TaskList from the previous Dude session from memory."
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * If data from the previous session cannot be found, returns an empty TaskList."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param ui User Interface which Dude chatbot uses to report errors when loading data."
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @return TaskList with all tasks from previous session if successful, else shows an error message"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *         and returns TaskList with tasks that were successfully parsed from data/dude.txt."
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public TaskList restoreSession(IUserInterface ui) {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        TaskList session \u003d new TaskList();"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try (Scanner sc \u003d new Scanner(storeFile)) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            while (sc.hasNext()) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                String[] entry \u003d sc.nextLine().split(\"\\\\|\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                parseEntry(ui, session, entry);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (FileNotFoundException e) {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            ui.respond(\"I didn\u0027t find any previous session, starting empty\");"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        return session;"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Saves the TaskList from the current session into some form of persistent memory."
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * If an error occurs in writing the data, reports the error and warns users that data may be lost."
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param ui User Interface which Dude chatbot uses to report errors when saving data."
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param session TaskList containing Tasks to save to data/dude.txt."
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @throws SecurityException if a security violation occurs while attempting to create the directory or save file."
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public void saveSession(IUserInterface ui, TaskList session) {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        // Create \"/data/\" directory if it doesn\u0027t exist"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        if (!storeFile.getParentFile().exists()) {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            boolean isMkdirSuccessful \u003d storeFile.getParentFile().mkdir();"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            if (!isMkdirSuccessful) {"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                ui.respond(\"Warning: Could not create /data/ directory to save tasks\","
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                        \"I won\u0027t be able to save your tasks\");"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                return;"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try (PrintWriter pw \u003d new PrintWriter(storeFile)) {"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            session.formatFilteredTasks((index, task) -\u003e task.storeFormat(), task -\u003e true)"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                    .forEachOrdered(pw::println);"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (FileNotFoundException e) {"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            ui.respond(\"Warning: An error occurred when saving your tasks. \""
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                    + \"Some of your data may have been lost\");"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private void parseEntry(IUserInterface ui, TaskList session, String[] entry) {"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            boolean isDone \u003d entry[1].equals(\"O\");"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            switch (entry[0]) {"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            case \"T\":"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                session.addTask(new Todo(entry[2], isDone));"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            case \"D\":"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                LocalDate by \u003d LocalDate.parse(entry[3]);"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                session.addTask(new Deadline(entry[2], by, isDone));"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            case \"E\":"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                LocalDate from \u003d LocalDate.parse(entry[3]);"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                LocalDate to \u003d LocalDate.parse(entry[4]);"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                session.addTask(new Event(entry[2], from, to, isDone));"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                throw new ParsingException();"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (DateTimeParseException"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                | ArrayIndexOutOfBoundsException"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                | ParsingException e) {"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            ui.respond(\"Warning: An error occurred when reading your tasks. \""
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                    + \"Some of your data may have been lost\");"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "CornCobs": 101
+    }
+  },
+  {
+    "path": "src/main/java/dude/parser/DateParser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "package dude.parser;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.DateTimeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.DayOfWeek;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.format.DateTimeParseException;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.List;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.function.Function;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.regex.Matcher;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.regex.Pattern;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "public class DateParser {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Parses the given string from the given command from one of the accepted formats into a LocalDate."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Accepts these formats:"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * - yyyy-mm-dd"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * - d MMM yyyy"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * - dayOfWeek [+number]"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * - number [day(s) | week(s) | month(s) | year(s)]"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param dateString the string to parse."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param command the command to parse given dateString for."
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @return the parsed LocalDate."
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @throws ParsingException if given string is invalid or results in an invalid date."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public static LocalDate parse(String dateString, String command) throws ParsingException {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate date;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        for (Function\u003cString, LocalDate\u003e parser : parsers) {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            date \u003d parser.apply(dateString);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            if (date !\u003d null) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                return date;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        // If none of the parsers match, throw ParsingException"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        String errorMsg \u003d \"I don\u0027t understand this date: \" + dateString"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                + \". Type \u0027help -date\u0027 to see the date formats I accept.\";"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        throw new ParsingException(errorMsg, Parser.USAGES.get(command));"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static List\u003cFunction\u003cString, LocalDate\u003e\u003e parsers \u003d List.of("
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ds -\u003e fullDateParser(ds, DateTimeFormatter.ISO_LOCAL_DATE),"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        ds -\u003e fullDateParser(ds, DateTimeFormatter.ofPattern(\"d MMM yyyy\")),"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        DateParser::dayOfWeekParser,"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        DateParser::offsetParser);"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static LocalDate fullDateParser(String dateString, DateTimeFormatter dtf) {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return LocalDate.parse(dateString, dtf);"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (DateTimeParseException e) {"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static final Pattern dayOfWeekFormat \u003d"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            Pattern.compile(\"(?\u003cday\u003e\\\\w+)( \\\\+(?\u003cnumber\u003e\\\\d+))?\");"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static LocalDate dayOfWeekParser(String dateString) {"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        Matcher m \u003d dayOfWeekFormat.matcher(dateString);"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        if (!m.matches()) {"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        int number \u003d 0;"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        if (m.group(\"number\") !\u003d null) {"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            number \u003d Integer.parseInt(m.group(\"number\"));"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            DayOfWeek day \u003d DateTimeFormatter.ofPattern(\"EEE\")"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                    .parse(m.group(\"day\").substring(0,3))"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                    .query(DayOfWeek::from);"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return getNearestDate(day).plusWeeks(number);"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (DateTimeException e) {"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static LocalDate getNearestDate(DayOfWeek day) {"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate currDay \u003d LocalDate.now();"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        return currDay.datesUntil(currDay.plusWeeks(1))"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                .filter(date -\u003e date.getDayOfWeek() \u003d\u003d day)"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                .findFirst()"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                .get(); // We are sure that within 1 week we will find the given day"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static final Pattern offsetFormat \u003d"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            Pattern.compile(\"(?\u003cnumber\u003e\\\\d+) (?\u003cperiod\u003eday|week|month|year)s?\");"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static LocalDate offsetParser(String dateString) {"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        Matcher m \u003d offsetFormat.matcher(dateString);"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        if (!m.matches()) {"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        int number \u003d Integer.parseInt(m.group(\"number\"));"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            switch (m.group(\"period\")) {"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            case \"day\":"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                return LocalDate.now().plusDays(number);"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            case \"week\":"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                return LocalDate.now().plusWeeks(number);"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            case \"month\":"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                return LocalDate.now().plusMonths(number);"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            case \"year\":"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                return LocalDate.now().plusYears(number);"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "                return null;"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (DateTimeException e) {"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "CornCobs": 115
+    }
+  },
+  {
+    "path": "src/main/java/dude/parser/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "package dude.parser;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.AddTaskCommand;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.ByeCommand;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.CheckDateCommand;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.Command;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.DeleteCommand;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.DoneCommand;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.FindCommand;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.HelpCommand;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.command.ListCommand;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.task.Deadline;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.task.Event;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.task.Todo;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.format.DateTimeParseException;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.LinkedHashMap;"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.util.Map;"
       },
       {
         "lineNumber": 22,
@@ -7998,175 +9029,175 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    /**"
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Loads the TaskList from the previous Dude session from memory."
+        "content": "    /** Mappings from commands to their usage messages. */"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * If data from the previous session cannot be found, returns an empty TaskList."
+        "content": "    public static final Map\u003cString, String\u003e USAGES \u003d new LinkedHashMap\u003c\u003e();"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param ui User Interface which Dude chatbot uses to report errors when loading data."
+        "content": "    static {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @return TaskList with all tasks from previous session if successful, else shows an error message"
+        "content": "        USAGES.put(\"help\", \"help [command | -date]\");"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     *         and returns TaskList with tasks that were successfully parsed from data/dude.txt."
+        "content": "        USAGES.put(\"bye\", \"bye\");"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     */"
+        "content": "        USAGES.put(\"list\", \"list\");"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    @Override"
+        "content": "        USAGES.put(\"today\", \"today\");"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    public TaskList restoreSession(IUserInterface ui) {"
+        "content": "        USAGES.put(\"done\", \"done index_of_task\");"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        TaskList session \u003d new TaskList();"
+        "content": "        USAGES.put(\"delete\", \"delete index_of_task\");"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        try (Scanner sc \u003d new Scanner(storeFile)) {"
+        "content": "        USAGES.put(\"check\", \"check yyyy-mm-dd\");"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            while (sc.hasNext()) {"
+        "content": "        USAGES.put(\"todo\", \"todo description\");"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                String[] entry \u003d sc.nextLine().split(\"\\\\|\");"
+        "content": "        USAGES.put(\"deadline\", \"deadline description /by yyyy-mm-dd\");"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                parseEntry(ui, session, entry);"
+        "content": "        USAGES.put(\"event\", \"event description /from yyyy-mm-dd /to yyyy-mm-dd\");"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            }"
+        "content": "        USAGES.put(\"find\", \"find word\");"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        } catch (FileNotFoundException e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            ui.respond(\"I didn\u0027t find any previous session, starting empty\");"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        }"
+        "content": "    /** Regex for whitespace, for greater clarity. */"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        return session;"
+        "content": "    private static final String WHITESPACE \u003d \"\\\\s+\";"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    /**"
+        "content": "     * Takes raw user input and attempts to parse it to dispatch to the relevant Command with the correct arguments."
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * Saves the TaskList from the current session into some form of persistent memory."
+        "content": "     * Throws the custom checked exception ParsingException if user input is malformed."
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * If an error occurs in writing the data, reports the error and warns users that data may be lost."
+        "content": "     * The only valid messages are those that follow the usage messages in usages exactly."
       },
       {
         "lineNumber": 48,
@@ -8180,21 +9211,21 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param ui User Interface which Dude chatbot uses to report errors when saving data."
+        "content": "     * @param msg raw user input."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @param session TaskList containing Tasks to save to data/dude.txt."
+        "content": "     * @return Command that the user intends to execute."
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "     * @throws SecurityException if a security violation occurs while attempting to create the directory or save file."
+        "content": "     * @throws ParsingException if message is syntactically incorrect."
       },
       {
         "lineNumber": 52,
@@ -8208,315 +9239,315 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    @Override"
+        "content": "    public static Command parse(String msg) throws ParsingException {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    public void saveSession(IUserInterface ui, TaskList session) {"
+        "content": "        String[] cmdAndBody \u003d msg.strip().split(WHITESPACE, 2);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        // Create \"/data/\" directory if it doesn\u0027t exist"
+        "content": "        Command command;"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        if (!storeFile.getParentFile().exists()) {"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            boolean isMkdirSuccessful \u003d storeFile.getParentFile().mkdir();"
+        "content": "        if (cmdAndBody.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            if (!isMkdirSuccessful) {"
+        "content": "            command \u003d parseSingleWordCommand(cmdAndBody[0]);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                ui.respond(\"Warning: Could not create /data/ directory to save tasks\","
+        "content": "        } else {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                        \"I won\u0027t be able to save your tasks\");"
+        "content": "            assert cmdAndBody.length \u003d\u003d 2 :"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                return;"
+        "content": "                    \"If length of array from String.split with limit 2 !\u003d 1, it should be 2\";"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            }"
+        "content": "            try {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        }"
+        "content": "                command \u003d parseCommandWithArguments(cmdAndBody[0], cmdAndBody[1]);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        try (PrintWriter pw \u003d new PrintWriter(storeFile)) {"
+        "content": "                throw new ParsingException(\"Look\u0027s like your command is incomplete, mate\","
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            session.formatFilteredTasks((index, task) -\u003e task.storeFormat(), task -\u003e true)"
+        "content": "                        USAGES.get(cmdAndBody[0]));"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                    .forEachOrdered(pw::println);"
+        "content": "            }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        } catch (FileNotFoundException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            ui.respond(\"Warning: An error occurred when saving your tasks. \""
+        "content": ""
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                    + \"Some of your data may have been lost\");"
+        "content": "        if (command \u003d\u003d null) {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        }"
+        "content": "            throw new ParsingException(\"Sorry mate, I didn\u0027t catch your drift\","
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "                    USAGES.get(\"help\"));"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    private void parseEntry(IUserInterface ui, TaskList session, String[] entry) {"
+        "content": ""
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        try {"
+        "content": "        return command;"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            boolean isDone \u003d entry[1].equals(\"O\");"
+        "content": "    }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            switch (entry[0]) {"
+        "content": ""
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            case \"T\":"
+        "content": "    /**"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                session.addTask(new Todo(entry[2], isDone));"
+        "content": "     * Attempts to match the user\u0027s message with single word commands bye, list, today, help"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                break;"
+        "content": "     * Returns null otherwise."
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            case \"D\":"
+        "content": "     */"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                LocalDate by \u003d LocalDate.parse(entry[3]);"
+        "content": "    private static Command parseSingleWordCommand(String command) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                session.addTask(new Deadline(entry[2], by, isDone));"
+        "content": "        switch (command) {"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                break;"
+        "content": "        case \"bye\":"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            case \"E\":"
+        "content": "            return new ByeCommand();"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                LocalDate from \u003d LocalDate.parse(entry[3]);"
+        "content": ""
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                LocalDate to \u003d LocalDate.parse(entry[4]);"
+        "content": "        case \"list\":"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                session.addTask(new Event(entry[2], from, to, isDone));"
+        "content": "            return new ListCommand();"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                break;"
+        "content": ""
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            default:"
+        "content": "        case \"today\":"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                throw new ParsingException();"
+        "content": "            return new CheckDateCommand(LocalDate.now());"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        } catch (DateTimeParseException"
+        "content": "        case \"help\":"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                | ArrayIndexOutOfBoundsException"
+        "content": "            return new HelpCommand();"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                | ParsingException e) {"
+        "content": ""
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            ui.respond(\"Warning: An error occurred when reading your tasks. \""
+        "content": "        default:"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                    + \"Some of your data may have been lost\");"
+        "content": "            return null;"
       },
       {
         "lineNumber": 98,
@@ -8537,11 +9568,741 @@
         "author": {
           "gitId": "CornCobs"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Attempts to match the user\u0027s message with a complex command with arguments."
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * The possible commands are done, delete, check, todo, deadline, event, find and help."
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Returns null otherwise."
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param command the command name"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param args the argument body"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @return the parsed command or null if the command name does not match"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @throws ParsingException if the argument bodies are incorrect"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @throws ArrayIndexOutOfBoundsException if the incorrect argument count or format is given"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static Command parseCommandWithArguments(String command, String args) throws ParsingException {"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        switch (command) {"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"done\":"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            int indexDone \u003d parseNumericalArgument(args, \"done\");"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new DoneCommand(indexDone);"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"delete\":"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            int indexDelete \u003d parseNumericalArgument(args, \"delete\");"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new DeleteCommand(indexDelete);"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"check\":"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            LocalDate checkDate \u003d DateParser.parse(args, \"check\");"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new CheckDateCommand(checkDate);"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"todo\":"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new AddTaskCommand(new Todo(args, false));"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"deadline\":"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            Deadline deadline \u003d parseDeadline(args);"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new AddTaskCommand(deadline);"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"event\":"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            Event event \u003d parseEvent(args);"
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new AddTaskCommand(event);"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 137,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"find\":"
+      },
+      {
+        "lineNumber": 138,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new FindCommand(args);"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        case \"help\":"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return new HelpCommand(args);"
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return null;"
+      },
+      {
+        "lineNumber": 145,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 146,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 147,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 148,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static int parseNumericalArgument(String arg, String command) throws ParsingException {"
+      },
+      {
+        "lineNumber": 149,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 150,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            return Integer.parseInt(arg);"
+      },
+      {
+        "lineNumber": 151,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (NumberFormatException e) {"
+      },
+      {
+        "lineNumber": 152,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            throw new ParsingException(\"That\u0027s not a number, dude!\", USAGES.get(command));"
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static Event parseEvent(String args) throws ParsingException {"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        String[] eventArgs \u003d args.split(WHITESPACE + \"/from\" + WHITESPACE, 2);"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        String[] eventDateStrings \u003d eventArgs[1].split(WHITESPACE + \"/to\" + WHITESPACE, 2);"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate from \u003d DateParser.parse(eventDateStrings[0], \"event\");"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate to \u003d DateParser.parse(eventDateStrings[1], \"event\");"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        return new Event(eventArgs[0], from, to, false);"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private static Deadline parseDeadline(String args) throws ParsingException {"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        String[] deadlineArgs \u003d args.split(WHITESPACE + \"/by\" + WHITESPACE, 2);"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate by \u003d DateParser.parse(deadlineArgs[1], \"deadline\");"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        return new Deadline(deadlineArgs[0], by, false);"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "CornCobs"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "CornCobs": 100
+      "CornCobs": 169
+    }
+  },
+  {
+    "path": "src/main/java/dude/parser/ParsingException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "package dude.parser;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "public class ParsingException extends Exception {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private String usageMsg;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Initializes a ParsingException when one need not report the cause of the Exception to users,"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * thus no information is stored."
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public ParsingException() {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        super();"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Initializes the ParsingException carrying information of the error in parsing as well as the proper usage,"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * for users to learn the proper commands to communicate with Dude."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param errorMsg message explaining what went wrong in parsing."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @param usageMsg message(s) showing possible commands."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public ParsingException(String errorMsg, String usageMsg) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        super(errorMsg);"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        this.usageMsg \u003d usageMsg;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * Returns all proper usages of the command that lead to this ParsingException."
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     * @return an array of Strings of proper usage messages."
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    public String getUsageMsg() {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        return usageMsg;"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "CornCobs": 34
     }
   },
   {
@@ -11218,7 +12979,7 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        public void respondParsingError(String errorMsg, String... usageMsgs) {"
+        "content": "        public void respondParsingError(String errorMsg, String usageMsg) {"
       },
       {
         "lineNumber": 99,
@@ -11352,7 +13113,7 @@
     }
   },
   {
-    "path": "src/test/java/dude/component/ParserTest.java",
+    "path": "src/test/java/dude/component/TaskListTest.java",
     "fileType": "java",
     "lines": [
       {
@@ -11361,6 +13122,661 @@
           "gitId": "CornCobs"
         },
         "content": "package dude.component;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.task.Task;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import dude.task.Todo;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "class TaskListTest {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private Task task1 \u003d new Todo(\"dude\", false);"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    private Task task2 \u003d new Todo(\"blah blah\", true);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void taskCount_equalToSizeOfGetAllTasks() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        TaskList x \u003d new TaskList();"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        x.addTask(task1);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        x.addTask(task2);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertEquals(x.showFilteredTasks(task -\u003e true).count(), x.taskCount());"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        for (int i \u003d 0; i \u003c 144; i++) {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            x.addTask(task1);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            assertEquals(x.showFilteredTasks(task -\u003e true).count(), x.taskCount());"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void addTask_increaseTaskCountByOne() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        TaskList x \u003d new TaskList();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        int initialSize \u003d x.taskCount();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        x.addTask(task1);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertEquals(initialSize + 1, x.taskCount());"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void removeTask_decreaseTaskCountByOne() {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        TaskList x \u003d new TaskList();"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        x.addTask(task1);"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        int initialSize \u003d x.taskCount();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        x.removeTask(1);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertEquals(initialSize - 1, x.taskCount());"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "CornCobs": 41
+    }
+  },
+  {
+    "path": "src/test/java/dude/parser/DateParserTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "package dude.parser;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertTrue;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.fail;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "class DateParserTest {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void parse_isoFormat_correctDateParsed() throws ParsingException {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate date \u003d DateParser.parse(\"2103-01-01\", \"event\");"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertEquals(LocalDate.of(2103, 1, 1), date);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void parse_wrongIsoFormat_exceptionThrown() {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            DateParser.parse(\"2103/02/02\", \"event\");"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            fail();"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        } catch (ParsingException e) {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "            assertEquals(Parser.USAGES.get(\"event\"), e.getUsageMsg());"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void parse_dMmmYyyyFormat_correctDateParsed() throws ParsingException {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate date \u003d DateParser.parse(\"1 Jan 2103\", \"deadline\");"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertEquals(LocalDate.of(2103, 1, 1), date);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void parse_offsetPeriodFormat_correctDateParsed() throws ParsingException {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate date \u003d DateParser.parse(\"14 days\", \"deadline\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertEquals(LocalDate.now().plusDays(14), date);"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    void parse_dayOfWeekFormat_correctDateParsed() throws ParsingException {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate date \u003d DateParser.parse(\"Monday +3\", \"check\");"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate threeWeeks \u003d LocalDate.now().plusWeeks(3);"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        LocalDate fourWeeks \u003d LocalDate.now().plusWeeks(4);"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertTrue(date.isAfter(threeWeeks) || date.isEqual(threeWeeks));"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "        assertTrue(date.isBefore(fourWeeks) || date.isEqual(fourWeeks));"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "CornCobs": 50
+    }
+  },
+  {
+    "path": "src/test/java/dude/parser/ParserTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "CornCobs"
+        },
+        "content": "package dude.parser;"
       },
       {
         "lineNumber": 2,
@@ -11675,453 +14091,164 @@
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            assertEquals(\"I don\u0027t understand this date: \" + dateString, e.getMessage());"
+        "content": "            assertEquals(\"I don\u0027t understand this date: \" + dateString"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            assertEquals(\"deadline description /by yyyy-mm-dd\", e.getUsageMsgs()[0]);"
+        "content": "                    + \". Type \u0027help -date\u0027 to see the date formats I accept.\", e.getMessage());"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        }"
+        "content": "            assertEquals(\"deadline description /by yyyy-mm-dd\", e.getUsageMsg());"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    @Test"
+        "content": ""
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    void parse_correctDateFormat_correctCommandClassReturned() {"
+        "content": "    @Test"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        Command eventCommand \u003d assertDoesNotThrow(() -\u003e"
+        "content": "    void parse_correctDateFormat_correctCommandClassReturned() {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "                Parser.parse(\"event blah blah /from 2060-12-31 /to 2070-01-14\"));"
+        "content": "        Command eventCommand \u003d assertDoesNotThrow(() -\u003e"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        assertTrue(eventCommand instanceof AddTaskCommand);"
+        "content": "                Parser.parse(\"event blah blah /from 2060-12-31 /to 2070-01-14\"));"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "        assertTrue(eventCommand instanceof AddTaskCommand);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    @Test"
+        "content": ""
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    void parse_incorrectArgumentOrder_exceptionThrown() {"
+        "content": "    @Test"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        try {"
+        "content": "    void parse_incorrectArgumentOrder_exceptionThrown() {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            Parser.parse(\"event todo /to 2000-01-01 /from 2001-12-31\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            fail();"
+        "content": "            Parser.parse(\"event todo /to 2000-01-01 /from 2001-12-31\");"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        } catch (ParsingException e) {"
+        "content": "            fail();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            assertEquals(\"Look\u0027s like your command is incomplete, mate\", e.getMessage());"
+        "content": "        } catch (ParsingException e) {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "            assertEquals(\"event description /from yyyy-mm-dd /to yyyy-mm-dd\", e.getUsageMsgs()[0]);"
+        "content": "            assertEquals(\"Look\u0027s like your command is incomplete, mate\", e.getMessage());"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "        }"
+        "content": "            assertEquals(\"event description /from yyyy-mm-dd /to yyyy-mm-dd\", e.getUsageMsg());"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "CornCobs"
         },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "CornCobs": 68
-    }
-  },
-  {
-    "path": "src/test/java/dude/component/TaskListTest.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "package dude.component;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.task.Task;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import dude.task.Todo;"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import org.junit.jupiter.api.Test;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "class TaskListTest {"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private Task task1 \u003d new Todo(\"dude\", false);"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    private Task task2 \u003d new Todo(\"blah blah\", true);"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    @Test"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    void taskCount_equalToSizeOfGetAllTasks() {"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        TaskList x \u003d new TaskList();"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        x.addTask(task1);"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        x.addTask(task2);"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        assertEquals(x.showFilteredTasks(task -\u003e true).count(), x.taskCount());"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        for (int i \u003d 0; i \u003c 144; i++) {"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            x.addTask(task1);"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "            assertEquals(x.showFilteredTasks(task -\u003e true).count(), x.taskCount());"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "CornCobs"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    @Test"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    void addTask_increaseTaskCountByOne() {"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        TaskList x \u003d new TaskList();"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        int initialSize \u003d x.taskCount();"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        x.addTask(task1);"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        assertEquals(initialSize + 1, x.taskCount());"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    @Test"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    void removeTask_decreaseTaskCountByOne() {"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        TaskList x \u003d new TaskList();"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        x.addTask(task1);"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        int initialSize \u003d x.taskCount();"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        x.removeTask(1);"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "        assertEquals(initialSize - 1, x.taskCount());"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "CornCobs"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 41,
+        "lineNumber": 69,
         "author": {
           "gitId": "CornCobs"
         },
@@ -12129,7 +14256,7 @@
       }
     ],
     "authorContributionMap": {
-      "CornCobs": 41
+      "CornCobs": 69
     }
   },
   {

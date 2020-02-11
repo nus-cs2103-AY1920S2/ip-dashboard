@@ -2297,315 +2297,315 @@
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        int selectedTaskIndex;"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        Command toReturn \u003d null;"
+        "content": "        try {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "            switch (Command.Type.valueOf(commandString)) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        try {"
+        "content": "            case bye:"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            switch (Command.Type.valueOf(commandString)) {"
+        "content": "                return new ExitCommand();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case bye:"
+        "content": "            case list:"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                toReturn \u003d new ExitCommand();"
+        "content": "                return new ListCommand();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": "            case done:"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case list:"
+        "content": "                return createDoneCommand(splitInput);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                toReturn \u003d new ListCommand();"
+        "content": "            case delete:"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": "                return createDeleteCommand(splitInput);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case done:"
+        "content": "            case todo:"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                isSplitInputLengthLargerThanOne(splitInput);"
+        "content": "                return createTodoAddCommand(fullCommand, splitInput);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                selectedTaskIndex \u003d Integer.parseInt(splitInput[1]) - 1;"
+        "content": "            case find:"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                toReturn \u003d new DoneCommand(selectedTaskIndex);"
+        "content": "                return createFindCommand(fullCommand, splitInput);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": "            case deadline: // Fallthrough"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case delete:"
+        "content": "            case event:"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                isSplitInputLengthLargerThanOne(splitInput);"
+        "content": "                return createDeadLineOrEventAddCommand(fullCommand, splitInput, commandString);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                selectedTaskIndex \u003d Integer.parseInt(splitInput[1]) - 1;"
+        "content": "            default:"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                toReturn \u003d new DeleteCommand(selectedTaskIndex);"
+        "content": "                assert false : \"Class Parser: parse method, reached default case.\";"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": "            }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case todo:"
+        "content": "        } catch (IllegalArgumentException e) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                isSplitInputLengthLargerThanOne(splitInput);"
+        "content": "            throw new DukeWrongCommandException(\"OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                String taskDescription \u003d fullCommand.substring(Command.Type.todo.getCommand().length()).strip();"
+        "content": "        }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                toReturn \u003d new AddCommand(Command.Type.todo, taskDescription);"
+        "content": "    }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": ""
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case find:"
+        "content": "    private static void isSplitInputLengthLargerThanOne(String[] splitInput) throws DukeEmptyDescriptionException {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                isSplitInputLengthLargerThanOne(splitInput);"
+        "content": "        if (splitInput.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                String[] keywords \u003d fullCommand"
+        "content": "            throw new DukeEmptyDescriptionException(\"OOPS!!! The description of a task cannot be empty.\");"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                        .substring(Command.Type.find.getCommand().length())"
+        "content": "        }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                        .strip()"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                        .split(Pattern.quote(\" \"));"
+        "content": ""
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                toReturn \u003d new FindCommand(keywords);"
+        "content": "    private static Command createDoneCommand(String[] splitInput) throws DukeEmptyDescriptionException {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": "        int selectedTaskIndex;"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case deadline:"
+        "content": "        isSplitInputLengthLargerThanOne(splitInput);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            case event:"
+        "content": "        selectedTaskIndex \u003d Integer.parseInt(splitInput[1]) - 1;"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                isSplitInputLengthLargerThanOne(splitInput);"
+        "content": "        return new DoneCommand(selectedTaskIndex);"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                toReturn \u003d createDeadLineOrEventCommand(fullCommand, commandString);"
+        "content": "    }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": ""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            default:"
+        "content": "    private static Command createDeleteCommand(String[] splitInput) throws DukeEmptyDescriptionException {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                break;"
+        "content": "        int selectedTaskIndex;"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            }"
+        "content": "        isSplitInputLengthLargerThanOne(splitInput);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        } catch (IllegalArgumentException e) {"
+        "content": "        selectedTaskIndex \u003d Integer.parseInt(splitInput[1]) - 1;"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            throw new DukeWrongCommandException(\"OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+        "content": "        return new DeleteCommand(selectedTaskIndex);"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 69,
@@ -2619,192 +2619,262 @@
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return toReturn;"
+        "content": "    private static Command createTodoAddCommand(String fullCommand, String[] splitInput)"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "            throws DukeEmptyDescriptionException {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "        isSplitInputLengthLargerThanOne(splitInput);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    private static void isSplitInputLengthLargerThanOne(String[] splitInput) throws DukeEmptyDescriptionException {"
+        "content": "        String taskDescription \u003d fullCommand.substring(Command.Type.todo.getCommand().length()).strip();"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        if (splitInput.length \u003d\u003d 1) {"
+        "content": "        return new AddCommand(Command.Type.todo, taskDescription);"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            throw new DukeEmptyDescriptionException(\"OOPS!!! The description of a task cannot be empty.\");"
+        "content": "    }"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "    private static Command createFindCommand(String fullCommand, String[] splitInput)"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "            throws DukeEmptyDescriptionException {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    private static Command createDeadLineOrEventCommand(String fullCommand, String commandString)"
+        "content": "        isSplitInputLengthLargerThanOne(splitInput);"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            throws DukeNoKeywordException {"
+        "content": "        String[] keywords \u003d fullCommand"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        Command.Type type \u003d Command.Type.valueOf(commandString);"
+        "content": "                .substring(Command.Type.find.getCommand().length())"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        Command.Type keyword \u003d type \u003d\u003d Command.Type.deadline"
+        "content": "                .strip()"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                ? Command.Type.deadline_by"
+        "content": "                .split(Pattern.quote(\" \"));"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                : Command.Type.event_at;"
+        "content": "        return new FindCommand(keywords);"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        int keywordIndex \u003d fullCommand.indexOf(keyword.getCommand());"
+        "content": ""
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        if (keywordIndex \u003d\u003d -1) {"
+        "content": "    private static Command createDeadLineOrEventAddCommand("
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            throw new DukeNoKeywordException(\"OOPS!!! The description must contain a keyword.\");"
+        "content": "            String fullCommand, String[] splitInput, String commandString)"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        }"
+        "content": "            throws DukeEmptyDescriptionException, DukeNoKeywordException {"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "        isSplitInputLengthLargerThanOne(splitInput);"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        String taskDescription \u003d fullCommand.substring(type.getCommand().length(), keywordIndex).strip();"
+        "content": "        Command.Type type \u003d Command.Type.valueOf(commandString);"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        String deadlineOrTime \u003d fullCommand.substring(keywordIndex + keyword.getCommand().length()).strip();"
+        "content": "        Command.Type keyword \u003d type \u003d\u003d Command.Type.deadline"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        LocalDate date \u003d LocalDate.parse(deadlineOrTime);"
+        "content": "                ? Command.Type.deadline_by"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "                : Command.Type.event_at;"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return new AddCommand(type, taskDescription, date);"
+        "content": ""
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "        int keywordIndex \u003d fullCommand.indexOf(keyword.getCommand());"
       },
       {
         "lineNumber": 97,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "        if (keywordIndex \u003d\u003d -1) {"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "            throw new DukeNoKeywordException(\"OOPS!!! The description must contain a keyword.\");"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "        String taskDescription \u003d fullCommand.substring(type.getCommand().length(), keywordIndex).strip();"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "        String deadlineOrTime \u003d fullCommand.substring(keywordIndex + keyword.getCommand().length()).strip();"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "        LocalDate date \u003d LocalDate.parse(deadlineOrTime);"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "        return new AddCommand(type, taskDescription, date);"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 107,
         "author": {
           "gitId": "Guofeng-Tang"
         },
@@ -2812,7 +2882,7 @@
       }
     ],
     "authorContributionMap": {
-      "Guofeng-Tang": 97
+      "Guofeng-Tang": 107
     }
   },
   {
@@ -3167,7 +3237,7 @@
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                    .map(Task::toStringForSaving)"
+        "content": "                    .map(task -\u003e task.toStringForSaving())"
       },
       {
         "lineNumber": 51,
@@ -3477,175 +3547,175 @@
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        tasks \u003d lines.stream().map(TaskList::decode).collect(Collectors.toList());"
+        "content": "        tasks \u003d lines"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "                .stream()"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "                .map(str -\u003e TaskList.decode(str))"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    private static Task decode(String str) {"
+        "content": "                .collect(Collectors.toList());"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        String[] splitInput \u003d str.split(Pattern.quote(Task.SEPERATOR));"
+        "content": "    }"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        String taskType \u003d splitInput[0];"
+        "content": ""
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        boolean isDone \u003d splitInput[1].equals(Task.TRUE_SYMBOL);"
+        "content": "    private static Task decode(String str) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        String taskDescription \u003d splitInput[2];"
+        "content": "        String[] splitInput \u003d str.split(Pattern.quote(Task.SEPERATOR));"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        LocalDate date;"
+        "content": "        String taskType \u003d splitInput[0];"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        Task toReturn \u003d null;"
+        "content": "        boolean isDone \u003d splitInput[1].equals(Task.TRUE_SYMBOL);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "        String taskDescription \u003d splitInput[2];"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        switch (taskType) {"
+        "content": "        LocalDate date;"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        case Todo.TYPE_SYMBOL:"
+        "content": "        Task toReturn \u003d null;"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            toReturn \u003d new Todo(taskDescription);"
+        "content": ""
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            break;"
+        "content": "        switch (taskType) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        case Deadline.TYPE_SYMBOL:"
+        "content": "        case Todo.TYPE_SYMBOL:"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            date \u003d LocalDate.parse(splitInput[3]);"
+        "content": "            toReturn \u003d new Todo(taskDescription);"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            toReturn \u003d new Deadline(taskDescription, date);"
+        "content": "            break;"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            break;"
+        "content": "        case Deadline.TYPE_SYMBOL:"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        case Event.TYPE_SYMBOL:"
+        "content": "            date \u003d LocalDate.parse(splitInput[3]);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            date \u003d LocalDate.parse(splitInput[3]);"
+        "content": "            toReturn \u003d new Deadline(taskDescription, date);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            toReturn \u003d new Event(taskDescription, date);"
+        "content": "            break;"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            break;"
+        "content": "        case Event.TYPE_SYMBOL:"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        default:"
+        "content": "            date \u003d LocalDate.parse(splitInput[3]);"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            System.out.println(\"Failed to decode. Unknown task type.\");"
+        "content": "            toReturn \u003d new Event(taskDescription, date);"
       },
       {
         "lineNumber": 61,
@@ -3659,56 +3729,56 @@
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        }"
+        "content": "        default:"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "            assert false : \"Failed to decode. Unknown task type.\";"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        if (isDone \u0026\u0026 toReturn !\u003d null) {"
+        "content": "            break;"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            toReturn.markAsDone();"
+        "content": "        }"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "        if (isDone \u0026\u0026 toReturn !\u003d null) {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return toReturn;"
+        "content": "            toReturn.markAsDone();"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 70,
@@ -3722,430 +3792,451 @@
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    List\u003cTask\u003e getTasks() {"
+        "content": "        return toReturn;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return tasks;"
+        "content": "    }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    List\u003cTask\u003e getTasks() {"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    boolean isEmpty() {"
+        "content": "        return tasks;"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return tasks.isEmpty();"
+        "content": "    }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    boolean isEmpty() {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    int size() {"
+        "content": "        return tasks.isEmpty();"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return tasks.size();"
+        "content": "    }"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    int size() {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    /**"
+        "content": "        return tasks.size();"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * Returns a Task object at specified index position."
+        "content": "    }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * @param taskIndex Task object index, starting from 0."
+        "content": "    /**"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * @return Task object at specified index position."
+        "content": "     * Returns a Task object at specified index position."
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    public Task get(int taskIndex) {"
+        "content": "     * @param taskIndex Task object index, starting from 0."
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return tasks.get(taskIndex);"
+        "content": "     * @return Task object at specified index position."
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    public Task get(int taskIndex) {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    /**"
+        "content": "        return tasks.get(taskIndex);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * Add a task object to the back of the task list."
+        "content": "    }"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * @param newTask Task object to be added."
+        "content": "    /**"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     */"
+        "content": "     * Add a task object to the back of the task list."
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    public void add(Task newTask) {"
+        "content": "     *"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        tasks.add(newTask);"
+        "content": "     * @param newTask Task object to be added."
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    public void add(Task newTask) {"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    /**"
+        "content": "        tasks.add(newTask);"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * Deletes a Task object at specified index position."
+        "content": "    }"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * @param taskIndex Task object index, starting from 0."
+        "content": "    /**"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     */"
+        "content": "     * Deletes a Task object at specified index position."
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    public void remove(int taskIndex) {"
+        "content": "     *"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        tasks.remove(taskIndex);"
+        "content": "     * @param taskIndex Task object index, starting from 0."
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    public void remove(int taskIndex) {"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    /**"
+        "content": "        tasks.remove(taskIndex);"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * Returns a TaskList object, which contains the tasks that matches with the given keyword."
+        "content": "    }"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * @param keywords Keywords to match."
+        "content": "    /**"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     * @return Immutable TaskList object."
+        "content": "     * Returns a TaskList object, which contains the tasks that matches with the given keyword."
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    public TaskList find(String[] keywords) {"
+        "content": "     * @param keywords Keywords to match."
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        TaskList viewToReturn \u003d new TaskList();"
+        "content": "     * @return Immutable TaskList object."
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        Set\u003cTask\u003e taskSet \u003d new HashSet\u003c\u003e();"
+        "content": "     */"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "    public TaskList find(String[] keywords) {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        for (Task task : tasks) {"
+        "content": "        TaskList viewToReturn \u003d new TaskList();"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            for (String keyword : keywords) {"
+        "content": "        Set\u003cTask\u003e taskSet \u003d new HashSet\u003c\u003e();"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                if (task.getTaskDescription().contains(keyword) \u0026\u0026 !taskSet.contains(task)) {"
+        "content": ""
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                    taskSet.add(task);"
+        "content": "        for (Task task : tasks) {"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                    viewToReturn.add(task);"
+        "content": "            for (String keyword : keywords) {"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "                }"
+        "content": "                if (task.getTaskDescription().contains(keyword) \u0026\u0026 !taskSet.contains(task)) {"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            }"
+        "content": "                    taskSet.add(task);"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        }"
+        "content": "                    viewToReturn.add(task);"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "                }"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        return viewToReturn;"
+        "content": "            }"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 132,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "        return viewToReturn;"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 135,
         "author": {
           "gitId": "Guofeng-Tang"
         },
@@ -4153,7 +4244,7 @@
       }
     ],
     "authorContributionMap": {
-      "Guofeng-Tang": 132
+      "Guofeng-Tang": 135
     }
   },
   {
@@ -5644,52 +5735,59 @@
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "            break;"
+        "content": "            assert false : \"Class AddCommand: execute method, reached default case.\";"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        }"
+        "content": "            break;"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        tasks.add(newTask);"
+        "content": ""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        storage.save(tasks);"
+        "content": "        tasks.add(newTask);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "        ui.printAddMessage(tasks, newTask);"
+        "content": "        storage.save(tasks);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "Guofeng-Tang"
         },
-        "content": "    }"
+        "content": "        ui.printAddMessage(tasks, newTask);"
       },
       {
         "lineNumber": 66,
+        "author": {
+          "gitId": "Guofeng-Tang"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 67,
         "author": {
           "gitId": "Guofeng-Tang"
         },
@@ -5697,7 +5795,7 @@
       }
     ],
     "authorContributionMap": {
-      "Guofeng-Tang": 66
+      "Guofeng-Tang": 67
     }
   },
   {

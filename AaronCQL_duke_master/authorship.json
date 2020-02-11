@@ -314,82 +314,89 @@
       {
         "lineNumber": 45,
         "author": {
-          "gitId": "-"
+          "gitId": "AaronCQL"
         },
-        "content": "}"
+        "content": "    enableAssertions \u003d true"
       },
       {
         "lineNumber": 46,
         "author": {
-          "gitId": "AaronCQL"
+          "gitId": "-"
         },
-        "content": ""
+        "content": "}"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "shadowJar {"
+        "content": ""
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    archiveBaseName \u003d \"duke\""
+        "content": "shadowJar {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    archiveVersion \u003d \"0.1.0\""
+        "content": "    archiveBaseName \u003d \"duke\""
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    archiveClassifier \u003d null"
+        "content": "    archiveVersion \u003d \"0.1.0\""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    archiveAppendix \u003d null"
+        "content": "    archiveClassifier \u003d null"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "}"
+        "content": "    archiveAppendix \u003d null"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "}"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "checkstyle {"
+        "content": ""
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    toolVersion \u003d \u00278.23\u0027"
+        "content": "checkstyle {"
       },
       {
         "lineNumber": 56,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    toolVersion \u003d \u00278.23\u0027"
+      },
+      {
+        "lineNumber": 57,
         "author": {
           "gitId": "-"
         },
@@ -397,7 +404,7 @@
       }
     ],
     "authorContributionMap": {
-      "AaronCQL": 36,
+      "AaronCQL": 37,
       "-": 20
     }
   },
@@ -1718,17 +1725,24 @@
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return null;"
+        "content": "        assert false; // this should be unreachable, all input cases should be handled by above"
       },
       {
         "lineNumber": 87,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        return null;"
+      },
+      {
+        "lineNumber": 88,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 88,
+        "lineNumber": 89,
         "author": {
           "gitId": "-"
         },
@@ -1736,7 +1750,7 @@
       }
     ],
     "authorContributionMap": {
-      "AaronCQL": 85,
+      "AaronCQL": 86,
       "-": 3
     }
   },
@@ -2830,899 +2844,1466 @@
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
+        "content": "            this.addDeadlineHandler(userInputSplit);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please provide the description and due date.\");"
+        "content": "        } else if (this.command \u003d\u003d Command.ADD_EVENT) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } else if (!userInputSplit[1].contains(\"/by\")) {"
+        "content": "            this.addEventHandler(userInputSplit);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Make sure to use the \u0027/by\u0027 keyword.\");"
+        "content": "        } else if (this.command \u003d\u003d Command.ADD_TODO) {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "            this.addTodoHandler(userInputSplit);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            String[] instructionSplit \u003d userInputSplit[1].split(\"/by\", 2);"
+        "content": "        } else if (this.command \u003d\u003d Command.MARK_TASK_AS_DONE) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (instructionSplit[0].equals(\"\")) {"
+        "content": "            this.markTaskAsDoneHandler(userInputSplit);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Description of a Deadline must not be empty.\");"
+        "content": "        } else if (this.command \u003d\u003d Command.DELETE_TASK) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } else if (instructionSplit[1].equals(\"\")) {"
+        "content": "            this.deleteTaskHandler(userInputSplit);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please provide a due date.\");"
+        "content": "        } else if (this.command \u003d\u003d Command.NOT_FOUND) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "            this.commandNotFoundHandler(userInputSplit);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            this.description \u003d instructionSplit[0].trim();"
+        "content": "        } else if (this.command \u003d\u003d Command.FIND_TASKS) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            try {"
+        "content": "            this.findTasksHandler(userInputSplit);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                this.date \u003d LocalDate.parse(instructionSplit[1].trim());"
+        "content": "        }"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } catch (DateTimeParseException ex) {"
+        "content": "    }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)\");"
+        "content": ""
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "    /**"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (this.command \u003d\u003d Command.ADD_EVENT) {"
+        "content": "     * Tokenizes the {@code ADD_DEADLINE} command."
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
+        "content": "     * "
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please provide the description and due date.\");"
+        "content": "     * @param userInputSplit the array representing the user input string separated"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } else if (!userInputSplit[1].contains(\"/at\")) {"
+        "content": "     *                       by white spaces"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Make sure to use the \u0027/at\u0027 keyword.\");"
+        "content": "     * @throws DukeException if any of the task description, due date, or \u0027/by\u0027"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "     *                       keyword are missing"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            String[] instructionSplit \u003d userInputSplit[1].split(\"/at\", 2);"
+        "content": "     */"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (instructionSplit[0].equals(\"\")) {"
+        "content": "    private void addDeadlineHandler(String[] userInputSplit) throws DukeException {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Description of an Event must not be empty.\");"
+        "content": "        if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } else if (instructionSplit[1].equals(\"\")) {"
+        "content": "            throw new DukeException(\"Sorry! Please provide the description and due date.\");"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please provide a date range.\");"
+        "content": "        } else if (!userInputSplit[1].contains(\"/by\")) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "            throw new DukeException(\"Sorry! Make sure to use the \u0027/by\u0027 keyword.\");"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            this.description \u003d instructionSplit[0].trim();"
+        "content": "        }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            try {"
+        "content": "        String[] instructionSplit \u003d userInputSplit[1].split(\"/by\", 2);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                this.date \u003d LocalDate.parse(instructionSplit[1].trim());"
+        "content": "        if (instructionSplit[0].equals(\"\")) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } catch (DateTimeParseException ex) {"
+        "content": "            throw new DukeException(\"Sorry! Description of a Deadline must not be empty.\");"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)\");"
+        "content": "        } else if (instructionSplit[1].equals(\"\")) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "            throw new DukeException(\"Sorry! Please provide a due date.\");"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (this.command \u003d\u003d Command.ADD_TODO) {"
+        "content": "        }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
+        "content": "        this.description \u003d instructionSplit[0].trim();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Description of a Todo must not be empty.\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "            this.date \u003d LocalDate.parse(instructionSplit[1].trim());"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            this.description \u003d userInputSplit[1];"
+        "content": "        } catch (DateTimeParseException ex) {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (this.command \u003d\u003d Command.MARK_TASK_AS_DONE) {"
+        "content": "            throw new DukeException(\"Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)\");"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
+        "content": "        }"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please input a task number.\");"
+        "content": "    }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            try {"
+        "content": "    /**"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                this.taskIndex \u003d Integer.parseInt(userInputSplit[1]) - 1;"
+        "content": "     * Tokenizes the {@code ADD_EVENT} command."
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } catch (NumberFormatException ex) {"
+        "content": "     * "
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please enter a valid number.\");"
+        "content": "     * @param userInputSplit the array representing the user input string separated"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "     *                       by white spaces"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (this.command \u003d\u003d Command.DELETE_TASK) {"
+        "content": "     * @throws DukeException if any of the task description, due date, or \u0027/at\u0027"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
+        "content": "     *                       keyword are missing"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please input a task number.\");"
+        "content": "     */"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "    private void addEventHandler(String[] userInputSplit) throws DukeException {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            try {"
+        "content": "        if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                this.taskIndex \u003d Integer.parseInt(userInputSplit[1]) - 1;"
+        "content": "            throw new DukeException(\"Sorry! Please provide the description and due date.\");"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            } catch (NumberFormatException ex) {"
+        "content": "        } else if (!userInputSplit[1].contains(\"/at\")) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please enter a valid number.\");"
+        "content": "            throw new DukeException(\"Sorry! Make sure to use the \u0027/at\u0027 keyword.\");"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "        }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (this.command \u003d\u003d Command.NOT_FOUND) {"
+        "content": "        String[] instructionSplit \u003d userInputSplit[1].split(\"/at\", 2);"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            throw new DukeException(\"Sorry! I don\u0027t know what you mean!\");"
+        "content": "        if (instructionSplit[0].equals(\"\")) {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (this.command \u003d\u003d Command.FIND_TASKS) {"
+        "content": "            throw new DukeException(\"Sorry! Description of an Event must not be empty.\");"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
+        "content": "        } else if (instructionSplit[1].equals(\"\")) {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "                throw new DukeException(\"Sorry! Please provide something to find.\");"
+        "content": "            throw new DukeException(\"Sorry! Please provide a date range.\");"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            }"
+        "content": "        }"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            this.description \u003d userInputSplit[1];"
+        "content": "        this.description \u003d instructionSplit[0].trim();"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        }"
+        "content": "        try {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "            this.date \u003d LocalDate.parse(instructionSplit[1].trim());"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "        } catch (DateTimeParseException ex) {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    /**"
+        "content": "            throw new DukeException(\"Sorry! Make sure date is in YYYY-MM-DD format (eg. 2020-02-20)\");"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "     * Parses and tokenizes a String from the local hard disk."
+        "content": "        }"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "     * "
+        "content": "    }"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "     * \u003cp\u003eUnlike the {@code parseUserInput} method, this method does not throw any"
+        "content": ""
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "     * {@code DukeException} as the data stored on disk is guaranteed to be correct."
+        "content": "    /**"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "     * "
+        "content": "     * Tokenizes the {@code ADD_TODO} command."
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "     * @param data the raw String data from the local hard disk"
+        "content": "     * "
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "     */"
+        "content": "     * @param userInputSplit the array representing the user input string separated"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public void parseDiskData(String data) {"
+        "content": "     *                       by white spaces"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        String[] dataSplit \u003d data.split(\"\\\\|\");"
+        "content": "     * @throws DukeException if the task description is missing"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        this.command \u003d this.parseCommand(dataSplit[0]);"
+        "content": "     */"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        this.description \u003d dataSplit[2];"
+        "content": "    private void addTodoHandler(String[] userInputSplit) throws DukeException {"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        this.isDone \u003d dataSplit[1].equals(\"1\") ? true : false;"
+        "content": "        if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        if (this.command \u003d\u003d Command.ADD_DEADLINE) {"
+        "content": "            throw new DukeException(\"Sorry! Description of a Todo must not be empty.\");"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            this.date \u003d LocalDate.parse(dataSplit[3].trim());"
+        "content": "        }"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (this.command \u003d\u003d Command.ADD_EVENT) {"
+        "content": "        this.description \u003d userInputSplit[1];"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            this.date \u003d LocalDate.parse(dataSplit[3].trim());"
+        "content": "    }"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "     * Tokenizes the {@code MARK_TASK_AS_DONE} command."
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    private Command parseCommand(String command) {"
+        "content": "     * "
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        if (command.equals(\"bye\")) {"
+        "content": "     * @param userInputSplit the array representing the user input string separated"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.EXIT_DUKE;"
+        "content": "     *                       by white spaces"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (command.equals(\"list\")) {"
+        "content": "     * @throws DukeException if the input task number is missing, or not a number"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.LIST_TASKS;"
+        "content": "     */"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (command.equals(\"done\")) {"
+        "content": "    private void markTaskAsDoneHandler(String[] userInputSplit) throws DukeException {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.MARK_TASK_AS_DONE;"
+        "content": "        if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (command.equals(\"todo\") || command.equals(\"T\")) {"
+        "content": "            throw new DukeException(\"Sorry! Please input a task number.\");"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.ADD_TODO;"
+        "content": "        }"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (command.equals(\"deadline\") || command.equals(\"D\")) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.ADD_DEADLINE;"
+        "content": "            this.taskIndex \u003d Integer.parseInt(userInputSplit[1]) - 1;"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (command.equals(\"event\") || command.equals(\"E\")) {"
+        "content": "        } catch (NumberFormatException ex) {"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.ADD_EVENT;"
+        "content": "            throw new DukeException(\"Sorry! Please enter a valid number.\");"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (command.equals(\"delete\")) {"
+        "content": "        }"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.DELETE_TASK;"
+        "content": "    }"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        } else if (command.equals(\"find\")) {"
+        "content": ""
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "            return Command.FIND_TASKS;"
+        "content": "    /**"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        }"
+        "content": "     * Tokenizes the {@code DELETE_TASK} command."
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return Command.NOT_FOUND;"
+        "content": "     * "
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "     * @param userInputSplit the array representing the user input string separated"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "     *                       by white spaces"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public Command getCommand() {"
+        "content": "     * @throws DukeException if the input task number is missing, or not a number"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return this.command;"
+        "content": "     */"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "    private void deleteTaskHandler(String[] userInputSplit) throws DukeException {"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "        if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public String getDescription() {"
+        "content": "            throw new DukeException(\"Sorry! Please input a task number.\");"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return this.description;"
+        "content": "        }"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        try {"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "            this.taskIndex \u003d Integer.parseInt(userInputSplit[1]) - 1;"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public int getTaskIndex() {"
+        "content": "        } catch (NumberFormatException ex) {"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return this.taskIndex;"
+        "content": "            throw new DukeException(\"Sorry! Please enter a valid number.\");"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public boolean getIsDone() {"
+        "content": ""
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return this.isDone;"
+        "content": "    private void commandNotFoundHandler(String[] userInputSplit) throws DukeException {"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        throw new DukeException(\"Sorry! I don\u0027t know what you mean!\");"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public LocalDate getDate() {"
+        "content": ""
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return this.date;"
+        "content": "    /**"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "     * Tokenizes the {@code FIND_TASKS} command."
       },
       {
         "lineNumber": 155,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * @param userInputSplit the array representing the user input string separated"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     *                       by white spaces"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * @throws DukeException if the input string to find is missing"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    private void findTasksHandler(String[] userInputSplit) throws DukeException {"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        if (userInputSplit.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            throw new DukeException(\"Sorry! Please provide something to find.\");"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        this.description \u003d userInputSplit[1];"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * Parses and tokenizes a String from the local hard disk."
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * \u003cp\u003e"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * Unlike the {@code parseUserInput} method, this method does not throw any"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * {@code DukeException} as the data stored on disk is guaranteed to be correct."
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * @param data the raw String data from the local hard disk"
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    public void parseDiskData(String data) {"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        String[] dataSplit \u003d data.split(\"\\\\|\");"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        assert dataSplit.length \u003e\u003d 3;"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        this.command \u003d this.parseCommand(dataSplit[0]);"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        this.description \u003d dataSplit[2];"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        this.isDone \u003d dataSplit[1].equals(\"1\") ? true : false;"
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        if (this.command \u003d\u003d Command.ADD_DEADLINE) {"
+      },
+      {
+        "lineNumber": 183,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            this.date \u003d LocalDate.parse(dataSplit[3].trim());"
+      },
+      {
+        "lineNumber": 184,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (this.command \u003d\u003d Command.ADD_EVENT) {"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            this.date \u003d LocalDate.parse(dataSplit[3].trim());"
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 188,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 190,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * Parses and returns the correct {@code Command} enum value from the input"
+      },
+      {
+        "lineNumber": 191,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * string {@code command}"
+      },
+      {
+        "lineNumber": 192,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 193,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * @param command string to match"
+      },
+      {
+        "lineNumber": 194,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     * @return the correct {@code Command} enum value"
+      },
+      {
+        "lineNumber": 195,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 196,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    private Command parseCommand(String command) {"
+      },
+      {
+        "lineNumber": 197,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        if (command.equals(\"bye\")) {"
+      },
+      {
+        "lineNumber": 198,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.EXIT_DUKE;"
+      },
+      {
+        "lineNumber": 199,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (command.equals(\"list\")) {"
+      },
+      {
+        "lineNumber": 200,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.LIST_TASKS;"
+      },
+      {
+        "lineNumber": 201,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (command.equals(\"done\")) {"
+      },
+      {
+        "lineNumber": 202,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.MARK_TASK_AS_DONE;"
+      },
+      {
+        "lineNumber": 203,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (command.equals(\"todo\") || command.equals(\"T\")) {"
+      },
+      {
+        "lineNumber": 204,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.ADD_TODO;"
+      },
+      {
+        "lineNumber": 205,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (command.equals(\"deadline\") || command.equals(\"D\")) {"
+      },
+      {
+        "lineNumber": 206,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.ADD_DEADLINE;"
+      },
+      {
+        "lineNumber": 207,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (command.equals(\"event\") || command.equals(\"E\")) {"
+      },
+      {
+        "lineNumber": 208,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.ADD_EVENT;"
+      },
+      {
+        "lineNumber": 209,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (command.equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 210,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.DELETE_TASK;"
+      },
+      {
+        "lineNumber": 211,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        } else if (command.equals(\"find\")) {"
+      },
+      {
+        "lineNumber": 212,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "            return Command.FIND_TASKS;"
+      },
+      {
+        "lineNumber": 213,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 214,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        return Command.NOT_FOUND;"
+      },
+      {
+        "lineNumber": 215,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 216,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 217,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    public Command getCommand() {"
+      },
+      {
+        "lineNumber": 218,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        return this.command;"
+      },
+      {
+        "lineNumber": 219,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 220,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 221,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    public String getDescription() {"
+      },
+      {
+        "lineNumber": 222,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        return this.description;"
+      },
+      {
+        "lineNumber": 223,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 224,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 225,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    public int getTaskIndex() {"
+      },
+      {
+        "lineNumber": 226,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        return this.taskIndex;"
+      },
+      {
+        "lineNumber": 227,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 228,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 229,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    public boolean getIsDone() {"
+      },
+      {
+        "lineNumber": 230,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        return this.isDone;"
+      },
+      {
+        "lineNumber": 231,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 232,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 233,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    public LocalDate getDate() {"
+      },
+      {
+        "lineNumber": 234,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "        return this.date;"
+      },
+      {
+        "lineNumber": 235,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 236,
         "author": {
           "gitId": "AaronCQL"
         },
@@ -3730,7 +4311,7 @@
       }
     ],
     "authorContributionMap": {
-      "AaronCQL": 155
+      "AaronCQL": 236
     }
   },
   {
@@ -4703,178 +5284,185 @@
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        this.description \u003d description;"
+        "content": "        assert description !\u003d null;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        this.isDone \u003d isDone;"
+        "content": "        this.description \u003d description;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        this.isDone \u003d isDone;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public String getDescription() {"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return description;"
+        "content": "    public String getDescription() {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        return description;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public String getStatusIcon() {"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return (isDone ? \"\\u2713\" : \"\\u2718\"); // return tick or X symbols"
+        "content": "    public String getStatusIcon() {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        return (isDone ? \"\\u2713\" : \"\\u2718\"); // return tick or X symbols"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public boolean getIsDone() {"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return this.isDone;"
+        "content": "    public boolean getIsDone() {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        return this.isDone;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public void markAsDone() {"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        this.isDone \u003d true;"
+        "content": "    public void markAsDone() {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        this.isDone \u003d true;"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public String getDescriptionWithIsDone() {"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "        return \"[\" + this.getStatusIcon() + \"] \" + this.getDescription();"
+        "content": "    public String getDescriptionWithIsDone() {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    }"
+        "content": "        return \"[\" + this.getStatusIcon() + \"] \" + this.getDescription();"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "AaronCQL"
         },
-        "content": "    public abstract String getFullDescription();"
+        "content": ""
       },
       {
         "lineNumber": 35,
+        "author": {
+          "gitId": "AaronCQL"
+        },
+        "content": "    public abstract String getFullDescription();"
+      },
+      {
+        "lineNumber": 36,
         "author": {
           "gitId": "AaronCQL"
         },
@@ -4882,7 +5470,7 @@
       }
     ],
     "authorContributionMap": {
-      "AaronCQL": 35
+      "AaronCQL": 36
     }
   },
   {

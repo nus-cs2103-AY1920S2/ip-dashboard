@@ -1347,91 +1347,91 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            if (index \u003c tasks.size() \u0026\u0026 index \u003e\u003d 0) {"
+        "content": "            if (index \u003e\u003d tasks.size() || index \u003c 0)"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                taskList.markTaskDone(index);"
+        "content": "                return ui.taskNotExist();"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                storage.writeToFile(tasks);"
+        "content": "            taskList.markTaskDone(index);"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d taskList.taskMessage;"
+        "content": "            storage.writeToFile(tasks);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else {"
+        "content": "            responseMessage \u003d taskList.taskMessage;"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d ui.taskNotExist();"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": "        } else if (command.equals(\"delete\")) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        } else if (command.equals(\"delete\")) {"
+        "content": "            int index \u003d Integer.parseInt(input.split(\" \")[1]) - 1;"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            int index \u003d Integer.parseInt(input.split(\" \")[1]) - 1;"
+        "content": "            try {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            try {"
+        "content": "                taskList.deleteTask(index);"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                taskList.deleteTask(index);"
+        "content": "                String status \u003d storage.writeToFile(tasks);"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                storage.writeToFile(tasks);"
+        "content": "                responseMessage \u003d taskList.taskMessage;"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d taskList.taskMessage;"
+        "content": "                assert status.equals(\"Successful saved to file\") : \"Failed to write content\";"
       },
       {
         "lineNumber": 64,
@@ -1473,49 +1473,49 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            if (input.trim().equals(\"todo\")) {"
+        "content": "            if (input.trim().equals(\"todo\"))"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d ui.emptyDescription();"
+        "content": "                return ui.emptyDescription();"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else {"
+        "content": "            taskList.addToDo(input.substring(emptyIndex + 1));"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                taskList.addToDo(input.substring(emptyIndex + 1));"
+        "content": "            String status \u003d storage.writeToFile(tasks);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                storage.writeToFile(tasks);"
+        "content": "            responseMessage \u003d taskList.taskMessage;"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d taskList.taskMessage;"
+        "content": "            assert status.equals(\"Successful saved to file\") : \"Failed to write content\";"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 76,
@@ -1543,63 +1543,63 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            if (input.trim().equals(\"deadline\")) {"
+        "content": "            if (input.trim().equals(\"deadline\"))"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d ui.emptyDescription();"
+        "content": "                return ui.emptyDescription();"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else if (slashIndex \u003d\u003d -1) {"
+        "content": "            if (slashIndex \u003d\u003d -1)"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d ui.emptyDate();"
+        "content": "                return ui.emptyDate();"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else {"
+        "content": "            taskList.addDeadline(input.substring(emptyIndex + 1, slashIndex - 1), LocalDate.parse(input.substring(slashIndex + 4)));"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                taskList.addDeadline(input.substring(emptyIndex + 1, slashIndex - 1), LocalDate.parse(input.substring(slashIndex + 4)));"
+        "content": "            String status \u003d storage.writeToFile(tasks);"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                storage.writeToFile(tasks);"
+        "content": "            responseMessage \u003d taskList.taskMessage;"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d taskList.taskMessage;"
+        "content": "            assert status.equals(\"Successful saved to file\") : \"Failed to write content\";"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 88,
@@ -1627,63 +1627,63 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            if (input.trim().equals(\"event\")) {"
+        "content": "            if (input.trim().equals(\"event\"))"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d ui.emptyDescription();"
+        "content": "                return ui.emptyDescription();"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else if (slashIndex \u003d\u003d -1) {"
+        "content": "            if (slashIndex \u003d\u003d -1)"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d ui.emptyDate();"
+        "content": "                return ui.emptyDate();"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else {"
+        "content": "            taskList.addEvent(input.substring(emptyIndex + 1, slashIndex - 1), LocalDate.parse(input.substring(slashIndex + 4)));"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                taskList.addEvent(input.substring(emptyIndex + 1, slashIndex - 1), LocalDate.parse(input.substring(slashIndex + 4)));"
+        "content": "            String status \u003d storage.writeToFile(tasks);"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                storage.writeToFile(tasks);"
+        "content": "            responseMessage \u003d taskList.taskMessage;"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                responseMessage \u003d taskList.taskMessage;"
+        "content": "            assert status.equals(\"Successful saved to file\") : \"Failed to write content\";"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 100,
@@ -2672,59 +2672,52 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        assert input.length() \u003c 10 : \"not valid\";"
+        "content": "        String response \u003d duke.getResponse(input);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        String response \u003d duke.getResponse(input);"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "                DialogBox.getUserDialog(input, userImage),"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                DialogBox.getUserDialog(input, userImage),"
+        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
+        "content": "        );"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        );"
+        "content": "        userInput.clear();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        userInput.clear();"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "oLiXino"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 66,
+        "lineNumber": 65,
         "author": {
           "gitId": "oLiXino"
         },
@@ -2732,7 +2725,7 @@
       }
     ],
     "authorContributionMap": {
-      "oLiXino": 66
+      "oLiXino": 65
     }
   },
   {
@@ -2856,7 +2849,7 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        String command \u003d null;"
+        "content": "        String command;"
       },
       {
         "lineNumber": 18,
@@ -3306,7 +3299,7 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                if (isDone.equals(\"1\")) {"
+        "content": "                if (isDone.equals(\"1\"))"
       },
       {
         "lineNumber": 40,
@@ -3320,423 +3313,409 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                }"
+        "content": "                tasks.add(todo);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                tasks.add(todo);"
+        "content": "            } else if (type.equals(\"D\")) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else if (type.equals(\"D\")) {"
+        "content": "                DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"MMM d yyyy\");"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"MMM d yyyy\");"
+        "content": "                Deadline deadline \u003d new Deadline(data[2].trim(), LocalDate.parse(data[3].trim(), formatter));"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                Deadline deadline \u003d new Deadline(data[2].trim(), LocalDate.parse(data[3].trim(), formatter));"
+        "content": "                if (isDone.equals(\"1\"))"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                if (isDone.equals(\"1\")) {"
+        "content": "                    deadline.markAsDone();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                    deadline.markAsDone();"
+        "content": "                tasks.add(deadline);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                }"
+        "content": "            } else {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                tasks.add(deadline);"
+        "content": "                assert type.equals(\"E\") : \"Task type should be event\";"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            } else {"
+        "content": "                DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"MMM d yyyy\");"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"MMM d yyyy\");"
+        "content": "                Event event \u003d new Event(data[2].trim(), LocalDate.parse(data[3].trim(), formatter));"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                Event event \u003d new Event(data[2].trim(), LocalDate.parse(data[3].trim(), formatter));"
+        "content": "                if (isDone.equals(\"1\"))"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                if (isDone.equals(\"1\")) {"
+        "content": "                    event.markAsDone();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                    event.markAsDone();"
+        "content": "                tasks.add(event);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                }"
+        "content": "            }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                tasks.add(event);"
+        "content": "        }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": "        return tasks;"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        return tasks;"
+        "content": ""
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": ""
+        "content": "     * Writes content of a task list to a special file location on the hard disk"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     * Writes content of a task list to a special file location on the hard disk"
+        "content": "     * @param tasks the task list to be written to the file."
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     *"
+        "content": "     * @throws IOException if encounter issue writing content to the file."
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     * @param tasks the task list to be written to the file."
+        "content": "     */"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     * @throws IOException if encounter issue writing content to the file."
+        "content": "    public void writeFileContent(ArrayList\u003cTask\u003e tasks) throws IOException {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     */"
+        "content": "        FileWriter fw \u003d new FileWriter(filePath);"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    public void writeFileContent(ArrayList\u003cTask\u003e tasks) throws IOException {"
+        "content": "        for (Task task : tasks) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        FileWriter fw \u003d new FileWriter(filePath);"
+        "content": "            String type \u003d task instanceof Todo ? \"T\" : task instanceof Deadline ? \"D\" : \"E\";"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        for (Task task : tasks) {"
+        "content": "            String status \u003d task.isDone ? \"1\" : \"0\";"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            String type \u003d task instanceof Todo ? \"T\" : task instanceof Deadline ? \"D\" : \"E\";"
+        "content": "            String description \u003d task.description;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            String status \u003d task.isDone ? \"1\" : \"0\";"
+        "content": "            String text \u003d type + \" | \" + status + \" | \" + description;"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            String description \u003d task.description;"
+        "content": "            if (task instanceof Deadline)"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            String text \u003d type + \" | \" + status + \" | \" + description;"
+        "content": "                text +\u003d \" | \" + ((Deadline) task).by.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            if (task instanceof Deadline) {"
+        "content": "            if (task instanceof Event)"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                text +\u003d \" | \" + ((Deadline) task).by.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+        "content": "                text +\u003d \" | \" + ((Event) task).at.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": "            fw.write(text + System.lineSeparator());"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            if (task instanceof Event) {"
+        "content": "        }"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                text +\u003d \" | \" + ((Event) task).at.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+        "content": "        fw.close();"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": "    }"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            fw.write(text + System.lineSeparator());"
+        "content": ""
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        }"
+        "content": "    /**"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        fw.close();"
+        "content": "     * Calls writeFileContent method to write content to a specific file."
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    }"
+        "content": "     * Returns status message to indicate if content has been written to file successfully."
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    /**"
+        "content": "     * @param tasks the task list to be written to the file."
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     * Calls writeFileContent method to write content to a specific file."
+        "content": "     * @return status with successful message if content was written to file successfully, false otherwise."
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     * @param tasks the task list to be written to the file."
+        "content": "    public String writeToFile(ArrayList\u003cTask\u003e tasks) {"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     */"
+        "content": "        String status;"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    public String writeToFile(ArrayList\u003cTask\u003e tasks) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        String status;"
+        "content": "            writeFileContent(tasks);"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        try {"
+        "content": "            status \u003d \"Successful saved to file\";"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            writeFileContent(tasks);"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            status \u003d \"Successful saved to file\";"
+        "content": "            status \u003d \"Failed to saved to file\";"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            status \u003d \"Failed to saved to file\";"
+        "content": "        return status;"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "oLiXino"
-        },
-        "content": "        return status;"
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "oLiXino"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 101,
+        "lineNumber": 99,
         "author": {
           "gitId": "oLiXino"
         },
@@ -3744,7 +3723,7 @@
       }
     ],
     "authorContributionMap": {
-      "oLiXino": 101
+      "oLiXino": 99
     }
   },
   {
@@ -4654,7 +4633,7 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        if (index \u003e\u003d tasks.size() || index \u003c 0) {"
+        "content": "        if (index \u003e\u003d tasks.size() || index \u003c 0)"
       },
       {
         "lineNumber": 92,
@@ -4668,206 +4647,192 @@
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        }"
+        "content": "        Task task \u003d tasks.remove(index);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        Task task \u003d tasks.remove(index);"
+        "content": "        taskMessage \u003d \"Got it. I\u0027ve removed this task: \\n\";"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        taskMessage \u003d \"Got it. I\u0027ve removed this task: \\n\";"
+        "content": "        taskMessage +\u003d task + \"\\n\";"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        taskMessage +\u003d task + \"\\n\";"
+        "content": "        taskMessage +\u003d \"Now you have \" + tasks.size() + \" tasks in the list.\\n\";"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        taskMessage +\u003d \"Now you have \" + tasks.size() + \" tasks in the list.\\n\";"
+        "content": "    }"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    /**"
+        "content": "     * Searches the tasks that contains the keyword and displays these tasks."
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     * Searches the tasks that contains the keyword and displays these tasks."
+        "content": "     *"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     *"
+        "content": "     * @param keyword the keyword used to search for the tasks."
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     * @param keyword the keyword used to search for the tasks."
+        "content": "     */"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "     */"
+        "content": "    protected void findTask(String keyword) {"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "    protected void findTask(String keyword) {"
+        "content": "        ArrayList\u003cTask\u003e result \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        ArrayList\u003cTask\u003e result \u003d new ArrayList\u003c\u003e();"
+        "content": "        for (Task task : tasks) {"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        for (Task task : tasks) {"
+        "content": "            if (task.description.contains(keyword))"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            if (task.description.contains(keyword)) {"
+        "content": "                result.add(task);"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                result.add(task);"
+        "content": "        }"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": "        if (result.size() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        }"
+        "content": "            taskMessage \u003d \"Sorry! I can\u0027t find any task with the keyword \" + keyword + \"\\n\";"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        if (result.size() \u003d\u003d 0) {"
+        "content": "            return;"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            taskMessage \u003d \"Sorry! I can\u0027t find any task with the keyword \" + keyword + \"\\n\";"
+        "content": "        }"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        } else {"
+        "content": "        taskMessage \u003d \"Here are the matching tasks in your list:\\n\";"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            taskMessage +\u003d \"Here are the matching tasks in your list:\\n\";"
+        "content": "        for (Task task : result) {"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            for (Task task : result) {"
+        "content": "            taskMessage +\u003d task + \"\\n\";"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "                taskMessage +\u003d task + \"\\n\";"
+        "content": "        }"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "            }"
+        "content": "    }"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "oLiXino"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 120,
-        "author": {
-          "gitId": "oLiXino"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 121,
-        "author": {
-          "gitId": "oLiXino"
-        },
         "content": "}"
       },
       {
-        "lineNumber": 122,
+        "lineNumber": 120,
         "author": {
           "gitId": "oLiXino"
         },
@@ -4875,7 +4840,7 @@
       }
     ],
     "authorContributionMap": {
-      "oLiXino": 122
+      "oLiXino": 120
     }
   },
   {

@@ -454,18 +454,32 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "T | 0 | 2"
+        "content": "E | 1 | read | 2020-04-03"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "E | 1 | read | 2020-04-03"
+        "content": "T | 1 | x"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "T | 1 | y"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "T | 1 | r"
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 3
+      "Jarrod-Bob": 5
     }
   },
   {
@@ -990,626 +1004,514 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "/**"
+        "content": "import java.util.concurrent.TimeUnit;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": " * The class representation of the AI bot that helps keep track of the user\u0027s todo list."
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 17,
         "author": {
-          "gitId": "-"
+          "gitId": "Jarrod-Bob"
         },
-        "content": "public class Duke {"
+        "content": " * The class representation of the AI bot that helps keep track of the user\u0027s todo list."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Storage storage;"
+        "content": " */"
       },
       {
         "lineNumber": 19,
         "author": {
-          "gitId": "Jarrod-Bob"
+          "gitId": "-"
         },
-        "content": "    private TaskList tasks;"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Ui ui;"
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private ScrollPane scrollPane;"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private VBox dialogContainer;"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private TextField userInput;"
+        "content": "    public Duke() {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Button sendButton;"
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Scene scene;"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Image user \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
+        "content": "    public Duke(String filePath) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Image duke \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        storage \u003d new Storage(filePath);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        try {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public Duke() {"
+        "content": "            tasks \u003d storage.load();"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "            ui.showLoadingError();"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public Duke(String filePath) {"
+        "content": "            tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "        }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        storage \u003d new Storage(filePath);"
+        "content": "    }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        try {"
+        "content": ""
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            tasks \u003d storage.load();"
+        "content": "    public String getResponse(String input) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "        Command c \u003d Parser.parse(input);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            ui.showLoadingError();"
+        "content": "        boolean isExit \u003d c.isExit();"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            tasks \u003d new TaskList();"
+        "content": "        CommandResult output \u003d c.execute(tasks, storage);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "        if(isExit){"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "            System.out.println(\"Bye\");"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "            try {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String getWelcomeMessage() {"
+        "content": "                TimeUnit.SECONDS.sleep(3);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\treturn ui.createWelcomeMessage(tasks);"
+        "content": "            } catch (InterruptedException e) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return \"jarvis here!\";"
+        "content": "                e.printStackTrace();"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "            }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "            System.exit(0);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * You should have your own function to generate a response to user input."
+        "content": ""
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Replace this stub with your completed method."
+        "content": "        return output.feedbackToUser;"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String getResponse(String input) {"
+        "content": ""
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//        boolean isExit \u003d false;"
+        "content": "    /**"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//        while(!isExit) {"
+        "content": "     * The main program execution that will take in the user\u0027s input and act on it."
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//"
+        "content": "     */"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//        }"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        Command c \u003d Parser.parse(input);"
+        "content": "        System.out.println(ui.createWelcomeMessage(tasks));"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        boolean isExit \u003d c.isExit();"
+        "content": "        boolean isExit \u003d false;"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        CommandResult output \u003d c.execute(tasks, storage);"
+        "content": "        while (!isExit) {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        if(isExit){"
+        "content": "            try {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            System.out.println(\"Bye\");"
+        "content": "                String fullCommand \u003d ui.readCommand();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            System.exit(0);"
+        "content": "                ui.showLine(); // show the divider line (\"_______\")"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "                Command c \u003d Parser.parse(fullCommand);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "                c.execute(tasks, storage);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return output.feedbackToUser;"
+        "content": "                isExit \u003d c.isExit();"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "            } /*catch (Exception e) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "                ui.showError(e.getMessage());"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "            } */ finally {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * The main program execution that will take in the user\u0027s input and act on it."
+        "content": "                ui.showLine();"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "            }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public void run() {"
+        "content": "        }"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        //  ui.showWelcomeMessage(tasks);"
+        "content": "        ui.showGoodbyeMessage();"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        System.out.println(ui.createWelcomeMessage(tasks));"
+        "content": "    }"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        boolean isExit \u003d false;"
+        "content": ""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        while (!isExit) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            try {"
+        "content": "     * Main program that runs the Duke program."
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                String fullCommand \u003d ui.readCommand();"
+        "content": "     *"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                ui.showLine(); // show the divider line (\"_______\")"
+        "content": "     * @param args Relevant command line arguments."
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                Command c \u003d Parser.parse(fullCommand);"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "                c.execute(tasks, storage);"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "                isExit \u003d c.isExit();"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "            } /*catch (Exception e) {"
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "                ui.showError(e.getMessage());"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "            } */ finally {"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "                ui.showLine();"
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        ui.showGoodbyeMessage();"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "     * Main program that runs the Duke program."
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "     * @param args Relevant command line arguments."
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "     */"
       },
       {
-        "lineNumber": 98,
+        "lineNumber": 82,
         "author": {
           "gitId": "-"
         },
         "content": "    public static void main(String[] args) {"
       },
       {
-        "lineNumber": 99,
+        "lineNumber": 83,
         "author": {
           "gitId": "Jarrod-Bob"
         },
         "content": "        new Duke(\"data/tasks.txt\").run();"
       },
       {
-        "lineNumber": 100,
+        "lineNumber": 84,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 101,
+        "lineNumber": 85,
         "author": {
           "gitId": "-"
         },
         "content": "}"
       },
       {
-        "lineNumber": 102,
+        "lineNumber": 86,
         "author": {
           "gitId": "Jarrod-Bob"
         },
         "content": ""
       },
       {
-        "lineNumber": 103,
+        "lineNumber": 87,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -1617,7 +1519,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 99,
+      "Jarrod-Bob": 83,
       "-": 4
     }
   },
@@ -2082,227 +1984,241 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
+        "content": "    private Image userImage1 \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
+        "content": "    private Image dukeImage1 \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/peasant.png\"));"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    @FXML"
+        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/dukeEdinburgh.png\"));"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public void initialize() {"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        dialogContainer.getChildren().add("
+        "content": "    public void initialize() {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                DialogBox.getDukeDialog(\"Good Day, Jarvis here at your service!\", dukeImage)"
+        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        );"
+        "content": "        dialogContainer.getChildren().add("
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "                DialogBox.getDukeDialog(\"Good Day, Jarvis here at your service!\", dukeImage)"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        );"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public void setDuke(Duke d) {"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        duke \u003d d;"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "    public void setDuke(Duke d) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        duke \u003d d;"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * the dialog container. Clears the user input after processing."
+        "content": "    /**"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    @FXML"
+        "content": "     * the dialog container. Clears the user input after processing."
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private void handleUserInput() {"
+        "content": "     */"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\tdialogContainer.getChildren().add("
+        "content": "    @FXML"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\t\t\tDialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage)"
+        "content": "    private void handleUserInput() {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\t);"
+        "content": "//\t\tdialogContainer.getChildren().add("
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        String input \u003d userInput.getText();"
+        "content": "//\t\t\t\tDialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage)"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        String response \u003d duke.getResponse(input);"
+        "content": "//\t\t);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "        String input \u003d userInput.getText();"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                DialogBox.getUserDialog(input, userImage),"
+        "content": "        String response \u003d duke.getResponse(input);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        );"
+        "content": "                DialogBox.getUserDialog(input, userImage),"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        userInput.clear();"
+        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        );"
       },
       {
         "lineNumber": 56,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        userInput.clear();"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 58,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -2310,7 +2226,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 56
+      "Jarrod-Bob": 58
     }
   },
   {
@@ -2574,94 +2490,59 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "     * Checks if this is an exit command."
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    ;"
+        "content": "     * @return false since it is not an exit command."
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Checks if this is an exit command."
+        "content": "        return false;"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "     * @return false since it is not an exit command."
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "    public boolean isExit() {"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        return false;"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 50,
+        "lineNumber": 45,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -2669,7 +2550,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 50
+      "Jarrod-Bob": 45
     }
   },
   {
@@ -2779,136 +2660,24 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t/** The list of persons that was produced by the command */"
+        "content": "    public CommandResult(String feedbackToUser) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\tprivate final List\u003c? extends ReadOnlyPerson\u003e relevantPersons;"
+        "content": "        this.feedbackToUser \u003d feedbackToUser;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "    public CommandResult(String feedbackToUser) {"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        this.feedbackToUser \u003d feedbackToUser;"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\tpublic CommandResult(String feedbackToUser, List\u003c? extends ReadOnlyPerson\u003e relevantPersons) {"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t\tthis.feedbackToUser \u003d feedbackToUser;"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t\tthis.relevantPersons \u003d relevantPersons;"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t}"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t/**"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t * Returns a list of persons relevant to the command command result, if any."
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t */"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\tpublic Optional\u003cList\u003c? extends ReadOnlyPerson\u003e\u003e getRelevantPersons() {"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t\treturn Optional.ofNullable(relevantPersons);"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "//\t}"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 34,
+        "lineNumber": 18,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -2916,7 +2685,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 34
+      "Jarrod-Bob": 18
     }
   },
   {
@@ -3278,52 +3047,38 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\tSystem.out.println(\"Successfully added: \" + dl);"
+        "content": "        storage.save(tasks);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\tSystem.out.println(\"You now have \" + (tasks.getList().size()) + \" number of tasks in the list\");"
+        "content": "        return new CommandResult(\"Successfully added: \" + dl + \"\\nYou now have \" + (tasks.getList().size()) +"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        storage.save(tasks);"
+        "content": "                \" number of tasks in the list\");"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new CommandResult(\"Successfully added: \" + dl + \"\\nYou now have \" + (tasks.getList().size()) +"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                \" number of tasks in the list\");"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": ""
       },
       {
-        "lineNumber": 58,
+        "lineNumber": 56,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -3331,7 +3086,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 58
+      "Jarrod-Bob": 56
     }
   },
   {
@@ -3574,73 +3329,59 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\t\tSystem.out.println(\"Successfully Removed: \" + tasks.getList().get(this.index - 1));"
+        "content": "            Task deleted \u003d tasks.getList().get(this.index - 1);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            Task deleted \u003d tasks.getList().get(this.index - 1);"
+        "content": "            tasks.remove(this.index - 1);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            tasks.remove(this.index - 1);"
+        "content": "            storage.save(tasks);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            storage.save(tasks);"
+        "content": "            return new CommandResult(\"Successfully Removed: \" + deleted);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            return new CommandResult(\"Successfully Removed: \" + deleted);"
+        "content": "        } catch (IndexOutOfBoundsException ie) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (IndexOutOfBoundsException ie) {"
+        "content": "            return new CommandResult(\"Index does not exist\");"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//            System.out.println(\"Index does not exist\");"
+        "content": "        }"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            return new CommandResult(\"Index does not exist\");"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 44,
+        "lineNumber": 42,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -3648,7 +3389,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 44
+      "Jarrod-Bob": 42
     }
   },
   {
@@ -4313,52 +4054,38 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\tSystem.out.println(\"Successfully added: \" + ev);"
+        "content": "        storage.save(tasks);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\tSystem.out.println(\"You now have \" + (tasks.getList().size()) + \" number of tasks in the list\");"
+        "content": "        return new CommandResult(\"Successfully added: \" + ev + \"\\nYou now have \" + (tasks.getList().size()) +"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        storage.save(tasks);"
+        "content": "                \" number of tasks in the list\");"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new CommandResult(\"Successfully added: \" + ev + \"\\nYou now have \" + (tasks.getList().size()) +"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                \" number of tasks in the list\");"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "}"
       },
       {
-        "lineNumber": 58,
+        "lineNumber": 56,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -4366,7 +4093,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 58
+      "Jarrod-Bob": 56
     }
   },
   {
@@ -4532,122 +4259,115 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//        System.out.println(MESSAGE_EXIT_ACKNOWEDGEMENT);"
+        "content": "        return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);"
+        "content": "    }"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "     * Checks if this is an exit command."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Checks if this is an exit command."
+        "content": "     *"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * @return true since it is an exit command."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return true since it is an exit command."
+        "content": "     */"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "    @Override"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    @Override"
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public boolean isExit() {"
+        "content": "        return true;"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return true;"
+        "content": "    }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    public static boolean isExit(Command command) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public static boolean isExit(Command command) {"
+        "content": "        return command instanceof ExitCommand; // instanceof returns false if it is null"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return command instanceof ExitCommand; // instanceof returns false if it is null"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 40,
+        "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -4655,7 +4375,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 40
+      "Jarrod-Bob": 39
     }
   },
   {
@@ -4849,80 +4569,59 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\t\tSystem.out.println(\"Search Results as follows: \");"
+        "content": "            for (Task t : matchedTasks) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            for (Task t : matchedTasks) {"
+        "content": "                output +\u003d \"\\n\" + t.toString();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\t\t\tSystem.out.println(t);"
+        "content": "            }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                output +\u003d \"\\n\" + t.toString();"
+        "content": "            return new CommandResult(output + \"\\n\");"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            }"
+        "content": "        } catch (IndexOutOfBoundsException ie) {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            return new CommandResult(output + \"\\n\");"
+        "content": "            return new CommandResult(\"Index does not exist\");"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (IndexOutOfBoundsException ie) {"
+        "content": "        }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\t\tSystem.out.println(\"Index does not exist\");"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "            return new CommandResult(\"Index does not exist\");"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 38,
+        "lineNumber": 35,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -4930,7 +4629,233 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 38
+      "Jarrod-Bob": 35
+    }
+  },
+  {
+    "path": "src/main/java/commands/HelpCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "package commands;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "import storage.Storage;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "import taskList.TaskList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "public class HelpCommand extends Command{"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "    public static final String COMMAND_WORD \u003d \"help\";"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "    public CommandResult execute(TaskList tasks, Storage storage) {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        String helpString \u003d \"Hi, it seems that you are in need of some help, let me offer my assistance!\\n\";"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"**********************************************************\\n\";"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"Duke is your personal task management tool. It has functionalities in built for managing \" +"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "                \"different types of tasks that you might have, helping you check whether you have done your tasks \" +"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "                \"and helping you clear your different tasks.\\n\";"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"__________________________________________________________\\n\";"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"The commands that are available are as follows:\\n\";"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"Task Creation Commands:\\n\";"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"    1. todo [task] - allows you to add a simple todo\\n    2. event [task] /at [yyyy-mm-dd] - \" +"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "                \"allows you to add a event that is occuring on given date\\n    3. deadline [task] /by [yyyy-mm-dd] \" +"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "                \"- allows you to add a deadline event occuring on given date\\n\\n\";"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"Task Action Commands:\\n\";"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"    1. list - returns a list of all the current events and their action status\\n    2. \" +"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "                \"done [index] - completes the item at given [index] (1-indexing) in the list\\n    3. \" +"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "                \"delete [index] - deletes the item at given [index] (1-indexing) in the list\\n\" +"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "                \"find [keyword] - returns a list of items that contain the keyword\\n\\n\";"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"bye - the exit command to close the application\\n\";"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        helpString +\u003d \"**********************************************************\\n\";"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        return new CommandResult(helpString);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "Jarrod-Bob": 31
     }
   },
   {
@@ -5096,66 +5021,52 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\tSystem.out.println(\"Here are the current tasks in your list:\");"
+        "content": "        int listStart \u003d 1;"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        int listStart \u003d 1;"
+        "content": "        for (Task task : tasks.getList()) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        for (Task task : tasks.getList()) {"
+        "content": "            printList \u003d printList + listStart + \". \" + task + \"\\n\";"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            printList \u003d printList + listStart + \". \" + task + \"\\n\";"
+        "content": "            listStart++;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            listStart++;"
+        "content": "        }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "        return new CommandResult(printList);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//\t\tSystem.out.println(printList.trim());"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        return new CommandResult(printList);"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 32,
+        "lineNumber": 30,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -5163,7 +5074,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 32
+      "Jarrod-Bob": 30
     }
   },
   {
@@ -6005,217 +5916,217 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//            case HelpCommand.COMMAND_WORD: // Fallthrough"
+        "content": "        case HelpCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        default:"
+        "content": "            return new HelpCommand();"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            return new ExitCommand();"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "        default:"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "            //assert false : commandWord;"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "            return new HelpCommand();"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private static Command prepareTodo(String arguments) {"
+        "content": "        }"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new TodoCommand(arguments);"
+        "content": "    }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    private static Command prepareTodo(String arguments) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "        return new TodoCommand(arguments);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Handles the LocalDate objects first before sending it into Event object."
+        "content": "    }"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @param arguments the desc and date objects."
+        "content": "    /**"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return the EventCommand with the relevant Event object."
+        "content": "     * Handles the LocalDate objects first before sending it into Event object."
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private static Command prepareEvent(String arguments) {"
+        "content": "     * @param arguments the desc and date objects."
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        //event x /at 2020-01-13"
+        "content": "     * @return the EventCommand with the relevant Event object."
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        String[] items \u003d arguments.split(\" /at \");"
+        "content": "     */"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        String desc \u003d \"\";"
+        "content": "    private static Command prepareEvent(String arguments) {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        LocalDate date \u003d null;"
+        "content": "        //event x /at 2020-01-13"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        String[] items \u003d arguments.split(\" /at \");"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        try {"
+        "content": "        String desc \u003d \"\";"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            desc \u003d items[0];"
+        "content": "        LocalDate date \u003d null;"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            date \u003d LocalDate.parse(items[1]);"
+        "content": ""
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            System.out.println(\"Incorrect arguments please try again.\");"
+        "content": "            desc \u003d items[0];"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "            date \u003d LocalDate.parse(items[1]);"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new EventCommand(desc, date);"
+        "content": "            System.out.println(\"Incorrect arguments please try again. Use \\\"help\\\" to see commands\");"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 85,
@@ -6229,147 +6140,147 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "        return new EventCommand(desc, date);"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Handles the LocalDate objects first before sending it into Deadline object."
+        "content": "    }"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @param arguments the desc and date objects."
+        "content": "    /**"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return the DeadlineCommand with the relevant Deadline object."
+        "content": "     * Handles the LocalDate objects first before sending it into Deadline object."
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private static Command prepareDeadline(String arguments) {"
+        "content": "     * @param arguments the desc and date objects."
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        //event x /at 2020-01-13"
+        "content": "     * @return the DeadlineCommand with the relevant Deadline object."
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        String[] items \u003d arguments.split(\" /by \");"
+        "content": "     */"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        String desc \u003d \"\";"
+        "content": "    private static Command prepareDeadline(String arguments) {"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        LocalDate date \u003d null;"
+        "content": "        //event x /at 2020-01-13"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        String[] items \u003d arguments.split(\" /by \");"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        try {"
+        "content": "        String desc \u003d \"\";"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            desc \u003d items[0];"
+        "content": "        LocalDate date \u003d null;"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            date \u003d LocalDate.parse(items[1]);"
+        "content": ""
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            System.out.println(\"Incorrect arguments please try again.\");"
+        "content": "            desc \u003d items[0];"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "            date \u003d LocalDate.parse(items[1]);"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        } catch (ArrayIndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new DeadlineCommand(desc, date);"
+        "content": "            System.out.println(\"Incorrect arguments please try again. Use \\\"help\\\" to see commands\");"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 107,
@@ -6383,157 +6294,178 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private static Command prepareDone(String arguments) {"
+        "content": "        return new DeadlineCommand(desc, date);"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        final int targetIndex \u003d Integer.parseInt(arguments);"
+        "content": "    }"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new DoneCommand(targetIndex);"
+        "content": ""
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "    private static Command prepareDone(String arguments) {"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        final int targetIndex \u003d Integer.parseInt(arguments);"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private static Command prepareDelete(String arguments) {"
+        "content": "        return new DoneCommand(targetIndex);"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        final int targetIndex \u003d Integer.parseInt(arguments);"
+        "content": "    }"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new DeleteCommand(targetIndex);"
+        "content": ""
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "    private static Command prepareDelete(String arguments) {"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        final int targetIndex \u003d Integer.parseInt(arguments);"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    private static Command prepareFind(String arguments) {"
+        "content": "        return new DeleteCommand(targetIndex);"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return new FindCommand(arguments);"
+        "content": "    }"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    private static Command prepareFind(String arguments) {"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "        return new FindCommand(arguments);"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Signals that the user input could not be parsed."
+        "content": "    }"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public static class ParseException extends Exception {"
+        "content": "    /**"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        ParseException(String message) {"
+        "content": "     * Signals that the user input could not be parsed."
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            super(message);"
+        "content": "     */"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "    public static class ParseException extends Exception {"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        ParseException(String message) {"
       },
       {
         "lineNumber": 130,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "            super(message);"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 133,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -6541,7 +6473,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 130
+      "Jarrod-Bob": 133
     }
   },
   {
@@ -6714,514 +6646,500 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        // will need to deal with errorneous paths"
+        "content": "    }"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "     * Get the path of the relevant file that data is stored in."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Get the path of the relevant file that data is stored in."
+        "content": "     *"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * @return the relative path that data is stored in."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return the relative path that data is stored in."
+        "content": "     */"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "    public String getPath() {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String getPath() {"
+        "content": "        return path.toString();"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return path.toString();"
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "     * This method writes and saves all the current tasks in the list to the dedicated data file."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * This method writes and saves all the current tasks in the list to the dedicated data file."
+        "content": "     *"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * @param tasks The tasks to be saved.s"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @param tasks The tasks to be saved.s"
+        "content": "     */"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "    public void save(TaskList tasks) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public void save(TaskList tasks) {"
+        "content": "        String s \u003d \"\";"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//            List\u003cString\u003e encodedAddressBook \u003d AddressBookEncoder.encodeAddressBook(addressBook);"
+        "content": "        for (Task t : tasks.getList()) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        String s \u003d \"\";"
+        "content": "            s \u003d s + t.toTxtFormat() + \"\\n\";"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        for (Task t : tasks.getList()) {"
+        "content": "        }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            s \u003d s + t.format() + \"\\n\";"
+        "content": "        write(s, path);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        write(s, path);"
+        "content": ""
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//      Files.write(path, encodedAddressBook);"
+        "content": "    /**"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "     * This method loads the old tasks that have been saved in the dedicated data file previously."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "    public TaskList load() {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * This method loads the old tasks that have been saved in the dedicated data file previously."
+        "content": "        if (!Files.exists(path) || !Files.isRegularFile(path)) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "            return new TaskList();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public TaskList load() {"
+        "content": "        }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        if (!Files.exists(path) || !Files.isRegularFile(path)) {"
+        "content": "        TaskList tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            return new TaskList();"
+        "content": "        try {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "            List\u003cString\u003e loadedTasks \u003d Files.readAllLines(path);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        TaskList tasks \u003d new TaskList();"
+        "content": "            for (String s : loadedTasks) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        try {"
+        "content": "                if (!s.equals(\"\")) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            List\u003cString\u003e loadedTasks \u003d Files.readAllLines(path);"
+        "content": "                    tasks.add(Task.load(s));"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            for (String s : loadedTasks) {"
+        "content": "                }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                if (!s.equals(\"\")) {"
+        "content": "            }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                    tasks.add(Task.load(s));"
+        "content": "        } catch (FileNotFoundException fnfe) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                }"
+        "content": "            throw new AssertionError(\"A non-existent file scenario is already handled earlier.\");"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            }"
+        "content": "            // other errors"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (FileNotFoundException fnfe) {"
+        "content": "        } catch (IOException ioe) {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            throw new AssertionError(\"A non-existent file scenario is already handled earlier.\");"
+        "content": "            ioe.printStackTrace();"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            // other errors"
+        "content": "        }"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (IOException ioe) {"
+        "content": "        return tasks;"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            ioe.printStackTrace();"
+        "content": "    }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return tasks;"
+        "content": "    /**"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "     * This method performs the writing to the data file that is specified."
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "     * @param s    The tasks to be written to the file."
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * This method performs the writing to the data file that is specified."
+        "content": "     * @param path The relative path that the data will be written to."
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @param s    The tasks to be written to the file."
+        "content": "    public static void write(String s, Path path) {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @param path The relative path that the data will be written to."
+        "content": "        if (!Files.exists(path)) {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "            try {"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public static void write(String s, Path path) {"
+        "content": "                Files.createDirectory(path);"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        if (!Files.exists(path)) {"
+        "content": "            } catch (FileAlreadyExistsException e) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            try {"
+        "content": "                e.printStackTrace();"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                Files.createDirectory(path);"
+        "content": "            } catch (IOException e) {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            } catch (FileAlreadyExistsException e) {"
+        "content": "                e.printStackTrace();"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            } catch (IOException e) {"
+        "content": "            }"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                e.printStackTrace();"
+        "content": "        }"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            }"
+        "content": "        try (BufferedWriter writer \u003d Files.newBufferedWriter(path)) {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "            writer.write(s);"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        try (BufferedWriter writer \u003d Files.newBufferedWriter(path)) {"
+        "content": "        } catch (IOException ex) {"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            writer.write(s);"
+        "content": "            ex.printStackTrace();"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        } catch (IOException ex) {"
+        "content": "        }"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            ex.printStackTrace();"
+        "content": "    }"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": ""
       },
       {
-        "lineNumber": 97,
+        "lineNumber": 95,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -7229,7 +7147,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 97
+      "Jarrod-Bob": 95
     }
   },
   {
@@ -7444,7 +7362,7 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String format() {"
+        "content": "    public String toTxtFormat() {"
       },
       {
         "lineNumber": 31,
@@ -7486,101 +7404,94 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//        this.dateTime \u003d dateTime;"
+        "content": "        this.date \u003d date;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        this.date \u003d date;"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "     * A specialised toString() method based on implementations of the object."
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * A specialised toString() method based on implementations of the object."
+        "content": "     *"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * @return A specialised String representation of the Deadline object."
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return A specialised String representation of the Deadline object."
+        "content": "     */"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "    @Override"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    @Override"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String toString() {"
+        "content": "        return \"[D]\" + super.toString() + \" (by: \" +"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return \"[D]\" + super.toString() + \" (by: \" +"
+        "content": "                date.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")) + \")\";"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                date.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")) + \")\";"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 50,
+        "lineNumber": 49,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -7588,7 +7499,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 50
+      "Jarrod-Bob": 49
     }
   },
   {
@@ -7803,7 +7714,7 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String format() {"
+        "content": "    public String toTxtFormat() {"
       },
       {
         "lineNumber": 31,
@@ -7845,101 +7756,94 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "//        this.dateTime \u003d dateTime;"
+        "content": "        this.date \u003d date;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        this.date \u003d date;"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": "     * A specialised toString() method based on implementations of the object."
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * A specialised toString() method based on implementations of the object."
+        "content": "     *"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * @return A specialised String representation of the Event object."
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return A specialised String representation of the Event object."
+        "content": "     */"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "    @Override"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    @Override"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String toString() {"
+        "content": "        return \"[E]\" + super.toString() + \" (at: \" +"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return \"[E]\" + super.toString() + \" (at: \" +"
+        "content": "                date.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")) + \")\";"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                date.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")) + \")\";"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 50,
+        "lineNumber": 49,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -7947,7 +7851,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 50
+      "Jarrod-Bob": 49
     }
   },
   {
@@ -8407,234 +8311,241 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            return new Task(taskDesc);"
+        "content": "            assert false : actionLetter;"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        }"
+        "content": "            return new Task(taskDesc);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * Checks if the substring s exists in the current description."
+        "content": "    /**"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * Checks if the substring s exists in the current description."
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @param s Substring to be checked."
+        "content": "     *"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return boolean whether or not the substring exists."
+        "content": "     * @param s Substring to be checked."
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "     * @return boolean whether or not the substring exists."
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public boolean contains(String s) {"
+        "content": "     */"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return this.description.contains(s);"
+        "content": "    public boolean contains(String s) {"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        return this.description.contains(s);"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * This method formats the Task object based on its representation into a format suitable for"
+        "content": "    /**"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * writing to a file. It is not actually used in principle."
+        "content": "     * This method formats the Task object based on its representation into a format suitable for"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * writing to a file. It is not actually used in principle."
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return A String object that can be easily written and retrieved from the data file."
+        "content": "     *"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "     * @return A String object that can be easily written and retrieved from the data file."
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String format() {"
+        "content": "     */"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return \"TASK\" + \" | \" + (this.isDone ? \"1\" : \"0\") + \" | \" + description;"
+        "content": "    public String toTxtFormat() {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        return \"TASK\" + \" | \" + (this.isDone ? \"1\" : \"0\") + \" | \" + description;"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * A specialised toString() method based on implementations of the object."
+        "content": "    /**"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     *"
+        "content": "     * A specialised toString() method based on implementations of the object."
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     * @return A specialised String representation of the generic Task object."
+        "content": "     *"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "     */"
+        "content": "     * @return A specialised String representation of the generic Task object."
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    @Override"
+        "content": "     */"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String toString() {"
+        "content": "    @Override"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        return this.getStatusIcon() + \" \" + this.description;"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    }"
+        "content": "        return this.getStatusIcon() + \" \" + this.description;"
       },
       {
         "lineNumber": 98,
+        "author": {
+          "gitId": "Jarrod-Bob"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 99,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -8642,7 +8553,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 98
+      "Jarrod-Bob": 99
     }
   },
   {
@@ -8752,7 +8663,7 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    public String format() {"
+        "content": "    public String toTxtFormat() {"
       },
       {
         "lineNumber": 16,
@@ -9873,129 +9784,101 @@
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "\u003c?import javafx.scene.control.Button?\u003e"
+        "content": "\u003c?import javafx.scene.control.*?\u003e"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "\u003c?import javafx.scene.control.ScrollPane?\u003e"
+        "content": "\u003c?import javafx.scene.layout.*?\u003e"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "\u003c?import javafx.scene.control.TextField?\u003e"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "\u003c?import javafx.scene.layout.AnchorPane?\u003e"
+        "content": "\u003cAnchorPane maxHeight\u003d\"-Infinity\" maxWidth\u003d\"-Infinity\" minHeight\u003d\"-Infinity\" minWidth\u003d\"-Infinity\" prefHeight\u003d\"600.0\" prefWidth\u003d\"400.0\" xmlns\u003d\"http://javafx.com/javafx/10.0.2-internal\" xmlns:fx\u003d\"http://javafx.com/fxml/1\" fx:controller\u003d\"MainWindow\"\u003e"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "\u003c?import javafx.scene.layout.VBox?\u003e"
+        "content": "    \u003cchildren\u003e"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": ""
+        "content": "        \u003cTextField fx:id\u003d\"userInput\" layoutY\u003d\"558.0\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"324.0\" AnchorPane.bottomAnchor\u003d\"1.0\" /\u003e"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "\u003c?import javafx.scene.control.Label?\u003e"
+        "content": "        \u003cButton fx:id\u003d\"sendButton\" layoutX\u003d\"324.0\" layoutY\u003d\"558.0\" mnemonicParsing\u003d\"false\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"76.0\" text\u003d\"Send\" /\u003e"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "\u003cAnchorPane maxHeight\u003d\"-Infinity\" maxWidth\u003d\"-Infinity\" minHeight\u003d\"-Infinity\" minWidth\u003d\"-Infinity\" prefHeight\u003d\"600.0\" prefWidth\u003d\"400.0\" xmlns\u003d\"http://javafx.com/javafx/8.0.171\" xmlns:fx\u003d\"http://javafx.com/fxml/1\" fx:controller\u003d\"MainWindow\"\u003e"
+        "content": "        \u003cScrollPane fx:id\u003d\"scrollPane\" hbarPolicy\u003d\"NEVER\" hvalue\u003d\"1.0\" prefHeight\u003d\"557.0\" prefWidth\u003d\"400.0\" vvalue\u003d\"1.0\"\u003e"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "    \u003cchildren\u003e"
+        "content": "            \u003ccontent\u003e"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        \u003cTextField fx:id\u003d\"userInput\" layoutY\u003d\"558.0\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"324.0\" AnchorPane.bottomAnchor\u003d\"1.0\" /\u003e"
+        "content": "                \u003cVBox fx:id\u003d\"dialogContainer\"\u003e"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        \u003cButton fx:id\u003d\"sendButton\" layoutX\u003d\"324.0\" layoutY\u003d\"558.0\" mnemonicParsing\u003d\"false\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"76.0\" text\u003d\"Send\" /\u003e"
+        "content": "                \u003c/VBox\u003e"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "        \u003cScrollPane fx:id\u003d\"scrollPane\" hbarPolicy\u003d\"NEVER\" hvalue\u003d\"1.0\" prefHeight\u003d\"557.0\" prefWidth\u003d\"400.0\" vvalue\u003d\"1.0\"\u003e"
+        "content": "            \u003c/content\u003e"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "            \u003ccontent\u003e"
+        "content": "        \u003c/ScrollPane\u003e"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "Jarrod-Bob"
         },
-        "content": "                \u003cVBox fx:id\u003d\"dialogContainer\" prefHeight\u003d\"552.0\" prefWidth\u003d\"388.0\"\u003e"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "                \u003c/VBox\u003e"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "            \u003c/content\u003e"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
-        "content": "        \u003c/ScrollPane\u003e"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "Jarrod-Bob"
-        },
         "content": "    \u003c/children\u003e"
       },
       {
-        "lineNumber": 21,
+        "lineNumber": 17,
         "author": {
           "gitId": "Jarrod-Bob"
         },
@@ -10003,7 +9886,7 @@
       }
     ],
     "authorContributionMap": {
-      "Jarrod-Bob": 21
+      "Jarrod-Bob": 17
     }
   },
   {

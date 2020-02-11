@@ -473,21 +473,21 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Storage object to deal with the save file. */"
+        "content": "    private static final String WELCOME_MESSAGE \u003d \"Hello! My name is Megumin, user of the finest magic\""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private Storage storage;"
+        "content": "            + \" crimson demons possess.\\nWhat can I explo- I mean do for you?\";"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** TaskList object to store the task list. */"
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 23,
@@ -501,325 +501,269 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Welcome message of the application. */"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private String welcomeMessage \u003d \"Hello! My name is Megumin, user of the finest magic crimson demons possess.\\n\""
+        "content": "    /**"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            + \"What can I explo- I mean do for you?\";"
+        "content": "     * Constructs Duke with the default save directory."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    public Duke() {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs Duke with the default save directory."
+        "content": "        String workingDir \u003d System.getProperty(\"user.dir\");"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "        Path savePath \u003d Paths.get(workingDir, \"data\", \"duke.txt\");"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public Duke() {"
+        "content": "        storage \u003d new Storage(savePath);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String workingDir \u003d System.getProperty(\"user.dir\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        Path savePath \u003d Paths.get(workingDir, \"data\", \"duke.txt\");"
+        "content": "            tasks \u003d new TaskList(storage.loadTasks());"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        storage \u003d new Storage(savePath);"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            System.err.println(e);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //load the tasks from save file"
+        "content": "        }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            tasks \u003d new TaskList(storage.loadTasks());"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            System.err.println(e);"
+        "content": "     * Gets the program\u0027s response based on the user\u0027s input."
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "     *"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     * @param input The user\u0027s input."
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "     * @return The program\u0027s response."
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Gets the program\u0027s response based on the user\u0027s input."
+        "content": "    public String getResponse(String input) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "        try {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param input The user\u0027s input."
+        "content": "            Command command \u003d Parser.parseCommand(input);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s response."
+        "content": "            return command.execute(tasks, storage);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "        } catch (InvalidCommandException e) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String getResponse(String input) {"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "        }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //parse command"
+        "content": "    }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            Command command \u003d Parser.parseCommand(input);"
+        "content": ""
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //execute command"
+        "content": "     * Gets the welcome message of the program."
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return command.execute(tasks, storage);"
+        "content": "     *"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (InvalidCommandException e) {"
+        "content": "     * @return The welcome message of the program."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return e.getMessage();"
+        "content": "     */"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "    public String getWelcomeMessage() {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "        return WELCOME_MESSAGE;"
       },
       {
         "lineNumber": 61,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * Gets the welcome message of the program."
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * @return The welcome message of the program."
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    public String getWelcomeMessage() {"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        return welcomeMessage;"
-      },
-      {
-        "lineNumber": 69,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 70,
+        "lineNumber": 62,
         "author": {
           "gitId": "-"
         },
@@ -828,7 +772,7 @@
     ],
     "authorContributionMap": {
       "-": 3,
-      "ongch00": 67
+      "ongch00": 59
     }
   },
   {
@@ -1073,150 +1017,185 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    private static final String MAIN_WINDOW_FXML_PATH \u003d \"/view/MainWindow.fxml\";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Initializes and starts the application."
+        "content": "    private static final String SCROLL_PANE_CSS_PATH \u003d \"view/ScrollPane.css\";"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    private static final String ICON_PATH \u003d \"/images/icon.jpg\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param stage Stage object for the application."
+        "content": "    private static final String APPLICATION_NAME \u003d \"Megumin\";"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "    /**"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public void start(Stage stage) {"
+        "content": "     * Initializes and starts the application."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "     *"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            FXMLLoader fxmlLoader \u003d new FXMLLoader(Main.class.getResource(\"/view/MainWindow.fxml\"));"
+        "content": "     * @param stage Stage object for the application."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            AnchorPane ap \u003d fxmlLoader.load();"
+        "content": "     */"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            Scene scene \u003d new Scene(ap);"
+        "content": "    @Override"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            scene.getStylesheets().add(\"view/ScrollPane.css\");"
+        "content": "    public void start(Stage stage) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            stage.getIcons().add(new Image(\"/images/icon.jpg\"));"
+        "content": "        try {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            stage.setTitle(\"Megumin\");"
+        "content": "            FXMLLoader fxmlLoader \u003d new FXMLLoader(Main.class.getResource(MAIN_WINDOW_FXML_PATH));"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            stage.setScene(scene);"
+        "content": "            AnchorPane ap \u003d fxmlLoader.load();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            stage.setResizable(false);"
+        "content": "            Scene scene \u003d new Scene(ap);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            stage.show();"
+        "content": "            scene.getStylesheets().add(SCROLL_PANE_CSS_PATH);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            stage.getIcons().add(new Image(ICON_PATH));"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            e.printStackTrace();"
+        "content": "            stage.setTitle(APPLICATION_NAME);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "            stage.setScene(scene);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "            stage.setResizable(false);"
       },
       {
         "lineNumber": 37,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            stage.show();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            e.printStackTrace();"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
@@ -1224,7 +1203,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 37
+      "ongch00": 42
     }
   },
   {
@@ -1285,7 +1264,7 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": " * This is an abstract class meant as a template for the commands."
+        "content": " * This is an interface meant as a template for the commands."
       },
       {
         "lineNumber": 9,
@@ -1299,7 +1278,7 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public abstract class Command {"
+        "content": "public interface Command {"
       },
       {
         "lineNumber": 11,
@@ -1313,14 +1292,14 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Abstract method to execute the command."
+        "content": "     * Method to execute the command."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Must be overridden."
+        "content": "     * Must be overridden by implementing classes."
       },
       {
         "lineNumber": 14,
@@ -1362,7 +1341,7 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public abstract String execute(TaskList tasks, Storage storage);"
+        "content": "    String execute(TaskList tasks, Storage storage);"
       },
       {
         "lineNumber": 20,
@@ -1483,238 +1462,238 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class DeadlineCommand extends Command {"
+        "content": "public class DeadlineCommand implements Command {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** String array for the command arguments. */"
+        "content": "    private static final String NO_DATE_ERROR_MESSAGE \u003d \"HEY!!! The date of a deadline cannot be empty.\";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private String[] args \u003d new String[0];"
+        "content": "    private static final String SAVE_WRITE_ERROR_MESSAGE \u003d \"Sorry, I could not write to the magic saving item\""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            + \" (Error when writing to save file).\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new DeadlineCommand."
+        "content": "    /** String array for the command arguments. */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    private String[] args \u003d new String[0];"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param args arguments for the deadline command."
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public DeadlineCommand(String[] args) {"
+        "content": "     * Constructs a new DeadlineCommand."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.args \u003d args;"
+        "content": "     *"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     * @param args arguments for the deadline command."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    public DeadlineCommand(String[] args) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the deadline command."
+        "content": "        this.args \u003d args;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "    /**"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     * Executes the deadline command."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //check if the argument length required is correct"
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            if (args.length \u003c 2) {"
+        "content": "    @Override"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!!\""
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                        + \" The date of a deadline cannot be empty.\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": "            //check if arg length is complete for the command to execute"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            if (args.length \u003c 2) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //add a new deadline task to the list"
+        "content": "                throw new InvalidCommandException(NO_DATE_ERROR_MESSAGE);"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            Task newDeadlineTask \u003d new Deadline(args[0], args[1]);"
+        "content": "            }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            tasks.addTask(newDeadlineTask);"
+        "content": ""
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            Task newDeadlineTask \u003d new Deadline(args[0], args[1]);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //update save file"
+        "content": "            tasks.addTask(newDeadlineTask);"
       },
       {
         "lineNumber": 49,
@@ -1728,73 +1707,59 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            return String.format(\"Got it. I\u0027ve added this task:\\n  %s\\n\""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //print success message"
+        "content": "                    + \"Now you have %d tasks in the list.\\n\", newDeadlineTask, tasks.getSize());"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return String.format(\"Got it. I\u0027ve added this task:\\n  %s\\n\""
+        "content": "        } catch (InvalidCommandException e) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"Now you have %d tasks in the list.\\n\", newDeadlineTask,tasks.getSize());"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (InvalidCommandException e) {"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return e.getMessage();"
+        "content": "            return SAVE_WRITE_ERROR_MESSAGE;"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"Sorry, I could not write to the magic saving item (Error when writing to save file).\";"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "ongch00"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 60,
+        "lineNumber": 58,
         "author": {
           "gitId": "ongch00"
         },
@@ -1802,7 +1767,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 60
+      "ongch00": 58
     }
   },
   {
@@ -1905,21 +1870,21 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class DeleteCommand extends Command {"
+        "content": "public class DeleteCommand implements Command {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Index of the task to be deleted. */"
+        "content": "    private static final String SAVE_WRITE_ERROR_MESSAGE \u003d \"Sorry, I could not write to the magic saving item\""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private int index \u003d 0;"
+        "content": "            + \" (Error when writing to save file).\";"
       },
       {
         "lineNumber": 17,
@@ -1933,248 +1898,241 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    /** Index of the task to be deleted. */"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new DeleteCommand."
+        "content": "    private int index \u003d 0;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param index index of the task in the task list to delete."
+        "content": "    /**"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * Constructs a new DeleteCommand."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public DeleteCommand(int index) {"
+        "content": "     *"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.index \u003d index;"
+        "content": "     * @param index index of the task in the task list to delete."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public DeleteCommand(int index) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "        this.index \u003d index;"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the delete command."
+        "content": "    }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": "    /**"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "     * Executes the delete command."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     *"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //delete the desired task"
+        "content": "    @Override"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            Task taskToDelete \u003d tasks.deleteTask(index);"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "        try {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //update save file"
+        "content": "            Task taskDeleted \u003d tasks.deleteTask(index);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            storage.saveTasks(tasks.getList());"
+        "content": "            assert taskDeleted !\u003d null : \"There cannot be a null deleted task\";"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            storage.saveTasks(tasks.getList());"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //print success message"
+        "content": "            return String.format(\"Here I go! My ultimate destructive magic! EXPLOSION!\\n\""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return String.format(\"Here I go! My ultimate destructive magic! EXPLOSION!\\n\""
+        "content": "                    + \"I have successfully eradicated this task:\\n  %s\\n\""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"I have successfully eradicated this task:\\n  %s\\n\""
+        "content": "                    + \"Now you have %d tasks in the list.\\n\", taskDeleted, tasks.getSize());"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"Now you have %d tasks in the list.\\n\", taskToDelete, tasks.getSize());"
+        "content": "        } catch (InvalidCommandException e) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (InvalidCommandException e) {"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return e.getMessage();"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            return SAVE_WRITE_ERROR_MESSAGE;"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"Sorry, I could not write to the magic saving item (Error when writing to save file).\";"
+        "content": "        }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "ongch00"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 53,
+        "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
@@ -2182,7 +2140,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 53
+      "ongch00": 52
     }
   },
   {
@@ -2278,21 +2236,21 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class DoneCommand extends Command {"
+        "content": "public class DoneCommand implements Command {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Index of the task to be set as done. */"
+        "content": "    private static final String SAVE_WRITE_ERROR_MESSAGE \u003d \"Sorry, I could not write to the magic saving item\""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private int index \u003d 0;"
+        "content": "            + \" (Error when writing to save file).\";"
       },
       {
         "lineNumber": 16,
@@ -2306,161 +2264,161 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    /** Index of the task to be set as done. */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new DoneCommand."
+        "content": "    private int index \u003d 0;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param index index of the task to set as done."
+        "content": "    /**"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * Constructs a new DoneCommand."
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public DoneCommand(int index) {"
+        "content": "     *"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.index \u003d index;"
+        "content": "     * @param index index of the task to set as done."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public DoneCommand(int index) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "        this.index \u003d index;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the done command."
+        "content": "    }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": "    /**"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "     * Executes the done command."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     *"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //set the desired task as done"
+        "content": "    @Override"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            tasks.setAsDone(index);"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "        try {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //update save file"
+        "content": "            tasks.setAsDone(index);"
       },
       {
         "lineNumber": 40,
@@ -2474,80 +2432,66 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            return String.format(\"Nice! I\u0027ve marked this task as done:\\n\""
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //print success message"
+        "content": "                    + \"  %s\\n\" + \"Hope we get loads of Eris for this!\\n\", tasks.getTask(index));"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return String.format(\"Nice! I\u0027ve marked this task as done:\\n\""
+        "content": "        } catch (InvalidCommandException e) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"  %s\\n\" + \"Hope we get loads of Eris for this!\\n\", tasks.getTask(index));"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (InvalidCommandException e) {"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return e.getMessage();"
+        "content": "            return SAVE_WRITE_ERROR_MESSAGE;"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"Sorry, I could not write to the magic saving item (Error when writing to save file).\";"
+        "content": ""
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "ongch00"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 52,
+        "lineNumber": 50,
         "author": {
           "gitId": "ongch00"
         },
@@ -2555,7 +2499,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 52
+      "ongch00": 50
     }
   },
   {
@@ -2947,238 +2891,238 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class EventCommand extends Command {"
+        "content": "public class EventCommand implements Command {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** String array for the command arguments. */"
+        "content": "    private static final String NO_DATE_ERROR_MESSAGE \u003d \"HEY!!! The date of an event cannot be empty.\";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private String[] args \u003d new String[0];"
+        "content": "    private static final String SAVE_WRITE_ERROR_MESSAGE \u003d \"Sorry, I could not write to the magic saving item\""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            + \" (Error when writing to save file).\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new EventCommand."
+        "content": "    /** String array for the command arguments. */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    private String[] args \u003d new String[0];"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param args arguments for the event command."
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public EventCommand(String[] args) {"
+        "content": "     * Constructs a new EventCommand."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.args \u003d args;"
+        "content": "     *"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     * @param args arguments for the event command."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    public EventCommand(String[] args) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the event command."
+        "content": "        this.args \u003d args;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "    /**"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     * Executes the event command."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //check if the argument length required is correct"
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            if (args.length \u003c 2) {"
+        "content": "    @Override"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!! The date of an \""
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                        + \"event cannot be empty.\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": "            //check if arg length is complete for the command to execute"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            if (args.length \u003c 2) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //add a new event task to the list"
+        "content": "                throw new InvalidCommandException(NO_DATE_ERROR_MESSAGE);"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            Task newEventTask \u003d new Event(args[0], args[1]);"
+        "content": "            }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            tasks.addTask(newEventTask);"
+        "content": ""
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            Task newEventTask \u003d new Event(args[0], args[1]);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //update save file"
+        "content": "            tasks.addTask(newEventTask);"
       },
       {
         "lineNumber": 49,
@@ -3192,73 +3136,59 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            return String.format(\"Got it. I\u0027ve added this task:\\n  %s\\n\""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //print success message"
+        "content": "                    + \"Now you have %d tasks in the list.\\n\", newEventTask, tasks.getSize());"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return String.format(\"Got it. I\u0027ve added this task:\\n  %s\\n\""
+        "content": "        } catch (InvalidCommandException e) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"Now you have %d tasks in the list.\\n\", newEventTask,tasks.getSize());"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (InvalidCommandException e) {"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return e.getMessage();"
+        "content": "            return SAVE_WRITE_ERROR_MESSAGE;"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"Sorry, I could not write to the magic saving item (Error when writing to save file).\";"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "ongch00"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 60,
+        "lineNumber": 58,
         "author": {
           "gitId": "ongch00"
         },
@@ -3266,7 +3196,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 60
+      "ongch00": 58
     }
   },
   {
@@ -3341,87 +3271,101 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class ExitCommand extends Command {"
+        "content": "public class ExitCommand implements Command {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    private static final String EXIT_MESSAGE \u003d \"Wait! Don\u0027t leave me! Please bring me along!\";"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the exit command."
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": "     * Executes the exit command."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "     *"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     */"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        return \"Wait! Don\u0027t leave me! Please bring me along!\";"
+        "content": "    @Override"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 22,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        return EXIT_MESSAGE;"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
@@ -3429,7 +3373,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 22
+      "ongch00": 24
     }
   },
   {
@@ -3504,213 +3448,220 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class FindCommand extends Command {"
+        "content": "public class FindCommand implements Command {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** String argument for the command. */"
+        "content": "    private static final String NO_MATCHING_TASKS_MESSAGE \u003d \"There are no matching tasks in your list.\";"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private String arg \u003d \"\";"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    /** String argument for the command. */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    private String arg \u003d \"\";"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new FindCommand."
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param arg argument for the find command."
+        "content": "     * Constructs a new FindCommand."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public FindCommand(String arg) {"
+        "content": "     * @param arg argument for the find command."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.arg \u003d arg;"
+        "content": "     */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "    public FindCommand(String arg) {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "        this.arg \u003d arg;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the find command."
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": "     * Executes the find command."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "     *"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     */"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String relevantTasks \u003d tasks.findTasksBySearchPhrase(arg);"
+        "content": "    @Override"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (relevantTasks.equals(\"\")) {"
+        "content": "        String relevantTasks \u003d tasks.findTasksBySearchPhrase(arg);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"There are no matching tasks in your list.\";"
+        "content": "        if (relevantTasks.equals(\"\")) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } else {"
+        "content": "            return NO_MATCHING_TASKS_MESSAGE;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"Here are the matching tasks in your list:\\n\" + relevantTasks;"
+        "content": "        } else {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "            return \"Here are the matching tasks in your list:\\n\" + relevantTasks;"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 40,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
@@ -3718,7 +3669,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 40
+      "ongch00": 41
     }
   },
   {
@@ -3793,115 +3744,136 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class ListCommand extends Command {"
+        "content": "public class ListCommand implements Command {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    private static final String EMPTY_TASK_LIST_MESSAGE \u003d \"I may or may not have exploded all your tasks\""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the list command."
+        "content": "            + \" in your list as it is empty.\";"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": "    /**"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "     * Executes the list command."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     *"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (tasks.getSize() \u003e 0) {"
+        "content": "     */"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"Here are the tasks in your list:\\n\" + tasks;"
+        "content": "    @Override"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } else {"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"I may or may not have exploded all your tasks in your list as it is empty.\";"
+        "content": "        if (tasks.getSize() \u003e 0) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "            return \"Here are the tasks in your list:\\n\" + tasks;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 26,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            return EMPTY_TASK_LIST_MESSAGE;"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
@@ -3909,7 +3881,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 26
+      "ongch00": 29
     }
   },
   {
@@ -3984,224 +3956,224 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    private static final String INVALID_DONE_COMMAND_MESSAGE \u003d \"HEY!!! I need to know what task\""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Parses the user input into the respective command."
+        "content": "            + \" you want to mark as done!\";"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    private static final String INVALID_DELETE_COMMAND_MESSAGE \u003d \"HEY!!! I need to know what task to\""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param input the command input."
+        "content": "            + \" target my explosion. Perhaps I will just target Beldia\u0027s castle...\";"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The respective command if given a valid command input."
+        "content": "    private static final String INVALID_TODO_COMMAND_MESSAGE \u003d \"HEY!!! The description of a todo cannot be empty.\""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @throws InvalidCommandException If command input is invalid."
+        "content": "            + \" Maybe I will name it ChunChunMaru for you! Just kidding, please don\u0027t hit me!\";"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "    private static final String INVALID_DEADLINE_COMMAND_MESSAGE \u003d \"HEY!!! The description of a deadline cannot\""
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public static Command parseCommand(String input) throws InvalidCommandException {"
+        "content": "            + \" be empty. Maybe I will name it Chomusuke for you! Just kidding, please don\u0027t hit me!\";"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //split the command line"
+        "content": "    private static final String INVALID_EVENT_COMMAND_MESSAGE \u003d \"HEY!!! The description of an event cannot be empty.\""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] commandLine \u003d input.split(\" \", 2);"
+        "content": "            + \" Maybe I will name it Hyoizaburoo for you! Just kidding, please don\u0027t hit me!\";"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    private static final String INVALID_FIND_COMMAND_MESSAGE \u003d \"HEY!!! Please state what you want to find.\";"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //determine which type of command and return the respective command"
+        "content": "    private static final String NO_SUCH_COMMAND_MESSAGE \u003d \"HEY!!! I don\u0027t know what that means :-(\";"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        DukeCommand command \u003d DukeCommand.getCommand(commandLine[0]);"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        switch (command) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case BYE:"
+        "content": "     * Parses the user input into the respective command."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return new ExitCommand();"
+        "content": "     *"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case LIST:"
+        "content": "     * @param input the command input."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return new ListCommand();"
+        "content": "     * @return The respective command if given a valid command input."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case DONE:"
+        "content": "     * @throws InvalidCommandException If command input is invalid."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            if (commandLine.length \u003c 2) {"
+        "content": "     */"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!! I need to know what task you want mark as done!\");"
+        "content": "    public static Command parseCommand(String input) throws InvalidCommandException {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            } else {"
+        "content": "        //split the command line to get the command and arguments"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                return new DoneCommand(Integer.parseInt(commandLine[1]));"
+        "content": "        String[] commandLine \u003d input.split(\" \", 2);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case DELETE:"
+        "content": "        //determine which type of command and return the respective command"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            if (commandLine.length \u003c 2) {"
+        "content": "        DukeCommand command \u003d DukeCommand.getCommand(commandLine[0]);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!! I need to know what task to target my explosion.\""
+        "content": "        switch (command) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                        + \" Perhaps I will just target Beldia\u0027s castle...\");"
+        "content": "        case BYE:"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            } else {"
+        "content": "            return new ExitCommand();"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                return new DeleteCommand(Integer.parseInt(commandLine[1]));"
+        "content": "        case LIST:"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": "            return new ListCommand();"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case TODO:"
+        "content": "        case DONE:"
       },
       {
         "lineNumber": 42,
@@ -4215,220 +4187,283 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!! The description of a todo cannot be empty.\""
+        "content": "                throw new InvalidCommandException(INVALID_DONE_COMMAND_MESSAGE);"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                        + \" Maybe I will name it ChunChunMaru for you! Just kidding, please don\u0027t hit me!\");"
+        "content": "            } else {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            } else {"
+        "content": "                return new DoneCommand(Integer.parseInt(commandLine[1]));"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                return new TodoCommand(commandLine[1]);"
+        "content": "            }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": "        case DELETE:"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case DEADLINE:"
+        "content": "            if (commandLine.length \u003c 2) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            if (commandLine.length \u003c 2) {"
+        "content": "                throw new InvalidCommandException(INVALID_DELETE_COMMAND_MESSAGE);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!! The description of a deadline cannot be empty.\""
+        "content": "            } else {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                        + \" Maybe I will name it Chomusuke for you! Just kidding, please don\u0027t hit me!\");"
+        "content": "                return new DeleteCommand(Integer.parseInt(commandLine[1]));"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            } else {"
+        "content": "            }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                String[] deadlineDescriptionDate \u003d commandLine[1].split(\" /by \");"
+        "content": "        case TODO:"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                return new DeadlineCommand(deadlineDescriptionDate);"
+        "content": "            if (commandLine.length \u003c 2) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": "                throw new InvalidCommandException(INVALID_TODO_COMMAND_MESSAGE);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case EVENT:"
+        "content": "            } else {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            if (commandLine.length \u003c 2) {"
+        "content": "                return new TodoCommand(commandLine[1]);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!! The description of an event cannot be empty.\""
+        "content": "            }"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                        + \" Maybe I will name it Hyoizaburoo for you! Just kidding, please don\u0027t hit me!\");"
+        "content": "        case DEADLINE:"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            } else {"
+        "content": "            if (commandLine.length \u003c 2) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                String[] eventDescriptionDate \u003d commandLine[1].split(\" /at \");"
+        "content": "                throw new InvalidCommandException(INVALID_DEADLINE_COMMAND_MESSAGE);"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                return new EventCommand(eventDescriptionDate);"
+        "content": "            } else {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": "                String[] deadlineDescriptionDate \u003d commandLine[1].split(\" /by \");"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        case FIND:"
+        "content": "                return new DeadlineCommand(deadlineDescriptionDate);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            if (commandLine.length \u003c 2) {"
+        "content": "            }"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                throw new InvalidCommandException(\"HEY!!! Please state what you want to find.\");"
+        "content": "        case EVENT:"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            } else {"
+        "content": "            if (commandLine.length \u003c 2) {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                return new FindCommand(commandLine[1]);"
+        "content": "                throw new InvalidCommandException(INVALID_EVENT_COMMAND_MESSAGE);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            }"
+        "content": "            } else {"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        default:"
+        "content": "                String[] eventDescriptionDate \u003d commandLine[1].split(\" /at \");"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            throw new InvalidCommandException(\"HEY!!! I don\u0027t know what that means :-(\");"
+        "content": "                return new EventCommand(eventDescriptionDate);"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "        case FIND:"
       },
       {
         "lineNumber": 74,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            if (commandLine.length \u003c 2) {"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "                throw new InvalidCommandException(INVALID_FIND_COMMAND_MESSAGE);"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "                return new FindCommand(commandLine[1]);"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            throw new InvalidCommandException(NO_SUCH_COMMAND_MESSAGE);"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 83,
         "author": {
           "gitId": "ongch00"
         },
@@ -4436,7 +4471,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 74
+      "ongch00": 83
     }
   },
   {
@@ -4539,21 +4574,21 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class TodoCommand extends Command {"
+        "content": "public class TodoCommand implements Command {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** String argument for the command. */"
+        "content": "    private static final String SAVE_WRITE_ERROR_MESSAGE \u003d \"Sorry, I could not write to the magic saving item\""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private String arg \u003d \"\";"
+        "content": "            + \" (Error when writing to save file).\";"
       },
       {
         "lineNumber": 17,
@@ -4567,168 +4602,168 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    /** String argument for the command. */"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new TodoCommand."
+        "content": "    private String arg \u003d \"\";"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param arg argument for the todo command."
+        "content": "    /**"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * Constructs a new TodoCommand."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public TodoCommand(String arg) {"
+        "content": "     *"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.arg \u003d arg;"
+        "content": "     * @param arg argument for the todo command."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public TodoCommand(String arg) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "        this.arg \u003d arg;"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Executes the todo command."
+        "content": "    }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks TaskList object that contains the tasks of the application."
+        "content": "    /**"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param storage storage object for the retrieval/saving of tasks."
+        "content": "     * Executes the todo command."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return The program\u0027s output."
+        "content": "     *"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param tasks TaskList object that contains the tasks of the application."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    @Override"
+        "content": "     * @param storage storage object for the retrieval/saving of tasks."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     * @return The program\u0027s output."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //add a new todo task to the list"
+        "content": "    @Override"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            Task newTodoTask \u003d new Todo(arg);"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            tasks.addTask(newTodoTask);"
+        "content": "        try {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            Task newTodoTask \u003d new Todo(arg);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //update save file"
+        "content": "            tasks.addTask(newTodoTask);"
       },
       {
         "lineNumber": 42,
@@ -4742,59 +4777,45 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            return String.format(\"Got it. I\u0027ve added this task:\\n  %s\\n\""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            //print success message"
+        "content": "                    + \"Now you have %d tasks in the list.\\n\", newTodoTask, tasks.getSize());"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return String.format(\"Got it. I\u0027ve added this task:\\n  %s\\n\""
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"Now you have %d tasks in the list.\\n\", newTodoTask,tasks.getSize());"
+        "content": "            return SAVE_WRITE_ERROR_MESSAGE;"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            return \"Sorry, I could not write to the magic saving item (Error when writing to save file).\";"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "ongch00"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 51,
+        "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
@@ -4802,7 +4823,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 51
+      "ongch00": 49
     }
   },
   {
@@ -5056,364 +5077,364 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "import duke.temporal.DateTimeParser;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "import java.time.LocalTime;"
+        "content": ""
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "import java.time.format.DateTimeFormatter;"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "import java.time.LocalTime;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "/**"
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "ongch00"
         },
-        "content": " * Represents a Deadline task."
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "ongch00"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class Deadline extends Task {"
+        "content": " * Represents a Deadline task."
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Date the deadline task is due. */"
+        "content": " */"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private LocalDate byDate \u003d null;"
+        "content": "public class Deadline extends Task {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Time of the day the deadline task is due. */"
+        "content": "    /** Date the deadline task is due. */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private LocalTime byTime \u003d null;"
+        "content": "    private LocalDate byDate;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    /** Time of the day the deadline task is due. */"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    private LocalTime byTime;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new Deadline task with description and date."
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Task is set to not done by default."
+        "content": "    /**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "     * Constructs a new Deadline task with description and date."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param description description of the task."
+        "content": "     * Task is set to not done by default."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param byDateTime date and time the deadline task is due."
+        "content": "     *"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param description description of the task."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public Deadline(String description, String byDateTime) {"
+        "content": "     * @param byDateTime date and time the deadline task is due."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        super(description, false);"
+        "content": "     */"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public Deadline(String description, String byDateTime) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //translate the date and time to the correct format"
+        "content": "        super(description, false);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] rawDateTime \u003d byDateTime.split(\" \");"
+        "content": "        this.byDate \u003d LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] date \u003d rawDateTime[0].split(\"/\");"
+        "content": "        this.byTime \u003d LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[0].length() \u003c 2) {"
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[0] \u003d \"0\" + date[0];"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "    /**"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[1].length() \u003c 2) {"
+        "content": "     * Constructs a new Deadline task with description, date and done status."
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[1] \u003d \"0\" + date[1];"
+        "content": "     *"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "     * @param description description of the task."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String formattedDate \u003d date[2] + \"-\" + date[1] + \"-\""
+        "content": "     * @param isDone done status of the task."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + date[0];"
+        "content": "     * @param byDateTime date and time the deadline task is due."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String formattedTime \u003d \"\" + rawDateTime[1].charAt(0)"
+        "content": "     */"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + rawDateTime[1].charAt(1) + \":\" + rawDateTime[1].charAt(2)"
+        "content": "    public Deadline(String description, boolean isDone, String byDateTime) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + rawDateTime[1].charAt(3) + \":00\";"
+        "content": "        super(description, isDone);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "        this.byDate \u003d LocalDate.parse(DateTimeParser.getParsableDate(byDateTime));"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //parse the reformatted date and time"
+        "content": "        this.byTime \u003d LocalTime.parse(DateTimeParser.getParsableTime(byDateTime));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.byDate \u003d LocalDate.parse(formattedDate);"
+        "content": "    }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.byTime \u003d LocalTime.parse(formattedTime);"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "     * Gets the string representation of the deadline task used for saving."
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new Deadline task with description, date and done status."
+        "content": "     * @return the string representation of the deadline task to be used for saving."
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param description description of the task."
+        "content": "    @Override"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param isDone done status of the task."
+        "content": "    public String getSaveRepresentation() {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param byDateTime date and time the deadline task is due."
+        "content": "        return \"D|||\" + getIsDone() + \"|||\" + getDescription() + \"|||\""
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "                + byDate.format(DateTimeFormatter.ofPattern(\"dd/MM/yyyy \"))"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public Deadline(String description, boolean isDone, String byDateTime) {"
+        "content": "                + byTime.format(DateTimeFormatter.ofPattern(\"kmm\")) + \"\\n\";"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        super(description, isDone);"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
@@ -5427,304 +5448,80 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //translate the date and time to the correct format"
+        "content": "    /**"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] rawDateTime \u003d byDateTime.split(\" \");"
+        "content": "     * Gets the string representation of the deadline task."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] date \u003d rawDateTime[0].split(\"/\");"
+        "content": "     *"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[0].length() \u003c 2) {"
+        "content": "     * @return the string representation of the deadline task."
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[0] \u003d \"0\" + date[0];"
+        "content": "     */"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "    @Override"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[1].length() \u003c 2) {"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[1] \u003d \"0\" + date[1];"
+        "content": "        return String.format(\"[%s][%s] %s (by: %s, %s)\", \"D\", (getIsDone() ? \"Y\" : \"N\"), getDescription(),"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "                byDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")),"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String formattedDate \u003d date[2] + \"-\" + date[1] + \"-\""
+        "content": "                byTime.format(DateTimeFormatter.ofPattern(\"h:mma\")));"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + date[0];"
+        "content": "    }"
       },
       {
         "lineNumber": 67,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        String formattedTime \u003d \"\" + rawDateTime[1].charAt(0)"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + rawDateTime[1].charAt(1) + \":\" + rawDateTime[1].charAt(2)"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + rawDateTime[1].charAt(3) + \":00\";"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        //parse the reformatted date and time"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        this.byDate \u003d LocalDate.parse(formattedDate);"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        this.byTime \u003d LocalTime.parse(formattedTime);"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * Gets the string representation of the deadline task used for saving."
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * @return the string representation of the deadline task to be used for saving."
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    public String getSaveRepresentation() {"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        return \"D|||\" + getIsDone() + \"|||\" + getDescription() + \"|||\""
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + byDate.format(DateTimeFormatter.ofPattern(\"dd/MM/yyyy \"))"
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + byTime.format(DateTimeFormatter.ofPattern(\"kmm\")) + \"\\n\";"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * Gets the string representation of the deadline task."
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * @return the string representation of the deadline task."
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        return String.format(\"[%s][%s] %s (by: %s, %s)\", \"D\", (getIsDone() ? \"Y\" : \"N\"), getDescription(),"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                byDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")),"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                byTime.format(DateTimeFormatter.ofPattern(\"h:mma\")));"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 99,
         "author": {
           "gitId": "ongch00"
         },
@@ -5732,7 +5529,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 99
+      "ongch00": 67
     }
   },
   {
@@ -5758,364 +5555,364 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "import duke.temporal.DateTimeParser;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "import java.time.LocalTime;"
+        "content": ""
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "import java.time.format.DateTimeFormatter;"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "import java.time.LocalTime;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "/**"
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "ongch00"
         },
-        "content": " * Represents an Event task."
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "ongch00"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "public class Event extends Task {"
+        "content": " * Represents an Event task."
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Date that the event is happening. */"
+        "content": " */"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private LocalDate atDate \u003d null;"
+        "content": "public class Event extends Task {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** Time of the day the event is happening. */"
+        "content": "    /** Date that the event is happening. */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private LocalTime atTime \u003d null;"
+        "content": "    private LocalDate atDate;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    /** Time of the day the event is happening. */"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    private LocalTime atTime;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new Event task with description and date."
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Task is set to not done by default."
+        "content": "    /**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "     * Constructs a new Event task with description and date."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param description description of the task."
+        "content": "     * Task is set to not done by default."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param atDateTime date and time the event task is happening."
+        "content": "     *"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @param description description of the task."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public Event(String description, String atDateTime) {"
+        "content": "     * @param atDateTime date and time the event task is happening."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        super(description, false);"
+        "content": "     */"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public Event(String description, String atDateTime) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //translate the date and time to the correct format"
+        "content": "        super(description, false);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] rawDateTime \u003d atDateTime.split(\" \");"
+        "content": "        this.atDate \u003d LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] date \u003d rawDateTime[0].split(\"/\");"
+        "content": "        this.atTime \u003d LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[0].length() \u003c 2) {"
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[0] \u003d \"0\" + date[0];"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "    /**"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[1].length() \u003c 2) {"
+        "content": "     * Constructs a new Event task with description, date and done status."
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[1] \u003d \"0\" + date[1];"
+        "content": "     *"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "     * @param description description of the task."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String formattedDate \u003d date[2] + \"-\" + date[1] + \"-\""
+        "content": "     * @param isDone done status of the task."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + date[0];"
+        "content": "     * @param atDateTime date and time the event task is happening."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String formattedTime \u003d \"\" + rawDateTime[1].charAt(0)"
+        "content": "     */"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + rawDateTime[1].charAt(1) + \":\" + rawDateTime[1].charAt(2)"
+        "content": "    public Event(String description, boolean isDone, String atDateTime) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + rawDateTime[1].charAt(3) + \":00\";"
+        "content": "        super(description, isDone);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "        this.atDate \u003d LocalDate.parse(DateTimeParser.getParsableDate(atDateTime));"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //parse the reformatted date and time"
+        "content": "        this.atTime \u003d LocalTime.parse(DateTimeParser.getParsableTime(atDateTime));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.atDate \u003d LocalDate.parse(formattedDate);"
+        "content": "    }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.atTime \u003d LocalTime.parse(formattedTime);"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "     * Gets the string representation of the event task used for saving."
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new Event task with description, date and done status."
+        "content": "     * @return the string representation of the event task to be used for saving."
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param description description of the task."
+        "content": "    @Override"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param isDone done status of the task."
+        "content": "    public String getSaveRepresentation() {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param atDateTime date and time the event task is happening."
+        "content": "        return \"E|||\" + getIsDone() + \"|||\" + getDescription() + \"|||\""
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "                + atDate.format(DateTimeFormatter.ofPattern(\"dd/MM/yyyy \"))"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public Event(String description, boolean isDone, String atDateTime) {"
+        "content": "                + atTime.format(DateTimeFormatter.ofPattern(\"kmm\")) + \"\\n\";"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        super(description, isDone);"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
@@ -6129,304 +5926,80 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //translate the date and time to the correct format"
+        "content": "    /**"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] rawDateTime \u003d atDateTime.split(\" \");"
+        "content": "     * Gets the string representation of the event task."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String[] date \u003d rawDateTime[0].split(\"/\");"
+        "content": "     *"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[0].length() \u003c 2) {"
+        "content": "     * @return the string representation of the event task."
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[0] \u003d \"0\" + date[0];"
+        "content": "     */"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "    @Override"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (date[1].length() \u003c 2) {"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            date[1] \u003d \"0\" + date[1];"
+        "content": "        return String.format(\"[%s][%s] %s (at: %s, %s)\", \"E\", (getIsDone() ? \"Y\" : \"N\"), getDescription(),"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "                atDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")),"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        String formattedDate \u003d date[2] + \"-\" + date[1] + \"-\""
+        "content": "                atTime.format(DateTimeFormatter.ofPattern(\"h:mma\")));"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                + date[0];"
+        "content": "    }"
       },
       {
         "lineNumber": 67,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        String formattedTime \u003d \"\" + rawDateTime[1].charAt(0)"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + rawDateTime[1].charAt(1) + \":\" + rawDateTime[1].charAt(2)"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + rawDateTime[1].charAt(3) + \":00\";"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        //parse the reformatted date and time"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        this.atDate \u003d LocalDate.parse(formattedDate);"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        this.atTime \u003d LocalTime.parse(formattedTime);"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * Gets the string representation of the event task used for saving."
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * @return the string representation of the event task to be used for saving."
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    public String getSaveRepresentation() {"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        return \"E|||\" + getIsDone() + \"|||\" + getDescription() + \"|||\""
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + atDate.format(DateTimeFormatter.ofPattern(\"dd/MM/yyyy \"))"
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                + atTime.format(DateTimeFormatter.ofPattern(\"kmm\")) + \"\\n\";"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * Gets the string representation of the event task."
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     * @return the string representation of the event task."
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "        return String.format(\"[%s][%s] %s (at: %s, %s)\", \"E\", (getIsDone() ? \"Y\" : \"N\"), getDescription(),"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                atDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")),"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "                atTime.format(DateTimeFormatter.ofPattern(\"h:mma\")));"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "ongch00"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 99,
         "author": {
           "gitId": "ongch00"
         },
@@ -6434,7 +6007,7 @@
       }
     ],
     "authorContributionMap": {
-      "ongch00": 99
+      "ongch00": 67
     }
   },
   {
@@ -7556,14 +7129,14 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /** List of tasks. */"
+        "content": "    private static final String DONE_NO_SUCH_TASK_MESSAGE \u003d \"HEY!!! I cannot set a non-existent task to be done.\";"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    private List\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e();"
+        "content": "    private static final String DELETE_NO_SUCH_TASK_MESSAGE \u003d \"HEY!!! I cannot destroy a non-existent task.\";"
       },
       {
         "lineNumber": 15,
@@ -7577,322 +7150,322 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    /** List of tasks. */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Constructs a new task list given a list of tasks."
+        "content": "    private List\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param tasks a list of tasks."
+        "content": "    /**"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * Constructs a new task list given a list of tasks."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public TaskList(List\u003cTask\u003e tasks) {"
+        "content": "     *"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        this.tasks \u003d tasks;"
+        "content": "     * @param tasks a list of tasks."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public TaskList(List\u003cTask\u003e tasks) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "        this.tasks \u003d tasks;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Adds a task to the task list."
+        "content": "    }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param task the task to be added to the list."
+        "content": "    /**"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * Adds a task to the task list."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public void addTask(Task task) {"
+        "content": "     *"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        tasks.add(task);"
+        "content": "     * @param task the task to be added to the list."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "    public void addTask(Task task) {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "        tasks.add(task);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Sets a task in the list to be done based on the index."
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param index the index of the task based on the list\u0027s string representation to be set as done."
+        "content": "    /**"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @throws InvalidCommandException if the index given is out of bounds"
+        "content": "     * Sets a task in the list to be done based on the index."
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public void setAsDone(int index) throws InvalidCommandException {"
+        "content": "     * @param index the index of the task based on the list\u0027s string representation to be set as done."
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (index \u003e tasks.size() || index \u003c\u003d 0) {"
+        "content": "     * @throws InvalidCommandException if the index given is out of bounds"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            throw new InvalidCommandException(\"HEY!!! I cannot set a \""
+        "content": "     */"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"non-existent task to be done.\");"
+        "content": "    public void setAsDone(int index) throws InvalidCommandException {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        }"
+        "content": "        if (index \u003e tasks.size() || index \u003c\u003d 0) {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "            throw new InvalidCommandException(DONE_NO_SUCH_TASK_MESSAGE);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //mark selected task to be done"
+        "content": "        }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        tasks.get(index - 1).markDone();"
+        "content": "        assert tasks.size() \u003e 0 : \"task list should not be empty\";"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "        tasks.get(index - 1).markDone();"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * Deletes a task from the list based on the index and returns the task deleted."
+        "content": ""
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @param index the index of the task based on the list\u0027s string representation to be deleted."
+        "content": "     * Deletes a task from the list based on the index and returns the task deleted."
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @return the deleted task."
+        "content": "     *"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     * @throws InvalidCommandException if the index given is out of bounds."
+        "content": "     * @param index the index of the task based on the list\u0027s string representation to be deleted."
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "     */"
+        "content": "     * @return the deleted task."
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "    public Task deleteTask(int index) throws InvalidCommandException {"
+        "content": "     * @throws InvalidCommandException if the index given is out of bounds."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //check if index is valid"
+        "content": "     */"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        if (index \u003e tasks.size() || index \u003c\u003d 0) {"
+        "content": "    public Task deleteTask(int index) throws InvalidCommandException {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "            throw new InvalidCommandException(\"HEY!!! I cannot destroy a \""
+        "content": "        if (index \u003e tasks.size() || index \u003c\u003d 0) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "                    + \"non-existent task.\");"
+        "content": "            throw new InvalidCommandException(DELETE_NO_SUCH_TASK_MESSAGE);"
       },
       {
         "lineNumber": 62,
@@ -7906,14 +7479,14 @@
         "author": {
           "gitId": "ongch00"
         },
-        "content": ""
+        "content": "        assert tasks.size() \u003e 0 : \"task list should not be empty\";"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "ongch00"
         },
-        "content": "        //delete the task from the list and return it"
+        "content": ""
       },
       {
         "lineNumber": 65,
@@ -8676,6 +8249,288 @@
     ],
     "authorContributionMap": {
       "ongch00": 45
+    }
+  },
+  {
+    "path": "src/main/java/duke/temporal/DateTimeParser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "package duke.temporal;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "public class DateTimeParser {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     * Take in the raw date and time and returns a date string parsable by LocalDate."
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     * @param rawDateTime Raw date and time string of format dd/MM/yyyy hhmm."
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     * @return date string parsable by LocalDate."
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    public static String getParsableDate(String rawDateTime) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        String[] separatedDateTime \u003d rawDateTime.split(\" \");"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        String[] date \u003d separatedDateTime[0].split(\"/\");"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        if (date[0].length() \u003c 2) {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            date[0] \u003d \"0\" + date[0];"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        if (date[1].length() \u003c 2) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            date[1] \u003d \"0\" + date[1];"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        String formattedDate \u003d date[2] + \"-\" + date[1] + \"-\" + date[0];"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        return formattedDate;"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     * Takes in the raw date and time and returns a time string parsable by LocalTime."
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     * @param rawDateTime Raw date and time string of format dd/MM/yyyy hhmm."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     * @return time string parsable by LocalTime."
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    public static String getParsableTime(String rawDateTime) {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        String[] separatedDateTime \u003d rawDateTime.split(\" \");"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        String hour \u003d separatedDateTime[1].substring(0, 2);"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        if (hour.equals(\"24\")) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "            hour \u003d \"00\";"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        String minute \u003d separatedDateTime[1].substring(2, 4);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        String formattedTime \u003d hour + \":\" + minute + \":00\";"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "        return formattedTime;"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "ongch00"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "ongch00": 39
     }
   },
   {

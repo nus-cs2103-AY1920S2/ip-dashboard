@@ -1009,248 +1009,318 @@
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    private boolean canLoad \u003d true;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public Duke() {}"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    public Duke() {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public String init() {"
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "        storage \u003d new Storage(filePath);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        storage \u003d new Storage(filePath);"
+        "content": "        try {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String response \u003d ui.getWelcome();"
+        "content": "            tasks \u003d new TaskList(storage.load());"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        try {"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            tasks \u003d new TaskList(storage.load());"
+        "content": "            canLoad \u003d false;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "            tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            response \u003d ui.getLoadingError();"
+        "content": "        }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            tasks \u003d new TaskList();"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return response;"
+        "content": "    /**"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "     * Returns the message that Duke will show the user once it is initialised."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "     * @return Duke\u0027s first message."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * You should have your own function to generate a response to user input."
+        "content": "    public String getFirstMsg() {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Replace this stub with your completed method."
+        "content": "        if (canLoad) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "            return ui.getWelcome();"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public String getResponse(String input) {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        boolean isExit;"
+        "content": "            return ui.getLoadingError();"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String response \u003d \"\";"
+        "content": "        }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        try {"
+        "content": "    }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            Command c \u003d Parser.parse(input);"
+        "content": ""
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            response \u003d c.execute(tasks, ui, storage);"
+        "content": "    /**"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            isExit \u003d c.isExit();"
+        "content": "     * Returns Duke\u0027s response to user input."
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            if (isExit) {"
+        "content": "     * @param input User input."
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                Platform.exit();"
+        "content": "     * @return Duke\u0027s response."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            }"
+        "content": "     */"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "    public String getResponse(String input) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            response \u003d ui.getError(e.getMessage());"
+        "content": "        boolean isExit;"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "        String response \u003d \"\";"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return response;"
+        "content": "        try {"
       },
       {
         "lineNumber": 55,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            Command c \u003d Parser.parse(input);"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            response \u003d c.execute(tasks, ui, storage);"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            isExit \u003d c.isExit();"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            if (isExit) {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                Platform.exit();"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            response \u003d ui.getError(e.getMessage());"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        return response;"
+      },
+      {
+        "lineNumber": 65,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 56,
+        "lineNumber": 66,
         "author": {
           "gitId": "-"
         },
@@ -1258,7 +1328,7 @@
       }
     ],
     "authorContributionMap": {
-      "chanckben": 53,
+      "chanckben": 63,
       "-": 3
     }
   },
@@ -1611,381 +1681,374 @@
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import duke.Duke;"
+        "content": "import javafx.fxml.FXML;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import javafx.fxml.FXML;"
+        "content": "import javafx.scene.control.Button;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import javafx.scene.control.Button;"
+        "content": "import javafx.scene.control.ScrollPane;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import javafx.scene.control.ScrollPane;"
+        "content": "import javafx.scene.control.TextField;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import javafx.scene.control.TextField;"
+        "content": "import javafx.scene.image.Image;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import javafx.scene.image.Image;"
+        "content": "import javafx.scene.layout.AnchorPane;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import javafx.scene.layout.AnchorPane;"
+        "content": "import javafx.scene.layout.VBox;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "import javafx.scene.layout.VBox;"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "/**"
+        "content": " * Controller for MainWindow. Provides the layout for the other controls."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "chanckben"
         },
-        "content": " * Controller for MainWindow. Provides the layout for the other controls."
+        "content": " */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "chanckben"
         },
-        "content": " */"
+        "content": "public class MainWindow extends AnchorPane {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "public class MainWindow extends AnchorPane {"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    @FXML"
+        "content": "    private ScrollPane scrollPane;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private ScrollPane scrollPane;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    @FXML"
+        "content": "    private VBox dialogContainer;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private VBox dialogContainer;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    @FXML"
+        "content": "    private TextField userInput;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private TextField userInput;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    @FXML"
+        "content": "    private Button sendButton;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private Button sendButton;"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    private Duke duke;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private Duke duke;"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
+        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    @FXML"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    @FXML"
+        "content": "    public void initialize() {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public void initialize() {"
+        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    public void setDuke(Duke d) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public void setDuke(Duke d) {"
+        "content": "        duke \u003d d;"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        duke \u003d d;"
+        "content": "        String welcome \u003d duke.getFirstMsg();"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String welcome \u003d duke.init();"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "                DialogBox.getDukeDialog(welcome, dukeImage)"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                DialogBox.getDukeDialog(welcome, dukeImage)"
+        "content": "        );"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        );"
+        "content": "    }"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
+        "content": "     * the dialog container. Clears the user input after processing."
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * the dialog container. Clears the user input after processing."
+        "content": "     */"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    @FXML"
+        "content": "    private void handleUserInput() {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private void handleUserInput() {"
+        "content": "        String input \u003d userInput.getText();"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String input \u003d userInput.getText();"
+        "content": "        String response \u003d duke.getResponse(input);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String response \u003d duke.getResponse(input);"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "                DialogBox.getUserDialog(input, userImage),"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                DialogBox.getUserDialog(input, userImage),"
+        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
+        "content": "        );"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        );"
+        "content": "        userInput.clear();"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        userInput.clear();"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "chanckben"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 57,
+        "lineNumber": 56,
         "author": {
           "gitId": "chanckben"
         },
@@ -1993,7 +2056,7 @@
       }
     ],
     "authorContributionMap": {
-      "chanckben": 57
+      "chanckben": 56
     }
   },
   {
@@ -4658,168 +4721,168 @@
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "import java.util.ArrayList;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "chanckben"
         },
-        "content": " * Parses user inputs."
+        "content": "/**"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "chanckben"
         },
-        "content": " */"
+        "content": " * Parses user inputs."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "public class Parser {"
+        "content": " */"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Throws an error if the given array only has 1 element."
+        "content": "    /**"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param task Type of task."
+        "content": "     * Throws an error if the given array only has 1 element."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param hasDescription Whether the task has a description."
+        "content": "     * @param task Type of task."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param elements Array to check."
+        "content": "     * @param hasDescription Whether the task has a description."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @throws DukeException If given array has only 1 element."
+        "content": "     * @param elements Array to check."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "     * @throws DukeException If given array has only 1 element."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private static void checkArr(String task, boolean hasDescription, String[] elements) throws DukeException {"
+        "content": "     */"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        if (elements.length \u003d\u003d 1) {"
+        "content": "    private static void checkArr(String task, boolean hasDescription, String[] elements) throws DukeException {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            throw new MissingInfoException(task, hasDescription);"
+        "content": "        if (elements.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "            throw new MissingInfoException(task, hasDescription);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Parses the given user input and maps it to a command."
+        "content": "    /**"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param input User input."
+        "content": "     * Checks if an input command is valid."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @return Command."
+        "content": "     * @param input Input command."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @throws DukeException If any error occurs during parsing of the user input."
+        "content": "     * @return true if input command is valid, false otherwise."
       },
       {
         "lineNumber": 38,
@@ -4833,311 +4896,500 @@
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public static Command parse(String input) throws DukeException {"
+        "content": "    private static boolean isValidCommand(String input) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        if (input.equals(\"bye\")) {"
+        "content": "        // Maintain an array of possible commands by the user"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            return new ExitCommand();"
+        "content": "        ArrayList\u003cString\u003e commands \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } else if (input.equals(\"list\")) {"
+        "content": "        commands.add(\"bye\");"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            return new ListCommand();"
+        "content": "        commands.add(\"list\");"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "        commands.add(\"todo\");"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "        commands.add(\"deadline\");"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        Command c;"
+        "content": "        commands.add(\"event\");"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String[] inputElements \u003d input.split(\" \", 2);"
+        "content": "        commands.add(\"delete\");"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String command \u003d inputElements[0];"
+        "content": "        commands.add(\"done\");"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "        commands.add(\"find\");"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        try {"
+        "content": ""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            Parser.checkArr(command, false, inputElements);"
+        "content": "        return commands.contains(input);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            if (command.equals(\"todo\")) {"
+        "content": "    }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                c \u003d new AddCommand(new ToDo(inputElements[1]));"
+        "content": ""
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            } else if (command.equals(\"deadline\")) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                String[] descElements \u003d inputElements[1].split(\" /by \", 2);"
+        "content": "     * Parses the given user input and maps it to a command."
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                Parser.checkArr(command, true, descElements);"
+        "content": "     * @param input User input."
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                LocalDate date \u003d LocalDate.parse(descElements[1]);"
+        "content": "     * @return Command."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                c \u003d new AddCommand(new Deadline(descElements[0], date));"
+        "content": "     * @throws DukeException If any error occurs during parsing of the user input."
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            } else if (command.equals(\"event\")) {"
+        "content": "     */"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                String[] descElements \u003d inputElements[1].split(\" /at \", 2);"
+        "content": "    public static Command parse(String input) throws DukeException {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                Parser.checkArr(command, true, descElements);"
+        "content": "        // Check for single word user inputs"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                LocalDate date \u003d LocalDate.parse(descElements[1]);"
+        "content": "        if (input.equals(\"bye\")) {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                c \u003d new AddCommand(new Event(descElements[0], date));"
+        "content": "            return new ExitCommand();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            } else if (command.equals(\"delete\")) {"
+        "content": "        } else if (input.equals(\"list\")) {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                int i \u003d Integer.parseInt(inputElements[1]);"
+        "content": "            return new ListCommand();"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                c \u003d new DeleteCommand(i - 1);"
+        "content": "        }"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            } else if (command.equals(\"done\")) {"
+        "content": ""
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                int i \u003d Integer.parseInt(inputElements[1]);"
+        "content": "        Command c;"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                c \u003d new DoneCommand(i - 1);"
+        "content": "        String[] inputElements \u003d input.split(\" \", 2);"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            } else if (command.equals(\"find\")) {"
+        "content": "        String command \u003d inputElements[0];"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                c \u003d new FindCommand(inputElements[1]);"
+        "content": ""
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            } else {"
+        "content": "        // Check for unknown commands"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                c \u003d new UnknownCommand();"
+        "content": "        if (!isValidCommand(command)) {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            }"
+        "content": "            return new UnknownCommand();"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } catch (DateTimeParseException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            throw new InvalidDateException();"
+        "content": ""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } catch (NumberFormatException e) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            throw new InvalidIndexException();"
+        "content": "            Parser.checkArr(command, false, inputElements);"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "            if (command.equals(\"todo\")) {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "                c \u003d new AddCommand(new ToDo(inputElements[1]));"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return c;"
+        "content": "            } else if (command.equals(\"deadline\")) {"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "                String[] descElements \u003d inputElements[1].split(\" /by \", 2);"
       },
       {
         "lineNumber": 83,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                Parser.checkArr(command, true, descElements);"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                LocalDate date \u003d LocalDate.parse(descElements[1]);"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                c \u003d new AddCommand(new Deadline(descElements[0], date));"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            } else if (command.equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                String[] descElements \u003d inputElements[1].split(\" /at \", 2);"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                Parser.checkArr(command, true, descElements);"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                LocalDate date \u003d LocalDate.parse(descElements[1]);"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                c \u003d new AddCommand(new Event(descElements[0], date));"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            } else if (command.equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                int i \u003d Integer.parseInt(inputElements[1]);"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                c \u003d new DeleteCommand(i - 1);"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            } else if (command.equals(\"done\")) {"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                int i \u003d Integer.parseInt(inputElements[1]);"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                c \u003d new DoneCommand(i - 1);"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            } else if (command.equals(\"find\")) {"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                c \u003d new FindCommand(inputElements[1]);"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "                c \u003d new UnknownCommand();"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        } catch (DateTimeParseException e) {"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            throw new InvalidDateException();"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        } catch (NumberFormatException e) {"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "            throw new InvalidIndexException();"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        return c;"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 110,
         "author": {
           "gitId": "chanckben"
         },
@@ -5145,7 +5397,7 @@
       }
     ],
     "authorContributionMap": {
-      "chanckben": 83
+      "chanckben": 110
     }
   },
   {
@@ -6020,773 +6272,731 @@
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            if (taskElements[1].equals(\"1\")) {"
+        "content": "            break;"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                t.setDone();"
+        "content": "        case \"D\":"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            }"
+        "content": "            t \u003d new Deadline(taskElements[2],"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            break;"
+        "content": "                    LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern(\"MMM d yyyy\")));"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        case \"D\":"
+        "content": "            break;"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            t \u003d new Deadline(taskElements[2],"
+        "content": "        case \"E\":"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                    LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern(\"MMM d yyyy\")));"
+        "content": "            t \u003d new Event(taskElements[2],"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            if (taskElements[1].equals(\"1\")) {"
+        "content": "                    LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern(\"MMM d yyyy\")));"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                t.setDone();"
+        "content": "            break;"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            }"
+        "content": "        default:"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            break;"
+        "content": "            throw new LoadingException();"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        case \"E\":"
+        "content": "        }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            t \u003d new Event(taskElements[2],"
+        "content": "        assert t !\u003d null;"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                    LocalDate.parse(taskElements[3], DateTimeFormatter.ofPattern(\"MMM d yyyy\")));"
+        "content": "        if (taskElements[1].equals(\"1\")) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            if (taskElements[1].equals(\"1\")) {"
+        "content": "            t.setDone();"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                t.setDone();"
+        "content": "        }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            }"
+        "content": "        return t;"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            break;"
+        "content": "    }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        default:"
+        "content": ""
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            throw new LoadingException();"
+        "content": "    /**"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "     * Loads tasks from a file into Duke."
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        assert t !\u003d null;"
+        "content": "     * @return Array of Tasks as stored in the file."
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return t;"
+        "content": "     * @throws LoadingException If error occurs while loading tasks from file."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    public ArrayList\u003cTask\u003e load() throws LoadingException {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "        ArrayList\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Loads tasks from a file into Duke."
+        "content": "        File f \u003d new File(this.filePath);"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @return Array of Tasks as stored in the file."
+        "content": "        Scanner s;"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @throws LoadingException If error occurs while loading tasks from file."
+        "content": "        try {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "            s \u003d new Scanner(f);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public ArrayList\u003cTask\u003e load() throws LoadingException {"
+        "content": "        } catch (FileNotFoundException e) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        ArrayList\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e();"
+        "content": "            throw new LoadingException();"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        File f \u003d new File(this.filePath);"
+        "content": "        }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        Scanner s;"
+        "content": "        while (s.hasNextLine()) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        try {"
+        "content": "            String currLine \u003d s.nextLine();"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            s \u003d new Scanner(f);"
+        "content": "            String[] taskElements \u003d currLine.split(\" \\\\| \");"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } catch (FileNotFoundException e) {"
+        "content": "            // String format of task should have at least 3 components: type, isDone, description"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            throw new LoadingException();"
+        "content": "            assert taskElements.length \u003e\u003d 3;"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "            tasks.add(this.getNextTask(taskElements));"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        while (s.hasNextLine()) {"
+        "content": "        }"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            String currLine \u003d s.nextLine();"
+        "content": "        return tasks;"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            String[] taskElements \u003d currLine.split(\" \\\\| \");"
+        "content": "    }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            // String format of task should have at least 3 components: type, isDone, description"
+        "content": ""
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            assert taskElements.length \u003e\u003d 3;"
+        "content": "    /**"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            tasks.add(this.getNextTask(taskElements));"
+        "content": "     * Saves tasks from Duke to a file."
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "     * @param tasks Tasks to be stored in the file."
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return tasks;"
+        "content": "     * @throws SavingException If error occurs while saving tasks to file."
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    public void save(ArrayList\u003cTask\u003e tasks) throws SavingException {"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "        try {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Saves tasks from Duke to a file."
+        "content": "            this.writeToFile(this.filePath, this.parseTasks(tasks));"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param tasks Tasks to be stored in the file."
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @throws SavingException If error occurs while saving tasks to file."
+        "content": "            throw new SavingException();"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "        }"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public void save(ArrayList\u003cTask\u003e tasks) throws SavingException {"
+        "content": "    }"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        try {"
+        "content": ""
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            this.writeToFile(this.filePath, this.parseTasks(tasks));"
+        "content": "    /**"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "     * Writes the String representation of all tasks in Duke to a file."
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            throw new SavingException();"
+        "content": "     * @param filePath Path of file."
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "     * @param textToAdd String representation of tasks."
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "     * @throws IOException If error occurs when writing to the file."
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "    private void writeToFile(String filePath, String textToAdd) throws IOException {"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Writes the String representation of all tasks in Duke to a file."
+        "content": "        FileWriter fw \u003d new FileWriter(filePath);"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param filePath Path of file."
+        "content": "        fw.write(textToAdd);"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param textToAdd String representation of tasks."
+        "content": "        fw.close();"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @throws IOException If error occurs when writing to the file."
+        "content": "    }"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private void writeToFile(String filePath, String textToAdd) throws IOException {"
+        "content": "    /**"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        FileWriter fw \u003d new FileWriter(filePath);"
+        "content": "     * Converts a Task object into a String to store in a file."
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        fw.write(textToAdd);"
+        "content": "     * Roughly equivalent to the reverse of the getNextTask method."
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        fw.close();"
+        "content": "     * @param t Task to be converted."
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "     * @return String representation of the task."
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "    private String parseTask(Task t) {"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Converts a Task object into a String to store in a file."
+        "content": "        String taskString \u003d t.getType() + \" | \";"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Roughly equivalent to the reverse of the getNextTask method."
+        "content": "        if (t.isDone()) {"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param t Task to be converted."
+        "content": "            taskString +\u003d \"1 | \";"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @return String representation of the task."
+        "content": "        } else {"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "            taskString +\u003d \"0 | \";"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private String parseTask(Task t) {"
+        "content": "        }"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String taskString \u003d t.getType() + \" | \";"
+        "content": "        taskString +\u003d t.getDescription();"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        if (t.isDone()) {"
+        "content": "        if (t instanceof DateTimeTask) {"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            taskString +\u003d \"1 | \";"
+        "content": "            taskString +\u003d \" | \" + ((DateTimeTask) t).getDateTime();"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        } else {"
+        "content": "        }"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            taskString +\u003d \"0 | \";"
+        "content": "        taskString +\u003d \"\\n\";"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "        // There must be either 2 or 3 pipe characters \u0027|\u0027 in taskString"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        taskString +\u003d t.getDescription();"
+        "content": "        long countPipes \u003d taskString.chars().filter(ch -\u003e ch \u003d\u003d \u0027|\u0027).count();"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        if (t instanceof DateTimeTask) {"
+        "content": "        assert (countPipes \u003d\u003d 2 || countPipes \u003d\u003d 3);"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "            taskString +\u003d \" | \" + ((DateTimeTask) t).getDateTime();"
+        "content": "        return taskString;"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        taskString +\u003d \"\\n\";"
+        "content": ""
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        // There must be either 2 or 3 pipe characters \u0027|\u0027 in taskString"
+        "content": "    /**"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        long countPipes \u003d taskString.chars().filter(ch -\u003e ch \u003d\u003d \u0027|\u0027).count();"
+        "content": "     * Converts all Tasks in Duke into a String to store in a file."
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        assert (countPipes \u003d\u003d 2 || countPipes \u003d\u003d 3);"
+        "content": "     * @param tasks An array of Task objects in Duke."
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return taskString;"
+        "content": "     * @return String representation of all tasks."
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    private String parseTasks(ArrayList\u003cTask\u003e tasks) {"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "        String allTasks \u003d \"\";"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Converts all Tasks in Duke into a String to store in a file."
+        "content": "        for (Task t : tasks) {"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param tasks An array of Task objects in Duke."
+        "content": "            allTasks +\u003d parseTask(t);"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @return String representation of all tasks."
+        "content": "        }"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "        return allTasks;"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    private String parseTasks(ArrayList\u003cTask\u003e tasks) {"
-      },
-      {
-        "lineNumber": 139,
-        "author": {
-          "gitId": "chanckben"
-        },
-        "content": "        String allTasks \u003d \"\";"
-      },
-      {
-        "lineNumber": 140,
-        "author": {
-          "gitId": "chanckben"
-        },
-        "content": "        for (Task t : tasks) {"
-      },
-      {
-        "lineNumber": 141,
-        "author": {
-          "gitId": "chanckben"
-        },
-        "content": "            allTasks +\u003d parseTask(t);"
-      },
-      {
-        "lineNumber": 142,
-        "author": {
-          "gitId": "chanckben"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 143,
-        "author": {
-          "gitId": "chanckben"
-        },
-        "content": "        return allTasks;"
-      },
-      {
-        "lineNumber": 144,
-        "author": {
-          "gitId": "chanckben"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 145,
+        "lineNumber": 139,
         "author": {
           "gitId": "chanckben"
         },
@@ -6794,7 +7004,7 @@
       }
     ],
     "authorContributionMap": {
-      "chanckben": 145
+      "chanckben": 139
     }
   },
   {
@@ -8111,150 +8321,171 @@
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "     * @return Welcome message."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public String getWelcome() {"
+        "content": "     */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        String greeting \u003d \"Hello! I\u0027m Woody and I\u0027m always here to keep you company.\\n\""
+        "content": "    public String getWelcome() {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "                + \"Let me know what you need and I\u0027ll be right on it.\\n\";"
+        "content": "        String greeting \u003d \"Hello! I\u0027m Woody and I\u0027m always here to keep you company.\\n\""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return greeting;"
+        "content": "                + \"Let me know what you need and I\u0027ll be right on it.\\n\";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "        return greeting;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Prints an error message."
+        "content": "    /**"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * @param errorMsg Error message."
+        "content": "     * Prints an error message."
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "     * @param errorMsg Error message."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public String getError(String errorMsg) {"
+        "content": "     * @return Error message to display to user."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return \"OOPS!!! \" + errorMsg;"
+        "content": "     */"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "    public String getError(String errorMsg) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chanckben"
         },
-        "content": ""
+        "content": "        return \"OOPS!!! \" + errorMsg;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     * Prints an error message for errors encountered during loading."
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    public String getLoadingError() {"
+        "content": "     * Prints an error message for errors encountered during loading."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "        return \"OOPS!!! Error when loading tasks from file to Woody.\";"
+        "content": "     * @return Loading error message."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chanckben"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "    public String getLoadingError() {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "        return \"OOPS!!! Error when loading tasks from file to Woody.\";"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "chanckben"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 36,
         "author": {
           "gitId": "chanckben"
         },
@@ -8262,7 +8493,7 @@
       }
     ],
     "authorContributionMap": {
-      "chanckben": 33
+      "chanckben": 36
     }
   },
   {
