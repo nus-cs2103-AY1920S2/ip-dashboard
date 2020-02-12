@@ -1736,598 +1736,563 @@
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import java.io.File;"
+        "content": "/**"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import java.util.Scanner;"
+        "content": " * Represents the main working class of DukeProject."
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "/**"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "foochifa"
         },
-        "content": " * Represents the main working class of DukeProject."
+        "content": "    /** Object that handles user interface and communicating with user. */"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "foochifa"
         },
-        "content": " */"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "public class Duke {"
+        "content": "    /** Parser to read commands. */"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Object that handles user interface and communicating with user. */"
+        "content": "    private Parser parser;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Ui ui;"
+        "content": "    /** Storage to read and store Duke into a file. */"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Primary I/O object used. */"
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Scanner sc;"
+        "content": "    /** List of tasks in Duke. */"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Parser to read commands. */"
+        "content": "    private TaskList taskList;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Parser parser;"
+        "content": "    /** Calender of tasks stored according to their dates. */"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Storage to read and store Duke into a file. */"
+        "content": "    private Schedule schedule;"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Storage storage;"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** List of tasks in Duke. */"
+        "content": "    /**"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private TaskList taskList;"
+        "content": "     * Generates a command as a response to a user input String from the GUI."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Calender of tasks stored according to their dates. */"
+        "content": "     *"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Schedule schedule;"
+        "content": "     * @param input input provided by user from GUI."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "     * @return Command that is parsed from the input."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Generates a command as a response to a user input String from the GUI."
+        "content": "    public Command getCommandResponse(String input) throws InvalidCommandException {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
+        "content": "        String[] inputs \u003d input.split(\" \", 2);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @param input input provided by user from GUI."
+        "content": "        CommandType commandType \u003d Parser.commandParser(inputs[0]);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @return Command that is parsed from the input."
+        "content": "        if (inputs.length \u003c 2) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "            return parser.getCommand(commandType, \"\");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public Command getCommandResponse(String input) throws InvalidCommandException {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        String[] inputs \u003d input.split(\" \", 2);"
+        "content": "            return parser.getCommand(commandType, inputs[1]);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        CommandType commandType \u003d Parser.commandParser(inputs[0]);"
+        "content": "        }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        if (inputs.length \u003c 2) {"
+        "content": "    }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return parser.getCommand(commandType, \"\");"
+        "content": ""
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } else {"
+        "content": "    /**"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return parser.getCommand(commandType, inputs[1]);"
+        "content": "     * Generates Duke\u0027s response to a command."
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        }"
+        "content": "     *"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "     * @param command The command provided."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "     * @return Duke\u0027s response."
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Generates Duke\u0027s response to a command."
+        "content": "    public String getResponse(Command command) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
+        "content": "        try {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @param command The command provided."
+        "content": "            return command.execute(ui, taskList, storage, schedule);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @return Duke\u0027s response."
+        "content": "        } catch (DukeDescriptionException e) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "            return ui.say(SayType.EMPTY_DESCRIPTION);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public String getResponse(Command command) {"
+        "content": "        } catch (BadDateException e) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        try {"
+        "content": "            return ui.say(SayType.BAD_DATE);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return command.execute(ui, taskList, storage, schedule);"
+        "content": "        } catch (BadDescriptionException e) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } catch (DukeDescriptionException e) {"
+        "content": "            return ui.say(SayType.BAD_DESCRIPTION) + e.getMessage();"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return ui.say(SayType.EMPTY_DESCRIPTION);"
+        "content": "        }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } catch (BadDateException e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return ui.say(SayType.BAD_DATE);"
+        "content": ""
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } catch (BadDescriptionException e) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return ui.say(SayType.BAD_DESCRIPTION) + e.getMessage();"
+        "content": "     * Returns the User Interface of Duke."
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        }"
+        "content": "     *"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "     * @return User Interface."
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "    public Ui getUi() {"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Returns the User Interface of Duke."
+        "content": "        return ui;"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @return User Interface."
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public Ui getUi() {"
+        "content": "     * Constructs a Duke object with a filepath to store the task list."
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        return ui;"
+        "content": "     *"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "     * @param filepath Filepath of the Duke storage."
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "    public Duke(String filepath) {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Constructs a Duke object with a filepath to store the task list."
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
+        "content": "        schedule \u003d new Schedule();"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @param filepath Filepath of the Duke storage."
+        "content": "        storage \u003d new Storage(filepath);"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "        taskList \u003d new TaskList(storage.printFileIntoList(schedule));"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public Duke(String filepath) {"
+        "content": "        parser \u003d new Parser();"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "    }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        schedule \u003d new Schedule();"
+        "content": ""
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        storage \u003d new Storage(filepath);"
+        "content": "    /**"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        taskList \u003d new TaskList(storage.printFileIntoList(schedule));"
+        "content": "     * Runs the Duke Project. If \"text\" is input within the CLI, this method will run the CLI version of Duke."
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        parser \u003d new Parser();"
+        "content": "     * Else, as default, it will run the GUI version of Duke."
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "     * @param args Inputs by user on the CLI."
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Runs the Duke Project. If \"text\" is input within the CLI, this method will run the CLI version of Duke."
+        "content": "    public static void main(String[] args) {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Else, as default, it will run the GUI version of Duke."
+        "content": "        Application.launch(GuiApp.class, args);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "     * @param args Inputs by user on the CLI."
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "    public static void main(String[] args) {"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "        Application.launch(GuiApp.class, args);"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "foochifa"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 100,
+        "lineNumber": 95,
         "author": {
           "gitId": "-"
         },
@@ -2335,7 +2300,7 @@
       }
     ],
     "authorContributionMap": {
-      "foochifa": 99,
+      "foochifa": 94,
       "-": 1
     }
   },
@@ -3209,318 +3174,325 @@
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        //set up labels for user and duke"
+        "content": "        assert dukeResponse.length() \u003e 0 : \"Duke response cannot be empty\";"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        Label userText \u003d new Label(userInput.getText());"
+        "content": "        //set up labels for user and duke"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        Label dukeText \u003d new Label(dukeResponse.toString());"
+        "content": "        Label userText \u003d new Label(userInput.getText());"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        userText.setWrapText(true);"
+        "content": "        Label dukeText \u003d new Label(dukeResponse.toString());"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        dukeText.setWrapText(true);"
+        "content": "        userText.setWrapText(true);"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        //add labels into dialog container"
+        "content": "        dukeText.setWrapText(true);"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "        //add labels into dialog container"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "                DialogBox.getUserDialog(userText, new ImageView(userIm)),"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "                DialogBox.getDukeDialog(dukeText, new ImageView(dukeIm))"
+        "content": "                DialogBox.getUserDialog(userText, new ImageView(userIm)),"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        );"
+        "content": "                DialogBox.getDukeDialog(dukeText, new ImageView(dukeIm))"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        if (command.isExit()) {"
+        "content": "        );"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            closeApp();"
+        "content": "        if (command.isExit()) {"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        }"
+        "content": "            closeApp();"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        userInput.clear();"
+        "content": "        }"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "        userInput.clear();"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Command getDukeCommand(StringBuilder response) {"
+        "content": ""
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        try {"
+        "content": "    private Command getDukeCommand(StringBuilder response) {"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            Command command \u003d duke.getCommandResponse(userInput.getText());"
+        "content": "        try {"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            response.append(duke.getResponse(command));"
+        "content": "            Command command \u003d duke.getCommandResponse(userInput.getText());"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return command;"
+        "content": "            response.append(duke.getResponse(command));"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } catch (InvalidCommandException e) {"
+        "content": "            return command;"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            response.append(duke.getUi().say(SayType.INVALID_COMMAND));"
+        "content": "        } catch (InvalidCommandException e) {"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return new ListCommand();"
+        "content": "            response.append(duke.getUi().say(SayType.INVALID_COMMAND));"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        }"
+        "content": "            return new ListCommand();"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Closes the GUI Application."
+        "content": "    /**"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "     * Closes the GUI Application."
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private void closeApp() {"
+        "content": "     */"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        try {"
+        "content": "    private void closeApp() {"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            Platform.exit();"
+        "content": "        try {"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "            Platform.exit();"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            displayDukeResponse(\"Oh dear! I cant seem to close, please alt+F4\");"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        }"
+        "content": "            displayDukeResponse(\"Oh dear! I cant seem to close, please alt+F4\");"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Constructs a GUI app with a predetermined Duke variable."
+        "content": "    /**"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "     * Constructs a GUI app with a predetermined Duke variable."
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public GuiApp() {"
+        "content": "     */"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        duke \u003d new Duke(\".\" + File.separator + \"data\" + File.separator + \"Task.txt\");"
+        "content": "    public GuiApp() {"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "        duke \u003d new Duke(\".\" + File.separator + \"data\" + File.separator + \"Task.txt\");"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 169,
+        "author": {
+          "gitId": "foochifa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 170,
         "author": {
           "gitId": "foochifa"
         },
@@ -3528,7 +3500,7 @@
       }
     ],
     "authorContributionMap": {
-      "foochifa": 169
+      "foochifa": 170
     }
   },
   {
@@ -3561,843 +3533,710 @@
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.data.Schedule;"
+        "content": "import dukeproj.enums.CommandType;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.data.TaskList;"
+        "content": "import dukeproj.exception.BadDateException;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.enums.CommandType;"
+        "content": "import dukeproj.exception.InvalidCommandException;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.exception.BadDateException;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.exception.BadDescriptionException;"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.exception.DukeDescriptionException;"
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.exception.InvalidCommandException;"
+        "content": "import java.time.format.DateTimeParseException;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.tasks.Deadline;"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.tasks.Event;"
+        "content": "/**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.tasks.Task;"
+        "content": " * Represents a parser with static methods to interpret Strings into actionable data for DukeProject."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import dukeproj.tasks.Todo;"
+        "content": " */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "    /** Date formatter when reading (to print from Duke) the date. */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import java.time.format.DateTimeFormatter;"
+        "content": "    public static DateTimeFormatter DATE_READ_FORMATTER \u003d"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import java.time.format.DateTimeParseException;"
+        "content": "            DateTimeFormatter.ofPattern(\"dd MMM uuuu\");"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "import java.util.Scanner;"
+        "content": "    /** Date formatter when writing (to write into Duke) the date.*/"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "    public static DateTimeFormatter DATE_WRITE_FORMATTER \u003d"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "/**"
+        "content": "            DateTimeFormatter.ofPattern(\"dd MM uu\");"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "foochifa"
         },
-        "content": " * Represents a parser with static methods to interpret Strings into actionable data for DukeProject."
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "foochifa"
         },
-        "content": " */"
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "public class Parser {"
+        "content": "     * Returns the date in LocalDate form parsed from the String entered."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Date formatter when reading (to print from dukeproj.Duke) the date. */"
+        "content": "     * If the String format is wrong, will throw BadDateException."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public static DateTimeFormatter DATE_READ_FORMATTER \u003d"
+        "content": "     *"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            DateTimeFormatter.ofPattern(\"dd MMM uuuu\");"
+        "content": "     * @param str String to be parsed into a date."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Date formatter when writing (to write into dukeproj.Duke) the date.*/"
+        "content": "     * @return date in LocalDate format."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public static DateTimeFormatter DATE_WRITE_FORMATTER \u003d"
+        "content": "     * @throws BadDateException if format of string is not aligned with write formatter."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            DateTimeFormatter.ofPattern(\"dd MM uu\");"
+        "content": "     */"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "    public static LocalDate dateParser(String str) throws BadDateException {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Primary data structure to store the tasks. */"
+        "content": "        try {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private TaskList taskList;"
+        "content": "            DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"dd MM uu\");"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Storage to read/write task list from/into files. */"
+        "content": "            return LocalDate.parse(str, formatter);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Storage storage;"
+        "content": "        } catch (DateTimeParseException e) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Data structure to store tasks aligned by dates.*/"
+        "content": "            throw new BadDateException(\"Bad date format\");"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Schedule schedule;"
+        "content": "        }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /** Primary I/O object used. */"
+        "content": "    }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    private Scanner sc;"
+        "content": ""
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "     * Returns the command in the form of enum class Command parsed from the String entered."
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Returns the date in LocalDate form parsed from the String entered."
+        "content": "     * If String does not coincide with any command, will throw InvalidCommandException."
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * If the String format is wrong, will throw BadDateException."
+        "content": "     *"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
+        "content": "     * @param str String to be parsed into a command."
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @param str String to be parsed into a date."
+        "content": "     * @return command in enum class Command format."
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @return date in LocalDate format."
+        "content": "     * @throws InvalidCommandException String entered does not coincide with any command in enum class Command."
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @throws BadDateException if format of string is not aligned with write formatter."
+        "content": "     */"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "    public static CommandType commandParser(String str) throws InvalidCommandException {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public static LocalDate dateParser(String str) throws BadDateException {"
+        "content": "        try {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        try {"
+        "content": "            return CommandType.valueOf(str.toUpperCase());"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"dd MM uu\");"
+        "content": "        } catch (IllegalArgumentException e) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return LocalDate.parse(str, formatter);"
+        "content": "            throw new InvalidCommandException(str + \" is an invalid command\");"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } catch (DateTimeParseException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            throw new BadDateException(\"Bad date format\");"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "     * Gets a Command class object from a certain command type and description."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Returns the command in the form of enum class Command parsed from the String entered."
+        "content": "     * @param commandType The type of command to return."
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * If String does not coincide with any command, will throw InvalidCommandException."
+        "content": "     * @param description The description accompanying the command."
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
+        "content": "     * @return The Command class object to be returned."
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @param str String to be parsed into a command."
+        "content": "     */"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @return command in enum class Command format."
+        "content": "    public Command getCommand(CommandType commandType, String description) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @throws InvalidCommandException String entered does not coincide with any command in enum class Command."
+        "content": "        Command command \u003d new ExitCommand(); //default command"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "        switch (commandType) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public static CommandType commandParser(String str) throws InvalidCommandException {"
+        "content": "        case LIST:"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        try {"
+        "content": "            command \u003d new ListCommand();"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            return CommandType.valueOf(str.toUpperCase());"
+        "content": "            break;"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        } catch (IllegalArgumentException e) {"
+        "content": "        case DONE:"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            throw new InvalidCommandException(str + \" is an invalid command\");"
+        "content": "            command \u003d new DoneCommand(description);"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        }"
+        "content": "            break;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    }"
+        "content": "        case TODO:"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "foochifa"
         },
-        "content": ""
+        "content": "            //fallthrough"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    /**"
+        "content": "        case EVENT:"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * Gets a Command class object from a certain command type and description."
+        "content": "            //fallthrough"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     *"
+        "content": "        case DEADLINE:"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @param commandType The type of command to return."
+        "content": "            command \u003d new AddCommand(description, commandType);"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @param description The description accompanying the command."
+        "content": "            break;"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     * @return The Command class object to be returned."
+        "content": "        case DELETE:"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "     */"
+        "content": "            command \u003d new DeleteCommand(description);"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "    public Command getCommand(CommandType commandType, String description) {"
+        "content": "            break;"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        Command command \u003d new ExitCommand(); //default command"
+        "content": "        case SCHEDULE:"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        switch (commandType) {"
+        "content": "            command \u003d new ScheduleCommand(description);"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case LIST:"
+        "content": "            break;"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            command \u003d new ListCommand();"
+        "content": "        case FIND:"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            break;"
+        "content": "            command \u003d new FindCommand(description);"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case DONE:"
+        "content": "            break;"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            command \u003d new DoneCommand(description);"
+        "content": "        case HELP:"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            break;"
+        "content": "            command \u003d new HelpCommand();"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case TODO:"
+        "content": "            break;"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            //fallthrough"
+        "content": "        case BYE:"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case EVENT:"
+        "content": "            //fallthrough"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            //fallthrough"
+        "content": "        default:"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case DEADLINE:"
+        "content": "            assert !commandType.equals(CommandType.BYE) : \"Erroneous Command\";"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            command \u003d new AddCommand(description, commandType);"
+        "content": "            break;"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            break;"
+        "content": "        }"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case DELETE:"
+        "content": "        return command;"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            command \u003d new DeleteCommand(description);"
+        "content": "    }"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            break;"
+        "content": ""
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case SCHEDULE:"
+        "content": "    /**"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            command \u003d new ScheduleCommand(description);"
+        "content": "     * Constructs an empty Parser to be used in Duke GUI version."
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            break;"
+        "content": "     */"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "        case FIND:"
+        "content": "    public Parser() {"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "foochifa"
         },
-        "content": "            command \u003d new FindCommand(description);"
+        "content": "    }"
       },
       {
         "lineNumber": 105,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "            break;"
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "        case HELP:"
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "            command \u003d new HelpCommand();"
-      },
-      {
-        "lineNumber": 108,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "        case BYE:"
-      },
-      {
-        "lineNumber": 109,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "            //fallthrough"
-      },
-      {
-        "lineNumber": 110,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "        default:"
-      },
-      {
-        "lineNumber": 111,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "            if (command.isExit() \u0026\u0026 !commandType.equals(CommandType.BYE)) {"
-      },
-      {
-        "lineNumber": 112,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "                System.err.println(\"erroneous command\");"
-      },
-      {
-        "lineNumber": 113,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 114,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "            break;"
-      },
-      {
-        "lineNumber": 115,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 116,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "        return command;"
-      },
-      {
-        "lineNumber": 117,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 118,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 119,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 120,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "     * Constructs an empty Parser to be used in Duke GUI version."
-      },
-      {
-        "lineNumber": 121,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 122,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "    public Parser() {"
-      },
-      {
-        "lineNumber": 123,
-        "author": {
-          "gitId": "foochifa"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 124,
         "author": {
           "gitId": "foochifa"
         },
@@ -4405,7 +4244,7 @@
       }
     ],
     "authorContributionMap": {
-      "foochifa": 124
+      "foochifa": 105
     }
   },
   {

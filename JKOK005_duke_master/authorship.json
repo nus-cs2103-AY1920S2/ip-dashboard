@@ -1104,168 +1104,168 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            case \"add\":"
+        "content": "            case \"mark\":"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                controller.createNewTask(taskName);"
+        "content": "                if (controller.checkTask(taskName)) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                Greetings.prettyPrint(\"Added: \" + taskName);"
+        "content": "                    controller.setMark(taskName, true);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                break;"
+        "content": "                    Greetings.prettyPrint(String.format(\"Marked task %s\", taskName));"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "                } else {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            case \"mark\":"
+        "content": "                    Greetings.prettyPrint(String.format(\"Task does not exist\", taskName));"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                if (controller.checkTask(taskName)) {"
+        "content": "                }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                    controller.markTask(taskName);"
+        "content": "                break;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                    Greetings.prettyPrint(String.format(\"Marked task %s\", taskName));"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                } else {"
+        "content": "            case \"unmark\":"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                    Greetings.prettyPrint(String.format(\"Task does not exist\", taskName));"
+        "content": "                if (controller.checkTask(taskName)) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                }"
+        "content": "                    controller.setMark(taskName, false);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                break;"
+        "content": "                    Greetings.prettyPrint(String.format(\"Unmarked task %s\", taskName));"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "                } else {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            case \"unmark\":"
+        "content": "                    Greetings.prettyPrint(String.format(\"Task does not exist\", taskName));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                if (controller.checkTask(taskName)) {"
+        "content": "                }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                    controller.unmarkTask(taskName);"
+        "content": "                break;"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                    Greetings.prettyPrint(String.format(\"Unmarked task %s\", taskName));"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                } else {"
+        "content": "            case \"todo\":"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                    Greetings.prettyPrint(String.format(\"Task does not exist\", taskName));"
+        "content": "                if (!controller.checkTask(taskName)) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                }"
+        "content": "                    controller.createNewTask(taskName);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                break;"
+        "content": "                }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "                controller.asTodo(taskName);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            case \"delete\":"
+        "content": "                Greetings.prettyPrint(String.format(\"Marked task as todo: %s\", taskName));"
       },
       {
         "lineNumber": 51,
@@ -1286,101 +1286,262 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            case \"quit\":"
+        "content": "            case \"deadline\":"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                Greetings.tearDown();"
+        "content": "                if (!controller.checkTask(taskName)) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                contLoop \u003d false;"
+        "content": "                    controller.createNewTask(taskName);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                break;"
+        "content": "                }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            default:"
+        "content": "                controller.asDeadline(taskName);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                Greetings.handleUndefined();"
+        "content": "                Greetings.prettyPrint(String.format(\"Marked task as deadline: %s\", taskName));"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            }"
+        "content": "                break;"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "            case \"event\":"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "                if (!controller.checkTask(taskName)) {"
       },
       {
         "lineNumber": 63,
         "author": {
-          "gitId": "-"
+          "gitId": "JKOK005"
         },
-        "content": "    public static void main(String[] args) {"
+        "content": "                    controller.createNewTask(taskName);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        Greetings.init();"
+        "content": "                }"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        poll(args);"
+        "content": "                controller.asEvent(taskName);"
       },
       {
         "lineNumber": 66,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                Greetings.prettyPrint(String.format(\"Marked task as event: %s\", taskName));"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "            case \"delete\":"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                if (controller.checkTask(taskName)) {"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                    controller.removeTask(taskName);"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                Greetings.prettyPrint(String.format(\"Deleted task: %s\", taskName));"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "            case \"quit\":"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                Greetings.tearDown();"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                contLoop \u003d false;"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                Greetings.handleUndefined();"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "-"
+        },
+        "content": "    public static void main(String[] args) {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        Greetings.init();"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        poll(args);"
+      },
+      {
+        "lineNumber": 89,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 67,
+        "lineNumber": 90,
         "author": {
           "gitId": "-"
         },
@@ -1388,7 +1549,7 @@
       }
     ],
     "authorContributionMap": {
-      "JKOK005": 63,
+      "JKOK005": 86,
       "-": 4
     }
   },
@@ -1429,21 +1590,21 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "import com.nus.duke.tasks.Tasks;"
+        "content": "import com.nus.duke.parser.Parser;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "import java.util.List;"
+        "content": "import com.nus.duke.tasks.Tasks;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "import java.util.stream.Collectors;"
+        "content": "import javafx.util.Pair;"
       },
       {
         "lineNumber": 8,
@@ -1457,14 +1618,14 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "public class TaskController {"
+        "content": "import java.util.List;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    private DAOInterface dataObj \u003d new InMemDAO();"
+        "content": "import java.util.stream.Collectors;"
       },
       {
         "lineNumber": 11,
@@ -1478,252 +1639,252 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    private String stringify(Tasks t) {"
+        "content": "public class TaskController {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return String.format(\"[%s][%s] %s\", t.getStatus().toString(),"
+        "content": "    private DAOInterface dataObj \u003d new InMemDAO();"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                                            t.getType().toString(),"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                                            t.getName());"
+        "content": "    private String stringify(Tasks t) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        StringBuilder strBldr \u003d new StringBuilder();"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "        strBldr.append(String.format(\"[%s][%s] \", t.getStatus().toString(), t.getType().toString()));"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    private boolean setTask(Tasks task, Tasks.TASK_STATUS lvl) {"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        this.dataObj.set(task, lvl);"
+        "content": "        if (t.getName().contains(\"/by\")) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return true;"
+        "content": "            Pair\u003cString, String\u003e parsedInput \u003d Parser.tokenize(t.getName(), \"/by\");"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "            strBldr.append(String.format(\"%s (by: %s)\", parsedInput.getKey(), parsedInput.getValue()));"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public boolean createNewTask(String name) {"
+        "content": "        else if (t.getName().contains(\"/at\")) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        Tasks task \u003d new Tasks(name);"
+        "content": "            Pair\u003cString, String\u003e parsedInput \u003d Parser.tokenize(t.getName(), \"/at\");"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        Boolean result \u003d this.dataObj.add(task);"
+        "content": "            strBldr.append(String.format(\"%s (at: %s)\", parsedInput.getKey(), parsedInput.getValue()));"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return result;"
+        "content": "        }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        else {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "            strBldr.append(String.format(\"%s\", t.getName()));"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Tasks getTask(String name) {"
+        "content": "        }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return dataObj.search(name);"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        return strBldr.toString();"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public boolean checkTask(String name) {"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return this.getTask(name) !\u003d null;"
+        "content": "    private boolean setTask(Tasks task, Tasks.TASK_STATUS lvl) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        this.dataObj.set(task, lvl);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "        return true;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public List\u003cString\u003e getAllTasks() {"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        List\u003cTasks\u003e Tasks \u003d dataObj.getAll();"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        List\u003cString\u003e taskString \u003d Tasks.stream()"
+        "content": "    private boolean setTask(Tasks task, Tasks.TASK_CATEGORY cat) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                                        .map(eachTask -\u003e stringify(eachTask))"
+        "content": "        this.dataObj.set(task, cat);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                                        .collect(Collectors.toList());"
+        "content": "        return true;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return taskString;"
+        "content": "    }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "    public boolean setMark(String name, boolean isMark) {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public boolean markTask(String name) {"
+        "content": "        Tasks t \u003d this.getTask(name);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        Tasks t \u003d this.getTask(name);"
+        "content": "        Tasks.TASK_STATUS status \u003d isMark ? Tasks.TASK_STATUS.COMPLETE : Tasks.TASK_STATUS.INCOMPLETE;"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return this.setTask(t, Tasks.TASK_STATUS.COMPLETE);"
+        "content": "        return this.setTask(t, status);"
       },
       {
         "lineNumber": 48,
@@ -1744,7 +1905,7 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public boolean unmarkTask(String name) {"
+        "content": "    public boolean asTodo(String name) {"
       },
       {
         "lineNumber": 51,
@@ -1758,7 +1919,7 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return this.setTask(t, Tasks.TASK_STATUS.INCOMPLETE);"
+        "content": "        return this.setTask(t, Tasks.TASK_CATEGORY.TODO);"
       },
       {
         "lineNumber": 53,
@@ -1779,24 +1940,255 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public boolean removeTask(String name) {"
+        "content": "    public boolean asDeadline(String name) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return false;"
+        "content": "        Tasks t \u003d this.getTask(name);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        return this.setTask(t, Tasks.TASK_CATEGORY.DEADLINE);"
       },
       {
         "lineNumber": 58,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public boolean asEvent(String name) {"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        Tasks t \u003d this.getTask(name);"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return this.setTask(t, Tasks.TASK_CATEGORY.EVENT);"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public boolean createNewTask(String name) {"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        Tasks task \u003d new Tasks(name);"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        Boolean result \u003d this.dataObj.add(task);"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public Tasks getTask(String name) {"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return dataObj.search(name);"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public boolean checkTask(String name) {"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return this.getTask(name) !\u003d null;"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public List\u003cString\u003e getAllTasks() {"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        List\u003cTasks\u003e Tasks \u003d dataObj.getAll();"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        List\u003cString\u003e taskString \u003d Tasks.stream()"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                                        .map(eachTask -\u003e stringify(eachTask))"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "                                        .collect(Collectors.toList());"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return taskString;"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public boolean removeTask(String name) {"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        Tasks t \u003d this.getTask(name);"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return this.dataObj.delete(t);"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 91,
         "author": {
           "gitId": "JKOK005"
         },
@@ -1804,7 +2196,7 @@
       }
     ],
     "authorContributionMap": {
-      "JKOK005": 58
+      "JKOK005": 91
     }
   },
   {
@@ -1837,66 +2229,80 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "import com.nus.duke.tasks.Tasks;"
+        "content": "import static com.nus.duke.tasks.Tasks.TASK_CATEGORY;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "import java.util.List;"
+        "content": "import com.nus.duke.tasks.Tasks;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "import java.util.List;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "public interface DAOInterface{"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Boolean add(Tasks task);"
+        "content": "public interface DAOInterface{"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Boolean set(Tasks task, TASK_STATUS status);"
+        "content": "    public boolean add(Tasks task);"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Boolean delete(Tasks task);"
+        "content": "    public boolean set(Tasks task, TASK_STATUS status);"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public List\u003cTasks\u003e getAll();"
+        "content": "    public boolean set(Tasks task, TASK_CATEGORY category);"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Tasks search(String name);"
+        "content": "    public boolean delete(Tasks task);"
       },
       {
         "lineNumber": 13,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public List\u003cTasks\u003e getAll();"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public Tasks search(String name);"
+      },
+      {
+        "lineNumber": 15,
         "author": {
           "gitId": "JKOK005"
         },
@@ -1904,7 +2310,7 @@
       }
     ],
     "authorContributionMap": {
-      "JKOK005": 13
+      "JKOK005": 15
     }
   },
   {
@@ -2000,7 +2406,7 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Boolean add(Tasks task) {"
+        "content": "    public boolean add(Tasks task) {"
       },
       {
         "lineNumber": 14,
@@ -2042,7 +2448,7 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Boolean set(Tasks task, TASK_STATUS status) {"
+        "content": "    public boolean set(Tasks task, TASK_STATUS status) {"
       },
       {
         "lineNumber": 20,
@@ -2084,91 +2490,91 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Tasks search(String name) {"
+        "content": "    public boolean set(Tasks task, Tasks.TASK_CATEGORY category) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        Optional\u003cTasks\u003e task \u003d this.tasksList"
+        "content": "        task.changeCategory(category);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                                    .stream()"
+        "content": "        return true;"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                                    .filter(eachTask -\u003e name.equals(eachTask.getName()))"
+        "content": "    }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                                    .findFirst();"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return task.isPresent() ? task.get() : null;"
+        "content": "    public Tasks search(String name) {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        Optional\u003cTasks\u003e task \u003d this.tasksList"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "                                    .stream()"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    @Override"
+        "content": "                                    .filter(eachTask -\u003e name.equals(eachTask.getName()))"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Boolean delete(Tasks task) {"
+        "content": "                                    .findFirst();"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        this.tasksList.remove(task);"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return true;"
+        "content": "        return task.isPresent() ? task.get() : null;"
       },
       {
         "lineNumber": 38,
@@ -2196,24 +2602,66 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public List\u003cTasks\u003e getAll() {"
+        "content": "    public boolean delete(Tasks task) {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return this.tasksList;"
+        "content": "        this.tasksList.remove(task);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        return true;"
       },
       {
         "lineNumber": 44,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public List\u003cTasks\u003e getAll() {"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return this.tasksList;"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 50,
         "author": {
           "gitId": "JKOK005"
         },
@@ -2221,7 +2669,7 @@
       }
     ],
     "authorContributionMap": {
-      "JKOK005": 44
+      "JKOK005": 50
     }
   },
   {
@@ -2282,28 +2730,28 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "         Splits a string into a (command, condition) pair"
+        "content": "         By default splits the string by the first whitespace character"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "         */"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "         @param input"
+        "content": "        return tokenize(input, \" \");"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                input text string, such as \"list books\""
+        "content": "    }"
       },
       {
         "lineNumber": 12,
@@ -2317,52 +2765,101 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "         @return Pair of (command, condition)"
+        "content": "    public static Pair\u003cString, String\u003e tokenize(String input, String expr) {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "         */"
+        "content": "        /**"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        String[] res        \u003d input.split(\" \", 2);"
+        "content": "         Splits a string into a (command, condition) pair"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        String command      \u003d res[0];"
+        "content": ""
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        String condition    \u003d res.length \u003e 1 ? res[1] : null;"
+        "content": "         @param input"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return new Pair\u003c\u003e(command, condition);"
+        "content": "         input text string, such as \"list books\""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 20,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "         @return Pair of (command, condition)"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "         */"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        String[] res        \u003d input.split(expr, 2);"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        String command      \u003d res[0];"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        String condition    \u003d res.length \u003e 1 ? res[1] : null;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return new Pair\u003c\u003e(command, condition);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
         "author": {
           "gitId": "JKOK005"
         },
@@ -2370,7 +2867,7 @@
       }
     ],
     "authorContributionMap": {
-      "JKOK005": 20
+      "JKOK005": 27
     }
   },
   {
@@ -2417,385 +2914,385 @@
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            public String toString() {"
+        "content": "            public String toString() { return \"\\u2717\"; }"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                return \"\\u2717\";"
+        "content": "        },"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            }"
+        "content": "        COMPLETE {"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        },"
+        "content": "            public String toString() {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        COMPLETE {"
+        "content": "                return \"\\u2713\";"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            public String toString() {"
+        "content": "            }"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                return \"\\u2713\";"
+        "content": "        },"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            }"
+        "content": "    }"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        },"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "    public enum TASK_CATEGORY {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "        TODO {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public enum TASK_CATEGORY {"
+        "content": "            public String toString() {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        TODO {"
+        "content": "                return \"T\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            public String toString() {"
+        "content": "            }"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                return \"T\";"
+        "content": "        },"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        },"
+        "content": "        DEADLINE {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "            public String toString() {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        DEADLINE {"
+        "content": "                return \"D\";"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            public String toString() {"
+        "content": "            }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                return \"D\";"
+        "content": "        },"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        },"
+        "content": "        EVENT {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "            public String toString() {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        EVENT {"
+        "content": "                return \"E\";"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            public String toString() {"
+        "content": "            }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "                return \"E\";"
+        "content": "        },"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "            }"
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        },"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "    private String name;"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "    private TASK_STATUS status;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    private String name;"
+        "content": "    private TASK_CATEGORY category;"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    private TASK_STATUS status;"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    private TASK_CATEGORY category;"
+        "content": "    public Tasks(String name) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "        this(name, TASK_STATUS.INCOMPLETE, TASK_CATEGORY.TODO);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Tasks(String name) {"
+        "content": "    }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        this(name, TASK_STATUS.INCOMPLETE, TASK_CATEGORY.TODO);"
+        "content": ""
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "    public Tasks(String name, TASK_STATUS status, TASK_CATEGORY category) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "        this.name \u003d name;"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public Tasks(String name, TASK_STATUS status, TASK_CATEGORY category) {"
+        "content": "        this.status \u003d status;"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        this.name \u003d name;"
+        "content": "        this.category \u003d category;"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        this.status \u003d status;"
+        "content": "    }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        this.category \u003d category;"
+        "content": ""
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "    public String getName() {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "        return this.name;"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public String getName() {"
+        "content": "    }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return this.name;"
+        "content": "    public TASK_STATUS getStatus() {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "        return this.status;"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public TASK_STATUS getStatus() {"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        return this.status;"
+        "content": "    public TASK_CATEGORY getType() {return this.category;}"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    }"
+        "content": "    public void changeStatus(TASK_STATUS status) {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public TASK_CATEGORY getType() {return this.category;}"
+        "content": "        this.status \u003d status;"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "    public void changeStatus(TASK_STATUS status) {"
+        "content": "    public void changeCategory(TASK_CATEGORY category) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "JKOK005"
         },
-        "content": "        this.status \u003d status;"
+        "content": "        this.category \u003d category;"
       },
       {
         "lineNumber": 61,
@@ -2809,11 +3306,67 @@
         "author": {
           "gitId": "JKOK005"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    public boolean equals(Object obj) {"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        if (obj \u003d\u003d null) return false;"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        if (obj \u003d\u003d this) return true;"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        if (!(obj instanceof Tasks)) return false;"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        Tasks o \u003d (Tasks) obj;"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "        return o.getName() \u003d\u003d this.getName();"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "JKOK005"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "JKOK005"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "JKOK005": 62
+      "JKOK005": 70
     }
   },
   {

@@ -305,25 +305,46 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "T|0|the other thing"
+        "content": "T|1|jonge"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "T|1|jonge"
+        "content": "D|0|this|2030-06-11 1900"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "souwmyaa"
         },
+        "content": "D|0|this|2030-06-10 1900"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "D|0|this|2030-06-11 1901"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "souwmyaa"
+        },
         "content": "T|0|this"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "T|1|lecture 1"
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 3
+      "souwmyaa": 6
     }
   },
   {
@@ -421,115 +442,213 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    String execute(TaskList tasks, Storage storage) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        tasks.getList().add(ob);"
+        "content": "     * This function executes the add command for tasks of all types."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        String k \u003d ob.toString();"
+        "content": "     * It initially calls a function from DetectDuplicates class to detect and remove an duplicates in the list."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        if (saved \u003d\u003d 0) {"
+        "content": "     *"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return \"Got it. I\u0027ve added this task:\\n  \""
+        "content": "     * @param tasks TaskList object."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                            + k + \"\\nNow you have \" + tasks.getList().size()"
+        "content": "     * @param storage Storage object."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                            + \" tasks in the list.\";"
+        "content": "     * @return Returns affirmation that add has been done."
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        } else {"
+        "content": "     */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return \"\";"
+        "content": "    String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        }"
+        "content": "        DetectDuplicates detect;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        if (ob.getType().equals(\"todo\")) {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "            detect \u003d new DetectDuplicates(ob.getTaskName(), ob.getType());"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    boolean isExit() {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return false;"
+        "content": "            if (ob.getType().equals(\"deadline\")) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "                detect \u003d new DetectDuplicates(ob.getTaskName(), ob.getType(), ((Deadline)ob).getTime());"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "            } else {"
       },
       {
         "lineNumber": 26,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                detect \u003d new DetectDuplicates(ob.getTaskName(), ob.getType(), ((Event)ob).getTime());"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        detect.removeDuplicates(tasks, storage);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        tasks.getList().add(ob);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        String k \u003d ob.toString();"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        if (saved \u003d\u003d 0) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"Got it. I\u0027ve added this task:\\n  \""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                            + k + \"\\nNow you have \" + tasks.getList().size()"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                            + \" tasks in the list.\";"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"\";"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 40,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -537,7 +656,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 26
+      "souwmyaa": 40
     }
   },
   {
@@ -605,10 +724,24 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    abstract boolean isExit();"
+        "content": "    boolean isExit() {"
       },
       {
         "lineNumber": 10,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -616,7 +749,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 10
+      "souwmyaa": 12
     }
   },
   {
@@ -705,7 +838,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    LocalDateTime getBy() {"
+        "content": "    LocalDateTime getTime() {"
       },
       {
         "lineNumber": 13,
@@ -726,7 +859,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return by;"
+        "content": "        return by; //return the localDateTime"
       },
       {
         "lineNumber": 16,
@@ -868,7 +1001,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * It executes the delete command."
+        "content": "     * It executes the delete command by removing the specified task from the list."
       },
       {
         "lineNumber": 11,
@@ -896,94 +1029,73 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "     * @return Returns affirmation that delete has been done."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     */"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        assert num \u003c\u003d tasks.getList().size() \u0026\u0026 num \u003e\u003d 0 : \"This task number does not exist in the list. \""
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                + \"Please try again!\";"
+        "content": "        assert num \u003c\u003d tasks.getList().size() \u0026\u0026 num \u003e\u003d 0 : \"This task number does not exist in the list. \""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        String s \u003d tasks.getList().get(num - 1).toString();"
+        "content": "                + \"Please try again!\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        tasks.getList().remove(num - 1);"
+        "content": "        String s \u003d tasks.getList().get(num - 1).toString();"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return \"Noted. I\u0027ve removed this task:\\n\" + s"
+        "content": "        tasks.getList().remove(num - 1);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                + \"\\nNow you have \" + (tasks.getList().size()) + \" tasks in the list.\";"
+        "content": "        return \"Noted. I\u0027ve removed this task:\\n\" + s"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "                + \"\\nNow you have \" + (tasks.getList().size()) + \" tasks in the list.\";"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "    boolean isExit() {"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "        return false;"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "souwmyaa"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 27,
+        "lineNumber": 24,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -991,7 +1103,373 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 27
+      "souwmyaa": 24
+    }
+  },
+  {
+    "path": "src/main/java/DetectDuplicates.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "import java.time.LocalDateTime;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "public class DetectDuplicates {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    private String str;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    private String type;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    private LocalDateTime time;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    DetectDuplicates(String str, String type, LocalDateTime time) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        this.str \u003d str;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        this.type \u003d type;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        this.time \u003d time;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    DetectDuplicates(String str, String type) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        this.str \u003d str;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        this.type \u003d type;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "     * Removes all duplicate tasks from the list."
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "     * @param tasks List of tasks"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "     * @param storage Storage object"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    public void removeDuplicates(TaskList tasks, Storage storage) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        if (tasks.getList().size() \u003e 0) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                if (tasks.getList().get(i).getTaskName().equalsIgnoreCase(str)"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        \u0026\u0026 tasks.getList().get(i).getType().equalsIgnoreCase(type)) {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    Task ob \u003d tasks.getList().get(i);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    if (ob.getType() \u003d\u003d \"todo\") {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        Delete d \u003d new Delete(i + 1);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        d.execute(tasks, storage);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    } else {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        LocalDateTime object;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        if (ob.getType() \u003d\u003d \"deadline\") {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                            object \u003d ((Deadline)ob).getTime();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        } else {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                            object \u003d ((Event) ob).getTime();"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        if (this.time.isEqual(object)) {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                            Delete d \u003d new Delete(i + 1);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                            d.execute(tasks, storage);"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "souwmyaa": 51
     }
   },
   {
@@ -1248,304 +1726,248 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        initializeBox(text);"
+        "content": "        dialog.setText(text);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialog.setText(text);"
+        "content": "        dialog.setFont(Font.font(\"Verdana\", 14));"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        displayPicture.setImage(img);"
+        "content": "        dialog.setTextFill(Color.WHITE);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        dialog.setTextOverrun(OverrunStyle.CLIP);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "        dialog.setMinSize(200, Label.USE_PREF_SIZE + 50);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    private void initializeBox(String text) {"
+        "content": "        dialog.setText(text);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        formatDialog(text);"
+        "content": "        displayPicture.setImage(img);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialog.setMinSize(200, Label.USE_PREF_SIZE + 50);"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    private void formatDialog(String text) {"
+        "content": "     * Flips the dialog box such that the ImageView is on the left and text on the right."
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialog.setText(text);"
+        "content": "     */"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialog.setFont(Font.font(\"Verdana\", 14));"
+        "content": "    private void flip() {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialog.setTextFill(Color.WHITE);"
+        "content": "        ObservableList\u003cNode\u003e tmp \u003d FXCollections.observableArrayList(this.getChildren());"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialog.setTextOverrun(OverrunStyle.CLIP);"
+        "content": "        Collections.reverse(tmp);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        getChildren().setAll(tmp);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "        setAlignment(Pos.TOP_LEFT);"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Flips the dialog box such that the ImageView is on the left and text on the right."
+        "content": ""
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "    public static DialogBox getUserDialog(String text, Image img) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    private void flip() {"
+        "content": "        return new DialogBox(text, img);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        ObservableList\u003cNode\u003e tmp \u003d FXCollections.observableArrayList(this.getChildren());"
+        "content": "    }"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        Collections.reverse(tmp);"
+        "content": ""
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        getChildren().setAll(tmp);"
+        "content": "    /**"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        setAlignment(Pos.TOP_LEFT);"
+        "content": "     * Returns a dialogbox object."
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "     * @param text Text to be displayed"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    public static DialogBox getUserDialog(String text, Image img) {"
+        "content": "     * @param img Image to be displayed"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return new DialogBox(text, img);"
+        "content": "     * @return DialogBox object"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "    public static DialogBox getDukeDialog(String text, Image img) {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    /**"
+        "content": "        var db \u003d new DialogBox(text, img);"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Returns a dialogbox object."
+        "content": "        db.flip();"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     *"
+        "content": "        return db;"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * @param text Text to be displayed"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "     * @param img Image to be displayed"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "     * @return DialogBox object"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "    public static DialogBox getDukeDialog(String text, Image img) {"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "        var db \u003d new DialogBox(text, img);"
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "        db.flip();"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "        return db;"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "souwmyaa"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 79,
+        "lineNumber": 71,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -1553,7 +1975,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 79
+      "souwmyaa": 71
     }
   },
   {
@@ -1621,7 +2043,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Executes the done command."
+        "content": "     * Executes the done command by marking the respective task as done."
       },
       {
         "lineNumber": 10,
@@ -1649,94 +2071,73 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "     * @return Returns the affirmation that task has been marked as completed."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        int number \u003d Integer.valueOf(num);"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        Task ob \u003d tasks.getList().get(number - 1);"
+        "content": "        int number \u003d Integer.valueOf(num);"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        String k \u003d ob.toString();"
+        "content": "        Task ob \u003d tasks.getList().get(number - 1);"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        ob.setDone();"
+        "content": "        String k \u003d ob.toString();"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return \"Nice! I\u0027ve marked this task as done:\\n\""
+        "content": "        ob.setDone();"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                + k;"
+        "content": "        return \"Nice! I\u0027ve marked this task as done:\\n\""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "                + k;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "    boolean isExit() {"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "        return false;"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "souwmyaa"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 26,
+        "lineNumber": 23,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -1744,7 +2145,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 26
+      "souwmyaa": 23
     }
   },
   {
@@ -1945,7 +2346,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Runs the code well."
+        "content": "     * Parses user input and executes the same."
       },
       {
         "lineNumber": 29,
@@ -1959,73 +2360,80 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * @throws IOException Throws IOException."
+        "content": "     * @return String to be displayed."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "     * @throws IOException Throws IOException."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    public String getResponse(String fullCommand) throws IOException {"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        try {"
+        "content": "    public String getResponse(String fullCommand) throws IOException {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            Command c \u003d Parser.parse(0,fullCommand,0, tasks);"
+        "content": "        try {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return c.execute(tasks, storage);"
+        "content": "            Command c \u003d Parser.parse(0,fullCommand,0, tasks);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "            return c.execute(tasks, storage);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return e.getMessage();"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        }"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 40,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -2033,7 +2441,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 39,
+      "souwmyaa": 40,
       "-": 1
     }
   },
@@ -2209,7 +2617,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    LocalDateTime getAt() {"
+        "content": "    LocalDateTime getTime() {"
       },
       {
         "lineNumber": 13,
@@ -2365,7 +2773,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Executes exit command."
+        "content": "     * Executes exit command. Initially stores list items in text file."
       },
       {
         "lineNumber": 10,
@@ -2393,73 +2801,87 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * @throws IOException Throws IOException."
+        "content": "     * @return Affirmation that exit will be done."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "     * @throws IOException Throws IOException."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) throws IOException {"
+        "content": "     */"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        storage.save(tasks);"
+        "content": "    public String execute(TaskList tasks, Storage storage) throws IOException {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return \"Bye. Hope to see you again soon!\";"
+        "content": "        storage.save(tasks);"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        return \"Bye. Hope to see you again soon!\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    boolean isExit() {"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return true;"
+        "content": "    @Override"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "    boolean isExit() {"
       },
       {
         "lineNumber": 23,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        return true;"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -2467,7 +2889,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 23
+      "souwmyaa": 25
     }
   },
   {
@@ -2479,182 +2901,182 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "public class Find extends Command {"
+        "content": "import java.util.ArrayList;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    String str;"
+        "content": ""
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "public class Find extends Command {"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    Find(String str) {"
+        "content": "    String str;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        super();"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        this.str \u003d str;"
+        "content": "    Find(String str) {"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        super();"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "        this.str \u003d str;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * It executes the find command."
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * @param tasks Object of type TaskList."
+        "content": "     * It executes the find command by searching for every task that contains that keyword."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * @param storage Object of type Storage."
+        "content": "     *"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "     * @param tasks Object of type TaskList."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    public String execute(TaskList tasks, Storage storage) {"
+        "content": "     * @param storage Object of type Storage."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        StringBuilder s \u003d new StringBuilder(\"Here are the matching tasks in your list:\\n\");"
+        "content": "     * @return Returns the list of tasks that contain user input keyword"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        int count \u003d 0;"
+        "content": "     */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        if (tasks.getList().size() \u003e 0) {"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
+        "content": "        StringBuilder s \u003d new StringBuilder(\"Here are the matching tasks in your list:\\n\");"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                if (tasks.getList().get(i).getTaskName().contains(str)) {"
+        "content": "        int count \u003d 0;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                    s \u003d s.append((i + 1) + \".\" + tasks.getList().get(i) + \"\\n\");"
+        "content": "        if (tasks.getList().size() \u003e 0) {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                    count++;"
+        "content": "            for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                }"
+        "content": "                if (tasks.getList().get(i).getTaskName().contains(str)) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            }"
+        "content": "                    s \u003d s.append((i + 1) + \".\" + tasks.getList().get(i) + \"\\n\");"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            if (count \u003d\u003d 0) {"
+        "content": "                    count++;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                s \u003d s.append(\"Nothing Available with : \" + str + \"\\n\");"
+        "content": "                }"
       },
       {
         "lineNumber": 27,
@@ -2668,56 +3090,317 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        } else {"
+        "content": "            if (count \u003d\u003d 0) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            s \u003d s.append(\"NoTasks available\\n\");"
+        "content": "                s \u003d s.append(\"Nothing Available with : \" + str + \"\\n\");"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return s.toString();"
+        "content": "        } else {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "            s \u003d s.append(\"NoTasks available\\n\");"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    boolean isExit() {"
+        "content": "        return s.toString();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return false;"
+        "content": "    }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "souwmyaa": 36
+    }
+  },
+  {
+    "path": "src/main/java/Help.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "public class Help extends Command {"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    private int index;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    Help(int index) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        this.index \u003d index;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    String execute(TaskList tasks, Storage storage) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        switch (this.index) {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        case 1:"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"This function can be used to add a task to the list.\\n\""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"The task you add can be of type todo, event or deadline\\n\\n\""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for todo is \\\"todo task_name\\\"\\n\""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for event is \\\"event task_name /at yyyy-MM-dd HHmm\\\"\\n\""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for deadline is \\\"deadline task_name /by yyyy-MM-dd HHmm\\\"\\n\";"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        case 2:"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"This function can be used to delete a task.\\n\""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for delete is \\\"delete task_number\\\"\\n\";"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        case 3:"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"This function can be used to find a task in the list.\\n\""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"It will display all tasks that contain the keyword specified.\\n\""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for find is \\\"find key_word\\\"\\n\";"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        case 4:"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"This function marks a task in your list as complete by changing [N] to [Y].\\n\""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for done \\\"done task_number\\\"\\n\";"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        case 5:"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"This functions displays a list of all the tasks in your list.\\n\""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"It uses T for todo, D for deadline and E for event.\\n\""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for list is \\\"list\\\"\\n\";"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        case 6:"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"This function will let you exit Duke\\n\""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                    + \"Format for exit is \\\"bye\\\"\\n\";"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            return \"This is not a valid function! Please try again.\";"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        }"
       },
       {
         "lineNumber": 36,
@@ -2868,7 +3551,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Executes list command."
+        "content": "     * Executes list command by displaying the list."
       },
       {
         "lineNumber": 9,
@@ -2896,115 +3579,94 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "     * @return list of tasks."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    String execute(TaskList tasks, Storage storage) {"
+        "content": "     */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        StringBuilder output \u003d new StringBuilder(\"Here is the list of tasks:\\n\");"
+        "content": "    public String execute(TaskList tasks, Storage storage) {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
+        "content": "        StringBuilder output \u003d new StringBuilder(\"Here is the list of tasks:\\n\");"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            output.append((i + 1) + \". \" + tasks.getList().get(i));"
+        "content": "        for (int i \u003d 0; i \u003c tasks.getList().size(); i++) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            if (i !\u003d tasks.getList().size() - 1) {"
+        "content": "            output.append((i + 1) + \". \" + tasks.getList().get(i));"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                output.append(\"\\n\");"
+        "content": "            if (i !\u003d tasks.getList().size() - 1) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            }"
+        "content": "                output.append(\"\\n\");"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        String s \u003d output.toString();"
+        "content": "        }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        return s;"
+        "content": "        String s \u003d output.toString();"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        return s;"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "    boolean isExit() {"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "souwmyaa"
-        },
-        "content": "        return false;"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "souwmyaa"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 28,
+        "lineNumber": 25,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -3012,7 +3674,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 28
+      "souwmyaa": 25
     }
   },
   {
@@ -3649,213 +4311,276 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        StringBuilder logo \u003d new StringBuilder(\"Hello! I am DUKE.\");"
+        "content": "        StringBuilder logo \u003d new StringBuilder(\"Hello! I am DUKE.\\n\\n\""
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "                + \"These are the functions I provide:\\n\""
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                DialogBox.getDukeDialog(logo.toString(), dukeImage)"
+        "content": "                + \"1. Add a task- task may be of type todo, deadline or event\\n\""
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        );"
+        "content": "                + \"2. Delete a task\\n\""
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "                + \"3. Find a task\\n\""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "                + \"4. Mark a task as completed/done\\n\""
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    /**"
+        "content": "                + \"5. List all tasks\\n\""
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
+        "content": "                + \"6. Exit the application\\n\\n\""
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * the dialog container. Clears the user input after processing."
+        "content": "                + \"Please enter the respective number of a function for more information on usage!\\n\\n\""
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     */"
+        "content": "                + \"NOTE: The application automatically deletes duplicated tasks\");"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    @FXML"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    private void handleUserInput() throws IOException {"
+        "content": "                DialogBox.getDukeDialog(logo.toString(), dukeImage)"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        String input \u003d userInput.getText();"
+        "content": "        );"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        String response \u003d duke.getResponse(input);"
+        "content": "    }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                DialogBox.getUserDialog(input, userImage),"
+        "content": "    /**"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        );"
+        "content": "     * the dialog container. Clears the user input after processing."
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        userInput.clear();"
+        "content": "     */"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        try {"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            if (response.equalsIgnoreCase(EXIT_MESSAGE)) {"
+        "content": "    private void handleUserInput() throws IOException {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                Stage stage \u003d Stage.class.cast(VBox.class.cast(dialogContainer).getScene().getWindow());"
+        "content": "        String input \u003d userInput.getText();"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                PauseTransition pauseTransition \u003d new PauseTransition(Duration.seconds(1));"
+        "content": "        String response \u003d duke.getResponse(input);"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                pauseTransition.setOnFinished(event -\u003e stage.close());"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                pauseTransition.play();"
+        "content": "                DialogBox.getUserDialog(input, userImage),"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            }"
+        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "        );"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            System.exit(0);"
+        "content": "        userInput.clear();"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        }"
+        "content": "        try {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "            if (response.equalsIgnoreCase(EXIT_MESSAGE)) {"
       },
       {
         "lineNumber": 88,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                Stage stage \u003d Stage.class.cast(VBox.class.cast(dialogContainer).getScene().getWindow());"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                PauseTransition pauseTransition \u003d new PauseTransition(Duration.seconds(1));"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                pauseTransition.setOnFinished(event -\u003e stage.close());"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                pauseTransition.play();"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            System.exit(0);"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 97,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -3863,7 +4588,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 88
+      "souwmyaa": 97
     }
   },
   {
@@ -3924,7 +4649,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * Formats the sentence."
+        "content": "     * Formats the deadline and event type commands."
       },
       {
         "lineNumber": 9,
@@ -3966,7 +4691,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "     * @return Task."
+        "content": "     * @return Task object of type deadline/event."
       },
       {
         "lineNumber": 15,
@@ -4071,7 +4796,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        if((locOfSpace + 1) \u003e\u003d (locOfSlash)) {"
+        "content": "        if ((locOfSpace + 1) \u003e\u003d (locOfSlash)) {"
       },
       {
         "lineNumber": 30,
@@ -4288,339 +5013,423 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        switch (firstWord) {"
+        "content": "        if (firstWord.equals(sentence) \u0026\u0026 firstWord.length() \u003d\u003d 1) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"delete\":"
+        "content": "            char ch \u003d firstWord.charAt(0);"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            int num \u003d Integer.valueOf(sentence.substring(locOfSpace + 1));"
+        "content": "            boolean isDigit \u003d Character.isDigit(ch);"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            if (num \u003e\u003d 0 \u0026\u0026 num \u003c\u003d tasks.getList().size()) {"
+        "content": "            if (isDigit) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                return new Delete(num);"
+        "content": "                Help h \u003d new Help(Integer.valueOf(firstWord));"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            } else {"
+        "content": "                return h;"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! \""
+        "content": "            } else {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                        + \"This task number does not exist in the list\");"
+        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! \""
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                throw ex;"
+        "content": "                        + \"I do not know what you mean\");"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            }"
+        "content": "                throw ex;"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "            }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"done\":"
+        "content": "        }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return new Done(sentence.substring(locOfSpace + 1));"
+        "content": "        switch (firstWord) {"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"list\":"
+        "content": "        case \"delete\":"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return new ListCommand();"
+        "content": "            int num \u003d Integer.valueOf(sentence.substring(locOfSpace + 1));"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"bye\":"
+        "content": "            if (num \u003e\u003d 0 \u0026\u0026 num \u003c\u003d tasks.getList().size()) {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return new Exit();"
+        "content": "                return new Delete(num);"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"find\":"
+        "content": "            } else {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            return new Find(sentence.substring(locOfSpace + 1));"
+        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! \""
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"deadline\":"
+        "content": "                        + \"This task number does not exist in the list\");"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            if (sentence.equals(\"deadline\")) {"
+        "content": "                throw ex;"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! \""
+        "content": "            }"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                        + \"The description of a deadline cannot be empty.\");"
+        "content": ""
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                throw ex;"
+        "content": "        case \"done\":"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            } else {"
+        "content": "            return new Done(sentence.substring(locOfSpace + 1));"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                return new Add(formatter(sentence, locOfSpace, \"deadline\",done),saved);"
+        "content": "        case \"list\":"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            }"
+        "content": "            return new ListCommand();"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"todo\":"
+        "content": "        case \"bye\":"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            if (sentence.equals(\"todo\")) {"
+        "content": "            return new Exit();"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! The description of a todo cannot be empty.\");"
+        "content": "        case \"find\":"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                throw ex;"
+        "content": "            return new Find(sentence.substring(locOfSpace + 1));"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            } else {"
+        "content": "        case \"deadline\":"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                Todo todoObj \u003d new Todo(done,sentence.substring(locOfSpace + 1));"
+        "content": "            if (sentence.equals(\"deadline\")) {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                return new Add(todoObj,saved);"
+        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! \""
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            }"
+        "content": "                        + \"The description of a deadline cannot be empty.\");"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        case \"event\":"
+        "content": "                throw ex;"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            if (sentence.equals(\"event\")) {"
+        "content": "            } else {"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! The description of an event cannot be empty.\");"
+        "content": "                return new Add(formatter(sentence, locOfSpace, \"deadline\",done),saved);"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                throw ex;"
+        "content": "            }"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            } else {"
+        "content": "        case \"todo\":"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                return new Add(formatter(sentence, locOfSpace, \"event\",done),saved);"
+        "content": "            if (sentence.equals(\"todo\")) {"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            }"
+        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! The description of a todo cannot be empty.\");"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        default:"
+        "content": "                throw ex;"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            DukeException ex \u003d new DukeException(\":( OOPS!!! I\u0027m sorry, but I don\u0027t know what that means\");"
+        "content": "            } else {"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "            throw ex;"
+        "content": "                Todo todoObj \u003d new Todo(done,sentence.substring(locOfSpace + 1));"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "        }"
+        "content": "                return new Add(todoObj,saved);"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": ""
+        "content": "            }"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "    }"
+        "content": "        case \"event\":"
       },
       {
         "lineNumber": 108,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            if (sentence.equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                DukeException ex \u003d new DukeException(\":( OOPS!!! The description of an event cannot be empty.\");"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                throw ex;"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "                return new Add(formatter(sentence, locOfSpace, \"event\",done),saved);"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            DukeException ex \u003d new DukeException(\":( OOPS!!! I\u0027m sorry, but I don\u0027t know what that means\");"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "            throw ex;"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "souwmyaa"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 120,
         "author": {
           "gitId": "souwmyaa"
         },
@@ -4628,7 +5437,7 @@
       }
     ],
     "authorContributionMap": {
-      "souwmyaa": 108
+      "souwmyaa": 120
     }
   },
   {
@@ -5284,7 +6093,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                            + ob.getTaskName() + \"|\" + ((Deadline)ob).getBy().format(format) + \"\\n\";"
+        "content": "                            + ob.getTaskName() + \"|\" + ((Deadline)ob).getTime().format(format) + \"\\n\";"
       },
       {
         "lineNumber": 94,
@@ -5340,7 +6149,7 @@
         "author": {
           "gitId": "souwmyaa"
         },
-        "content": "                            + \"|\" + ob.getTaskName() + \"|\" + ((Event)ob).getAt().format(format) + \"\\n\";"
+        "content": "                            + \"|\" + ob.getTaskName() + \"|\" + ((Event)ob).getTime().format(format) + \"\\n\";"
       },
       {
         "lineNumber": 102,

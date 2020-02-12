@@ -438,7 +438,7 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    mainClassName \u003d \"Launcher\" //seedu.duke.Duke\""
+        "content": "    mainClassName \u003d \"duke.Launcher\" //seedu.duke.Duke\""
       },
       {
         "lineNumber": 23,
@@ -644,32 +644,25 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "D , O , find nemo , 2020-02-10"
+        "content": "D , O , find nemo and dory , 2020-02-10"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "E , X , fish and meet , 2020-02-03"
+        "content": "E , O , fish and meet , 2020-02-03"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "D , X , eat , 2020-02-11"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "T , X , shark"
+        "content": "D , X , eat dory\u0027s fin , 2020-02-13"
       }
     ],
     "authorContributionMap": {
-      "beatricetay": 6
+      "beatricetay": 5
     }
   },
   {
@@ -4894,6 +4887,521 @@
     }
   },
   {
+    "path": "src/main/java/duke/command/CommandUpDate.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.interact.UiDesign;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.task.DateTask;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "public class CommandUpDate implements Command {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    private StringBuilder appendedText;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    private int indexToUpdate;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    private LocalDate newDate;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public CommandUpDate(int index, LocalDate date) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        indexToUpdate \u003d index;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        newDate \u003d date;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public void execute(TaskList tasks, Storage storage) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        appendedText \u003d new StringBuilder(UiDesign.UPDATE_TOP_PART.getString());"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        DateTask task \u003d (DateTask) tasks.getTask(indexToUpdate);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        task.changeDate(newDate);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        appendedText.append(tasks.getTask(indexToUpdate))"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                .append(\"\\n\")"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                .append(UiDesign.BORDER.getString());"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        storage.save(tasks);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public String output() {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        return appendedText.toString();"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "beatricetay": 37
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/CommandUpDetail.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.interact.UiDesign;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "public class CommandUpDetail implements Command {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    private StringBuilder appendedText;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    private int indexToUpdate;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    private String newDetail;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public CommandUpDetail(int index, String detail) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        indexToUpdate \u003d index;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        newDetail \u003d detail;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public void execute(TaskList tasks, Storage storage) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        appendedText \u003d new StringBuilder(UiDesign.UPDATE_TOP_PART.getString());"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        Task task \u003d tasks.getTask(indexToUpdate);"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        task.changeDetail(newDetail);"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        appendedText.append(tasks.getTask(indexToUpdate))"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                .append(\"\\n\")"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                .append(UiDesign.BORDER.getString());"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        storage.save(tasks);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public String output() {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        return appendedText.toString();"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "beatricetay": 34
+    }
+  },
+  {
     "path": "src/main/java/duke/exception/DukeException.java",
     "fileType": "java",
     "lines": [
@@ -5863,84 +6371,84 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.exception.DukeException;"
+        "content": "import duke.command.CommandUpDate;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.exception.DukeExceptionCommand;"
+        "content": "import duke.command.CommandUpDetail;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.exception.DukeExceptionDate;"
+        "content": "import duke.exception.DukeException;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.exception.DukeExceptionDateFormat;"
+        "content": "import duke.exception.DukeExceptionCommand;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.exception.DukeExceptionDescription;"
+        "content": "import duke.exception.DukeExceptionDate;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.exception.DukeExceptionIndex;"
+        "content": "import duke.exception.DukeExceptionDateFormat;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.task.Deadline;"
+        "content": "import duke.exception.DukeExceptionDescription;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.task.Event;"
+        "content": "import duke.exception.DukeExceptionIndex;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import duke.task.ToDo;"
+        "content": "import duke.task.Deadline;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "import duke.task.Event;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "import duke.task.Task;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "import java.time.format.DateTimeParseException;"
+        "content": "import duke.task.ToDo;"
       },
       {
         "lineNumber": 23,
@@ -5954,140 +6462,140 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "/**"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": " * Parses user input and checks whether the user has given wrongly formatted input."
+        "content": "import java.time.format.DateTimeParseException;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": " */"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "public class Parser {"
+        "content": "/**"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": " * Parses user input and checks whether the user has given wrongly formatted input."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    /**"
+        "content": " */"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * Returns a Command representing the user input."
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * @param line String input by user."
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * @param tasks Current TaskList."
+        "content": "    /**"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * @return Command representing user input."
+        "content": "     * Returns a Command representing the user input."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * @throws DukeException Exception thrown if user input is wrongly formatted."
+        "content": "     * @param line String input by user."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     */"
+        "content": "     * @param tasks Current TaskList."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public Command parse(String line, TaskList tasks) throws DukeException {"
+        "content": "     * @return Command representing user input."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        int size \u003d tasks.getSize();"
+        "content": "     * @throws DukeException Exception thrown if user input is wrongly formatted."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        switch (line) {"
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        case \"bye\":"
+        "content": "    public Command parse(String line, TaskList tasks) throws DukeException {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            return new CommandBye();"
+        "content": "        int size \u003d tasks.getSize();"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "        switch (line) {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        case \"list\":"
+        "content": "        case \"bye\":"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            return new CommandList();"
+        "content": "            return new CommandBye();"
       },
       {
         "lineNumber": 44,
@@ -6101,105 +6609,105 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        default:"
+        "content": "        case \"list\":"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            String[] comArs \u003d line.split(\"\\\\s\", 2);"
+        "content": "            return new CommandList();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            String inputCommand \u003d comArs[0];"
+        "content": ""
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "        default:"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            int index;"
+        "content": "            String[] comArs \u003d line.split(\"\\\\s\", 2);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            String details;"
+        "content": "            String inputCommand \u003d comArs[0];"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            String[] msgAndDate;"
+        "content": ""
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "            int index;"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            switch (inputCommand) {"
+        "content": "            String details;"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            case \"done\":"
+        "content": "            String[] msgAndDate;"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (comArs.length \u003d\u003d 1) {"
+        "content": "            String[] indexAndNew;"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionIndex(\"done\");"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                }"
+        "content": "            switch (inputCommand) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                index \u003d Integer.parseInt(comArs[1]) - 1;"
+        "content": "            case \"done\":"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (index \u003e size - 1) {"
+        "content": "                if (comArs.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 60,
@@ -6220,70 +6728,70 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                index \u003d Integer.parseInt(comArs[1]) - 1;"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                assert index \u003e\u003d 0 : \"Index should be greater than 0.\";"
+        "content": "                if (index \u003e size - 1) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                return new CommandDone(index);"
+        "content": "                    throw new DukeExceptionIndex(\"done\");"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                }"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            case \"delete\":"
+        "content": ""
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (comArs.length \u003d\u003d 1) {"
+        "content": "                assert index \u003e\u003d 0 : \"Index should be greater than 0.\";"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionIndex(\"delete\");"
+        "content": "                return new CommandDone(index);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                }"
+        "content": ""
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                index \u003d Integer.parseInt(comArs[1]) - 1;"
+        "content": "            case \"delete\":"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (index \u003e size - 1) {"
+        "content": "                if (comArs.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 72,
@@ -6304,133 +6812,133 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                index \u003d Integer.parseInt(comArs[1]) - 1;"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                assert index \u003e\u003d 0 : \"Index should be greater than 0.\";"
+        "content": "                if (index \u003e size - 1) {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                return new CommandDel(index);"
+        "content": "                    throw new DukeExceptionIndex(\"delete\");"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                }"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            case \"todo\":"
+        "content": ""
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                details \u003d line.substring(4);"
+        "content": "                assert index \u003e\u003d 0 : \"Index should be greater than 0.\";"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (details.isBlank()) {"
+        "content": "                return new CommandDel(index);"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionDescription(\"todo\");"
+        "content": ""
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                }"
+        "content": "            case \"todo\":"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                return new CommandAdd(new ToDo(details));"
+        "content": "                details \u003d line.substring(4);"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                if (details.isBlank()) {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            case \"event\":"
+        "content": "                    throw new DukeExceptionDescription(\"todo\");"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                details \u003d line.substring(5);"
+        "content": "                }"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (details.isBlank()) {"
+        "content": "                return new CommandAdd(new ToDo(details));"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionDescription(\"event\");"
+        "content": ""
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                }"
+        "content": "            case \"event\":"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                msgAndDate \u003d details.split(\" /at \", 2);"
+        "content": "                details \u003d line.substring(5);"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (msgAndDate.length \u003d\u003d 1) {"
+        "content": "                if (details.isBlank()) {"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionDate(\"event\");"
+        "content": "                    throw new DukeExceptionDescription(\"event\");"
       },
       {
         "lineNumber": 93,
@@ -6444,28 +6952,28 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                msgAndDate \u003d details.split(\" /at \", 2);"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                try {"
+        "content": "                if (msgAndDate.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    LocalDate date \u003d LocalDate.parse(msgAndDate[1]);"
+        "content": "                    throw new DukeExceptionDate(\"event\");"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    return new CommandAdd(new Event(msgAndDate[0], date));"
+        "content": "                }"
       },
       {
         "lineNumber": 98,
@@ -6479,21 +6987,21 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                } catch (DateTimeParseException e) {"
+        "content": "                try {"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionDateFormat();"
+        "content": "                    LocalDate date \u003d LocalDate.parse(msgAndDate[1]);"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                }"
+        "content": "                    return new CommandAdd(new Event(msgAndDate[0], date));"
       },
       {
         "lineNumber": 102,
@@ -6507,56 +7015,56 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            case \"deadline\":"
+        "content": "                } catch (DateTimeParseException e) {"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                details \u003d line.substring(8);"
+        "content": "                    throw new DukeExceptionDateFormat();"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (details.isBlank()) {"
+        "content": "                }"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionDescription(\"deadline\");"
+        "content": ""
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                }"
+        "content": "            case \"deadline\":"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                msgAndDate \u003d details.split(\" /by \", 2);"
+        "content": "                details \u003d line.substring(8);"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                if (msgAndDate.length \u003d\u003d 1) {"
+        "content": "                if (details.isBlank()) {"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionDate(\"deadline\");"
+        "content": "                    throw new DukeExceptionDescription(\"deadline\");"
       },
       {
         "lineNumber": 111,
@@ -6570,115 +7078,213 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                msgAndDate \u003d details.split(\" /by \", 2);"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                try {"
+        "content": "                if (msgAndDate.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    LocalDate date \u003d LocalDate.parse(msgAndDate[1]);"
+        "content": "                    throw new DukeExceptionDate(\"deadline\");"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    return new CommandAdd(new Deadline(msgAndDate[0], date));"
+        "content": "                }"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                } catch (DateTimeParseException e) {"
+        "content": ""
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                    throw new DukeExceptionDateFormat();"
+        "content": "                try {"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                }"
+        "content": "                    LocalDate date \u003d LocalDate.parse(msgAndDate[1]);"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                    return new CommandAdd(new Deadline(msgAndDate[0], date));"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            case \"find\":"
+        "content": "                } catch (DateTimeParseException e) {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                return new CommandFind(line.substring(4));"
+        "content": "                    throw new DukeExceptionDateFormat();"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "                }"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            default:"
+        "content": ""
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "                throw new DukeExceptionCommand();"
+        "content": "            case \"find\":"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "            }"
+        "content": "                return new CommandFind(line.substring(4));"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    }"
+        "content": "            case \"updatem\":"
       },
       {
         "lineNumber": 128,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                // implement check for presence of index \u0026 detail"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                indexAndNew \u003d comArs[1].split(\"\\\\s\", 2);"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                return new CommandUpDetail(Integer.parseInt(indexAndNew[0]) - 1, \" \" + indexAndNew[1]);"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "            case \"updated\":"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                // implement check for presence of index \u0026 date"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                indexAndNew \u003d comArs[1].split(\"\\\\s\", 2);"
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                return new CommandUpDate(Integer.parseInt(indexAndNew[0]) - 1, LocalDate.parse(indexAndNew[1]));"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 137,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "            default:"
+      },
+      {
+        "lineNumber": 138,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                throw new DukeExceptionCommand();"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 142,
         "author": {
           "gitId": "beatricetay"
         },
@@ -6686,7 +7292,7 @@
       }
     ],
     "authorContributionMap": {
-      "beatricetay": 128
+      "beatricetay": 142
     }
   },
   {
@@ -7043,87 +7649,94 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    FIND_TOP_PART(\"Here\u0027s what I\u0027ve found amongst all the marine litter: \\n\");"
+        "content": "    FIND_TOP_PART(\"Here\u0027s what I\u0027ve found amongst all the marine litter: \\n\"),"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "    UPDATE_TOP_PART(\"I have updated it: \\n\");"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    private final String text;"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "    private final String text;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    UiDesign(final String text) {"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        this.text \u003d text;"
+        "content": "    UiDesign(final String text) {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    }"
+        "content": "        this.text \u003d text;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public String getString() {"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        return text;"
+        "content": "    public String getString() {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    }"
+        "content": "        return text;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 28,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
         "author": {
           "gitId": "beatricetay"
         },
@@ -7131,7 +7744,247 @@
       }
     ],
     "authorContributionMap": {
-      "beatricetay": 28
+      "beatricetay": 29
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/DateTask.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "public abstract class DateTask extends Task {"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    protected LocalDate date;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    protected String connectorWord;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public DateTask(String msg, LocalDate date, String connector) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        super(msg);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        this.date \u003d date;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        this.connectorWord \u003d connector;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public void changeDate(LocalDate date) {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        this.date \u003d date;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public String writeToFile() {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        return super.writeToFile() + \" , \" + date;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        return super.toString() + \" (\" + connectorWord + \": \""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "                + date.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")) + \")\";"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "beatricetay": 33
     }
   },
   {
@@ -7199,7 +8052,7 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "public class Deadline extends Task {"
+        "content": "public class Deadline extends DateTask {"
       },
       {
         "lineNumber": 10,
@@ -7248,7 +8101,7 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        super(msg);"
+        "content": "        super(msg, date, \"by\");"
       },
       {
         "lineNumber": 17,
@@ -7262,87 +8115,17 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        super.time \u003d date;"
+        "content": "    }"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 20,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    public String writeToFile() {"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "        return super.writeToFile() + \" , \" + super.time;"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "        return super.toString() + \" (by: \" + super.time.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")) + \")\";"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 30,
         "author": {
           "gitId": "beatricetay"
         },
@@ -7350,7 +8133,7 @@
       }
     ],
     "authorContributionMap": {
-      "beatricetay": 30
+      "beatricetay": 20
     }
   },
   {
@@ -7390,112 +8173,112 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "import java.util.Date;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": " * Creates an Event Task with date."
+        "content": "/**"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": " */"
+        "content": " * Creates an Event Task with date."
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "public class Event extends Task {"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "public class Event extends DateTask {"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * Creates an Event Task with LocalDate."
+        "content": "    /**"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * @param msg Details of the Event Task."
+        "content": "     * Creates an Event Task with LocalDate."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     * @param date Date that the Event will be done at."
+        "content": "     * @param msg Details of the Event Task."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "     */"
+        "content": "     * @param date Date that the Event will be done at."
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public Event(String msg, LocalDate date) {"
+        "content": "     */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        super(msg);"
+        "content": "    public Event(String msg, LocalDate date) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        super.type \u003d \"E\";"
+        "content": "        super(msg, date, \"at\");"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        super.time \u003d date;"
+        "content": "        super.type \u003d \"E\";"
       },
       {
         "lineNumber": 21,
@@ -7516,74 +8299,11 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    public String writeToFile() {"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "        return super.writeToFile() + \" , \" + super.time;"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "        return super.toString() + \" (at: \" + super.time.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\")) + \")\";"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "beatricetay"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "beatricetay"
-        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "beatricetay": 32
+      "beatricetay": 23
     }
   },
   {
@@ -7623,7 +8343,7 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "public class Task {"
+        "content": "public abstract class Task {"
       },
       {
         "lineNumber": 6,
@@ -7735,14 +8455,14 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public void markDone() {"
+        "content": "    public void changeDetail(String msg) {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        status \u003d \"O\";"
+        "content": "        this.msg \u003d msg;"
       },
       {
         "lineNumber": 23,
@@ -7763,77 +8483,77 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public String getDetails() {"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        return msg;"
+        "content": "    public void markDone() {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    }"
+        "content": "        status \u003d \"O\";"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public void setStatus(String status) {"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        this.status \u003d status;"
+        "content": "    public String getDetails() {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    }"
+        "content": "        return msg;"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public String writeToFile() {"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        assert (type.equals(\"T\") | type.equals(\"D\") | type.equals(\"E\")) : \"Type should either be T, D or E.\";"
+        "content": "    public void setStatus(String status) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        return type + \" , \" + status + \" ,\" + msg;"
+        "content": "        this.status \u003d status;"
       },
       {
         "lineNumber": 36,
@@ -7854,14 +8574,14 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "    public String toString() {"
+        "content": "    public String writeToFile() {"
       },
       {
         "lineNumber": 40,
@@ -7875,7 +8595,7 @@
         "author": {
           "gitId": "beatricetay"
         },
-        "content": "        return \"[\" + type + \"][\" + status + \"]\" + msg;"
+        "content": "        return type + \" , \" + status + \" ,\" + msg;"
       },
       {
         "lineNumber": 42,
@@ -7889,11 +8609,53 @@
         "author": {
           "gitId": "beatricetay"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        assert (type.equals(\"T\") | type.equals(\"D\") | type.equals(\"E\")) : \"Type should either be T, D or E.\";"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "        return \"[\" + type + \"][\" + status + \"]\" + msg;"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "beatricetay"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "beatricetay"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "beatricetay": 43
+      "beatricetay": 49
     }
   },
   {

@@ -494,7 +494,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 12,
@@ -515,112 +515,112 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "            // to check if the command violates any rules"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            // to check if the command violates any rules"
+        "content": "            if (!this.getInputCommand().contains(\"/by\")) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            if (!this.getInputCommand().contains(\"/by\")) {"
+        "content": "                throw new DukeException(\"Deadline command must contain [/by] as stated!\");"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                throw new DukeException(\"Deadline command must contain [/by] as stated!\");"
+        "content": "            }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": "            if (inputParsed.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            if (inputParsed.length \u003d\u003d 1) {"
+        "content": "                throw new DukeException(\"Deadline command description cannot be empty\");"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                throw new DukeException(\"Deadline command description cannot be empty\");"
+        "content": "            }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "            // else extract out the important details and create new deadline task"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            // else extract out the important details and create new deadline task"
+        "content": "            StringBuilder taskName \u003d new StringBuilder();"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            StringBuilder taskName \u003d new StringBuilder();"
+        "content": "            StringBuilder dateTime \u003d new StringBuilder();"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            StringBuilder dateTime \u003d new StringBuilder();"
+        "content": "            int indexFound \u003d parser.grabTaskName(taskName, inputParsed, \"/by\");"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            int indexFound \u003d parser.grabTaskName(taskName, inputParsed, \"/by\");"
+        "content": "            parser.grabDateTime(indexFound, inputParsed, dateTime);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            parser.grabDateTime(indexFound, inputParsed, dateTime);"
+        "content": "            Deadline.validDate(dateTime.toString());"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            Deadline.validDate(dateTime.toString());"
+        "content": "            Deadline deadline \u003d new Deadline(taskName.toString(), dateTime.toString());"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            Deadline deadline \u003d new Deadline(taskName.toString(), dateTime.toString());"
+        "content": "            historyManager.addState(list);"
       },
       {
         "lineNumber": 30,
@@ -634,73 +634,66 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "            //write to storage and print out output (for debugging)"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            //write to storage and print out output (for debugging)"
+        "content": "            storage.writeToFile(list.getTaskList());"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            storage.writeToFile(list.getTaskList());"
+        "content": "            return ui.prettyPrinting(taskName.toString() + \" added!\");"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            return ui.prettyPrinting(taskName.toString() + \" added!\");"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "            throw new DukeException(\"Deadline description cannot be empty or must conatins [/by]!\");"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            throw new DukeException(\"Deadline description cannot be empty or must conatins [/by]!\");"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "            throw new DukeException(\"Incorrect date format! Please refer to following example: 31-12-2020 23:59\");"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            throw new DukeException(\"Incorrect date format! Please refer to following example: 31-12-2020 23:59\");"
+        "content": "        }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "kester-ng"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 41,
+        "lineNumber": 40,
         "author": {
           "gitId": "kester-ng"
         },
@@ -708,7 +701,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 41
+      "kester-ng": 40
     }
   },
   {
@@ -895,7 +888,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 27,
@@ -993,38 +986,45 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        list.addTask(event);"
+        "content": "        historyManager.addState(list);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        storage.writeToFile(list.getTaskList()); //save to file"
+        "content": "        list.addTask(event);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return ui.prettyPrinting(taskName.toString() + \" added!\");"
+        "content": "        storage.writeToFile(list.getTaskList()); //save to file"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        return ui.prettyPrinting(taskName.toString() + \" added!\");"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 45,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 46,
         "author": {
           "gitId": "kester-ng"
         },
@@ -1032,7 +1032,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 45
+      "kester-ng": 46
     }
   },
   {
@@ -1198,7 +1198,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 24,
@@ -1289,31 +1289,38 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        list.addTask(newToDo); //add to task list"
+        "content": "        historyManager.addState(list);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        storage.writeToFile(list.getTaskList()); //save to file"
+        "content": "        list.addTask(newToDo); //add to task list"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return ui.prettyPrinting(taskName.toString() + \" added!\");"
+        "content": "        storage.writeToFile(list.getTaskList()); //save to file"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        return ui.prettyPrinting(taskName.toString() + \" added!\");"
       },
       {
         "lineNumber": 40,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
         "author": {
           "gitId": "kester-ng"
         },
@@ -1321,7 +1328,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 40
+      "kester-ng": 41
     }
   },
   {
@@ -1487,7 +1494,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 24,
@@ -1636,7 +1643,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    private HistoryManager historyManager \u003d new HistoryManager();"
       },
       {
         "lineNumber": 18,
@@ -1650,360 +1657,395 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public ChatBot() {"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    public ChatBot() {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    // constructor for chat-bot to initialise the file that was saved, if does not exist, then create new one"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public ChatBot(TaskList list) {"
+        "content": "    // constructor for chat-bot to initialise the file that was saved, if does not exist, then create new one"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        this.taskLists \u003d list;"
+        "content": "    public ChatBot(TaskList list) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        this.taskLists \u003d list;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Function to run chat-bot and terminate when needed."
+        "content": "    /**"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param sc scanner object that gets the input."
+        "content": "     * Function to run chat-bot and terminate when needed."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": "     * @param sc scanner object that gets the input."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public void runChatBot(Scanner sc) {"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        String inputCommand;"
+        "content": "    public void runChatBot(Scanner sc) {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        this.ui.greetUser();"
+        "content": "        String inputCommand;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        this.updateTaskList();"
+        "content": "        this.ui.greetUser();"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        while (sc.hasNextLine()) {"
+        "content": "        this.updateTaskList();"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            inputCommand \u003d sc.nextLine();"
+        "content": "        while (sc.hasNextLine()) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            Command command \u003d parser.respondToUser(inputCommand);"
+        "content": "            inputCommand \u003d sc.nextLine();"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            try {"
+        "content": "            Command command \u003d parser.respondToUser(inputCommand);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                command.execute(this.ui, this.taskLists, this.storage);"
+        "content": "            try {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                if (command.getExitStatus()) {"
+        "content": "                command.execute(this.ui, this.taskLists, this.storage, this.historyManager);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                    return; //exit from chat-bot"
+        "content": "                if (command.getExitStatus()) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                }"
+        "content": "                    return; //exit from chat-bot"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            } catch (DukeException e) {"
+        "content": "                }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                this.ui.prettyPrinting(e.toString());"
+        "content": "            } catch (DukeException e) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": "                this.ui.prettyPrinting(e.toString());"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public void updateTaskList() {"
+        "content": ""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        ArrayList\u003cTask\u003e tasks \u003d this.storage.getTaskFromStorage();"
+        "content": "    public void updateTaskList() {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        this.taskLists \u003d new TaskList(tasks);"
+        "content": "        ArrayList\u003cTask\u003e tasks \u003d this.storage.getTaskFromStorage();"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        this.taskLists \u003d new TaskList(tasks);"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public Parser getParser() {"
+        "content": ""
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return this.parser;"
+        "content": "    public Parser getParser() {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        return this.parser;"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public Storage getStorage() {"
+        "content": ""
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return this.storage;"
+        "content": "    public Storage getStorage() {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        return this.storage;"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public UI getUI() {"
+        "content": ""
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return this.ui;"
+        "content": "    public UI getUI() {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        return this.ui;"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public TaskList getTaskLists() {"
+        "content": ""
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return this.taskLists;"
+        "content": "    public TaskList getTaskLists() {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        return this.taskLists;"
       },
       {
         "lineNumber": 70,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public HistoryManager getHistoryManager() {"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        return this.historyManager;"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 75,
         "author": {
           "gitId": "kester-ng"
         },
@@ -2011,7 +2053,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 70
+      "kester-ng": 75
     }
   },
   {
@@ -2247,7 +2289,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public abstract String execute(UI ui, TaskList list, Storage storage) throws DukeException;"
+        "content": "    public abstract String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException;"
       },
       {
         "lineNumber": 34,
@@ -2809,11 +2851,39 @@
         "author": {
           "gitId": "kester-ng"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public String getDateTime() {"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        return this.dateTime;"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "kester-ng"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 70
+      "kester-ng": 74
     }
   },
   {
@@ -2979,7 +3049,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 24,
@@ -3021,7 +3091,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            Task taskDeleted \u003d list.deleteTask(Integer.parseInt(inputParsed[1]));"
+        "content": "            Task taskDeleted \u003d list.deleteTask(Integer.parseInt(inputParsed[1]), historyManager);"
       },
       {
         "lineNumber": 30,
@@ -3739,7 +3809,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 9,
@@ -3809,59 +3879,66 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                task.setDone();"
+        "content": "                historyManager.addState(list);"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                storage.writeToFile(list.getTaskList());"
+        "content": "                task.setDone();"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                return ui.prettyPrinting(\"Task set to done!\");"
+        "content": "                storage.writeToFile(list.getTaskList());"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": "                return ui.prettyPrinting(\"Task set to done!\");"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        } catch (IndexOutOfBoundsException e) {"
+        "content": "            }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            throw new DukeException(\"I believe you have an incorrect task number, try again!\");"
+        "content": "        } catch (IndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "            throw new DukeException(\"I believe you have an incorrect task number, try again!\");"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 26,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
         "author": {
           "gitId": "kester-ng"
         },
@@ -3869,7 +3946,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 26
+      "kester-ng": 27
     }
   },
   {
@@ -4357,157 +4434,164 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        UI ui \u003d bot.getUI();"
+        "content": "        HistoryManager historyManager \u003d bot.getHistoryManager();"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        try {"
+        "content": "        UI ui \u003d bot.getUI();"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            Command command \u003d parser.respondToUser(input);"
+        "content": "        try {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            assert command !\u003d null; // assert that command not null"
+        "content": "            Command command \u003d parser.respondToUser(input);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            String reply \u003d command.execute(ui, list, storage).trim();"
+        "content": "            assert command !\u003d null; // assert that command not null"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            return reply;"
+        "content": "            String reply \u003d command.execute(ui, list, storage, historyManager).trim();"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "            return reply;"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            return e.toString();"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "            return e.toString();"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Main driver method."
+        "content": "    /**"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param args arguments."
+        "content": "     * Main driver method."
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": "     * @param args arguments."
       },
       {
         "lineNumber": 84,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 85,
         "author": {
           "gitId": "-"
         },
         "content": "    public static void main(String[] args) {"
       },
       {
-        "lineNumber": 85,
+        "lineNumber": 86,
         "author": {
           "gitId": "kester-ng"
         },
         "content": "        // add a new chatbot for users"
       },
       {
-        "lineNumber": 86,
+        "lineNumber": 87,
         "author": {
           "gitId": "kester-ng"
         },
         "content": "        ChatBot duke \u003d new ChatBot();"
       },
       {
-        "lineNumber": 87,
+        "lineNumber": 88,
         "author": {
           "gitId": "kester-ng"
         },
         "content": "        Scanner sc \u003d new Scanner(System.in);"
       },
       {
-        "lineNumber": 88,
+        "lineNumber": 89,
         "author": {
           "gitId": "kester-ng"
         },
         "content": "        // run the chat-bot"
       },
       {
-        "lineNumber": 89,
+        "lineNumber": 90,
         "author": {
           "gitId": "kester-ng"
         },
         "content": "        duke.runChatBot(sc);"
       },
       {
-        "lineNumber": 90,
+        "lineNumber": 91,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 91,
+        "lineNumber": 92,
         "author": {
           "gitId": "-"
         },
@@ -4515,7 +4599,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 87,
+      "kester-ng": 88,
       "-": 4
     }
   },
@@ -5013,11 +5097,39 @@
         "author": {
           "gitId": "kester-ng"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public String getDateTime() {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        return this.dateTime;"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "kester-ng"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 44
+      "kester-ng": 48
     }
   },
   {
@@ -5197,7 +5309,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 26,
@@ -5430,7 +5542,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 9,
@@ -5561,6 +5673,379 @@
     ],
     "authorContributionMap": {
       "kester-ng": 26
+    }
+  },
+  {
+    "path": "src/main/java/HistoryManager.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "import java.util.LinkedList;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "public class HistoryManager {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    private final int size \u003d 5; // set the number of undo commands to 5"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    private LinkedList\u003cTaskList\u003e history \u003d new LinkedList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public boolean canAdd() {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        return this.history.size() !\u003d this.size;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public boolean canUndo() {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        return this.history.size() !\u003d 0;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public TaskList copyList(TaskList list) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        ArrayList\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        for (Task task : list.getTaskList()) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            Task newTask \u003d this.copyTask(task);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            if (task.getDone()) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "                newTask.setDone();"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            tasks.add(newTask);"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        return new TaskList(tasks);"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public void addState(TaskList current) {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "       if (!this.canAdd()) {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "           this.history.removeLast();"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "       }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "       this.history.addFirst(this.copyList(current));"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public TaskList getLastState(TaskList current) {"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        if (canUndo()) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            return this.history.removeFirst();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            return current; // return itself, cannot undo"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public Task copyTask(Task task) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        if (task instanceof ToDo) {"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            return new ToDo(task.getTaskName(), task.getPriority());"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        } else if (task instanceof Deadline) {"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            return new Deadline(task.getTaskName(),((Deadline) task).getDateTime() ,task.getPriority());"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            return new Event(task.getTaskName(), ((Event)task).getDateTime() ,task.getPriority());"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "kester-ng": 52
     }
   },
   {
@@ -5726,7 +6211,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 24,
@@ -5996,7 +6481,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 24,
@@ -7150,402 +7635,416 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        default:"
+        "content": "        case \"undo\":"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            return new InvalidCommand(command, false);"
+        "content": "            return new UndoCommand(command, false);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "        default:"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "            return new InvalidCommand(command, false);"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Function to split the input query and grab the task name, also returns the index where the at/by will be at."
+        "content": ""
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param taskName name of the task."
+        "content": "    /**"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param inputCommand command inputted by user (array)."
+        "content": "     * Function to split the input query and grab the task name, also returns the index where the at/by will be at."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param delimiter delimiter which is either /by or /at."
+        "content": "     * @param taskName name of the task."
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @return index for the by/at depending on the type of task, not applicable for to-do tasks."
+        "content": "     * @param inputCommand command inputted by user (array)."
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": "     * @param delimiter delimiter which is either /by or /at."
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public int grabTaskName(StringBuilder taskName, String[] inputCommand, String delimiter)  throws DukeException {"
+        "content": "     * @return index for the by/at depending on the type of task, not applicable for to-do tasks."
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        int indexFound \u003d 0; //find the index for the delimiter"
+        "content": "     */"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        for (int i \u003d 1; i \u003c\u003d inputCommand.length - 1; i++) {"
+        "content": "    public int grabTaskName(StringBuilder taskName, String[] inputCommand, String delimiter)  throws DukeException {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            if (inputCommand[i].equals(delimiter)) {"
+        "content": "        int indexFound \u003d 0; //find the index for the delimiter"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                indexFound \u003d i;"
+        "content": "        for (int i \u003d 1; i \u003c\u003d inputCommand.length - 1; i++) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                break;"
+        "content": "            if (inputCommand[i].equals(delimiter)) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            } else {"
+        "content": "                indexFound \u003d i;"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                taskName.append(inputCommand[i]);"
+        "content": "                break;"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                if (inputCommand[i + 1].equals(delimiter)) {"
+        "content": "            } else {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                    indexFound \u003d i + 1;"
+        "content": "                taskName.append(inputCommand[i]);"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                    break;"
+        "content": "                if (inputCommand[i + 1].equals(delimiter)) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                } else {"
+        "content": "                    indexFound \u003d i + 1;"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                    taskName.append(\" \");"
+        "content": "                    break;"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                }"
+        "content": "                } else {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": "                    taskName.append(\" \");"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "                }"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        // if the inputCommand array index 1 \u003d\u003d delimiter, means no description was given, throw exception"
+        "content": "            }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        if (indexFound \u003d\u003d 1) {"
+        "content": "        }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            throw new DukeException(\"Description of deadline/event cannot be empty!\");"
+        "content": "        // if the inputCommand array index 1 \u003d\u003d delimiter, means no description was given, throw exception"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "        if (indexFound \u003d\u003d 1) {"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return indexFound;"
+        "content": "            throw new DukeException(\"Description of deadline/event cannot be empty!\");"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "        return indexFound;"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Function to grab and get the date time for the event/deadline."
+        "content": ""
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param indexFound index where the /at or /by is found."
+        "content": "    /**"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param inputCommand command inputted by user (array)."
+        "content": "     * Function to grab and get the date time for the event/deadline."
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param dateTime object to hold the result."
+        "content": "     * @param indexFound index where the /at or /by is found."
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": "     * @param inputCommand command inputted by user (array)."
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public void grabDateTime(int indexFound, String[] inputCommand, StringBuilder dateTime)  throws DukeException {"
+        "content": "     * @param dateTime object to hold the result."
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        assert dateTime !\u003d null;"
+        "content": "     */"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        if (indexFound \u003d\u003d inputCommand.length - 1) {"
+        "content": "    public void grabDateTime(int indexFound, String[] inputCommand, StringBuilder dateTime)  throws DukeException {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            // means that there is no description of date of task after the delimiter"
+        "content": "        assert dateTime !\u003d null;"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            throw new DukeException(\"Date and time of the event/deadline cannot be empty!\");"
+        "content": "        if (indexFound \u003d\u003d inputCommand.length - 1) {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "            // means that there is no description of date of task after the delimiter"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "            throw new DukeException(\"Date and time of the event/deadline cannot be empty!\");"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        //append the date and time onto the dateTime object"
+        "content": "        }"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        for (int i \u003d indexFound + 1; i \u003c inputCommand.length; i++) {"
+        "content": ""
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            dateTime.append(inputCommand[i]);"
+        "content": "        //append the date and time onto the dateTime object"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            if (i !\u003d inputCommand.length - 1) {"
+        "content": "        for (int i \u003d indexFound + 1; i \u003c inputCommand.length; i++) {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                dateTime.append(\" \");"
+        "content": "            dateTime.append(inputCommand[i]);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": "            if (i !\u003d inputCommand.length - 1) {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "                dateTime.append(\" \");"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "            }"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 98,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 100,
         "author": {
           "gitId": "kester-ng"
         },
@@ -7553,7 +8052,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 98
+      "kester-ng": 100
     }
   },
   {
@@ -7658,7 +8157,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 9,
@@ -7714,70 +8213,70 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            boolean isSuccessful \u003d task.setPriority(priority);"
+        "content": "            if (task.getPriority() \u003d\u003d priority) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            if (isSuccessful) {"
+        "content": "                ui.prettyPrinting(\"Priority is already set as stated!\");"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                ui.prettyPrinting(\"Priority set!\");"
+        "content": "                return \"Priority is already set as stated\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                storage.writeToFile(list.getTaskList());"
+        "content": "            } else {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                return \"Priority set!\";"
+        "content": "                historyManager.addState(list);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            } else {"
+        "content": "                task.setPriority(priority);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                ui.prettyPrinting(\"Priority is already set as stated!\");"
+        "content": "                ui.prettyPrinting(\"Priority set!\");"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                return \"Priority is already set as stated\";"
+        "content": "                storage.writeToFile(list.getTaskList());"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": "                return \"Priority set!\";"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "            }"
       },
       {
         "lineNumber": 26,
@@ -8003,7 +8502,7 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public String execute(UI ui, TaskList list, Storage storage) throws DukeException {"
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
       },
       {
         "lineNumber": 12,
@@ -10235,325 +10734,360 @@
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public Task deleteTask(int taskNumber) throws IndexOutOfBoundsException {"
+        "content": "    public Task deleteTask(int taskNumber, HistoryManager historyManager) throws IndexOutOfBoundsException {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        Task deletedTask \u003d this.tasks.remove(taskNumber - 1); // need to minus 1 as 0-index based arraylist"
+        "content": "        if (taskNumber \u003e\u003d 0 || taskNumber \u003c this.tasks.size()) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        this.size--;"
+        "content": "            historyManager.addState(this);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return deletedTask;"
+        "content": "            Task deletedTask \u003d this.tasks.remove(taskNumber - 1); // need to minus 1 as 0-index based arraylist"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "            this.size--;"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "            return deletedTask;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": "        } else {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Function to get the task based on taskNumber."
+        "content": "            throw new IndexOutOfBoundsException();"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param taskNumber index of the task."
+        "content": "        }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @return the Task."
+        "content": "    }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @throws IndexOutOfBoundsException if the taskNumber is out of bounds."
+        "content": ""
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public Task getTask(int taskNumber) throws IndexOutOfBoundsException {"
+        "content": "     * Function to get the task based on taskNumber."
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return this.tasks.get(taskNumber - 1);"
+        "content": "     * @param taskNumber index of the task."
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "     * @return the Task."
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "     * @throws IndexOutOfBoundsException if the taskNumber is out of bounds."
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Function to get the number of tasks in the list."
+        "content": "    public Task getTask(int taskNumber) throws IndexOutOfBoundsException {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @return int (size of the list)."
+        "content": "        return this.tasks.get(taskNumber - 1);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public int getSize() {"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return this.size;"
+        "content": "    /**"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "     * Function to get the number of tasks in the list."
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "     * @return int (size of the list)."
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Function to get the arraylist of tasks."
+        "content": "    public int getSize() {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @return ArrayList."
+        "content": "        return this.size;"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
+        "content": ""
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return this.tasks;"
+        "content": "    /**"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "     * Function to get the arraylist of tasks."
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": ""
+        "content": "     * @return ArrayList."
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * Function to find tasks based on keyWord."
+        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @param keyWord word to be used for search."
+        "content": "        return this.tasks;"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     * @return ArrayList of tasks that were found."
+        "content": "    }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    public ArrayList\u003cTask\u003e findTasks(String keyWord) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        ArrayList\u003cTask\u003e result \u003d new ArrayList\u003c\u003e();"
+        "content": "     * Function to find tasks based on keyWord."
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        for (Task t : this.tasks) {"
+        "content": "     * @param keyWord word to be used for search."
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            if ((t.getTaskName().toLowerCase()).contains(keyWord.toLowerCase())) {"
+        "content": "     * @return ArrayList of tasks that were found."
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "                result.add(t);"
+        "content": "     */"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "            }"
+        "content": "    public ArrayList\u003cTask\u003e findTasks(String keyWord) {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        }"
+        "content": "        ArrayList\u003cTask\u003e result \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "        return result;"
+        "content": "        for (Task t : this.tasks) {"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "kester-ng"
         },
-        "content": "    }"
+        "content": "            if ((t.getTaskName().toLowerCase()).contains(keyWord.toLowerCase())) {"
       },
       {
         "lineNumber": 82,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "                result.add(t);"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 87,
         "author": {
           "gitId": "kester-ng"
         },
@@ -10561,7 +11095,7 @@
       }
     ],
     "authorContributionMap": {
-      "kester-ng": 82
+      "kester-ng": 87
     }
   },
   {
@@ -11154,6 +11688,218 @@
     ],
     "authorContributionMap": {
       "kester-ng": 49
+    }
+  },
+  {
+    "path": "src/main/java/UndoCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "public class UndoCommand extends Command {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public UndoCommand(String inputCommand, boolean isExit) {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        super(inputCommand, isExit);"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public String execute(UI ui, TaskList list, Storage storage, HistoryManager historyManager) throws DukeException {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        if (historyManager.canUndo()) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            TaskList previousState \u003d historyManager.getLastState(list);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            this.transferList(list, previousState);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            storage.writeToFile(previousState.getTaskList());"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            return \"Previous command has been undone!\";"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            throw new DukeException(\"No more commands to undo!\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    public void transferList(TaskList list, TaskList previousState) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        ArrayList\u003cTask\u003e destination \u003d list.getTaskList();"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        ArrayList\u003cTask\u003e source \u003d previousState.getTaskList();"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        destination.clear();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        for (Task task : source) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "            destination.add(task);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "kester-ng"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "kester-ng": 29
     }
   },
   {
