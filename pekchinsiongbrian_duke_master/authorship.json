@@ -1293,262 +1293,325 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "import java.util.Arrays;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": " * Command that is executed when user inputs \u0027delete\u0027."
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": " */"
+        "content": " * Command that is executed when user inputs \u0027delete\u0027."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "public class DeleteCommand extends Command {"
+        "content": " */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    private int deleteIndex;"
+        "content": "public class DeleteCommand extends Command {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "    private int[] deleteIndices;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public DeleteCommand(int deleteIndex) {"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        this.deleteIndex \u003d deleteIndex;"
+        "content": "    public DeleteCommand(int[] deleteIndices) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        this.deleteIndices \u003d Arrays.stream(deleteIndices)"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "                .distinct()"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "                .sorted()"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Executes the \u0027delete\u0027 command and saves latest version of the task list."
+        "content": "                .toArray();"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param tasks Task list"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param ui Current user interface"
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param storage Current storage"
+        "content": "     * Executes the \u0027delete\u0027 command and saves latest version of the task list."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of success message after task is deleted"
+        "content": "     *"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @throws DukeException If task list fails to save"
+        "content": "     * @param tasks Task list"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * @param ui Current user interface"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    @Override"
+        "content": "     * @param storage Current storage"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "     * @return String representation of success message after task is deleted"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        Task toDelete \u003d tasks.getTaskList().get(deleteIndex - 1);"
+        "content": "     * @throws DukeException If task list fails to save"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        tasks.deleteFromTaskList(deleteIndex - 1);"
+        "content": "     */"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        storage.save(tasks.getTaskList());"
+        "content": "    @Override"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return ui.showDelete(toDelete.toString(), tasks.getTaskList().size());"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        for (int i \u003d 0; i \u003c deleteIndices.length; i++) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            sb.append(\"\\n\");"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Updates main function if it should exit the programme or not."
+        "content": "            Task deletedTask \u003d tasks.getTaskList().get(deleteIndices[i] - i -1);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "            tasks.deleteFromTaskList(deleteIndices[i] - i - 1);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return True if \u0027bye\u0027 command is called, false otherwise. In this case, false is returned."
+        "content": "            storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "            sb.append(deletedTask.toString());"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    @Override"
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public boolean isExit() {"
+        "content": "        return ui.showDelete(sb.toString(), tasks.getTaskList().size(), deleteIndices.length);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return false;"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 45,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     * Updates main function if it should exit the programme or not."
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     * @return True if \u0027bye\u0027 command is called, false otherwise. In this case, false is returned."
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
@@ -1556,7 +1619,7 @@
       }
     ],
     "authorContributionMap": {
-      "pekchinsiongbrian": 45
+      "pekchinsiongbrian": 54
     }
   },
   {
@@ -1617,262 +1680,325 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "import java.util.Arrays;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": " * Command that is executed when user inputs \u0027done\u0027."
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": " */"
+        "content": " * Command that is executed when user inputs \u0027done\u0027."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "public class DoneCommand extends Command {"
+        "content": " */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    private int doneIndex;"
+        "content": "public class DoneCommand extends Command {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "    private int[] doneIndices;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public DoneCommand(int doneIndex) {"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        this.doneIndex \u003d doneIndex;"
+        "content": "    public DoneCommand(int[] doneIndices) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        this.doneIndices \u003d Arrays.stream(doneIndices)"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "                .distinct()"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "                .sorted()"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Executes the \u0027done\u0027 command and saves latest version of the task list."
+        "content": "                .toArray();"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param tasks Task list"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param ui Current user interface"
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param storage Current storage"
+        "content": "     * Executes the \u0027done\u0027 command and saves latest version of the task list."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of success message after task is marked as done"
+        "content": "     *"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @throws DukeException If task list fails to save"
+        "content": "     * @param tasks Task list"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * @param ui Current user interface"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    @Override"
+        "content": "     * @param storage Current storage"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "     * @return String representation of success message after task is marked as done"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        Task doneTask \u003d tasks.getTaskList().get(doneIndex - 1);"
+        "content": "     * @throws DukeException If task list fails to save"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        doneTask.markAsDone();"
+        "content": "     */"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        storage.save(tasks.getTaskList());"
+        "content": "    @Override"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return ui.showDone(doneTask.toString());"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        for (int index : doneIndices) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            sb.append(\"\\n\");"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Updates main function if it should exit the programme or not."
+        "content": "            Task doneTask \u003d tasks.getTaskList().get(index - 1);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "            doneTask.markAsDone();"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return True if \u0027bye\u0027 command is called, false otherwise. In this case, false is returned."
+        "content": "            storage.save(tasks.getTaskList());"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "            sb.append(doneTask.toString());"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    @Override"
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public boolean isExit() {"
+        "content": "        return ui.showDone(sb.toString(), doneIndices.length);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return false;"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 45,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     * Updates main function if it should exit the programme or not."
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     * @return True if \u0027bye\u0027 command is called, false otherwise. In this case, false is returned."
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    public boolean isExit() {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "        return false;"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
@@ -1880,7 +2006,7 @@
       }
     ],
     "authorContributionMap": {
-      "pekchinsiongbrian": 45
+      "pekchinsiongbrian": 54
     }
   },
   {
@@ -6246,7 +6372,7 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (userInputSplit.length !\u003d 2) {"
+        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 104,
@@ -6281,938 +6407,938 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    if (Integer.parseInt(userInputSplit[1]) \u003c\u003d 0) {"
+        "content": "                    for (int i \u003d 1; i \u003c userInputSplit.length; i++) {"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DONE_USE);"
+        "content": "                        if (Integer.parseInt(userInputSplit[i]) \u003c\u003d 0) {"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    } else if (Integer.parseInt(userInputSplit[1]) \u003e list.getTaskList().size()) {"
+        "content": "                            throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DONE_USE);"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        throw new DukeException(\"Argument exceeds number of items on the list!\\n\\n\" + DONE_USE);"
+        "content": "                        } else if (Integer.parseInt(userInputSplit[i]) \u003e list.getTaskList().size()) {"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    }"
+        "content": "                            throw new DukeException(\"Argument exceeds number of items on the list!\\n\\n\" + DONE_USE);"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                } catch (NumberFormatException e) {"
+        "content": "                        }"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DONE_USE);"
+        "content": "                    }"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                }"
+        "content": "                } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "                    throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DONE_USE);"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return firstWord;"
+        "content": "                }"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            }"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"DELETE\":"
+        "content": "            return firstWord;"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            // Guard condition"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (userInputSplit.length !\u003d 2) {"
+        "content": "        case \"DELETE\":"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                throw new DukeException(\"Enter index of item to delete it. \""
+        "content": "            // Guard condition"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        + \"Type \u0027list\u0027 to see all items.\\n\\n\" + DELETE_USE);"
+        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else {"
+        "content": "                throw new DukeException(\"Enter index of item to delete it. \""
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                try {"
+        "content": "                        + \"Type \u0027list\u0027 to see all items.\\n\\n\" + DELETE_USE);"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    if (Integer.parseInt(userInputSplit[1]) \u003c\u003d 0) {"
+        "content": "            } else {"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DELETE_USE);"
+        "content": "                try {"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    } else if (Integer.parseInt(userInputSplit[1]) \u003e list.getTaskList().size()) {"
+        "content": "                    for (int i \u003d 1; i \u003c userInputSplit.length; i++) {"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        throw new DukeException(\"Argument exceeds number of items on the list!\\n\\n\" + DELETE_USE);"
+        "content": "                        if (Integer.parseInt(userInputSplit[i]) \u003c\u003d 0) {"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    }"
+        "content": "                            throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DELETE_USE);"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                } catch (NumberFormatException e) {"
+        "content": "                        } else if (Integer.parseInt(userInputSplit[i]) \u003e list.getTaskList().size()) {"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DELETE_USE);"
+        "content": "                            throw new DukeException(\"Argument exceeds number of items on the list!\\n\\n\" + DELETE_USE);"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                }"
+        "content": "                        }"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "                    }"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return firstWord;"
+        "content": "                } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "                    throw new DukeException(\"Argument must be a positive integer.\\n\\n\" + DELETE_USE);"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"LIST\":"
+        "content": "                }"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            // Guard condition"
+        "content": "            }"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (userInputSplit.length \u003e 2) {"
+        "content": "            return firstWord;"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                throw new DukeException(LIST_USE);"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else if (userInputSplit.length \u003d\u003d 2) {"
+        "content": "        case \"LIST\":"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                if (!userInputSplit[1].equals(\"/showtimer\") \u0026\u0026 !userInputSplit[1].equals(\"/hidetimer\")) {"
+        "content": "            // Guard condition"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    throw new DukeException(LIST_USE);"
+        "content": "            if (userInputSplit.length \u003e 2) {"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                }"
+        "content": "                throw new DukeException(LIST_USE);"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "            } else if (userInputSplit.length \u003d\u003d 2) {"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return firstWord;"
+        "content": "                if (!userInputSplit[1].equals(\"/showtimer\") \u0026\u0026 !userInputSplit[1].equals(\"/hidetimer\")) {"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "                    throw new DukeException(LIST_USE);"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"BYE\":"
+        "content": "                }"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            // Guard condition"
+        "content": "            }"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (userInputSplit.length \u003e 1) {"
+        "content": "            return firstWord;"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                throw new DukeException(\"\u0027bye\u0027 command has no arguments!\");"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "        case \"BYE\":"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return firstWord;"
+        "content": "            // Guard condition"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            if (userInputSplit.length \u003e 1) {"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"FIND\":"
+        "content": "                throw new DukeException(\"\u0027bye\u0027 command has no arguments!\");"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            // Guard condition"
+        "content": "            }"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
+        "content": "            return firstWord;"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                throw new DukeException(\"Enter a keyword to search!\\n\" + FIND_USE);"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "        case \"FIND\":"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return firstWord;"
+        "content": "            // Guard condition"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            if (userInputSplit.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        default:"
+        "content": "                throw new DukeException(\"Enter a keyword to search!\\n\" + FIND_USE);"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            throw new DukeException(\"Invalid command!\\nFor list of commands, type: /help\");"
+        "content": "            }"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return firstWord;"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        default:"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "            throw new DukeException(\"Invalid command!\\nFor list of commands, type: /help\");"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Selects the command to execute based on the command type that is input."
+        "content": "        }"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param commandType Type of command"
+        "content": ""
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": "    /**"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param isTimerOn Whether the user has set timer on or timer off"
+        "content": "     * Selects the command to execute based on the command type that is input."
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return Command"
+        "content": "     *"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @throws DukeException If command is invalid"
+        "content": "     * @param commandType Type of command"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public Command selectCommand(String commandType, String userInput, boolean isTimerOn) throws DukeException {"
+        "content": "     * @param isTimerOn Whether the user has set timer on or timer off"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        switch (commandType) {"
+        "content": "     * @return Command"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"/HELP\":"
+        "content": "     * @throws DukeException If command is invalid"
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return new HelpCommand();"
+        "content": "     */"
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "    public Command selectCommand(String commandType, String userInput, boolean isTimerOn) throws DukeException {"
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"TODO\":"
+        "content": "        switch (commandType) {"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return parseTodoCommand(userInput);"
+        "content": "        case \"/HELP\":"
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return new HelpCommand();"
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"DEADLINE\":"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return parseDeadlineCommand(userInput);"
+        "content": "        case \"TODO\":"
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return parseTodoCommand(userInput);"
       },
       {
         "lineNumber": 188,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"EVENT\":"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 189,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return parseEventCommand(userInput);"
+        "content": "        case \"DEADLINE\":"
       },
       {
         "lineNumber": 190,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return parseDeadlineCommand(userInput);"
       },
       {
         "lineNumber": 191,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"DONE\":"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 192,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return parseDoneCommand(userInput);"
+        "content": "        case \"EVENT\":"
       },
       {
         "lineNumber": 193,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return parseEventCommand(userInput);"
       },
       {
         "lineNumber": 194,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"DELETE\":"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 195,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return parseDeleteCommand(userInput);"
+        "content": "        case \"DONE\":"
       },
       {
         "lineNumber": 196,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return parseDoneCommand(userInput);"
       },
       {
         "lineNumber": 197,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"LIST\":"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 198,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return parseListCommand(userInput, isTimerOn);"
+        "content": "        case \"DELETE\":"
       },
       {
         "lineNumber": 199,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return parseDeleteCommand(userInput);"
       },
       {
         "lineNumber": 200,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"BYE\":"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 201,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return new ByeCommand();"
+        "content": "        case \"LIST\":"
       },
       {
         "lineNumber": 202,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return parseListCommand(userInput, isTimerOn);"
       },
       {
         "lineNumber": 203,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        case \"FIND\":"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 204,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return parseFindCommand(userInput, isTimerOn);"
+        "content": "        case \"BYE\":"
       },
       {
         "lineNumber": 205,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return new ByeCommand();"
       },
       {
         "lineNumber": 206,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        default:"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 207,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            throw new DukeException(\"Invalid command!\\nFor list of commands, type: /help\");"
+        "content": "        case \"FIND\":"
       },
       {
         "lineNumber": 208,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            //Fallthrough"
+        "content": "            return parseFindCommand(userInput, isTimerOn);"
       },
       {
         "lineNumber": 209,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 210,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        default:"
       },
       {
         "lineNumber": 211,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "            throw new DukeException(\"Invalid command!\\nFor list of commands, type: /help\");"
       },
       {
         "lineNumber": 212,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            //Fallthrough"
       },
       {
         "lineNumber": 213,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Parses user input and returns a to-do command if user input is valid."
+        "content": "        }"
       },
       {
         "lineNumber": 214,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 215,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": ""
       },
       {
         "lineNumber": 216,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return TodoCommand"
+        "content": "    /**"
       },
       {
         "lineNumber": 217,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * Parses user input and returns a to-do command if user input is valid."
       },
       {
         "lineNumber": 218,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public TodoCommand parseTodoCommand(String userInput) {"
+        "content": "     *"
       },
       {
         "lineNumber": 219,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        assert userInput.length() \u003e\u003d 5 \u0026\u0026 userInput.split(\" \").length \u003e\u003d 2 :"
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 220,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                \"Invalid use of todo command\";"
+        "content": "     * @return TodoCommand"
       },
       {
         "lineNumber": 221,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return new TodoCommand(userInput.substring(5));"
+        "content": "     */"
       },
       {
         "lineNumber": 222,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "    public TodoCommand parseTodoCommand(String userInput) {"
       },
       {
         "lineNumber": 223,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        assert userInput.length() \u003e\u003d 5 \u0026\u0026 userInput.split(\" \").length \u003e\u003d 2 :"
       },
       {
         "lineNumber": 224,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "                \"Invalid use of todo command\";"
       },
       {
         "lineNumber": 225,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Parses user input and returns a deadline command if user input is valid."
+        "content": "        return new TodoCommand(userInput.substring(5));"
       },
       {
         "lineNumber": 226,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 227,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": ""
       },
       {
         "lineNumber": 228,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return DeadlineCommand"
+        "content": "    /**"
       },
       {
         "lineNumber": 229,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @throws DukeException If user input is invalid"
+        "content": "     * Parses user input and returns a deadline command if user input is valid."
       },
       {
         "lineNumber": 230,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 231,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public DeadlineCommand parseDeadlineCommand(String userInput) throws DukeException {"
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 232,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String desc \u003d userInput.substring(9, userInput.toLowerCase().indexOf(\"/by\") - 1);"
+        "content": "     * @return DeadlineCommand"
       },
       {
         "lineNumber": 233,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String by \u003d userInput.substring(userInput.indexOf(\"/by\") + 4);"
+        "content": "     * @throws DukeException If user input is invalid"
       },
       {
         "lineNumber": 234,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String[] byComponents \u003d by.split(\" \");"
+        "content": "     */"
       },
       {
         "lineNumber": 235,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        try {"
+        "content": "    public DeadlineCommand parseDeadlineCommand(String userInput) throws DukeException {"
       },
       {
         "lineNumber": 236,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (byComponents.length \u003d\u003d 1) {"
+        "content": "        String desc \u003d userInput.substring(9, userInput.toLowerCase().indexOf(\"/by\") - 1);"
       },
       {
         "lineNumber": 237,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e"
+        "content": "        String by \u003d userInput.substring(userInput.indexOf(\"/by\") + 4);"
       },
       {
         "lineNumber": 238,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                LocalDate.parse(byComponents[0]);"
+        "content": "        String[] byComponents \u003d by.split(\" \");"
       },
       {
         "lineNumber": 239,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                return new DeadlineCommand(new String[]{desc, byComponents[0]});"
+        "content": "        try {"
       },
       {
         "lineNumber": 240,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else if (byComponents.length \u003d\u003d 2) {"
+        "content": "            if (byComponents.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 241,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e \u003cHH:mm\u003e"
+        "content": "                // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e"
       },
       {
         "lineNumber": 242,
@@ -7226,196 +7352,196 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                LocalTime.parse(byComponents[1]);"
+        "content": "                return new DeadlineCommand(new String[]{desc, byComponents[0]});"
       },
       {
         "lineNumber": 244,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                return new DeadlineCommand(new String[]{desc, byComponents[0], byComponents[1]});"
+        "content": "            } else if (byComponents.length \u003d\u003d 2) {"
       },
       {
         "lineNumber": 245,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else {"
+        "content": "                // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e \u003cHH:mm\u003e"
       },
       {
         "lineNumber": 246,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                throw new DukeException(DEADLINE_USE);"
+        "content": "                LocalDate.parse(byComponents[0]);"
       },
       {
         "lineNumber": 247,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "                LocalTime.parse(byComponents[1]);"
       },
       {
         "lineNumber": 248,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        } catch (DateTimeParseException dtpe) {"
+        "content": "                return new DeadlineCommand(new String[]{desc, byComponents[0], byComponents[1]});"
       },
       {
         "lineNumber": 249,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            throw new DukeException(\"Error reading date and/or time.\\n\\n\" + DEADLINE_USE);"
+        "content": "            } else {"
       },
       {
         "lineNumber": 250,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "                throw new DukeException(DEADLINE_USE);"
       },
       {
         "lineNumber": 251,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "            }"
       },
       {
         "lineNumber": 252,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        } catch (DateTimeParseException dtpe) {"
       },
       {
         "lineNumber": 253,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            throw new DukeException(\"Error reading date and/or time.\\n\\n\" + DEADLINE_USE);"
       },
       {
         "lineNumber": 254,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Parses user input and returns an event command if user input is valid."
+        "content": "        }"
       },
       {
         "lineNumber": 255,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 256,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": ""
       },
       {
         "lineNumber": 257,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return EventCommand"
+        "content": "    /**"
       },
       {
         "lineNumber": 258,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @throws DukeException If user input is invalid"
+        "content": "     * Parses user input and returns an event command if user input is valid."
       },
       {
         "lineNumber": 259,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 260,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public EventCommand parseEventCommand(String userInput) throws DukeException {"
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 261,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        try {"
+        "content": "     * @return EventCommand"
       },
       {
         "lineNumber": 262,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            String desc \u003d userInput.substring(6, userInput.toLowerCase().indexOf(\"/at\") - 1);"
+        "content": "     * @throws DukeException If user input is invalid"
       },
       {
         "lineNumber": 263,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            String at \u003d userInput.substring(userInput.indexOf(\"/at\") + 4);"
+        "content": "     */"
       },
       {
         "lineNumber": 264,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            String[] atComponents \u003d at.split(\" \");"
+        "content": "    public EventCommand parseEventCommand(String userInput) throws DukeException {"
       },
       {
         "lineNumber": 265,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (atComponents.length \u003d\u003d 1) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 266,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e"
+        "content": "            String desc \u003d userInput.substring(6, userInput.toLowerCase().indexOf(\"/at\") - 1);"
       },
       {
         "lineNumber": 267,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                LocalDate.parse(atComponents[0]);"
+        "content": "            String at \u003d userInput.substring(userInput.indexOf(\"/at\") + 4);"
       },
       {
         "lineNumber": 268,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                return new EventCommand(new String[]{desc, atComponents[0]});"
+        "content": "            String[] atComponents \u003d at.split(\" \");"
       },
       {
         "lineNumber": 269,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else if (atComponents.length \u003d\u003d 2) {"
+        "content": "            if (atComponents.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 270,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e"
+        "content": "                // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e"
       },
       {
         "lineNumber": 271,
@@ -7429,588 +7555,588 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                LocalTime.parse(atComponents[1]);"
+        "content": "                return new EventCommand(new String[]{desc, atComponents[0]});"
       },
       {
         "lineNumber": 273,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                return new EventCommand(new String[]{desc, atComponents[0], atComponents[1]});"
+        "content": "            } else if (atComponents.length \u003d\u003d 2) {"
       },
       {
         "lineNumber": 274,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else if (atComponents.length \u003d\u003d 4) {"
+        "content": "                // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e"
       },
       {
         "lineNumber": 275,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e to \u003cend HH:mm\u003e"
+        "content": "                LocalDate.parse(atComponents[0]);"
       },
       {
         "lineNumber": 276,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                if (!atComponents[2].toLowerCase().equals(\"to\")) {"
+        "content": "                LocalTime.parse(atComponents[1]);"
       },
       {
         "lineNumber": 277,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    // Checks if the \u0027to\u0027 keyword is used"
+        "content": "                return new EventCommand(new String[]{desc, atComponents[0], atComponents[1]});"
       },
       {
         "lineNumber": 278,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    throw new DukeException(EVENT_USE);"
+        "content": "            } else if (atComponents.length \u003d\u003d 4) {"
       },
       {
         "lineNumber": 279,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                } else {"
+        "content": "                // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e to \u003cend HH:mm\u003e"
       },
       {
         "lineNumber": 280,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    LocalDate.parse(atComponents[0]);"
+        "content": "                if (!atComponents[2].toLowerCase().equals(\"to\")) {"
       },
       {
         "lineNumber": 281,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    LocalTime.parse(atComponents[1]);"
+        "content": "                    // Checks if the \u0027to\u0027 keyword is used"
       },
       {
         "lineNumber": 282,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    LocalTime.parse(atComponents[3]);"
+        "content": "                    throw new DukeException(EVENT_USE);"
       },
       {
         "lineNumber": 283,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    return new EventCommand(new String[]{desc, atComponents[0], atComponents[1], atComponents[3]});"
+        "content": "                } else {"
       },
       {
         "lineNumber": 284,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                }"
+        "content": "                    LocalDate.parse(atComponents[0]);"
       },
       {
         "lineNumber": 285,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else {"
+        "content": "                    LocalTime.parse(atComponents[1]);"
       },
       {
         "lineNumber": 286,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                throw new DukeException(EVENT_USE);"
+        "content": "                    LocalTime.parse(atComponents[3]);"
       },
       {
         "lineNumber": 287,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "                    return new EventCommand(new String[]{desc, atComponents[0], atComponents[1], atComponents[3]});"
       },
       {
         "lineNumber": 288,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        } catch (DateTimeParseException dtpe) {"
+        "content": "                }"
       },
       {
         "lineNumber": 289,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            throw new DukeException(\"Error reading date and/or time.\\n\\n\" + EVENT_USE);"
+        "content": "            } else {"
       },
       {
         "lineNumber": 290,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "                throw new DukeException(EVENT_USE);"
       },
       {
         "lineNumber": 291,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "            }"
       },
       {
         "lineNumber": 292,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        } catch (DateTimeParseException dtpe) {"
       },
       {
         "lineNumber": 293,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            throw new DukeException(\"Error reading date and/or time.\\n\\n\" + EVENT_USE);"
       },
       {
         "lineNumber": 294,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Parses user input and returns a list command if user input is valid."
+        "content": "        }"
       },
       {
         "lineNumber": 295,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 296,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": ""
       },
       {
         "lineNumber": 297,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param isTimerOn Whether the user has set timer on or timer off"
+        "content": "    /**"
       },
       {
         "lineNumber": 298,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return ListCommand"
+        "content": "     * Parses user input and returns a list command if user input is valid."
       },
       {
         "lineNumber": 299,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 300,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public ListCommand parseListCommand(String userInput, boolean isTimerOn) {"
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 301,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String[] userInputSplit \u003d userInput.toLowerCase().split(\" \");"
+        "content": "     * @param isTimerOn Whether the user has set timer on or timer off"
       },
       {
         "lineNumber": 302,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        if (userInputSplit.length \u003d\u003d 2) {"
+        "content": "     * @return ListCommand"
       },
       {
         "lineNumber": 303,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            // Case: \u0027list /showtimer\u0027 or \u0027list /hidetimer\u0027"
+        "content": "     */"
       },
       {
         "lineNumber": 304,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            assert userInputSplit[1].equals(\"/showtimer\") || userInputSplit[1].equals(\"/hidetimer\") :"
+        "content": "    public ListCommand parseListCommand(String userInput, boolean isTimerOn) {"
       },
       {
         "lineNumber": 305,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    \"Invalid argument\";"
+        "content": "        String[] userInputSplit \u003d userInput.toLowerCase().split(\" \");"
       },
       {
         "lineNumber": 306,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return new ListCommand(userInputSplit[1], isTimerOn);"
+        "content": "        if (userInputSplit.length \u003d\u003d 2) {"
       },
       {
         "lineNumber": 307,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        } else {"
+        "content": "            // Case: \u0027list /showtimer\u0027 or \u0027list /hidetimer\u0027"
       },
       {
         "lineNumber": 308,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            // Case: \u0027list\u0027 (no arguments)"
+        "content": "            assert userInputSplit[1].equals(\"/showtimer\") || userInputSplit[1].equals(\"/hidetimer\") :"
       },
       {
         "lineNumber": 309,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            assert userInputSplit.length \u003d\u003d 1 : \"Invalid use of list command\";"
+        "content": "                    \"Invalid argument\";"
       },
       {
         "lineNumber": 310,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            return new ListCommand(\"\", isTimerOn);"
+        "content": "            return new ListCommand(userInputSplit[1], isTimerOn);"
       },
       {
         "lineNumber": 311,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 312,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "            // Case: \u0027list\u0027 (no arguments)"
       },
       {
         "lineNumber": 313,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "            assert userInputSplit.length \u003d\u003d 1 : \"Invalid use of list command\";"
       },
       {
         "lineNumber": 314,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            return new ListCommand(\"\", isTimerOn);"
       },
       {
         "lineNumber": 315,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Parses user input and returns a delete command if user input is valid."
+        "content": "        }"
       },
       {
         "lineNumber": 316,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 317,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": ""
       },
       {
         "lineNumber": 318,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return DeleteCommand"
+        "content": "    /**"
       },
       {
         "lineNumber": 319,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * Parses user input and returns a delete command if user input is valid."
       },
       {
         "lineNumber": 320,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public DeleteCommand parseDeleteCommand(String userInput) {"
+        "content": "     *"
       },
       {
         "lineNumber": 321,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String[] userInputSplit \u003d userInput.toLowerCase().split(\" \");"
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 322,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        assert userInputSplit.length \u003d\u003d 2 : \"Invalid use of delete command\";"
+        "content": "     * @return DeleteCommand"
       },
       {
         "lineNumber": 323,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return new DeleteCommand(Integer.parseInt(userInputSplit[1]));"
+        "content": "     */"
       },
       {
         "lineNumber": 324,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "    public DeleteCommand parseDeleteCommand(String userInput) {"
       },
       {
         "lineNumber": 325,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        String[] userInputSplit \u003d userInput.toLowerCase().split(\" \");"
       },
       {
         "lineNumber": 326,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "        assert userInputSplit.length \u003e\u003d 2 : \"Invalid use of delete command\";"
       },
       {
         "lineNumber": 327,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Parses user input and returns a done command if user input is valid."
+        "content": "        int[] deleteIndices \u003d new int[userInputSplit.length - 1];"
       },
       {
         "lineNumber": 328,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "        for (int i \u003d 0; i \u003c userInputSplit.length - 1; i++) {"
       },
       {
         "lineNumber": 329,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": "            deleteIndices[i] \u003d Integer.parseInt(userInputSplit[i + 1]);"
       },
       {
         "lineNumber": 330,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return DoneCommand"
+        "content": "        }"
       },
       {
         "lineNumber": 331,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "        return new DeleteCommand(deleteIndices);"
       },
       {
         "lineNumber": 332,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public DoneCommand parseDoneCommand(String userInput) {"
+        "content": "    }"
       },
       {
         "lineNumber": 333,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String[] userInputSplit \u003d userInput.toLowerCase().split(\" \");"
+        "content": ""
       },
       {
         "lineNumber": 334,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        assert userInputSplit.length \u003d\u003d 2 : \"Invalid use of done command\";"
+        "content": "    /**"
       },
       {
         "lineNumber": 335,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return new DoneCommand(Integer.parseInt(userInputSplit[1]));"
+        "content": "     * Parses user input and returns a done command if user input is valid."
       },
       {
         "lineNumber": 336,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 337,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 338,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "     * @return DoneCommand"
       },
       {
         "lineNumber": 339,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Parses user input and returns a find command if user input is valid."
+        "content": "     */"
       },
       {
         "lineNumber": 340,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    public DoneCommand parseDoneCommand(String userInput) {"
       },
       {
         "lineNumber": 341,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param userInput User input"
+        "content": "        String[] userInputSplit \u003d userInput.toLowerCase().split(\" \");"
       },
       {
         "lineNumber": 342,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param isTimerOn Whether the user has set timer on or timer off"
+        "content": "        assert userInputSplit.length \u003e\u003d 2 : \"Invalid use of done command\";"
       },
       {
         "lineNumber": 343,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return FindCommand"
+        "content": "        int[] doneIndices \u003d new int[userInputSplit.length - 1];"
       },
       {
         "lineNumber": 344,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "        for (int i \u003d 0; i \u003c userInputSplit.length - 1; i++) {"
       },
       {
         "lineNumber": 345,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public FindCommand parseFindCommand(String userInput, boolean isTimerOn) {"
+        "content": "            doneIndices[i] \u003d Integer.parseInt(userInputSplit[i + 1]);"
       },
       {
         "lineNumber": 346,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        assert userInput.length() \u003e\u003d 5 \u0026\u0026 userInput.split(\" \").length \u003e\u003d 2 :"
+        "content": "        }"
       },
       {
         "lineNumber": 347,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                \"Invalid use of find command\";"
+        "content": "        return new DoneCommand(doneIndices);"
       },
       {
         "lineNumber": 348,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return new FindCommand(userInput.substring(5), isTimerOn);"
+        "content": "    }"
       },
       {
         "lineNumber": 349,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 350,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 351,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "     * Parses user input and returns a find command if user input is valid."
       },
       {
         "lineNumber": 352,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Converts the input list from strings to task objects."
+        "content": "     *"
       },
       {
         "lineNumber": 353,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "     * @param userInput User input"
       },
       {
         "lineNumber": 354,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param list Task list"
+        "content": "     * @param isTimerOn Whether the user has set timer on or timer off"
       },
       {
         "lineNumber": 355,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return Array list of task objects"
+        "content": "     * @return FindCommand"
       },
       {
         "lineNumber": 356,
@@ -8024,273 +8150,273 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public ArrayList\u003cTask\u003e parseSavedFile(ArrayList\u003cString\u003e list) {"
+        "content": "    public FindCommand parseFindCommand(String userInput, boolean isTimerOn) {"
       },
       {
         "lineNumber": 358,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        ArrayList\u003cTask\u003e parsedList \u003d new ArrayList\u003c\u003e();"
+        "content": "        assert userInput.length() \u003e\u003d 5 \u0026\u0026 userInput.split(\" \").length \u003e\u003d 2 :"
       },
       {
         "lineNumber": 359,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        if (list.size() !\u003d 0) {"
+        "content": "                \"Invalid use of find command\";"
       },
       {
         "lineNumber": 360,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            for (String s : list) {"
+        "content": "        return new FindCommand(userInput.substring(5), isTimerOn);"
       },
       {
         "lineNumber": 361,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                String taskType \u003d s.substring(1, 2);"
+        "content": "    }"
       },
       {
         "lineNumber": 362,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                String description \u003d s.substring(7);"
+        "content": ""
       },
       {
         "lineNumber": 363,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                String status \u003d s.substring(4, 5);"
+        "content": "    /**"
       },
       {
         "lineNumber": 364,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"dd MMM uuuu\");"
+        "content": "     * Converts the input list from strings to task objects."
       },
       {
         "lineNumber": 365,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                switch (taskType) {"
+        "content": "     *"
       },
       {
         "lineNumber": 366,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                case \"T\":"
+        "content": "     * @param list Task list"
       },
       {
         "lineNumber": 367,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    parsedList.add(new Todo(description));"
+        "content": "     * @return Array list of task objects"
       },
       {
         "lineNumber": 368,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    if (status.equals(\"V\")) {"
+        "content": "     */"
       },
       {
         "lineNumber": 369,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        parsedList.get(parsedList.size() - 1).markAsDone();"
+        "content": "    public ArrayList\u003cTask\u003e parseSavedFile(ArrayList\u003cString\u003e list) {"
       },
       {
         "lineNumber": 370,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    }"
+        "content": "        ArrayList\u003cTask\u003e parsedList \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 371,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    break;"
+        "content": "        if (list.size() !\u003d 0) {"
       },
       {
         "lineNumber": 372,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                case \"D\":"
+        "content": "            for (String s : list) {"
       },
       {
         "lineNumber": 373,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    String by \u003d description.substring(description.indexOf(\"by:\") + 4);"
+        "content": "                String taskType \u003d s.substring(1, 2);"
       },
       {
         "lineNumber": 374,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    String[] byComponents \u003d by.split(\" \");"
+        "content": "                String description \u003d s.substring(7);"
       },
       {
         "lineNumber": 375,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    String deadlineDateToParse \u003d byComponents[0] + \" \" + byComponents[1] + \" \""
+        "content": "                String status \u003d s.substring(4, 5);"
       },
       {
         "lineNumber": 376,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                            + byComponents[2].substring(0, 4);"
+        "content": "                DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"dd MMM uuuu\");"
       },
       {
         "lineNumber": 377,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    if (Integer.parseInt(deadlineDateToParse.split(\" \")[0]) \u003c 10) {"
+        "content": "                switch (taskType) {"
       },
       {
         "lineNumber": 378,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        deadlineDateToParse \u003d \"0\" + deadlineDateToParse;"
+        "content": "                case \"T\":"
       },
       {
         "lineNumber": 379,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    }"
+        "content": "                    parsedList.add(new Todo(description));"
       },
       {
         "lineNumber": 380,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    if (byComponents.length \u003d\u003d 3) {"
+        "content": "                    if (status.equals(\"V\")) {"
       },
       {
         "lineNumber": 381,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e"
+        "content": "                        parsedList.get(parsedList.size() - 1).markAsDone();"
       },
       {
         "lineNumber": 382,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalDate deadlineDate \u003d LocalDate.parse("
+        "content": "                    }"
       },
       {
         "lineNumber": 383,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                LocalDate.parse(deadlineDateToParse, formatter).toString());"
+        "content": "                    break;"
       },
       {
         "lineNumber": 384,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        parsedList.add(new Deadline(description.substring(0, description.indexOf(\"(by:\") - 1),"
+        "content": "                case \"D\":"
       },
       {
         "lineNumber": 385,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                deadlineDate));"
+        "content": "                    String by \u003d description.substring(description.indexOf(\"by:\") + 4);"
       },
       {
         "lineNumber": 386,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        if (status.equals(\"V\")) {"
+        "content": "                    String[] byComponents \u003d by.split(\" \");"
       },
       {
         "lineNumber": 387,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                            parsedList.get(parsedList.size() - 1).markAsDone();"
+        "content": "                    String deadlineDateToParse \u003d byComponents[0] + \" \" + byComponents[1] + \" \""
       },
       {
         "lineNumber": 388,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        }"
+        "content": "                            + byComponents[2].substring(0, 4);"
       },
       {
         "lineNumber": 389,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        break;"
+        "content": "                    if (Integer.parseInt(deadlineDateToParse.split(\" \")[0]) \u003c 10) {"
       },
       {
         "lineNumber": 390,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    } else if (byComponents.length \u003d\u003d 4) {"
+        "content": "                        deadlineDateToParse \u003d \"0\" + deadlineDateToParse;"
       },
       {
         "lineNumber": 391,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e \u003cHH:mm\u003e"
+        "content": "                    }"
       },
       {
         "lineNumber": 392,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalDate deadlineDate \u003d LocalDate.parse("
+        "content": "                    if (byComponents.length \u003d\u003d 3) {"
       },
       {
         "lineNumber": 393,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                LocalDate.parse(deadlineDateToParse, formatter).toString());"
+        "content": "                        // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e"
       },
       {
         "lineNumber": 394,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalTime deadlineTime \u003d LocalTime.parse(byComponents[3].substring(0,"
+        "content": "                        LocalDate deadlineDate \u003d LocalDate.parse("
       },
       {
         "lineNumber": 395,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                byComponents[3].indexOf(\")\")));"
+        "content": "                                LocalDate.parse(deadlineDateToParse, formatter).toString());"
       },
       {
         "lineNumber": 396,
@@ -8304,7 +8430,7 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                deadlineDate, deadlineTime));"
+        "content": "                                deadlineDate));"
       },
       {
         "lineNumber": 398,
@@ -8339,189 +8465,189 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    } else {"
+        "content": "                    } else if (byComponents.length \u003d\u003d 4) {"
       },
       {
         "lineNumber": 403,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        break;"
+        "content": "                        // Case: deadline \u003ctask\u003e /by \u003cYYYY-MM-DD of deadline\u003e \u003cHH:mm\u003e"
       },
       {
         "lineNumber": 404,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    }"
+        "content": "                        LocalDate deadlineDate \u003d LocalDate.parse("
       },
       {
         "lineNumber": 405,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                case \"E\":"
+        "content": "                                LocalDate.parse(deadlineDateToParse, formatter).toString());"
       },
       {
         "lineNumber": 406,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    String at \u003d description.substring(description.indexOf(\"at:\") + 4);"
+        "content": "                        LocalTime deadlineTime \u003d LocalTime.parse(byComponents[3].substring(0,"
       },
       {
         "lineNumber": 407,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    String[] atComponents \u003d at.split(\" \");"
+        "content": "                                byComponents[3].indexOf(\")\")));"
       },
       {
         "lineNumber": 408,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    String eventDateToParse \u003d atComponents[0] + \" \" + atComponents[1] + \" \""
+        "content": "                        parsedList.add(new Deadline(description.substring(0, description.indexOf(\"(by:\") - 1),"
       },
       {
         "lineNumber": 409,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                            + atComponents[2].substring(0, 4);"
+        "content": "                                deadlineDate, deadlineTime));"
       },
       {
         "lineNumber": 410,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    if (Integer.parseInt(eventDateToParse.split(\" \")[0]) \u003c 10) {"
+        "content": "                        if (status.equals(\"V\")) {"
       },
       {
         "lineNumber": 411,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        eventDateToParse \u003d \"0\" + eventDateToParse;"
+        "content": "                            parsedList.get(parsedList.size() - 1).markAsDone();"
       },
       {
         "lineNumber": 412,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    }"
+        "content": "                        }"
       },
       {
         "lineNumber": 413,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    if (atComponents.length \u003d\u003d 3) {"
+        "content": "                        break;"
       },
       {
         "lineNumber": 414,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e"
+        "content": "                    } else {"
       },
       {
         "lineNumber": 415,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalDate eventDate \u003d LocalDate.parse("
+        "content": "                        break;"
       },
       {
         "lineNumber": 416,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                LocalDate.parse(eventDateToParse, formatter).toString());"
+        "content": "                    }"
       },
       {
         "lineNumber": 417,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        parsedList.add(new Event(description.substring(0, description.indexOf(\"(at:\") - 1),"
+        "content": "                case \"E\":"
       },
       {
         "lineNumber": 418,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                eventDate));"
+        "content": "                    String at \u003d description.substring(description.indexOf(\"at:\") + 4);"
       },
       {
         "lineNumber": 419,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        if (status.equals(\"V\")) {"
+        "content": "                    String[] atComponents \u003d at.split(\" \");"
       },
       {
         "lineNumber": 420,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                            parsedList.get(parsedList.size() - 1).markAsDone();"
+        "content": "                    String eventDateToParse \u003d atComponents[0] + \" \" + atComponents[1] + \" \""
       },
       {
         "lineNumber": 421,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        }"
+        "content": "                            + atComponents[2].substring(0, 4);"
       },
       {
         "lineNumber": 422,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        break;"
+        "content": "                    if (Integer.parseInt(eventDateToParse.split(\" \")[0]) \u003c 10) {"
       },
       {
         "lineNumber": 423,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    } else if (atComponents.length \u003d\u003d 4) {"
+        "content": "                        eventDateToParse \u003d \"0\" + eventDateToParse;"
       },
       {
         "lineNumber": 424,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e"
+        "content": "                    }"
       },
       {
         "lineNumber": 425,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalDate eventDate \u003d LocalDate.parse("
+        "content": "                    if (atComponents.length \u003d\u003d 3) {"
       },
       {
         "lineNumber": 426,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                LocalDate.parse(eventDateToParse, formatter).toString());"
+        "content": "                        // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e"
       },
       {
         "lineNumber": 427,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalTime eventTime \u003d LocalTime.parse(atComponents[3].substring(0,"
+        "content": "                        LocalDate eventDate \u003d LocalDate.parse("
       },
       {
         "lineNumber": 428,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                atComponents[3].indexOf(\")\")));"
+        "content": "                                LocalDate.parse(eventDateToParse, formatter).toString());"
       },
       {
         "lineNumber": 429,
@@ -8535,7 +8661,7 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                eventDate, eventTime));"
+        "content": "                                eventDate));"
       },
       {
         "lineNumber": 431,
@@ -8570,14 +8696,14 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    } else if (atComponents.length \u003d\u003d 6) {"
+        "content": "                    } else if (atComponents.length \u003d\u003d 4) {"
       },
       {
         "lineNumber": 436,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e to \u003cend HH:mm\u003e"
+        "content": "                        // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e"
       },
       {
         "lineNumber": 437,
@@ -8598,136 +8724,220 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalTime eventTimeStart \u003d LocalTime.parse(atComponents[3]);"
+        "content": "                        LocalTime eventTime \u003d LocalTime.parse(atComponents[3].substring(0,"
       },
       {
         "lineNumber": 440,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        LocalTime eventTimeEnd \u003d LocalTime.parse(atComponents[5].substring(0,"
+        "content": "                                atComponents[3].indexOf(\")\")));"
       },
       {
         "lineNumber": 441,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                atComponents[5].indexOf(\")\")));"
+        "content": "                        parsedList.add(new Event(description.substring(0, description.indexOf(\"(at:\") - 1),"
       },
       {
         "lineNumber": 442,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        parsedList.add(new Event(description.substring(0, description.indexOf(\"(at:\") - 1),"
+        "content": "                                eventDate, eventTime));"
       },
       {
         "lineNumber": 443,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                                eventDate, eventTimeStart, eventTimeEnd));"
+        "content": "                        if (status.equals(\"V\")) {"
       },
       {
         "lineNumber": 444,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        if (status.equals(\"V\")) {"
+        "content": "                            parsedList.get(parsedList.size() - 1).markAsDone();"
       },
       {
         "lineNumber": 445,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                            parsedList.get(parsedList.size() - 1).markAsDone();"
+        "content": "                        }"
       },
       {
         "lineNumber": 446,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        }"
+        "content": "                        break;"
       },
       {
         "lineNumber": 447,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        break;"
+        "content": "                    } else if (atComponents.length \u003d\u003d 6) {"
       },
       {
         "lineNumber": 448,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    } else {"
+        "content": "                        // Case: event \u003cdesc\u003e /at \u003cYYYY-MM-DD of event\u003e \u003cstart HH:mm\u003e to \u003cend HH:mm\u003e"
       },
       {
         "lineNumber": 449,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                        break;"
+        "content": "                        LocalDate eventDate \u003d LocalDate.parse("
       },
       {
         "lineNumber": 450,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    }"
+        "content": "                                LocalDate.parse(eventDateToParse, formatter).toString());"
       },
       {
         "lineNumber": 451,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                default:"
+        "content": "                        LocalTime eventTimeStart \u003d LocalTime.parse(atComponents[3]);"
       },
       {
         "lineNumber": 452,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    break;"
+        "content": "                        LocalTime eventTimeEnd \u003d LocalTime.parse(atComponents[5].substring(0,"
       },
       {
         "lineNumber": 453,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                }"
+        "content": "                                atComponents[5].indexOf(\")\")));"
       },
       {
         "lineNumber": 454,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "                        parsedList.add(new Event(description.substring(0, description.indexOf(\"(at:\") - 1),"
       },
       {
         "lineNumber": 455,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "                                eventDate, eventTimeStart, eventTimeEnd));"
       },
       {
         "lineNumber": 456,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return parsedList;"
+        "content": "                        if (status.equals(\"V\")) {"
       },
       {
         "lineNumber": 457,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "                            parsedList.get(parsedList.size() - 1).markAsDone();"
       },
       {
         "lineNumber": 458,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 459,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 460,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                    } else {"
+      },
+      {
+        "lineNumber": 461,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                        break;"
+      },
+      {
+        "lineNumber": 462,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 463,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                default:"
+      },
+      {
+        "lineNumber": 464,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 465,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 466,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 467,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 468,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "        return parsedList;"
+      },
+      {
+        "lineNumber": 469,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 470,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
@@ -8735,7 +8945,7 @@
       }
     ],
     "authorContributionMap": {
-      "pekchinsiongbrian": 458
+      "pekchinsiongbrian": 470
     }
   },
   {
@@ -9801,203 +10011,203 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param task Name of task to be marked as done"
+        "content": "     * @param task Name of task(s) to be marked as done"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of success message after task is marked as done"
+        "content": "     * @param numOfDone Number of tasks to be marked as done"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * @return String representation of success message after task is marked as done"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showDone(String task) {"
+        "content": "     */"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return \"Nice! I\u0027ve marked this task as done:\\n\\t\" + task;"
+        "content": "    public String showDone(String task, int numOfDone) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        assert numOfDone \u003e 0 : \"Invalid use of done command\";"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        if (numOfDone \u003d\u003d 1) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "            return \"Nice! I\u0027ve marked this task as done:\\t\" + task;"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Generates this message after a task is deleted."
+        "content": "        } else {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "            return \"Nice! I\u0027ve marked these tasks as done:\\t\" + task;"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param task Name of task to be deleted"
+        "content": "        }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param sizeOfList Size of the task list after deletion"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of success message after task is deleted"
+        "content": ""
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showDelete(String task, int sizeOfList) {"
+        "content": "     * Generates this message after a task is deleted."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return \"Noted. I\u0027ve removed this task:\\n\\t\" + task"
+        "content": "     *"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                + \"\\nNow you have \" + sizeOfList + \" tasks in the list.\";"
+        "content": "     * @param task Name of task to be deleted"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "     * @param sizeOfList Size of the task list after deletion"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "     * @param numOfDelete Number of tasks to be deleted"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "     * @return String representation of success message after task is deleted"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Generates this message after a to-do task, deadline, or event is added to the task list."
+        "content": "     */"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    public String showDelete(String task, int sizeOfList, int numOfDelete) {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param task Name of task that was added"
+        "content": "        if (numOfDelete \u003d\u003d 1) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param sizeOfList Size of the task list after adding"
+        "content": "            return \"Noted. I\u0027ve removed this task:\\t\" + task +"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of success message after a task is added to the task list"
+        "content": "                    \"\\nNow you have \" + sizeOfList + \" tasks in the list.\";"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "        } else {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showSuccessMessage(String task, int sizeOfList) {"
+        "content": "            return \"Noted. I\u0027ve removed these tasks:\\t\" + task +"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return \"Got it. I\u0027ve added this task:\\n\\t\" + task + \"\\nNow you have \""
+        "content": "                    \"\\nNow you have \" + sizeOfList + \" tasks in the list.\";"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                + sizeOfList + \" tasks in the list.\";"
+        "content": "        }"
       },
       {
         "lineNumber": 72,
@@ -10025,7 +10235,7 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Turns on countdown timer and generates task list for list command."
+        "content": "     * Generates this message after a to-do task, deadline, or event is added to the task list."
       },
       {
         "lineNumber": 76,
@@ -10039,752 +10249,836 @@
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param list Task list"
+        "content": "     * @param task Name of task that was added"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of task list with countdown timer"
+        "content": "     * @param sizeOfList Size of the task list after adding"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * @return String representation of success message after a task is added to the task list"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showListTimerOn(ArrayList\u003cTask\u003e list) {"
+        "content": "     */"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "    public String showSuccessMessage(String task, int sizeOfList) {"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        sb.append(\"Here are the tasks in your list:\");"
+        "content": "        return \"Got it. I\u0027ve added this task:\\n\\t\" + task + \"\\nNow you have \""
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String toAppend;"
+        "content": "                + sizeOfList + \" tasks in the list.\";"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        for (int i \u003d 0; i \u003c list.size(); i++) {"
+        "content": "    }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            if (list.get(i) instanceof Deadline) {"
+        "content": ""
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Deadline) list.get(i)).displayDeadline();"
+        "content": "    /**"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else if (list.get(i) instanceof Event) {"
+        "content": "     * Turns on countdown timer and generates task list for list command."
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Event) list.get(i)).displayEventTime();"
+        "content": "     *"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            } else {"
+        "content": "     * @param list Task list"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
+        "content": "     * @return String representation of task list with countdown timer"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "     */"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            sb.append(toAppend);"
+        "content": "    public String showListTimerOn(ArrayList\u003cTask\u003e list) {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        sb.append(\"\\n\\nTip: Try using \u0027list /showtimer\u0027 or list \u0027/hidetimer\u0027!\");"
+        "content": "        sb.append(\"Here are the tasks in your list:\");"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return sb.toString();"
+        "content": "        String toAppend;"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        for (int i \u003d 0; i \u003c list.size(); i++) {"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "            if (list.get(i) instanceof Deadline) {"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Deadline) list.get(i)).displayDeadline();"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Turns off countdown timer and generates task list for list command."
+        "content": "            } else if (list.get(i) instanceof Event) {"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Event) list.get(i)).displayEventTime();"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param list Task list"
+        "content": "            } else {"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of task list without countdown timer"
+        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "            }"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showListTimerOff(ArrayList\u003cTask\u003e list) {"
+        "content": "            sb.append(toAppend);"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "        }"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        sb.append(\"Here are the tasks in your list:\");"
+        "content": "        sb.append(\"\\n\\nTip: Try using \u0027list /showtimer\u0027 or list \u0027/hidetimer\u0027!\");"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        String toAppend;"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        for (int i \u003d 0; i \u003c list.size(); i++) {"
+        "content": "    }"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
+        "content": ""
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            sb.append(toAppend);"
+        "content": "    /**"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "     * Turns off countdown timer and generates task list for list command."
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        sb.append(\"\\n\\nTip: Try using \u0027list /showtimer\u0027 or list \u0027/hidetimer\u0027!\");"
+        "content": "     *"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return sb.toString();"
+        "content": "     * @param list Task list"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "     * @return String representation of task list without countdown timer"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "    public String showListTimerOff(ArrayList\u003cTask\u003e list) {"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Turns on countdown timer and generates task list for find command."
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "        sb.append(\"Here are the tasks in your list:\");"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param list Task list"
+        "content": "        String toAppend;"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of a list consisting of tasks that contain the keyword(s) (with countdown timer)"
+        "content": "        for (int i \u003d 0; i \u003c list.size(); i++) {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "            toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showFindListTimerOn(ArrayList\u003cTask\u003e list) {"
+        "content": "            sb.append(toAppend);"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "        }"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        sb.append(\"Here are the matching tasks in your list:\");"
+        "content": "        sb.append(\"\\n\\nTip: Try using \u0027list /showtimer\u0027 or list \u0027/hidetimer\u0027!\");"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        if (list.isEmpty()) {"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            sb.append(\"\\n\\tNo matches found!\");"
+        "content": "    }"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        else {"
+        "content": "    /**"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            String toAppend;"
+        "content": "     * Turns on countdown timer and generates task list for find command."
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            for (int i \u003d 0; i \u003c list.size(); i++) {"
+        "content": "     *"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                if (list.get(i) instanceof Deadline) {"
+        "content": "     * @param list Task list"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Deadline) list.get(i)).displayDeadline();"
+        "content": "     * @return String representation of a list consisting of tasks that contain the keyword(s) (with countdown timer)"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                } else if (list.get(i) instanceof Event) {"
+        "content": "     */"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Event) list.get(i)).displayEventTime();"
+        "content": "    public String showFindListTimerOn(ArrayList\u003cTask\u003e list) {"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                } else {"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                    toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
+        "content": "        sb.append(\"Here are the matching tasks in your list:\");"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                }"
+        "content": "        if (list.isEmpty()) {"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                sb.append(toAppend);"
+        "content": "            sb.append(\"\\n\\tNo matches found!\");"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "        }"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "        else {"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return sb.toString();"
+        "content": "            String toAppend;"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "            for (int i \u003d 0; i \u003c list.size(); i++) {"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "                if (list.get(i) instanceof Deadline) {"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "                    toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Deadline) list.get(i)).displayDeadline();"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Turns off countdown timer and generates task list for find command."
+        "content": "                } else if (list.get(i) instanceof Event) {"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "                    toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + ((Event) list.get(i)).displayEventTime();"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param list Task list"
+        "content": "                } else {"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of a list consisting of tasks that contain the keyword(s) (without countdown timer)"
+        "content": "                    toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "                }"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showFindListTimerOff(ArrayList\u003cTask\u003e list) {"
+        "content": "                sb.append(toAppend);"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "            }"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        sb.append(\"Here are the matching tasks in your list:\");"
+        "content": "        }"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        if (list.isEmpty()) {"
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            sb.append(\"\\n\\tNo matches found!\");"
+        "content": "    }"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        } else {"
+        "content": ""
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            String toAppend;"
+        "content": "    /**"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            for (int i \u003d 0; i \u003c list.size(); i++) {"
+        "content": "     * Turns off countdown timer and generates task list for find command."
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
+        "content": "     *"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                sb.append(toAppend);"
+        "content": "     * @param list Task list"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "            }"
+        "content": "     * @return String representation of a list consisting of tasks that contain the keyword(s) (without countdown timer)"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        }"
+        "content": "     */"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return sb.toString();"
+        "content": "    public String showFindListTimerOff(ArrayList\u003cTask\u003e list) {"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        sb.append(\"Here are the matching tasks in your list:\");"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "        if (list.isEmpty()) {"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Generates this message when task list is empty and user wants to view list."
+        "content": "            sb.append(\"\\n\\tNo matches found!\");"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "        } else {"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of an empty task list"
+        "content": "            String toAppend;"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "            for (int i \u003d 0; i \u003c list.size(); i++) {"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showEmptyListMessage() {"
+        "content": "                toAppend \u003d \"\\n\\t\" + (i + 1) + \". \" + list.get(i);"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return \"\\tHere are the tasks in your list:\\n\\n\\tYou have no tasks \""
+        "content": "                sb.append(toAppend);"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "                + \"right now.\\n\\tUse \u0027todo\u0027, \u0027deadline\u0027, or \u0027event\u0027 to add task!\";"
+        "content": "            }"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": ""
+        "content": "        return sb.toString();"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * Generates error message."
+        "content": ""
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @param errorMessage Error message to display"
+        "content": "     * Generates this message when task list is empty and user wants to view list."
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     * @return String representation of an error message"
+        "content": "     *"
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "     */"
+        "content": "     * @return String representation of an empty task list"
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    public String showError(String errorMessage) {"
+        "content": "     */"
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "        return errorMessage;"
+        "content": "    public String showEmptyListMessage() {"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
-        "content": "    }"
+        "content": "        return \"\\tHere are the tasks in your list:\\n\\n\\tYou have no tasks \""
       },
       {
         "lineNumber": 184,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "                + \"right now.\\n\\tUse \u0027todo\u0027, \u0027deadline\u0027, or \u0027event\u0027 to add task!\";"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 188,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     * Generates error message."
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 190,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     * @param errorMessage Error message to display"
+      },
+      {
+        "lineNumber": 191,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     * @return String representation of an error message"
+      },
+      {
+        "lineNumber": 192,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 193,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    public String showError(String errorMessage) {"
+      },
+      {
+        "lineNumber": 194,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "        return errorMessage;"
+      },
+      {
+        "lineNumber": 195,
+        "author": {
+          "gitId": "pekchinsiongbrian"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 196,
         "author": {
           "gitId": "pekchinsiongbrian"
         },
@@ -10792,7 +11086,7 @@
       }
     ],
     "authorContributionMap": {
-      "pekchinsiongbrian": 184
+      "pekchinsiongbrian": 196
     }
   },
   {

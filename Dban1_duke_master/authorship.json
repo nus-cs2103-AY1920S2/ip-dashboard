@@ -2903,367 +2903,290 @@
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//    private void handleUserInput() {"
+        "content": "    public String getResponse(String fullCommand) {"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//        String userTextInput \u003d userInput.getText();"
+        "content": "        String response \u003d ui.divider(\"\") + \"\\n\";"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//        Label userText \u003d new Label(userTextInput);"
+        "content": "        try {"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//        Label dukeText \u003d new Label(getResponse(userTextInput));"
+        "content": "            response +\u003d ui.divider(\"\");"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//        dialogContainer.getChildren().addAll("
+        "content": "            Command c \u003d Parser.parseCommand(fullCommand);"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//                DialogBox.getUserDialog(userTextInput, new ImageView(user)),"
+        "content": "            response +\u003d c.execute(tasks, storage, ui);"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//                DialogBox.getDukeDialog(getResponse(userTextInput), new ImageView(duke))"
+        "content": "            storage.updateStorage(tasks);"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//        );"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//        userInput.clear();"
+        "content": "            response +\u003d ui.showError(e);"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "//    }"
+        "content": "        } finally {"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "            response +\u003d \"\\n\" + ui.divider(\"\");"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String getResponse(String fullCommand) {"
+        "content": "        }"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        String response \u003d ui.divider(\"\") + \"\\n\";"
+        "content": "        return response;"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        try {"
+        "content": "    }"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            response +\u003d ui.divider(\"\");"
+        "content": ""
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            Command c \u003d Parser.parseCommand(fullCommand);"
+        "content": "    /**"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            response +\u003d c.execute(tasks, storage, ui);"
+        "content": "     * Executes the main function of Duke."
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            storage.updateStorage(tasks);"
+        "content": "     */"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            response +\u003d ui.showError(e);"
+        "content": "        ui.welcomeUser();"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        } finally {"
+        "content": "        boolean isExit \u003d false;"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            response +\u003d \"\\n\" + ui.divider(\"\");"
+        "content": "        while (!isExit) {"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "            try {"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return response;"
+        "content": "                String fullCommand \u003d ui.readCommand();"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "                ui.divider(\"\");"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "                Command c \u003d Parser.parseCommand(fullCommand);"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    /**"
+        "content": "                c.execute(tasks, storage, ui);"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * Executes the main function of Duke."
+        "content": "                storage.updateStorage(tasks);"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     */"
+        "content": "                isExit \u003d c.isExit();"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public void run() {"
+        "content": "            } catch (DukeException e) {"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        ui.welcomeUser();"
+        "content": "                ui.showError(e);"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        boolean isExit \u003d false;"
+        "content": "            } finally {"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        while (!isExit) {"
+        "content": "                ui.divider(\"\");"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            try {"
+        "content": "            }"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                String fullCommand \u003d ui.readCommand();"
+        "content": "        }"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                ui.divider(\"\");"
+        "content": "    }"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                Command c \u003d Parser.parseCommand(fullCommand);"
+        "content": ""
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                c.execute(tasks, storage, ui);"
+        "content": "    public static void main(String[] args) {"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                storage.updateStorage(tasks);"
+        "content": "        new Duke(\"./data/tasks.txt\").run();"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                isExit \u003d c.isExit();"
+        "content": "    }"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            } catch (DukeException e) {"
+        "content": ""
       },
       {
         "lineNumber": 171,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "                ui.showError(e);"
-      },
-      {
-        "lineNumber": 172,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "            } finally {"
-      },
-      {
-        "lineNumber": 173,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "                ui.divider(\"\");"
-      },
-      {
-        "lineNumber": 174,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 175,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 176,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 177,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 178,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "    public static void main(String[] args) {"
-      },
-      {
-        "lineNumber": 179,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "        new Duke(\"./data/tasks.txt\").run();"
-      },
-      {
-        "lineNumber": 180,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 181,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 182,
         "author": {
           "gitId": "Dban1"
         },
@@ -3271,7 +3194,7 @@
       }
     ],
     "authorContributionMap": {
-      "Dban1": 182
+      "Dban1": 171
     }
   },
   {
@@ -4600,234 +4523,269 @@
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            System.out.println(\"Parsed date successfully\");"
+        "content": "            assert this.date.isAfter(LocalDate.now()): \"Invalid early date\";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        } catch (DateTimeParseException de) {"
+        "content": "            getParsed_date_successfully();"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            this.by \u003d by;"
+        "content": "        } catch (DateTimeParseException de) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "            this.by \u003d by;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * Creates a Deadline class."
+        "content": "    private void getParsed_date_successfully() {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @param strArr Array of String containing input for the Deadline class."
+        "content": "        System.out.println(\"Parsed date successfully\");"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @return Created Deadline class."
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public static Deadline create(String[] strArr) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        Deadline t \u003d new Deadline(strArr[2], strArr[3]);"
+        "content": "     * Creates a Deadline class."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        if (strArr[1].equals(\"1\")) {"
+        "content": "     * @param strArr Array of String containing input for the Deadline class."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            t.setDone();"
+        "content": "     * @return Created Deadline class."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "     */"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return t;"
+        "content": "    public static Deadline create(String[] strArr) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        Deadline t \u003d new Deadline(strArr[TASK_NAME_INDEX], strArr[3]);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "        if (strArr[1].equals(\"1\")) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    @Override"
+        "content": "            t.setDone();"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String store() {"
+        "content": "        }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        String dateType \u003d this.by;"
+        "content": "        return t;"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        if (dateType.isEmpty()) {"
+        "content": "    }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            dateType \u003d this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));"
+        "content": ""
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "    @Override"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return \"D|\" + (isDone ? \"1\" : \"0\") + \"|\" + this.description + \"|\" + dateType;"
+        "content": "    public String store() {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        String dateType \u003d this.by;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "        if (dateType.isEmpty()) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    @Override"
+        "content": "            dateType \u003d this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String toString() {"
+        "content": "        }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return \"[D]\" + super.toString() + \"(by: \""
+        "content": "        return \"D|\" + (isDone ? \"1\" : \"0\") + \"|\" + this.description + \"|\" + dateType;"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                + (by.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.by) + \")\";"
+        "content": "    }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 49,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "        return \"[D]\" + super.toString() + \"(by: \""
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "                + (by.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.by) + \")\";"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
         "author": {
           "gitId": "Dban1"
         },
@@ -4835,7 +4793,7 @@
       }
     ],
     "authorContributionMap": {
-      "Dban1": 49
+      "Dban1": 54
     }
   },
   {
@@ -4959,234 +4917,241 @@
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            System.out.println(\"Parsed date successfully\");"
+        "content": "            assert this.date.isAfter(LocalDate.now()): \"Invalid early date\";"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        } catch (DateTimeParseException de) {"
+        "content": "            System.out.println(\"Parsed date successfully\");"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            this.at \u003d at;"
+        "content": "        } catch (DateTimeParseException de) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "            this.at \u003d at;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * Creates an Event class."
+        "content": "    /**"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @param strArr Array of String containing input for the Event class."
+        "content": "     * Creates an Event class."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @return Created Event class."
+        "content": "     * @param strArr Array of String containing input for the Event class."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     */"
+        "content": "     * @return Created Event class."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public static Event create(String[] strArr) {"
+        "content": "     */"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        Event t \u003d new Event(strArr[2], strArr[3]);"
+        "content": "    public static Event create(String[] strArr) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        if (strArr[1].equals(\"1\")) {"
+        "content": "        Event t \u003d new Event(strArr[TASK_NAME_INDEX], strArr[3]);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            t.setDone();"
+        "content": "        if (strArr[1].equals(\"1\")) {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "            t.setDone();"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return t;"
+        "content": "        }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        return t;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String store() {"
+        "content": "    @Override"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        String dateType \u003d this.at;"
+        "content": "    public String store() {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        if (dateType.isEmpty()) {"
+        "content": "        String dateType \u003d this.at;"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            dateType \u003d this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));"
+        "content": "        if (dateType.isEmpty()) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "            dateType \u003d this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return \"E|\" + (isDone ? \"1\" : \"0\") + \"|\" + this.description + \"|\" + dateType;"
+        "content": "        }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        return \"E|\" + (isDone ? \"1\" : \"0\") + \"|\" + this.description + \"|\" + dateType;"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String toString() {"
+        "content": "    @Override"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return \"[E]\" + super.toString() + \"(at: \""
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "                + (at.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.at) + \")\";"
+        "content": "        return \"[E]\" + super.toString() + \"(at: \""
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "                + (at.isEmpty() ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : this.at) + \")\";"
       },
       {
         "lineNumber": 50,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 51,
         "author": {
           "gitId": "Dban1"
         },
@@ -5194,7 +5159,7 @@
       }
     ],
     "authorContributionMap": {
-      "Dban1": 50
+      "Dban1": 51
     }
   },
   {
@@ -5241,248 +5206,262 @@
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "    protected final static int TASK_NAME_INDEX \u003d 2;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public Task(String s) {"
+        "content": "    protected final static int IS_DONE_BOOLEAN_INDEX \u003d 1;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        this.description \u003d s;"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        this.isDone \u003d false;"
+        "content": "    public Task(String s) {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        this.description \u003d s;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "        this.isDone \u003d false;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public void setDone() {"
+        "content": "    }"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        this.isDone \u003d true;"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "    public void setDone() {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "        this.isDone \u003d true;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String getStatusIcon() {"
+        "content": "    }"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return (isDone ? \"✓\" : \"✗\");"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "    public String getStatusIcon() {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "        return (isDone ? \"✓\" : \"✗\");"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String store() {"
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return \"Task|\" + (isDone ? \"1\" : \"0\") + \"|\" + this.description;"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "    public String store() {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "        return \"Task|\" + (isDone ? \"1\" : \"0\") + \"|\" + this.description;"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * Creates a Task class."
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @param strArr Array of String containing input for the Task class."
+        "content": "    /**"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @return Created Task class."
+        "content": "     * Creates a Task class."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     */"
+        "content": "     * @param strArr Array of String containing input for the Task class."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public static Task create(String[] strArr) {"
+        "content": "     * @return Created Task class."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        Task t \u003d new Task(strArr[2]);"
+        "content": "     */"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        if (strArr[1].equals(\"1\")) {"
+        "content": "    public static Task create(String[] strArr) {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            t.setDone();"
+        "content": "        Task t \u003d new Task(strArr[TASK_NAME_INDEX]);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "        if (strArr[1].equals(\"1\")) {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return t;"
+        "content": "            t.setDone();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "        return t;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    @Override"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String toString() {"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return \u0027[\u0027 + getStatusIcon() + \u0027]\u0027 + this.description;"
+        "content": "    @Override"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 41,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "        return \u0027[\u0027 + getStatusIcon() + \u0027]\u0027 + this.description;"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "Dban1"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
         "author": {
           "gitId": "Dban1"
         },
@@ -5490,7 +5469,7 @@
       }
     ],
     "authorContributionMap": {
-      "Dban1": 41
+      "Dban1": 43
     }
   },
   {
@@ -6036,14 +6015,14 @@
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        Todo t \u003d new Todo(strArr[2]);"
+        "content": "        Todo t \u003d new Todo(strArr[TASK_NAME_INDEX]);"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        if (strArr[1].equals(\"1\")) {"
+        "content": "        if (strArr[IS_DONE_BOOLEAN_INDEX].equals(\"1\")) {"
       },
       {
         "lineNumber": 21,
@@ -6425,241 +6404,213 @@
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        if (s.length() \u003d\u003d 0) {"
+        "content": "        return s;"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            return \"\";"
+        "content": "    }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        } else {"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "            return s;"
+        "content": "    /**"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        }"
+        "content": "     * Reads user input."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "     * @return User input."
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    /**"
+        "content": "    public String readCommand() {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * Reads user input."
+        "content": "        String scanned \u003d scan.nextLine();"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @return User input."
+        "content": "        return scanned;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String readCommand() {"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        String scanned \u003d scan.nextLine();"
+        "content": "    /**"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return scanned;"
+        "content": "     * Prints input String."
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "     * @param s Input String."
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    /**"
+        "content": "    public String showMessage(String s) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * Prints input String."
+        "content": "        System.out.println(s);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @param s Input String."
+        "content": "        return s;"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String showMessage(String s) {"
+        "content": ""
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        System.out.println(s);"
+        "content": "    /**"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "        return s;"
+        "content": "     * Prints given DukeException."
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    }"
+        "content": "     * @param e Input DukeException."
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "Dban1"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    /**"
+        "content": "    public String showError(DukeException e) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * Prints given DukeException."
+        "content": "        System.out.println(e.toString());"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     * @param e Input DukeException."
+        "content": "        return e.toString();"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "Dban1"
         },
-        "content": "    public String showError(DukeException e) {"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "        System.out.println(e.toString());"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "        return e.toString();"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "Dban1"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "Dban1"
-        },
         "content": ""
       },
       {
-        "lineNumber": 67,
+        "lineNumber": 63,
         "author": {
           "gitId": "Dban1"
         },
@@ -6667,7 +6618,7 @@
       }
     ],
     "authorContributionMap": {
-      "Dban1": 67
+      "Dban1": 63
     }
   },
   {

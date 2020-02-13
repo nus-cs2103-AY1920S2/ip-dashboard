@@ -396,7 +396,7 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "0 || deadline || abc || 2020-12-12 1500"
+        "content": "0 || deadline || sleep || 2000-01-01 1300"
       },
       {
         "lineNumber": 2,
@@ -410,7 +410,7 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "1 || todo || myself"
+        "content": "1 || todo || test"
       }
     ],
     "authorContributionMap": {
@@ -1094,70 +1094,70 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "import java.util.regex.Pattern;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.ByeCommand;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.Command;"
+        "content": "import duke.command.*;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.AddDeadlineCommand;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.AddEventCommand;"
+        "content": "import duke.exception.*;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.DoneCommand;"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.SearchCommand;"
+        "content": "/**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.DeleteCommand;"
+        "content": " * Class representing the parser with methods to parse strings."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.ListCommand;"
+        "content": " */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.command.AddTodoCommand;"
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 16,
@@ -1171,871 +1171,1158 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.exception.TimeFormatException;"
+        "content": "    /**"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.exception.UnknownCommandException;"
+        "content": "     * Parses the user input to a Command object."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.exception.MissingTimeException;"
+        "content": "     *"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.exception.InvalidIndexException;"
+        "content": "     * @param longCommand user String input."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "import duke.exception.MissingParameterException;"
+        "content": "     * @return Command object that represents the user input."
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "/**"
+        "content": "    public Command parse(String longCommand) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": " * Class representing the parser with methods to parse strings."
+        "content": "        String[] keywords \u003d longCommand.split(\" \", 2);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": " */"
+        "content": "        String commandString \u003d keywords[0];"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "public class Parser {"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "        switch (commandString) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "        case \"bye\" :"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Parses the user input to a Command object."
+        "content": "            return new ByeCommand();"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "        case \"list\":"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param longCommand user String input."
+        "content": "            return new ListCommand();"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return Command object that represents the user input."
+        "content": "        case \"done\":"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public Command parse(String longCommand) {"
+        "content": "            return new DoneCommand(parseStringToInt(keywords[1]));"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String[] keywords \u003d longCommand.split(\" \", 2);"
+        "content": "        case \"search\":"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String commandString \u003d keywords[0];"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "            return new SearchCommand(keywords[1]);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        switch (commandString) {"
+        "content": "        case \"delete\":"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"bye\" :"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return new ByeCommand();"
+        "content": "            return new DeleteCommand(parseStringToInt(keywords[1]));"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"list\":"
+        "content": "        case \"todo\":"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return new ListCommand();"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"done\":"
+        "content": "            return new AddTodoCommand(keywords[1]);"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            checkKeywordsLength(keywords);"
+        "content": "        case \"event\":"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return new DoneCommand(parseStringToInt(keywords[1]));"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"search\":"
+        "content": "            return parseEvent(keywords[1]);"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            checkKeywordsLength(keywords);"
+        "content": "        case \"deadline\":"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return new SearchCommand(keywords[1]);"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"delete\":"
+        "content": "            return parseDeadline(keywords[1]);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            checkKeywordsLength(keywords);"
+        "content": "        case \"updatetodo\":"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return new DeleteCommand(parseStringToInt(keywords[1]));"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"todo\":"
+        "content": "            return parseUpdateTodo(keywords[1]);"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            checkKeywordsLength(keywords);"
+        "content": "        case \"updatedeadline\":"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return new AddTodoCommand(keywords[1]);"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"event\":"
+        "content": "            return parseUpdateDeadline(keywords[1]);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            checkKeywordsLength(keywords);"
+        "content": "        case \"updateevent\":"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return parseEvent(keywords[1]);"
+        "content": "            checkKeywordsLength(keywords);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        case \"deadline\":"
+        "content": "            return parseUpdateEvent(keywords[1]);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            checkKeywordsLength(keywords);"
+        "content": "        default:"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return parseDeadline(keywords[1]);"
+        "content": "            throw new UnknownCommandException(keywords[0]);"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        default:"
+        "content": "        }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            throw new UnknownCommandException(keywords[0]);"
+        "content": "    }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": "    private String[] tokenizeUpdateCommand(String description) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "        String[] tokenArr \u003d description.split(\"desc/|time/\");"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "        if (tokenArr.length \u003c 2) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "            throw new DukeException(\"Wrong format for update command\");"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Checks if the keywords array is of the length 2. Throws MissingParameterException"
+        "content": "        }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * if keywords array is anything but 2."
+        "content": "        return tokenArr;"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param keywords Array of keywords"
+        "content": ""
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "    private UpdateEventCommand parseUpdateEvent(String description) {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    private void checkKeywordsLength(String[] keywords) {"
+        "content": "        String[] tokenArr \u003d tokenizeUpdateCommand(description);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        if (keywords.length !\u003d 2) {"
+        "content": "        if (tokenArr.length !\u003d 3) {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            throw new MissingParameterException("
+        "content": "            throw new DukeException(\"Wrong format for update event command\");"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "                    keywords[0].substring(0, 1).toUpperCase() + keywords[0].substring(1));"
+        "content": "        }"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": "        String indexStr \u003d tokenArr[0].trim();"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "        String newDesc \u003d tokenArr[1].trim();"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "        String newTimeStr \u003d tokenArr[2].trim();"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "        LocalDateTime newTime \u003d stringToTime(newTimeStr);"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Parses string that is supposed to represent a number to int."
+        "content": "        return new UpdateEventCommand(Integer.parseInt(indexStr) - 1, newDesc, newTime);"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "    }"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param indexStr String that is supposed to represent an integer."
+        "content": ""
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return Integer parsed from the String."
+        "content": "    private UpdateDeadlineCommand parseUpdateDeadline(String description) {"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "        String[] tokenArr \u003d tokenizeUpdateCommand(description);"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public int parseStringToInt(String indexStr) {"
+        "content": "        if (tokenArr.length !\u003d 3) {"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        try {"
+        "content": "            System.out.println(tokenArr.length);"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return Integer.parseInt(indexStr) - 1;"
+        "content": "            throw new DukeException(\"Wrong format for update deadline command\");"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        } catch (NumberFormatException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            throw new InvalidIndexException(indexStr);"
+        "content": "        String indexStr \u003d tokenArr[0].trim();"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": "        String newDesc \u003d tokenArr[1].trim();"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "        String newTimeStr \u003d tokenArr[2].trim();"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "        LocalDateTime newTime \u003d stringToTime(newTimeStr);"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "        return new UpdateDeadlineCommand(Integer.parseInt(indexStr) - 1, newDesc, newTime);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Parses description into Deadline Command."
+        "content": "    }"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param longDescription String description to describe the deadline."
+        "content": "    private UpdateTodoCommand parseUpdateTodo(String description) {"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return DeadlineCommand as described by the description."
+        "content": "        String[] tokenArr \u003d tokenizeUpdateCommand(description);"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "        if (tokenArr.length !\u003d 2) {"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public AddDeadlineCommand parseDeadline(String longDescription) {"
+        "content": "            System.out.println(tokenArr.length);"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String[] strArr \u003d longDescription.split(\" /by \", 2);"
+        "content": "            throw new DukeException(\"Wrong format for update todo command\");"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        if (strArr.length \u003d\u003d 1) {"
+        "content": "        }"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            assert !longDescription.contains(\" /by \"): \"Deadline has time\";"
+        "content": "        String indexStr \u003d tokenArr[0].trim();"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            throw new MissingTimeException(\"Deadline\");"
+        "content": "        String newDesc \u003d tokenArr[1].trim();"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": "        return new UpdateTodoCommand(Integer.parseInt(indexStr) - 1, newDesc);"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String description \u003d strArr[0];"
+        "content": "    }"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        LocalDateTime time \u003d stringToTime(strArr[1]);"
+        "content": ""
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        return new AddDeadlineCommand(description, time);"
+        "content": "    /**"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     * Checks if the keywords array is of the length 2. Throws MissingParameterException"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "     * if keywords array is anything but 2."
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Parses description into Event Command."
+        "content": "     * @param keywords Array of keywords"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param longDescription String description to describe the event."
+        "content": "    private void checkKeywordsLength(String[] keywords) {"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return EventCommand as described by the description."
+        "content": "        if (keywords.length !\u003d 2) {"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "            throw new MissingParameterException("
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public AddEventCommand parseEvent(String longDescription) {"
+        "content": "                    keywords[0].substring(0, 1).toUpperCase() + keywords[0].substring(1));"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String[] strArr \u003d longDescription.split(\" /at \", 2);"
+        "content": "        }"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        if (strArr.length \u003d\u003d 1) {"
+        "content": "    }"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            assert !longDescription.contains(\" /at \"): \"Event has time\";"
+        "content": ""
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            throw new MissingTimeException(\"Event\");"
+        "content": "    /**"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": "     * Parses string that is supposed to represent a number to int."
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String description \u003d strArr[0];"
+        "content": "     *"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        LocalDateTime time \u003d stringToTime(strArr[1]);"
+        "content": "     * @param indexStr String that is supposed to represent an integer."
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        return new AddEventCommand(description, time);"
+        "content": "     * @return Integer parsed from the String."
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "    public int parseStringToInt(String indexStr) {"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "        try {"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Parses time String to LocalDateTime object."
+        "content": "            return Integer.parseInt(indexStr) - 1;"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "        } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param str String of the time input of the user."
+        "content": "            throw new InvalidIndexException(indexStr);"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return LocalDateTime representation of that time format."
+        "content": "        }"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public LocalDateTime stringToTime(String str) {"
+        "content": ""
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        try {"
+        "content": "    /**"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"yyyy-MM-dd HHmm\");"
+        "content": "     * Parses description into Deadline Command."
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return LocalDateTime.parse(str, formatter);"
+        "content": "     *"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        } catch (DateTimeParseException e) {"
+        "content": "     * @param longDescription String description to describe the deadline."
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            throw new TimeFormatException();"
+        "content": "     * @return DeadlineCommand as described by the description."
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": "     */"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "    public AddDeadlineCommand parseDeadline(String longDescription) {"
       },
       {
         "lineNumber": 141,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        String[] strArr \u003d longDescription.split(\" /by \", 2);"
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        if (strArr.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            assert !longDescription.contains(\" /by \"): \"Deadline has time\";"
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            throw new MissingTimeException(\"Deadline\");"
+      },
+      {
+        "lineNumber": 145,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 146,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        String description \u003d strArr[0];"
+      },
+      {
+        "lineNumber": 147,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        LocalDateTime time \u003d stringToTime(strArr[1]);"
+      },
+      {
+        "lineNumber": 148,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        return new AddDeadlineCommand(description, time);"
+      },
+      {
+        "lineNumber": 149,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 150,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 151,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 152,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * Parses description into Event Command."
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * @param longDescription String description to describe the event."
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * @return EventCommand as described by the description."
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public AddEventCommand parseEvent(String longDescription) {"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        String[] strArr \u003d longDescription.split(\" /at \", 2);"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        if (strArr.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            assert !longDescription.contains(\" /at \"): \"Event has time\";"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            throw new MissingTimeException(\"Event\");"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        String description \u003d strArr[0];"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        LocalDateTime time \u003d stringToTime(strArr[1]);"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        return new AddEventCommand(description, time);"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * Parses time String to LocalDateTime object."
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * @param str String of the time input of the user."
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * @return LocalDateTime representation of that time format."
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public LocalDateTime stringToTime(String str) {"
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"yyyy-MM-dd HHmm\");"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            return LocalDateTime.parse(str, formatter);"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        } catch (DateTimeParseException e) {"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            throw new TimeFormatException();"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 182,
         "author": {
           "gitId": "helloImHai"
         },
@@ -2043,7 +2330,7 @@
       }
     ],
     "authorContributionMap": {
-      "helloImHai": 141
+      "helloImHai": 182
     }
   },
   {
@@ -3823,157 +4110,206 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "    public void showUpdate(Task task, ArrayList\u003cTask\u003e tasks) {"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Prints the Exception."
+        "content": "        printSmallLine();"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "        System.out.println(\"\\tGot it. I\u0027ve changed this task to:\");"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param e Exception thrown."
+        "content": "        System.out.printf(\"\\t%s\\n\", task);"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "        printSmallLine();"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public void showException(Exception e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        printSmallLine();"
+        "content": ""
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        System.out.println(\"    \" + e);"
+        "content": "    /**"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        printSmallLine();"
+        "content": "     * Prints the Exception."
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "     * @param e Exception thrown."
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Prints the Exception."
+        "content": "    public void showException(Exception e) {"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "        printSmallLine();"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param e Exception that is not explicitly caught by our catches."
+        "content": "        System.out.println(\"    \" + e);"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "        printSmallLine();"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public void showUnknownException(Exception e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        printSmallLine();"
+        "content": ""
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        System.out.printf(\"    I don\u0027t know this error homie, take a look:\\n    %s\\n\", e.toString());"
+        "content": "    /**"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        e.printStackTrace();"
+        "content": "     * Prints the Exception."
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        printSmallLine();"
+        "content": "     *"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     * @param e Exception that is not explicitly caught by our catches."
       },
       {
         "lineNumber": 138,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public void showUnknownException(Exception e) {"
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        printSmallLine();"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        System.out.printf(\"    I don\u0027t know this error homie, take a look:\\n    %s\\n\", e.toString());"
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        e.printStackTrace();"
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        printSmallLine();"
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 145,
         "author": {
           "gitId": "helloImHai"
         },
@@ -3981,7 +4317,7 @@
       }
     ],
     "authorContributionMap": {
-      "helloImHai": 138
+      "helloImHai": 145
     }
   },
   {
@@ -5911,6 +6247,889 @@
     ],
     "authorContributionMap": {
       "helloImHai": 39
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/UpdateDeadlineCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.task.Deadline;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import java.time.LocalDateTime;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "public class UpdateDeadlineCommand extends UpdateTimedTaskCommand {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public UpdateDeadlineCommand(int index, String description, LocalDateTime time) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        super(index, description, time);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        if (!(super.getTask(taskList) instanceof Deadline)) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            throw new DukeException(\"Task is not an Deadline\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        super.execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "helloImHai": 21
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/UpdateEventCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.task.Event;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import java.time.LocalDateTime;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "public class UpdateEventCommand extends UpdateTimedTaskCommand {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public UpdateEventCommand(int index, String description, LocalDateTime time) {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        super(index, description, time);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        if (!(super.getTask(taskList) instanceof Event)) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            throw new DukeException(\"Task is not an Event\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        super.execute(taskList, ui);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "helloImHai": 21
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/UpdateTimedTaskCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.exception.InvalidIndexException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.gui.Gui;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import java.time.LocalDateTime;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "public class UpdateTimedTaskCommand extends Command {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    protected int index;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    protected String description;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    protected LocalDateTime time;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public UpdateTimedTaskCommand(int index, String description, LocalDateTime time) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        this.index \u003d index;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        this.description \u003d description;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        this.time \u003d time;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public Task getTask(TaskList taskList) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            return taskList.getTaskList().get(index);"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            throw new InvalidIndexException(Integer.toString(index + 1));"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        Task task \u003d getTask(taskList);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        task.setDescription(description);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        task.setTime(time);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        ui.showUpdate(task, taskList.getTaskList());"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public String execute(TaskList taskList, Gui gui) {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        return null;"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "helloImHai": 42
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/UpdateTodoCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.TaskList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.exception.InvalidIndexException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.gui.Gui;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "public class UpdateTodoCommand extends Command {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    protected int index;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    protected String description;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public UpdateTodoCommand(int index, String description) {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        this.index \u003d index;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        this.description \u003d description;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public Task getTask(TaskList taskList) {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            return taskList.getTaskList().get(index);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            throw new InvalidIndexException(Integer.toString(index + 1));"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public void execute(TaskList taskList, Ui ui) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        Task task \u003d getTask(taskList);"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        task.setDescription(description);"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        ui.showUpdate(task, taskList.getTaskList());"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public String execute(TaskList taskList, Gui gui) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        return null;"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "helloImHai": 37
     }
   },
   {
@@ -8359,269 +9578,241 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Time that task must be completed by."
+        "content": "    /**"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "     * Creates a Deadline object."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    protected LocalDateTime time;"
+        "content": "     *"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "     * @param description String containing what to do."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     * @param time LocalDateTime object representing time that task must be completed by."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Creates a Deadline object."
+        "content": "     */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "    public Deadline(String description, LocalDateTime time) {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param task String containing what to do."
+        "content": "        super(description);"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param time LocalDateTime object representing time that task must be completed by."
+        "content": "        this.time \u003d time;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public Deadline(String task, LocalDateTime time) {"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        super(task);"
+        "content": "    /**"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        this.time \u003d time;"
+        "content": "     * Returns a String representation of the Deadline object."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "     * @return String representation of the deadline to print."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Returns a String representation of the Deadline object."
+        "content": "    @Override"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return String representation of the deadline to print."
+        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"HH:mm, MMM d yyyy\"));"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "        return String.format(\"[D]%s (by: %s)\", super.toString(), timeStr);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    @Override"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public String toString() {"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"HH:mm, MMM d yyyy\"));"
+        "content": "    /**"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        return String.format(\"[D]%s (by: %s)\", super.toString(), timeStr);"
+        "content": "     * Returns a String representation of the Deadline object to save."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "     * @return String representation of the deadline to save."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Returns a String representation of the Deadline object to save."
+        "content": "    @Override"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "    public String toSaveString() {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return String representation of the deadline to save."
+        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HHmm\"));"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "        return String.format("
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    @Override"
+        "content": "                \"%s || deadline || %s || %s\", super.toSaveString(), this.description, timeStr);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public String toSaveString() {"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "helloImHai"
-        },
-        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HHmm\"));"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "helloImHai"
-        },
-        "content": "        return String.format("
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "helloImHai"
-        },
-        "content": "                \"%s || deadline || %s || %s\", super.toSaveString(), this.task, timeStr);"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "helloImHai"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 48,
+        "lineNumber": 44,
         "author": {
           "gitId": "helloImHai"
         },
@@ -8629,7 +9820,7 @@
       }
     ],
     "authorContributionMap": {
-      "helloImHai": 48
+      "helloImHai": 44
     }
   },
   {
@@ -8704,241 +9895,234 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    protected LocalDateTime time;"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     * Creates Event object."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Creates Event object."
+        "content": "     *"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "     * @param description String representing the task that needs to be done"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param task String representing the task that needs to be done"
+        "content": "     * @param time LocalDateTime representing the time event is at."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param time LocalDateTime representing the time event is at."
+        "content": "     */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "    public Event(String description, LocalDateTime time) {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public Event(String task, LocalDateTime time) {"
+        "content": "        super(description);"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        super(task);"
+        "content": "        this.time \u003d time;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        this.time \u003d time;"
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     * Returns String representation of the event object."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Returns String representation of the event object."
+        "content": "     *"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "     * @return String representation of the event to print."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return String representation of the event to print."
+        "content": "     */"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "    @Override"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    @Override"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public String toString() {"
+        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"HH:mm, MMM d yyyy\"));"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"HH:mm, MMM d yyyy\"));"
+        "content": "        return String.format(\"[E]%s (at: %s)\", super.toString(), timeStr);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        return String.format(\"[E]%s (at: %s)\", super.toString(), timeStr);"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "    "
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    "
+        "content": "    /**"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     * Returns String representation of the event object to be saved."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Returns String representation of the event object to be saved."
+        "content": "     *"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "     * @return String representation of the event to save."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return String representation of the event to save."
+        "content": "     */"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "    @Override"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    @Override"
+        "content": "    public java.lang.String toSaveString() {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public java.lang.String toSaveString() {"
+        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HHmm\"));"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        String timeStr \u003d this.time.format(DateTimeFormatter.ofPattern(\"yyyy-MM-dd HHmm\"));"
+        "content": "        return String.format(\"%s || event || %s || %s\", super.toSaveString(), this.description, timeStr);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        return String.format(\"%s || event || %s || %s\", super.toSaveString(), this.task, timeStr);"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "helloImHai"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 44,
+        "lineNumber": 43,
         "author": {
           "gitId": "helloImHai"
         },
@@ -8946,7 +10130,7 @@
       }
     ],
     "authorContributionMap": {
-      "helloImHai": 44
+      "helloImHai": 43
     }
   },
   {
@@ -8972,339 +10156,416 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "/**"
+        "content": "import java.time.LocalDateTime;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": " * Class representation of Task."
+        "content": ""
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "public class Task {"
+        "content": " * Class representation of Task."
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    protected String task;"
+        "content": "public class Task {"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    protected Boolean done \u003d false;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "    protected String description;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "    protected LocalDateTime time \u003d null;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Creates Task object."
+        "content": "    protected Boolean done \u003d false;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @param task String describing what to do."
+        "content": "    /**"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "     * Creates Task object."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    Task(String task) {"
+        "content": "     *"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        this.task \u003d task;"
+        "content": "     * @param description String describing what to do."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "    Task(String description) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /** Sets this task as done. */"
+        "content": "        this.description \u003d description;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public void done() {"
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        this.done \u003d true;"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "    public void setDescription(String description) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "        this.description \u003d description;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Returns the String representation of the task to print."
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "    public void setTime(LocalDateTime time) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return String representation of the task to print."
+        "content": "        this.time \u003d time;"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public String toString() {"
+        "content": "    /** Sets this task as done. */"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        if (done) {"
+        "content": "    public void done() {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return \"[✓] \" + this.task;"
+        "content": "        this.done \u003d true;"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        } else {"
+        "content": "    }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return \"[✗] \" + this.task;"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": "    /**"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "     * Returns the String representation of the task to print."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    /**"
+        "content": "     * @return String representation of the task to print."
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * Returns the String representation of the task to save."
+        "content": "     */"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     *"
+        "content": "    @Override"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     * @return String representation of the task to save."
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "     */"
+        "content": "        if (done) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    public String toSaveString() {"
+        "content": "            return \"[✓] \" + this.description;"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        if (done) {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return \"1\";"
+        "content": "            return \"[✗] \" + this.description;"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        } else {"
+        "content": "        }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "            return \"0\";"
+        "content": "    }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 51,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * Returns the String representation of the task to save."
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     * @return String representation of the task to save."
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    public String toSaveString() {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        if (done) {"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            return \"1\";"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "            return \"0\";"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 62,
         "author": {
           "gitId": "helloImHai"
         },
@@ -9312,7 +10573,7 @@
       }
     ],
     "authorContributionMap": {
-      "helloImHai": 51
+      "helloImHai": 62
     }
   },
   {
@@ -9548,7 +10809,7 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "        return String.format(\"%s || todo || %s\", super.toSaveString(), this.task);"
+        "content": "        return String.format(\"%s || todo || %s\", super.toSaveString(), this.description);"
       },
       {
         "lineNumber": 34,
@@ -10279,11 +11540,39 @@
         "author": {
           "gitId": "helloImHai"
         },
+        "content": "updatedeadline 1 desc/ say hello time/ 2020-01-01 1300"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "updatetodo 3 desc/ your mom"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "updateevent 3 desc/ say hello time/ 2020-01-01 1300"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "helloImHai"
+        },
+        "content": "list"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "helloImHai"
+        },
         "content": "bye"
       }
     ],
     "authorContributionMap": {
-      "helloImHai": 32
+      "helloImHai": 36
     }
   },
   {
@@ -10542,7 +11831,7 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "1 || deadline || return book || 2020-03-15 1530"
+        "content": "1 || deadline || say hello || 2020-01-01 1300"
       },
       {
         "lineNumber": 2,
@@ -10556,7 +11845,7 @@
         "author": {
           "gitId": "helloImHai"
         },
-        "content": "0 || todo || your butt"
+        "content": "0 || todo || your mom"
       }
     ],
     "authorContributionMap": {

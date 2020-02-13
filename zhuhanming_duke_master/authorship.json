@@ -697,7 +697,7 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            this.ui.printLoadingError(e.getMessage());"
+        "content": "            this.ui.printToConsole(e.getMessage());"
       },
       {
         "lineNumber": 42,
@@ -872,7 +872,7 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                this.ui.printLoadingError(e.getMessage());"
+        "content": "                this.ui.printToConsole(e.getMessage());"
       },
       {
         "lineNumber": 67,
@@ -1752,6 +1752,274 @@
     }
   },
   {
+    "path": "src/main/java/duke/command/AdminCommandHandler.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.storage.Storage;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.ui.Ui;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " * The {@code AdminCommandHandler} class contains all static methods to handle"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " * administrative commands given the same arguments of command, taskList, ui and storage."
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "public class AdminCommandHandler {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Prints the help message with the given {@code Ui} instance."
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleHelpCommand(String command, TaskList taskList, Ui ui, Storage storage) {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        assert command.trim().equalsIgnoreCase(\"help\"); // pre-condition"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return ui.printHelpMessage();"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Prints the goodbye message with the given {@code Ui} instance."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleByeCommand(String command, TaskList taskList, Ui ui, Storage storage) {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        assert command.trim().equalsIgnoreCase(\"bye\"); // pre-condition"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return ui.printGoodbye();"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "zhuhanming": 37
+    }
+  },
+  {
     "path": "src/main/java/duke/command/Command.java",
     "fileType": "java",
     "lines": [
@@ -1844,63 +2112,63 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    TODO(CommandHandler::handleTodoCommand),"
+        "content": "    TODO(TaskCreationHandler::handleTodoCommand),"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    EVENT(CommandHandler::handleEventCommand),"
+        "content": "    EVENT(TaskCreationHandler::handleEventCommand),"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    DEADLINE(CommandHandler::handleDeadlineCommand),"
+        "content": "    DEADLINE(TaskCreationHandler::handleDeadlineCommand),"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    LIST(CommandHandler::handleListCommand),"
+        "content": "    LIST(TaskListCommandHandler::handleListCommand),"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    DONE(CommandHandler::handleDoneCommand),"
+        "content": "    DONE(TaskListCommandHandler::handleDoneCommand),"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    FIND(CommandHandler::handleFindCommand),"
+        "content": "    FIND(TaskListCommandHandler::handleFindCommand),"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    DELETE(CommandHandler::handleDeleteCommand),"
+        "content": "    DELETE(TaskListCommandHandler::handleDeleteCommand),"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    HELP(CommandHandler::handleHelpCommand),"
+        "content": "    HELP(AdminCommandHandler::handleHelpCommand),"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    BYE(CommandHandler::handleByeCommand);"
+        "content": "    BYE(AdminCommandHandler::handleByeCommand);"
       },
       {
         "lineNumber": 22,
@@ -3545,6 +3813,2054 @@
     ],
     "authorContributionMap": {
       "zhuhanming": 217
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/TaskCreationHandler.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.exception.DuchessException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.storage.Storage;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.Deadline;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.Event;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.ToDo;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.ui.Ui;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.util.DateTimeParser;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import java.util.Arrays;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_DEADLINE_MISSING_CONTENT;"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_DEADLINE_MISSING_DEADLINE;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_EVENT_MISSING_CONTENT;"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_EVENT_MISSING_TIME_FRAME;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_INVALID_COMMAND;"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_TODO_MISSING_CONTENT;"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " * The {@code TaskCreationHandler} class contains all static methods"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " * to handle task creation commands given the same arguments of"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " * command, taskList, ui and storage."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "public class TaskCreationHandler {"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Creates a {@code ToDo} based on the command and given the entire command and"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * the supporting instances."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException If the list fails to be saved."
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleTodoCommand(String command, TaskList taskList,"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                                    Ui ui, Storage storage) throws DuchessException {"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        Task newTask \u003d getTaskFromCommand(command);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return saveTask(newTask, taskList, storage, ui);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Creates a {@code Event} based on the command and given the entire command and"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * the supporting instances."
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException If the list fails to be saved or /at [details] is"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *                          missing."
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleEventCommand(String command, TaskList taskList,"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                                     Ui ui, Storage storage) throws DuchessException {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        Task newTask \u003d getTaskFromCommand(command, \"/at\");"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return saveTask(newTask, taskList, storage, ui);"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Creates a {@code Deadline} based on the command and given the entire command"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * and the supporting instances."
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException If the list fails to be saved or /by is missing or"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *                          the deadline is of an unrecognizable format."
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleDeadlineCommand(String command, TaskList taskList,"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                                        Ui ui, Storage storage) throws DuchessException {"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        Task newTask \u003d getTaskFromCommand(command, \"/by\");"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return saveTask(newTask, taskList, storage, ui);"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    // Private helper methods from this point onwards."
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Returns a task based on the command given. Private helper method that"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * processes. the input and checks for any errors. If error is found, an"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * appropriate error is thrown."
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command Command to process."
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @return Task created from command."
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException If the given command is of an invalid format."
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static Task getTaskFromCommand(String command) throws DuchessException {"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        ArrayList\u003cString\u003e commands \u003d new ArrayList\u003c\u003e(Arrays.asList(command.split(\"\\\\s\", 2)));"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (commands.size() \u003c 2) {"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            handleMissingContent(commands.get(0).toLowerCase());"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        assert commands.get(0).equals(\"todo\");"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return new ToDo(commands.get(1).trim());"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Returns a task based on the command given. Private helper method that"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * processes. the input and checks for any errors. If error is found, an"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * appropriate error is thrown."
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command Command to process."
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @return Task created from command."
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException If the given command is of an invalid format."
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static Task getTaskFromCommand(String command, String detailsKeyword) throws DuchessException {"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        ArrayList\u003cString\u003e commands \u003d new ArrayList\u003c\u003e(Arrays.asList(command.split(\"\\\\s\", 2)));"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (commands.size() \u003c 2) {"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            handleMissingContent(commands.get(0).toLowerCase());"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        ArrayList\u003cString\u003e details \u003d new ArrayList\u003c\u003e(Arrays.asList(commands.get(1).split(detailsKeyword)));"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (details.size() \u003c 2) {"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            handleMissingDetails(commands.get(0).toLowerCase());"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (commands.get(0).equalsIgnoreCase(\"event\")) {"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            return new Event(details.get(0).trim(), details.get(1).trim());"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        assert commands.get(0).equalsIgnoreCase(\"deadline\");"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        String timeDetails \u003d details.get(1).trim().toLowerCase();"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return new Deadline(details.get(0).trim(), DateTimeParser.parseDateTime(timeDetails));"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Throws the appropriate missing content error."
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param type Type of task with missing content."
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException An exception with an appropriate error message."
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static void handleMissingContent(String type) throws DuchessException {"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        switch (type) {"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        case \"todo\":"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_TODO_MISSING_CONTENT);"
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        case \"event\":"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_EVENT_MISSING_CONTENT);"
+      },
+      {
+        "lineNumber": 137,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        case \"deadline\":"
+      },
+      {
+        "lineNumber": 138,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_DEADLINE_MISSING_CONTENT);"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_INVALID_COMMAND);"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 145,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Throws the appropriate missing details error."
+      },
+      {
+        "lineNumber": 146,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 147,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param type Type of task with missing details."
+      },
+      {
+        "lineNumber": 148,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException An exception with an appropriate error message."
+      },
+      {
+        "lineNumber": 149,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 150,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static void handleMissingDetails(String type) throws DuchessException {"
+      },
+      {
+        "lineNumber": 151,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (type.equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 152,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_EVENT_MISSING_TIME_FRAME);"
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        assert type.equals(\"deadline\");"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        throw new DuchessException(ERROR_DEADLINE_MISSING_DEADLINE);"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Saves the newly created {@code Task} and returns a success message."
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param newTask  {@code Task} to be saved."
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList {@code TaskList} to save to."
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  {@code Storage} to write to the save file with."
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       {@code Ui} to generate the success message."
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @return A success message based on the new Task."
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException Failure to write to the save file."
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static String saveTask(Task newTask, TaskList taskList,"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                                   Storage storage, Ui ui) throws DuchessException {"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        taskList.addTask(newTask);"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        storage.save(taskList);"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return ui.printTaskAdded(newTask, taskList.size());"
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "zhuhanming": 174
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/TaskListCommandHandler.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.exception.DuchessException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.storage.Storage;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.ui.Ui;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import duke.util.Pair;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import java.util.Arrays;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_COMMAND_MISSING_INDEX;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_COMMAND_TOO_MANY_INDICES;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "import static duke.util.MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " * The {@code CommandHandler} class contains all static methods to handle"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " * commands given the same arguments of command, taskList, ui and storage."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "public class TaskListCommandHandler {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Prints out the given {@code TaskList} with the given {@code Ui} instance."
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleListCommand(String command, TaskList taskList,"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                                    Ui ui, Storage storage) throws DuchessException {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        assert command.trim().equalsIgnoreCase(\"list\"); // pre-condition"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return ui.printTaskList(taskList);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Completes a {@code Task} based on the command and given the entire command"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * and the supporting instances."
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException If the list fails to be saved or the index is out of"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *                          bounds or the task is already completed."
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleDoneCommand(String command, TaskList taskList,"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                                    Ui ui, Storage storage) throws DuchessException {"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        int index \u003d getIntegerFromCommand(command);"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        checkBoundsOfIndex(index, taskList);"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        Task taskCompleted \u003d taskList.completeTask(index - 1);"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        storage.save(taskList);"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return ui.printTaskCompleted(taskCompleted);"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Finds a list of {@code Task}s based on the command and given the entire"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * command and the supporting instances. The list of {@code Task}s are then"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * printed out with the given {@code Ui} instance."
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleFindCommand(String command, TaskList taskList, Ui ui, Storage storage) {"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        ArrayList\u003cString\u003e commands \u003d new ArrayList\u003c\u003e(Arrays.asList(command.split(\"\\\\s\", 2)));"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        assert commands.get(0).equalsIgnoreCase(\"find\"); // pre-condition"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        ArrayList\u003cPair\u003cTask, Integer\u003e\u003e filteredTaskList \u003d taskList.find(commands.get(1).trim());"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return ui.printFilteredTaskList(filteredTaskList);"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * Deletes a {@code Task} based on the command and given the entire command and"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * the supporting instances."
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param command  Full user command string."
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param taskList List of tasks."
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param ui       Ui instance."
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @param storage  Storage instance."
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     * @throws DuchessException If the list fails to be saved or the index is out of"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     *                          bounds."
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    static String handleDeleteCommand(String command, TaskList taskList,"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                                      Ui ui, Storage storage) throws DuchessException {"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        int index \u003d getIntegerFromCommand(command);"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        checkBoundsOfIndex(index, taskList);"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        Task taskToDelete \u003d taskList.getTask(index - 1);"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        taskList.removeTask(index - 1);"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        storage.save(taskList);"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return ui.printTaskDeleted(taskToDelete, taskList.size());"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static Integer getIntegerFromCommand(String command) throws DuchessException {"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        ArrayList\u003cString\u003e commands \u003d new ArrayList\u003c\u003e(Arrays.asList(command.split(\"\\\\s\", 2)));"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        checkSizeOfCommands(commands);"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return Integer.parseInt(commands.get(1).trim());"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static void checkSizeOfCommands(ArrayList\u003cString\u003e commands) throws DuchessException {"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (commands.size() \u003c 2) {"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_COMMAND_MISSING_INDEX);"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (commands.size() \u003e 2) {"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_COMMAND_TOO_MANY_INDICES);"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private static void checkBoundsOfIndex(int index, TaskList taskList) throws DuchessException {"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        boolean isIndexTooLow \u003d index \u003c 0;"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        boolean isIndexTooHigh \u003d index \u003e taskList.size();"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        if (isIndexTooLow || isIndexTooHigh) {"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            throw new DuchessException(ERROR_INDEX_OUT_OF_BOUNDS);"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "zhuhanming": 116
     }
   },
   {
@@ -5503,199 +7819,318 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            String fileContent \u003d Files.readString(Path.of(this.filePath));"
+        "content": "            JsonArray jsonArray \u003d readDataFromFilePath();"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            JsonArray array \u003d JsonParser.parseString(fileContent).getAsJsonArray();"
+        "content": "            return readTaskArrayFromJsonArray(jsonArray);"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            ArrayList\u003cTask\u003e result \u003d new ArrayList\u003c\u003e();"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            for (int i \u003d 0; i \u003c array.size(); i++) {"
+        "content": "            if (!isAbleToSave()) {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                JsonObject taskToCheck \u003d (JsonObject) array.get(i);"
+        "content": "                throw new DuchessException(ERROR_FAIL_TO_LOAD_AND_SAVE);"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                if (taskToCheck.has(GSON_ATTR_DEADLINE)) {"
+        "content": "            }"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                    result.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),"
+        "content": "            throw new DuchessException(ERROR_FAIL_TO_LOAD);"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),"
+        "content": "        }"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));"
+        "content": "    }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                } else if (taskToCheck.has(GSON_ATTR_TIME_FRAME)) {"
+        "content": ""
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                    result.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),"
+        "content": "    // Private helper methods"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_TIME_FRAME), String.class),"
+        "content": ""
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));"
+        "content": "    private JsonArray readDataFromFilePath() throws IOException {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                } else {"
+        "content": "        String fileContent \u003d Files.readString(Path.of(this.filePath));"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                    result.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),"
+        "content": "        return JsonParser.parseString(fileContent).getAsJsonArray();"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                            this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));"
+        "content": "    }"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                }"
+        "content": ""
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            }"
+        "content": "    private ArrayList\u003cTask\u003e readTaskArrayFromJsonArray(JsonArray jsonArray) {"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            return result;"
+        "content": "        ArrayList\u003cTask\u003e result \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        for (int i \u003d 0; i \u003c jsonArray.size(); i++) {"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            File file \u003d new File(this.filePath);"
+        "content": "            JsonObject taskToCheck \u003d (JsonObject) jsonArray.get(i);"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            File directories \u003d file.getParentFile();"
+        "content": "            if (taskToCheck.has(GSON_ATTR_DEADLINE)) {"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            if (!directories.exists() \u0026\u0026 !directories.mkdirs()) {"
+        "content": "                // Task is a Deadline"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                throw new DuchessException(ERROR_FAIL_TO_LOAD_AND_SAVE);"
+        "content": "                result.add(new Deadline(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            }"
+        "content": "                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_DEADLINE), LocalDateTime.class),"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            throw new DuchessException(ERROR_FAIL_TO_LOAD);"
+        "content": "                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "        }"
+        "content": "            } else if (taskToCheck.has(GSON_ATTR_TIME_FRAME)) {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    }"
+        "content": "                // Task is an Event"
       },
       {
         "lineNumber": 104,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                result.add(new Event(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_TIME_FRAME), String.class),"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                // Task is a ToDo"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                result.add(new ToDo(this.gson.fromJson(taskToCheck.get(GSON_ATTR_DESCRIPTION), String.class),"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "                        this.gson.fromJson(taskToCheck.get(GSON_ATTR_IS_COMPLETED), boolean.class)));"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    private boolean isAbleToSave() throws DuchessException {"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        File file \u003d new File(this.filePath);"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        File directories \u003d file.getParentFile();"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "        return directories.exists() || directories.mkdirs();"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 121,
         "author": {
           "gitId": "zhuhanming"
         },
@@ -5703,7 +8138,7 @@
       }
     ],
     "authorContributionMap": {
-      "zhuhanming": 104
+      "zhuhanming": 121
     }
   },
   {
@@ -10566,98 +13001,98 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "        if (dateTime.isBefore(currentDateTime)) {"
+        "content": "        boolean isToday \u003d differenceInDays \u003d\u003d 0;"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            if (differenceInDays \u003d\u003d 0) {"
+        "content": "        boolean isOneDayDifference \u003d Math.abs(differenceInDays) \u003d\u003d 1;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES)"
+        "content": "        boolean isDifferentYear \u003d dateTime.getYear() !\u003d currentDateTime.getYear();"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
+        "content": "        if (dateTime.isBefore(currentDateTime)) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            } else {"
+        "content": "            if (isToday) {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                if (differenceInDays \u003d\u003d 1) {"
+        "content": "                return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES)"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                    return DATE_TIME_YESTERDAY + dateTime.format(HOUR_MINUTES)"
+        "content": "                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                            + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
+        "content": "            } else if (isOneDayDifference) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                }"
+        "content": "                // isYesterday"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                if (dateTime.getYear() !\u003d currentDateTime.getYear()) {"
+        "content": "                return DATE_TIME_YESTERDAY + dateTime.format(HOUR_MINUTES)"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                    return dateTime.format(MONTH_YEAR_HOUR_MINUTES)"
+        "content": "                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                            + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
+        "content": "            } else if (isDifferentYear) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                }"
+        "content": "                return dateTime.format(MONTH_YEAR_HOUR_MINUTES)"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                return dateTime.format(MONTH_HOUR_MINUTES) + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
+        "content": "                        + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
       },
       {
         "lineNumber": 54,
@@ -10671,91 +13106,91 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "        } else {"
+        "content": "            return dateTime.format(MONTH_HOUR_MINUTES) + (isCompleted ? BLANK : DATE_TIME_OVERDUE);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            if (differenceInDays \u003d\u003d 0) {"
+        "content": "        }"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES);"
+        "content": ""
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            } else if (differenceInDays \u003d\u003d -1) {"
+        "content": "        boolean isThisWeek \u003d differenceInDays \u003e -7;"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                return DATE_TIME_TOMORROW + dateTime.format(HOUR_MINUTES);"
+        "content": "        if (isToday) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            } else if (differenceInDays \u003e -7) {"
+        "content": "            return DATE_TIME_TODAY + dateTime.format(HOUR_MINUTES);"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                return dateTime.format(WEEKDAY_HOUR_MINUTES);"
+        "content": "        } else if (isOneDayDifference) {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            } else {"
+        "content": "            // isTomorrow"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                if (dateTime.getYear() !\u003d currentDateTime.getYear()) {"
+        "content": "            return DATE_TIME_TOMORROW + dateTime.format(HOUR_MINUTES);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                    return dateTime.format(MONTH_YEAR_HOUR_MINUTES);"
+        "content": "        } else if (isThisWeek) {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                }"
+        "content": "            return dateTime.format(WEEKDAY_HOUR_MINUTES);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "                return dateTime.format(MONTH_HOUR_MINUTES);"
+        "content": "        } else if (isDifferentYear) {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            }"
+        "content": "            return dateTime.format(MONTH_YEAR_HOUR_MINUTES);"
       },
       {
         "lineNumber": 68,
@@ -10769,10 +13204,31 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    }"
+        "content": "        return dateTime.format(MONTH_HOUR_MINUTES);"
       },
       {
         "lineNumber": 70,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 73,
         "author": {
           "gitId": "zhuhanming"
         },
@@ -10780,7 +13236,7 @@
       }
     ],
     "authorContributionMap": {
-      "zhuhanming": 70
+      "zhuhanming": 73
     }
   },
   {
@@ -10897,192 +13353,213 @@
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_DEADLINE_MISSING_CONTENT \u003d \"Your deadline content cannot be empty! \""
+        "content": "    public static final String ERROR_COMMAND_MISSING_INDEX \u003d \"Your command needs the position of the task to \""
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            + \"Type help if you need help.\";"
+        "content": "            + \"operate with!\";"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_DEADLINE_MISSING_DEADLINE \u003d \"I don\u0027t know when your deadline is! \""
+        "content": "    public static final String ERROR_COMMAND_TOO_MANY_INDICES \u003d \"Your command can only work with a single index!\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            + \"Please use /by [deadline here].\";"
+        "content": "    public static final String ERROR_DEADLINE_MISSING_CONTENT \u003d \"Your deadline content cannot be empty! \""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_EVENT_MISSING_CONTENT \u003d \"Your event content cannot be empty! \""
+        "content": "            + \"Type help if you need help.\";"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            + \"Type help if you need help.\";"
+        "content": "    public static final String ERROR_DEADLINE_MISSING_DEADLINE \u003d \"I don\u0027t know when your deadline is! \""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_EVENT_MISSING_TIME_FRAME \u003d \"I don\u0027t know when is your event! \""
+        "content": "            + \"Please use /by [deadline here].\";"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            + \"Please use /at [time here].\";"
+        "content": "    public static final String ERROR_EVENT_MISSING_CONTENT \u003d \"Your event content cannot be empty! \""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_INDEX_OUT_OF_BOUNDS \u003d \"You\u0027re referring to a task which does not exist!\";"
+        "content": "            + \"Type help if you need help.\";"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_INVALID_COMMAND \u003d \"I don\u0027t see what I can do with what you just told me.\";"
+        "content": "    public static final String ERROR_EVENT_MISSING_TIME_FRAME \u003d \"I don\u0027t know when is your event! \""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    //    public static final String ERROR_INVALID_FILE_PATH \u003d \"Your file path is invalid. A new JSON file will \""
+        "content": "            + \"Please use /at [time here].\";"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    //            + \"be used for saving.\";"
+        "content": "    public static final String ERROR_INDEX_OUT_OF_BOUNDS \u003d \"You\u0027re referring to a task which does not exist!\";"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_FAIL_TO_LOAD \u003d \"Failed to load save file! Creating new save file.\";"
+        "content": "    public static final String ERROR_INVALID_COMMAND \u003d \"I don\u0027t see what I can do with what you just told me.\";"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_FAIL_TO_LOAD_AND_SAVE \u003d \"Failed to load save file! \""
+        "content": "    //    public static final String ERROR_INVALID_FILE_PATH \u003d \"Your file path is invalid. A new JSON file will \""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            + \"You will also not be able to save.\";"
+        "content": "    //            + \"be used for saving.\";"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_FAIL_TO_SAVE \u003d \"Facing difficulties saving your tasks right now.\";"
+        "content": "    public static final String ERROR_FAIL_TO_LOAD \u003d \"Failed to load save file! Creating new save file.\";"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_TASK_ALREADY_COMPLETED \u003d \"You have already completed this task!\";"
+        "content": "    public static final String ERROR_FAIL_TO_LOAD_AND_SAVE \u003d \"Failed to load save file! \""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_TODO_MISSING_CONTENT \u003d \"Your todo content cannot be empty! \""
+        "content": "            + \"You will also not be able to save.\";"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            + \"Type help if you need help.\";"
+        "content": "    public static final String ERROR_FAIL_TO_SAVE \u003d \"Facing difficulties saving your tasks right now.\";"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String ERROR_WRONG_DATE_FORMAT \u003d \"Your input is of the wrong format.\\n\""
+        "content": "    public static final String ERROR_TASK_ALREADY_COMPLETED \u003d \"You have already completed this task!\";"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "            + \"\\tType help to view the accepted formats.\";"
+        "content": "    public static final String ERROR_TODO_MISSING_CONTENT \u003d \"Your todo content cannot be empty! \""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": ""
+        "content": "            + \"Type help if you need help.\";"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    // GSON helper strings."
+        "content": "    public static final String ERROR_WRONG_DATE_FORMAT \u003d \"Your input is of the wrong format.\\n\""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String GSON_ATTR_DEADLINE \u003d \"deadline\";"
+        "content": "            + \"\\tType help to view the accepted formats.\";"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String GSON_ATTR_DESCRIPTION \u003d \"description\";"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String GSON_ATTR_IS_COMPLETED \u003d \"isCompleted\";"
+        "content": "    // GSON helper strings."
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "zhuhanming"
         },
-        "content": "    public static final String GSON_ATTR_TIME_FRAME \u003d \"timeFrame\";"
+        "content": "    public static final String GSON_ATTR_DEADLINE \u003d \"deadline\";"
       },
       {
         "lineNumber": 43,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    public static final String GSON_ATTR_DESCRIPTION \u003d \"description\";"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    public static final String GSON_ATTR_IS_COMPLETED \u003d \"isCompleted\";"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "zhuhanming"
+        },
+        "content": "    public static final String GSON_ATTR_TIME_FRAME \u003d \"timeFrame\";"
+      },
+      {
+        "lineNumber": 46,
         "author": {
           "gitId": "zhuhanming"
         },
@@ -11090,7 +13567,7 @@
       }
     ],
     "authorContributionMap": {
-      "zhuhanming": 43
+      "zhuhanming": 46
     }
   },
   {

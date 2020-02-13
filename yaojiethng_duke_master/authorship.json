@@ -748,7 +748,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import duke.exceptions.ShutdownException;"
+        "content": ""
       },
       {
         "lineNumber": 11,
@@ -762,210 +762,210 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "/**"
+        "content": " * Duke class represents the main chatbot entity; it contains classes that manage different components of the chatbot."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " * Duke class represents the main chatbot entity; it contains classes that manage different components of the chatbot."
+        "content": " */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " */"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "public class Duke {"
+        "content": "    /** the path where the saved Tasklist file is stored. */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /** the path where the saved Tasklist file is stored. */"
+        "content": "    private static final Path filePath \u003d Paths.get(System.getProperty(\"user.dir\"), \"data.duke\");"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private static final Path filePath \u003d Paths.get(System.getProperty(\"user.dir\"), \"data.duke\");"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private Storage storage;"
+        "content": "    private TaskList tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private TaskList tasks \u003d new TaskList();"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private Ui ui;"
+        "content": "    private Parser parser;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private Parser parser;"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    public static void main(String[] args) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    public static void main(String[] args) {"
+        "content": "        new Duke().run();"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        new Duke().run();"
+        "content": "    }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /**"
+        "content": "     * Initializes Duke and loads the TaskList from the files in the save directory."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * Initializes Duke and loads the TaskList from the files in the save directory."
+        "content": "     */"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     */"
+        "content": "    public Duke() {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    public Duke() {"
+        "content": "        storage \u003d new Storage(filePath);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "        parser \u003d new Parser(storage, ui, tasks);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        storage \u003d new Storage(filePath);"
+        "content": "        try {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        parser \u003d new Parser(storage, ui, tasks);"
+        "content": "            storage.loadFromFile(tasks);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        try {"
+        "content": "            System.out.println(\"    Tasklist loaded!\");"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            storage.loadFromFile(tasks);"
+        "content": "        } catch (FileNotFoundException e) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            System.out.println(\"    Tasklist loaded!\");"
+        "content": "            System.out.println(\"    No prior tasklist found...\");"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (FileNotFoundException e) {"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            System.out.println(\"    No prior tasklist found...\");"
+        "content": "            System.out.println(\"    Existing tasklist cannot be read...\");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        } catch (ClassNotFoundException e) {"
       },
       {
         "lineNumber": 42,
@@ -979,63 +979,63 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (ClassNotFoundException e) {"
+        "content": "        }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            System.out.println(\"    Existing tasklist cannot be read...\");"
+        "content": "    }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "    /** Starts Duke and begins reading commands from input. */"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    private void run() {       "
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /** Starts Duke and begins reading commands from input. */"
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private void run() {       "
+        "content": "        ui.out(\"Hello! I\u0027m Duke\", \"What can I do for you?\");"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        ui.out(\"Hello! I\u0027m Duke\", \"What can I do for you?\");"
+        "content": "        boolean isShutdown \u003d false;"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        boolean isShutdown \u003d false;"
+        "content": "        assert (ui !\u003d null);"
       },
       {
         "lineNumber": 52,
@@ -1056,213 +1056,199 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            try {"
+        "content": "            isShutdown \u003d input.equals(\"bye\");"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                ui.out(parser.parse(input));"
+        "content": "            try {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                storage.saveToFile(tasks);"
+        "content": "                ui.out(parser.parse(input));"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            } catch (InvalidCommandException | IncorrectArgumentException e) {"
+        "content": "                storage.saveToFile(tasks);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                ui.out(e.getMessage());"
+        "content": "            } catch (InvalidCommandException | IncorrectArgumentException e) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            } catch (IOException | NumberFormatException e) {"
+        "content": "                ui.out(e.getMessage());"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                e.printStackTrace();"
+        "content": "            } catch (IOException | NumberFormatException e) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            } catch (ShutdownException e) {"
+        "content": "                e.printStackTrace();"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                System.out.println(e.getMessage());"
+        "content": "            }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            }"
+        "content": "        }"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": "        ui.out(\"Bye. Hope to see you again soon!\");"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "        ui.close();"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    public String getResponse(String input) {"
+        "content": ""
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String response; "
+        "content": "    public String getResponse(String input) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        try {"
+        "content": "        String response; "
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            response \u003d ui.respond(parser.parse(input));"
+        "content": "        try {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            storage.saveToFile(tasks);"
+        "content": "            response \u003d ui.respond(parser.parse(input));"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (InvalidCommandException | IncorrectArgumentException e) {"
+        "content": "            storage.saveToFile(tasks);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            response \u003d e.getMessage();"
+        "content": "        } catch (InvalidCommandException | IncorrectArgumentException e) {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            System.out.println(e.getMessage());"
+        "content": "            response \u003d e.getMessage();"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (IOException | NumberFormatException e) {"
+        "content": "            System.out.println(e.getMessage());"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            response \u003d e.getMessage();"
+        "content": "        } catch (IOException | NumberFormatException e) {"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            e.printStackTrace();"
+        "content": "            response \u003d e.getMessage();"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (ShutdownException e) {"
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            System.out.println(e.getMessage());"
+        "content": "        }"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            response \u003d \"Bye command given\";"
+        "content": "        return response;"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "yaojiethng"
-        },
-        "content": "        return response;"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "yaojiethng"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 84,
+        "lineNumber": 82,
         "author": {
           "gitId": "-"
         },
@@ -1270,7 +1256,7 @@
       }
     ],
     "authorContributionMap": {
-      "yaojiethng": 83,
+      "yaojiethng": 81,
       "-": 1
     }
   },
@@ -1530,73 +1516,80 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            FXMLLoader fxmlLoader \u003d new FXMLLoader(Main.class.getResource(\"/view/MainWindow.fxml\"));"
+        "content": "            assert (Main.class.getResource(\"/view/MainWindow.fxml\") !\u003d null);"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            AnchorPane ap \u003d fxmlLoader.load();"
+        "content": "            FXMLLoader fxmlLoader \u003d new FXMLLoader(Main.class.getResource(\"/view/MainWindow.fxml\"));"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            Scene scene \u003d new Scene(ap);"
+        "content": "            AnchorPane ap \u003d fxmlLoader.load();"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            stage.setScene(scene);"
+        "content": "            Scene scene \u003d new Scene(ap);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            fxmlLoader.\u003cMainWindow\u003egetController().setDuke(duke);"
+        "content": "            stage.setScene(scene);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            stage.show();"
+        "content": "            fxmlLoader.\u003cMainWindow\u003egetController().setDuke(duke);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            stage.show();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            e.printStackTrace();"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 32,
+        "author": {
+          "gitId": "yaojiethng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
         "author": {
           "gitId": "yaojiethng"
         },
@@ -1604,7 +1597,7 @@
       }
     ],
     "authorContributionMap": {
-      "yaojiethng": 32
+      "yaojiethng": 33
     }
   },
   {
@@ -1679,266 +1672,266 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import duke.exceptions.ShutdownException;"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "/** "
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "/** "
+        "content": " * Class which deals with making sense of the user command. "
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " * Class which deals with making sense of the user command. "
+        "content": " * Deconstructs a line into a String[] of arguments, with the first item being the cmd and the rest the arg."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " * Deconstructs a line into a String[] of arguments, with the first item being the cmd and the rest the arg."
+        "content": " * Afterwards, performs checks for the validity of cmd and arg and throws exceptions if not valid."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " * Afterwards, performs checks for the validity of cmd and arg and throws exceptions if not valid."
+        "content": " * If no exceptions are thrown, it calls the respective classes to execute the command. "
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " * If no exceptions are thrown, it calls the respective classes to execute the command. "
+        "content": " */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " */"
+        "content": "class Parser {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "class Parser {"
+        "content": "    Storage storage;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    Storage storage;"
+        "content": "    Ui ui;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    Ui ui;"
+        "content": "    TaskList tasks;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    TaskList tasks;"
+        "content": "    "
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    "
+        "content": "    /**"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /**"
+        "content": "     * Public constructor which creates a Parser. As it passes valid commands to be executed by the respective"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * Public constructor which creates a Parser. As it passes valid commands to be executed by the respective"
+        "content": "     * classes, a reference to the corresponding classes is passed in during construction."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * classes, a reference to the corresponding classes is passed in during construction."
+        "content": "     * @param storage a reference to the underlying Storage object."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @param storage a reference to the underlying Storage object."
+        "content": "     * @param ui a reference to the underlying Ui object."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @param ui a reference to the underlying Ui object."
+        "content": "     * @param tasks a reference to the TaskList that the current application uses to hold Task entities."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @param tasks a reference to the TaskList that the current application uses to hold Task entities."
+        "content": "     */"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     */"
+        "content": "    public Parser(Storage storage, Ui ui, TaskList tasks) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    public Parser(Storage storage, Ui ui, TaskList tasks) {"
+        "content": "        this.storage \u003d storage;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        this.storage \u003d storage;"
+        "content": "        this.ui \u003d ui;"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        this.ui \u003d ui;"
+        "content": "        this.tasks \u003d tasks;"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        this.tasks \u003d tasks;"
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /**"
+        "content": "     * Parses the entire comment line by verifying the command and arguments, and then passes on the command "
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * Parses the entire comment line by verifying the command and arguments, and then passes on the command "
+        "content": "     * to the corresponding methods."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * to the corresponding methods."
+        "content": "     * @param line the entire command line retrieved from Scanner.nextLine()"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @param line the entire command line retrieved from Scanner.nextLine()"
+        "content": "     * @return A string describing duke\u0027s response."
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @return A string describing duke\u0027s response."
+        "content": "     * @throws IncorrectArgumentException when the wrong number or type of arguments are supplied to the command."
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @throws IncorrectArgumentException when the wrong number or type of arguments are supplied to the command."
+        "content": "     * @throws InvalidCommandException when a command is entered that does not exist."
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @throws InvalidCommandException when a command is entered that does not exist."
+        "content": "     * @throws IOException when the Storage object fails in saving the TaskList to file."
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @throws IOException when the Storage object fails in saving the TaskList to file."
+        "content": "     */"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     */"
+        "content": "    public String[] parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    public String[] parse(String line) throws IncorrectArgumentException, InvalidCommandException, IOException, ShutdownException {"
+        "content": "        String[] cmd \u003d line.split(\" \", 2);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String[] cmd \u003d line.split(\" \", 2);"
+        "content": "        String[] response;"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String[] response;"
+        "content": "        assert !line.equals(\"\");"
       },
       {
         "lineNumber": 48,
@@ -1966,7 +1959,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                throw new ShutdownException(bye());"
+        "content": "                response \u003d new String[]{\"bye\"};"
       },
       {
         "lineNumber": 52,
@@ -1980,7 +1973,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                response \u003d list();"
+        "content": "                response \u003d parseList();"
       },
       {
         "lineNumber": 54,
@@ -2001,7 +1994,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                response \u003d done(Integer.parseInt(cmd[1]));"
+        "content": "                response \u003d parseDone(Integer.parseInt(cmd[1]));"
       },
       {
         "lineNumber": 57,
@@ -2022,7 +2015,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                response \u003d todo(cmd[1]);"
+        "content": "                response \u003d parseAddTodo(cmd[1]);"
       },
       {
         "lineNumber": 60,
@@ -2043,7 +2036,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                response \u003d deadline(cmd[1]);"
+        "content": "                response \u003d parseAddDeadline(cmd[1]);"
       },
       {
         "lineNumber": 63,
@@ -2064,7 +2057,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                response \u003d event(cmd[1]);"
+        "content": "                response \u003d parseAddEvent(cmd[1]);"
       },
       {
         "lineNumber": 66,
@@ -2085,7 +2078,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                response \u003d delete(Integer.parseInt(cmd[1]));"
+        "content": "                response \u003d parseDelete(Integer.parseInt(cmd[1]));"
       },
       {
         "lineNumber": 69,
@@ -2106,7 +2099,7 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                response \u003d find(cmd[1]);"
+        "content": "                response \u003d parseFind(cmd[1]);"
       },
       {
         "lineNumber": 72,
@@ -2197,717 +2190,675 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String bye() {"
+        "content": "    private String[] parseList() {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        ui.out(\"Bye. Hope to see you again soon!\");"
+        "content": "        return tasks.list();"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        ui.close();"
+        "content": "    }"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return \"Shutting Down...\";"
+        "content": ""
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "    private String[] parseDone(int i) {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "        return tasks.done(i);"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String[] list() {"
+        "content": "    }"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return tasks.list();"
+        "content": ""
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "    private String[] parseAddTodo(String args) throws IncorrectArgumentException {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "        String[] argv \u003d args.split(\"/\");"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String[] done(int i) {"
+        "content": "        if (argv[0].equals(\"\")) {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return tasks.done(i);"
+        "content": "            throw new IncorrectArgumentException(\"Oops! Missing required arguments: Task Description\");"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "        } else if (argv.length \u003e 1) {"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "            throw new IncorrectArgumentException(\"Too many arguments!\");"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String[] todo(String args) throws IncorrectArgumentException {"
+        "content": "        }"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String[] argv \u003d args.split(\"/\");"
+        "content": "        return tasks.addTodo(argv[0]);"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        if (argv[0].equals(\"\")) {"
+        "content": "    }"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Oops! Missing required arguments: Task Description\");"
+        "content": ""
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } else if (argv.length \u003e 1) {"
+        "content": "    private String[] parseAddDeadline(String args) throws IncorrectArgumentException {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Too many arguments!\");"
+        "content": "        String[] argv \u003d args.split(\" /by \");"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": "        if (argv[0].equals(\"\")) {"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return tasks.addTodo(argv[0]);"
+        "content": "            throw new IncorrectArgumentException("
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "                \"Oops! Missing required arguments: \""
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "                .concat(argv.length \u003d\u003d 1 "
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String[] deadline(String args) throws IncorrectArgumentException {"
+        "content": "                    ? \"Task Description, by..\" "
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String[] argv \u003d args.split(\" /by \");"
+        "content": "                    : \"Task Description\"));"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        if (argv[0].equals(\"\")) {"
+        "content": "        } else if (argv.length \u003c 2) {"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException("
+        "content": "            throw new IncorrectArgumentException(\"Oops! Missing required arguments: /by yyyy-MM-dd HHmm\");"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                \"Oops! Missing required arguments: \""
+        "content": "        } else if (argv.length \u003e 2) {"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                .concat(argv.length \u003d\u003d 1 "
+        "content": "            throw new IncorrectArgumentException(\"Too many arguments!\");"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                    ? \"Task Description, by..\" "
+        "content": "        }"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                    : \"Task Description\"));"
+        "content": ""
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } else if (argv.length \u003c 2) {"
+        "content": "        String[] resp;"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Oops! Missing required arguments: /by yyyy-MM-dd HHmm\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } else if (argv.length \u003e 2) {"
+        "content": "            String[] textDateTime \u003d argv[1].split(\" \");"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Too many arguments!\");"
+        "content": "            LocalDate date \u003d toDate(textDateTime[0]);"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": "            LocalTime time \u003d toTime(textDateTime[1]);"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "            resp \u003d tasks.addDeadline(argv[0], date, time);"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String[] resp;"
+        "content": "        } catch (DateTimeParseException e) {"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        try {"
+        "content": "            throw new IncorrectArgumentException(\"Incorrect Date/Time format!\\n     Correct format: yyyy-MM-dd HHmm\");"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            String[] textDateTime \u003d argv[1].split(\" \");"
+        "content": "        }"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            LocalDate date \u003d toDate(textDateTime[0]);"
+        "content": ""
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            LocalTime time \u003d toTime(textDateTime[1]);"
+        "content": "        return resp;"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            resp \u003d tasks.addDeadline(argv[0], date, time);"
+        "content": "    }"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (DateTimeParseException e) {"
+        "content": ""
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Incorrect Date/Time format!\\n     Correct format: yyyy-MM-dd HHmm\");"
+        "content": "    private String[] parseAddEvent(String args) throws IncorrectArgumentException {"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": "        String[] argv \u003d args.split(\" /at \");"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "        if (argv[0].equals(\"\")) {"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return resp;"
+        "content": "            throw new IncorrectArgumentException("
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "                \"Oops! Missing required arguments: \""
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "                .concat(argv.length \u003d\u003d 1 "
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String[] event(String args) throws IncorrectArgumentException {"
+        "content": "                    ? \"Task Description, at..\""
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String[] argv \u003d args.split(\" /at \");"
+        "content": "                    : \"Task Description\"));"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        if (argv[0].equals(\"\")) {"
+        "content": "        } else if (argv.length \u003c 2) {"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException("
+        "content": "            System.out.println(args);"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                \"Oops! Missing required arguments: \""
+        "content": "            throw new IncorrectArgumentException(\"Oops! Missing required arguments:\\n/at yyyy-MM-dd HHmm\");"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                .concat(argv.length \u003d\u003d 1 "
+        "content": "        } else if (argv.length \u003e 2) {"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                    ? \"Task Description, at..\""
+        "content": "            throw new IncorrectArgumentException(\"Too many arguments!\");"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                    : \"Task Description\"));"
+        "content": "        }"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } else if (argv.length \u003c 2) {"
+        "content": ""
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            System.out.println(args);"
+        "content": "        String[] resp;"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Oops! Missing required arguments:\\n/at yyyy-MM-dd HHmm\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } else if (argv.length \u003e 2) {"
+        "content": "            String[] textDateTime \u003d argv[1].split(\" \");"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Too many arguments!\");"
+        "content": "            LocalDate date \u003d toDate(textDateTime[0]);"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": "            LocalTime time \u003d toTime(textDateTime[1]);"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "            resp \u003d tasks.addEvent(argv[0], date, time);"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        String[] resp;"
+        "content": "        } catch (DateTimeParseException e) {"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        try {"
+        "content": "            throw new IncorrectArgumentException(\"Incorrect Date/Time format!\\n     Correct format: yyyy-MM-dd HHmm\");"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            String[] textDateTime \u003d argv[1].split(\" \");"
+        "content": "        }"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            LocalDate date \u003d toDate(textDateTime[0]);"
+        "content": "        return resp;"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            LocalTime time \u003d toTime(textDateTime[1]);"
+        "content": "    }"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            resp \u003d tasks.addEvent(argv[0], date, time);"
+        "content": ""
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        } catch (DateTimeParseException e) {"
+        "content": "    private String[] parseDelete(int i) {"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "            throw new IncorrectArgumentException(\"Incorrect Date/Time format!\\n     Correct format: yyyy-MM-dd HHmm\");"
+        "content": "        return tasks.delete(i);"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return resp;"
+        "content": ""
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "    private String[] parseFind(String query) {"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "        return tasks.find(query);"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String[] delete(int i) {"
+        "content": "    }"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return tasks.delete(i);"
+        "content": ""
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "    /** Accepts a date in the format provided in the default formatter, DateTimeFormatter.ISO_LOCAL_DATE */ "
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    private static LocalDate toDate(String s) throws DateTimeParseException {"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private String[] find(String query) {"
+        "content": "        return LocalDate.parse(s);"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return tasks.find(query);"
+        "content": "    }"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "    "
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /** Accepts a date in the format provided in the default formatter, DateTimeFormatter.ISO_LOCAL_DATE */ "
+        "content": "     * Accepts a date according to the following 24H format: HHmm."
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private static LocalDate toDate(String s) throws DateTimeParseException {"
+        "content": "     * @param s a string representing the time in 24H format"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        return LocalDate.parse(s);"
+        "content": "     * @return a LocalTime object representing the time given."
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "     * @throws DateTimeParseException when an invalid time is passed."
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    "
+        "content": "     */"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /**"
+        "content": "    private static LocalTime toTime(String s) throws DateTimeParseException {"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * Accepts a date according to the following 24H format: HHmm."
+        "content": "        int time \u003d Integer.parseInt(s);"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @param s a string representing the time in 24H format"
+        "content": "        return LocalTime.of(time / 100, time % 100);"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @return a LocalTime object representing the time given."
+        "content": "    }"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * @throws DateTimeParseException when an invalid time is passed."
-      },
-      {
-        "lineNumber": 180,
-        "author": {
-          "gitId": "yaojiethng"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 181,
-        "author": {
-          "gitId": "yaojiethng"
-        },
-        "content": "    private static LocalTime toTime(String s) throws DateTimeParseException {"
-      },
-      {
-        "lineNumber": 182,
-        "author": {
-          "gitId": "yaojiethng"
-        },
-        "content": "        int time \u003d Integer.parseInt(s);"
-      },
-      {
-        "lineNumber": 183,
-        "author": {
-          "gitId": "yaojiethng"
-        },
-        "content": "        return LocalTime.of(time / 100, time % 100);"
-      },
-      {
-        "lineNumber": 184,
-        "author": {
-          "gitId": "yaojiethng"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 185,
-        "author": {
-          "gitId": "yaojiethng"
-        },
         "content": ""
       },
       {
-        "lineNumber": 186,
+        "lineNumber": 180,
         "author": {
           "gitId": "yaojiethng"
         },
@@ -2915,7 +2866,7 @@
       }
     ],
     "authorContributionMap": {
-      "yaojiethng": 186
+      "yaojiethng": 180
     }
   },
   {
@@ -6540,353 +6491,381 @@
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import javafx.fxml.FXML;"
+        "content": "import javafx.application.Platform;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import javafx.scene.control.Button;"
+        "content": "import javafx.fxml.FXML;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import javafx.scene.control.ScrollPane;"
+        "content": "import javafx.scene.control.Button;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import javafx.scene.control.TextField;"
+        "content": "import javafx.scene.control.ScrollPane;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import javafx.scene.image.Image;"
+        "content": "import javafx.scene.control.TextField;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import javafx.scene.layout.AnchorPane;"
+        "content": "import javafx.scene.image.Image;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "import javafx.scene.layout.VBox;"
+        "content": "import javafx.scene.layout.AnchorPane;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "/**"
+        "content": "import javafx.scene.layout.VBox;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " * Controller for MainWindow. Provides the layout for the other controls."
+        "content": "/**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " * Code taken from JavaFX tutorial."
+        "content": " * Controller for MainWindow. Provides the layout for the other controls."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": " */"
+        "content": " * Code taken from JavaFX tutorial."
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "public class MainWindow extends AnchorPane {"
+        "content": " */"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    @FXML"
+        "content": "public class MainWindow extends AnchorPane {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private ScrollPane scrollPane;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    @FXML"
+        "content": "    private ScrollPane scrollPane;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private VBox dialogContainer;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    @FXML"
+        "content": "    private VBox dialogContainer;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private TextField userInput;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    @FXML"
+        "content": "    private TextField userInput;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private Button sendButton;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    private Button sendButton;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private Duke duke;"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    private Duke duke;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private final Image USER_IMAGE \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private final Image DUKE_IMAGE \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
+        "content": "    private final Image USER_IMAGE \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    private final Image DUKE_IMAGE \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    @FXML"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    public void initialize() {"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
+        "content": "    public void initialize() {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    public void setDuke(final Duke d) {"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        duke \u003d d;"
+        "content": "    public void setDuke(final Duke d) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "        duke \u003d d;"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing"
+        "content": "    /**"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * Duke\u0027s reply and then appends them to the dialog container. Clears the user"
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     * input after processing."
+        "content": "     * Duke\u0027s reply and then appends them to the dialog container. Clears the user"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "     */"
+        "content": "     * input after processing."
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    @FXML"
+        "content": "     */"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    private void handleUserInput() {"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        final String input \u003d userInput.getText();"
+        "content": "    private void handleUserInput() {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        final String response \u003d duke.getResponse(input);"
+        "content": "        final String input \u003d userInput.getText();"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "        final String response \u003d duke.getResponse(input);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                DialogBox.getUserDialog(input, USER_IMAGE),"
+        "content": "        if (response.equals(\"bye\\n\")) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "                DialogBox.getDukeDialog(response, DUKE_IMAGE)"
+        "content": "            Platform.exit();"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        );"
+        "content": "        }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "        userInput.clear();"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "yaojiethng"
         },
-        "content": "    }"
+        "content": "                DialogBox.getUserDialog(input, USER_IMAGE),"
       },
       {
         "lineNumber": 54,
+        "author": {
+          "gitId": "yaojiethng"
+        },
+        "content": "                DialogBox.getDukeDialog(response, DUKE_IMAGE)"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "yaojiethng"
+        },
+        "content": "        );"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "yaojiethng"
+        },
+        "content": "        userInput.clear();"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "yaojiethng"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 58,
         "author": {
           "gitId": "yaojiethng"
         },
@@ -6894,7 +6873,7 @@
       }
     ],
     "authorContributionMap": {
-      "yaojiethng": 54
+      "yaojiethng": 58
     }
   },
   {

@@ -1403,465 +1403,423 @@
         "author": {
           "gitId": "hans555"
         },
-        "content": "    public void run() {"
+        "content": "    public String run(String command) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        this.ui.printIntro();"
+        "content": "        String message \u003d \"\";"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        Scanner myScanner \u003d new Scanner(System.in);"
+        "content": "        try {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "            String[] parsed \u003d TextParser.myFirstParser(command);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        while (true) {"
+        "content": "            String keyword \u003d parsed[0];"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "hans555"
         },
-        "content": "            String word \u003d myScanner.nextLine();"
+        "content": "            if (keyword.equals(\"bye\")) {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "hans555"
         },
-        "content": "            try {"
+        "content": "                this.storage.writeFile(this.tasklist.mylist);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                String[] parsed \u003d TextParser.myFirstParser(word);"
+        "content": "                message \u003d message + ui.printMessage(\"Bye. Hope to see you again soon!\");"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                String keyword \u003d parsed[0];"
+        "content": "            } else if (keyword.equals(\"list\")) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                if (keyword.equals(\"bye\")) {"
+        "content": "                message \u003d message + ui.printMessage(\"Here are the task in your list\");"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.storage.writeFile(this.tasklist.mylist);"
+        "content": "                message \u003d message + tasklist.printList();"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.ui.printMessage(\"Bye. Hope to see you again soon!\");"
+        "content": "            } else if (keyword.equals(\"done\")) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    break;"
+        "content": "                int taskNumber \u003d Integer.valueOf(parsed[1]);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                } else if (keyword.equals(\"list\")) {"
+        "content": "                this.tasklist.markDone(taskNumber);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.ui.printMessage(\"Here are the task in your list\");"
+        "content": "                message \u003d message + ui.printMessage(\"Nice! I\u0027ve marked this task as done:\");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.tasklist.printList();"
+        "content": "                message \u003d message + ui.printMessage(\"\" + taskNumber + \". \" + this.tasklist.getTask(taskNumber));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                } else if (keyword.equals(\"done\")) {"
+        "content": "            } else if (keyword.equals(\"delete\")) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    int taskNumber \u003d Integer.valueOf(parsed[1]);"
+        "content": "                int taskNumber \u003d Integer.valueOf(parsed[1]);"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.tasklist.markDone(taskNumber);"
+        "content": "                message \u003d message + ui.printMessage(\"Noted. I\u0027ve removed this task\");"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.ui.printMessage(\"Nice! I\u0027ve marked this task as done:\");"
+        "content": "                message \u003d message + ui.printMessage(\"\" + this.tasklist.getTask(taskNumber));"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.ui.printMessage(\"\" + taskNumber + \". \" + this.tasklist.getTask(taskNumber));"
+        "content": "                this.tasklist.removeTask(taskNumber);"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                } else if (keyword.equals(\"delete\")) {"
+        "content": "                message \u003d message + ui.printMessage(\"Now you have \" + this.tasklist.getSize() + \" in the list.\");"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    int taskNumber \u003d Integer.valueOf(parsed[1]);"
+        "content": "            } else if (keyword.equals(\"find\")) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.ui.printMessage(\"Noted. I\u0027ve removed this task\");"
+        "content": "                this.tasklist.findKeyword(parsed[1]);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.ui.printMessage(\"\" + this.tasklist.getTask(taskNumber));"
+        "content": "            } else if (keyword.equals(\"todo\") || keyword.equals(\"deadline\") || keyword.equals(\"event\")) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.tasklist.removeTask(taskNumber);"
+        "content": "                if (parsed.length \u003c\u003d 1) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.ui.printMessage(\"Now you have \" + this.tasklist.getSize() + \" in the list.\");"
+        "content": "                    throw new DukeException(\"I think u need more arguments\");"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                } else if (keyword.equals(\"find\")) {"
+        "content": "                } else {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    this.tasklist.findKeyword(parsed[1]);"
+        "content": "                    String word2 \u003d parsed[1];"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                } else if (keyword.equals(\"todo\") || keyword.equals(\"deadline\") || keyword.equals(\"event\")) {"
+        "content": "                    String[] parsed2 \u003d TextParser.mySecondParser(word2);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    if (parsed.length \u003c\u003d 1) {"
+        "content": "                    if (keyword.equals(\"todo\")) {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        throw new DukeException(\"I think u need more arguments\");"
+        "content": "                        this.tasklist.addTask(new Todo(parsed2[0]));"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    } else {"
+        "content": "                    } else if (keyword.equals(\"deadline\")) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        String word2 \u003d parsed[1];"
+        "content": "                        this.tasklist.addTask(new Deadline(parsed2[0], LocalDate.parse(parsed2[1])));"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        String[] parsed2 \u003d TextParser.mySecondParser(word2);"
+        "content": "                    } else if (keyword.equals(\"event\")) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        if (keyword.equals(\"todo\")) {"
+        "content": "                        this.tasklist.addTask(new Event(parsed2[0], LocalDate.parse(parsed2[1])));"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                            this.tasklist.addTask(new Todo(parsed2[0]));"
+        "content": "                    }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        } else if (keyword.equals(\"deadline\")) {"
+        "content": "                    message \u003d message + ui.printMessage(\"Got it. I \u0027ve added this task:\");"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                            this.tasklist.addTask(new Deadline(parsed2[0], LocalDate.parse(parsed2[1])));"
+        "content": "                    message \u003d message + ui.printMessage(\"\" + this.tasklist.getTask(this.tasklist.getSize()));"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        } else if (keyword.equals(\"event\")) {"
+        "content": "                    message \u003d message + ui.printMessage(\"Now you have \" + this.tasklist.getSize() + \" in the list.\");"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                            this.tasklist.addTask(new Event(parsed2[0], LocalDate.parse(parsed2[1])));"
+        "content": "                }"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        }"
+        "content": "            } else {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "                throw new DukeException(\"I DK how to process this -\u003e \" + command);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        this.ui.printMessage(\"Got it. I \u0027ve added this task:\");"
+        "content": "            }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        this.ui.printMessage(\"\" + this.tasklist.getTask(this.tasklist.getSize()));"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                        this.ui.printMessage(\"Now you have \" + this.tasklist.getSize() + \" in the list.\");"
+        "content": "            message \u003d message + ui.printMessage(e.getMessage());"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    }"
+        "content": "        } finally {"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                } else {"
+        "content": "            message \u003d message + ui.printLine();"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                    throw new DukeException(\"I DK how to process this -\u003e \" + word);"
+        "content": "        }"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                }"
+        "content": "        return message;"
       },
       {
         "lineNumber": 76,
-        "author": {
-          "gitId": "hans555"
-        },
-        "content": "            } catch (DukeException e) {"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "hans555"
-        },
-        "content": "                ui.printMessage(e.getMessage());"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "hans555"
-        },
-        "content": "            } finally {"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "hans555"
-        },
-        "content": "                this.ui.printLine();"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "hans555"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "hans555"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 82,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 83,
+        "lineNumber": 77,
         "author": {
           "gitId": "hans555"
         },
         "content": ""
       },
       {
-        "lineNumber": 84,
+        "lineNumber": 78,
         "author": {
           "gitId": "hans555"
         },
         "content": "    /**"
       },
       {
-        "lineNumber": 85,
+        "lineNumber": 79,
         "author": {
           "gitId": "hans555"
         },
         "content": "     * You should have your own function to generate a response to user input."
       },
       {
-        "lineNumber": 86,
+        "lineNumber": 80,
         "author": {
           "gitId": "hans555"
         },
         "content": "     * Replace this stub with your completed method."
       },
       {
-        "lineNumber": 87,
+        "lineNumber": 81,
         "author": {
           "gitId": "hans555"
         },
         "content": "     */"
       },
       {
-        "lineNumber": 88,
+        "lineNumber": 82,
         "author": {
           "gitId": "hans555"
         },
         "content": "    protected String getResponse(String input) {"
       },
       {
-        "lineNumber": 89,
+        "lineNumber": 83,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        return \"Duke heard: \" + input;"
+        "content": "        return this.run(input);"
       },
       {
-        "lineNumber": 90,
+        "lineNumber": 84,
         "author": {
           "gitId": "hans555"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 91,
+        "lineNumber": 85,
         "author": {
           "gitId": "hans555"
         },
         "content": ""
       },
       {
-        "lineNumber": 92,
+        "lineNumber": 86,
         "author": {
           "gitId": "-"
         },
@@ -1869,7 +1827,7 @@
       }
     ],
     "authorContributionMap": {
-      "hans555": 88,
+      "hans555": 82,
       "-": 4
     }
   },
@@ -2481,24 +2439,17 @@
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "hans555"
-        },
         "content": "}"
       },
       {
-        "lineNumber": 12,
+        "lineNumber": 11,
         "author": {
           "gitId": "hans555"
         },
@@ -2506,7 +2457,7 @@
       }
     ],
     "authorContributionMap": {
-      "hans555": 12
+      "hans555": 11
     }
   },
   {
@@ -4584,150 +4535,192 @@
         "author": {
           "gitId": "hans555"
         },
-        "content": "     * Prints the arraylist of task."
+        "content": "     * Print the arraylist of task."
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     */"
+        "content": "     * @return String of the list"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    public void printList() {"
+        "content": "     */"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        for (int i \u003d 0; i \u003c mylist.size(); i++) {"
+        "content": "    public String printList() {"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "hans555"
         },
-        "content": "            System.out.println(i + 1 + \". \" + mylist.get(i));"
+        "content": "        String list \u003d \"\";"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        }"
+        "content": "        for (int i \u003d 0; i \u003c mylist.size(); i++) {"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    }"
+        "content": "            list \u003d list + (i + 1 + \". \" + mylist.get(i) + \"\\n\");"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    /**"
+        "content": "        return list;"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     * Print the list of tasks with the keyword inside."
+        "content": "    }"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     * @param keyword String"
+        "content": ""
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    public void findKeyword(String keyword) {"
+        "content": "     * Print the list of tasks with the keyword inside."
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        int j \u003d 1;"
+        "content": "     * @param keyword String"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        for (int i \u003d 0; i \u003c mylist.size(); i++) {"
+        "content": "     * @return String of the result"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "hans555"
         },
-        "content": "            if (mylist.get(i).description.contains(keyword)) {"
+        "content": "     */"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                System.out.println(j + \". \" + mylist.get(i));"
+        "content": "    public String findKeyword(String keyword) {"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                j++;"
+        "content": "        String result \u003d \"\";"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "hans555"
         },
-        "content": "            }"
+        "content": "        int j \u003d 1;"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        }"
+        "content": "        for (int i \u003d 0; i \u003c mylist.size(); i++) {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    }"
+        "content": "            if (mylist.get(i).description.contains(keyword)) {"
       },
       {
         "lineNumber": 90,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "                result \u003d result + (j + \". \" + mylist.get(i) + \"\\n\");"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "                j++;"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 96,
         "author": {
           "gitId": "hans555"
         },
@@ -4735,7 +4728,7 @@
       }
     ],
     "authorContributionMap": {
-      "hans555": 90
+      "hans555": 96
     }
   },
   {
@@ -5276,248 +5269,290 @@
         "author": {
           "gitId": "hans555"
         },
-        "content": "     */"
+        "content": "     * @return String the introduction"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    public void printIntro() {"
+        "content": "     */"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        String logo \u003d \" ____        _        \\n\""
+        "content": "    public String printIntro() {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
+        "content": "        String logo \u003d \" ____        _        \\n\""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
+        "content": "                + \"|  _ \\\\ _   _| | _____ \\n\""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "hans555"
         },
-        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
+        "content": "                + \"| | | | | | | |/ / _ \\\\\\n\""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        System.out.println(\"Hello from\\n\" + logo);"
+        "content": "                + \"| |_| | |_| |   \u003c  __/\\n\""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "                + \"|____/ \\\\__,_|_|\\\\_\\\\___|\\n\";"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        System.out.println(\"Hello! I \u0027m Duke\");"
+        "content": "        logo \u003d \"Hello from\\n\" + logo;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        System.out.println(\"What can I do for you?\");"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        System.out.println(\"________________________________________\");"
+        "content": "        logo \u003d logo + \"Hello! I \u0027m Duke\\n\";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    }"
+        "content": "        logo \u003d logo + \"What can I do for you?\\n\";"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "        logo \u003d logo + \"________________________________________\\n\";"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    /**"
+        "content": "        return logo;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     * Prints the introduction exit message when duke exit."
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    public void printEnding() {"
+        "content": "    /**"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        System.out.println(\"Bye. Hope not to see you again soon!\");"
+        "content": "     * Prints the introduction exit message when duke exit."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    }"
+        "content": "     * @return string of the message"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    /**"
+        "content": "    public String printEnding() {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     * Prints any message by duke."
+        "content": "        return (\"Bye. Hope not to see you again soon!\\n\");"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     * @param message of duke"
+        "content": "    }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    public void printMessage(String message) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        System.out.println(message);"
+        "content": "     * Prints any message by duke."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    }"
+        "content": "     * @param message of duke"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "hans555"
         },
-        "content": ""
+        "content": "     * @return String ot the message"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     * Prints a line in the terminal."
+        "content": "    public String printMessage(String message) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "hans555"
         },
-        "content": "     */"
+        "content": "        return message + \"\\n\";"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    public void printLine() {"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "hans555"
         },
-        "content": "        System.out.println(\"________________________________________\");"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "hans555"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 40,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "     * Prints a line in the terminal."
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "     * @return String of a line"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "    public String printLine() {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "        return \"________________________________________\\n\";"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "hans555"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
         "author": {
           "gitId": "hans555"
         },
@@ -5525,7 +5560,7 @@
       }
     ],
     "authorContributionMap": {
-      "hans555": 40
+      "hans555": 46
     }
   },
   {
