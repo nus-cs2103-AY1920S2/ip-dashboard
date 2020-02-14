@@ -3931,822 +3931,1046 @@
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            taskList.add(todo);"
+        "content": "            if (duplicatedTask(taskList, todo)) {"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Ui.printWithBorder(\"The following to-do has been added:\\n    \""
+        "content": "                Ui.printWithBorder(\"This todo is already in your task list.\");"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    + todo.toString() + str + taskList.size());"
+        "content": "            } else {"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": ""
+        "content": "                taskList.add(todo);"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } else if (type.equals(DEADLINE_TYPE)) {"
+        "content": "                Ui.printWithBorder(\"The following to-do has been added:\\n    \""
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            String[] arr \u003d input.split(\"/\", MINIMUM_DEADLINE_LENGTH);"
+        "content": "                        + todo.toString() + str + taskList.size());"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            if (arr.length \u003e\u003d MINIMUM_DEADLINE_LENGTH) {"
+        "content": "            }"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                String description \u003d arr[DEADLINE_DESCRIPTION_POSITION];"
+        "content": ""
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                String by \u003d arr[DEADLINE_TIME_POSITION].split(\" \", MINIMUM_DEADLINE_LENGTH)[DEADLINE_TIME_POSITION];"
+        "content": "        } else if (type.equals(DEADLINE_TYPE)) {"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                if (isLocalDate(by)) {"
+        "content": "            String[] arr \u003d input.split(\"/\", MINIMUM_DEADLINE_LENGTH);"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    LocalDate deadlineDate \u003d LocalDate.parse(by);"
+        "content": "            if (arr.length \u003e\u003d MINIMUM_DEADLINE_LENGTH) {"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    Deadline deadline \u003d new Deadline(description, deadlineDate);"
+        "content": "                String description \u003d arr[DEADLINE_DESCRIPTION_POSITION];"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    taskList.add(deadline);"
+        "content": "                String by \u003d arr[DEADLINE_TIME_POSITION].split(\" \", MINIMUM_DEADLINE_LENGTH)[DEADLINE_TIME_POSITION];"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    Ui.printWithBorder(\"The following task has been added:\\n\""
+        "content": "                if (isLocalDate(by)) {"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                            + \"    \" + deadline.toString() + str + taskList.size());"
+        "content": "                    LocalDate deadlineDate \u003d LocalDate.parse(by);"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                } else {"
+        "content": "                    Deadline deadline \u003d new Deadline(description, deadlineDate);"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    throw new DukeTaskException(\"Invalid date format detected. \""
+        "content": "                    if (duplicatedTask(taskList, deadline)) {"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                            + \"Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).\");"
+        "content": "                        Ui.printWithBorder(\"This deadline is already in your task list.\");"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                }"
+        "content": "                    } else {"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            } else {"
+        "content": "                        taskList.add(deadline);"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                throw new DukeTaskException(\"\\\u0027/by\\\u0027 field is missing.\");"
+        "content": "                        Ui.printWithBorder(\"The following task has been added:\\n\""
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            }"
+        "content": "                                + \"    \" + deadline.toString() + str + taskList.size());"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": ""
+        "content": "                    }"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } else if (type.equals(EVENT_TYPE)) {"
+        "content": "                } else {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            String[] arr \u003d input.split(\"/\", MINIMUM_EVENT_LENGTH);"
+        "content": "                    throw new DukeTaskException(\"Invalid date format detected. \""
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            if (arr.length \u003e\u003d MINIMUM_EVENT_LENGTH) {"
+        "content": "                            + \"Please ensure date is in yyyy-mm-dd (e.g. 2019-01-30).\");"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                String description \u003d arr[EVENT_DESCRIPTION_POSITION];"
+        "content": "                }"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                String at \u003d arr[EVENT_TIME_POSITION].split(\" \", MINIMUM_EVENT_LENGTH)[EVENT_TIME_POSITION];"
+        "content": "            } else {"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                if (isLocalDate(at)) {"
+        "content": "                throw new DukeTaskException(\"\\\u0027/by\\\u0027 field is missing.\");"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    LocalDate eventDate \u003d LocalDate.parse(at);"
+        "content": "            }"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    Event event \u003d new Event(description, eventDate);"
+        "content": ""
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    taskList.add(event);"
+        "content": "        } else if (type.equals(EVENT_TYPE)) {"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    Ui.printWithBorder(\"The following task has been added:\\n\""
+        "content": "            String[] arr \u003d input.split(\"/\", MINIMUM_EVENT_LENGTH);"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                            + \"    \" + event.toString() + str + taskList.size());"
+        "content": "            if (arr.length \u003e\u003d MINIMUM_EVENT_LENGTH) {"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                } else {"
+        "content": "                String description \u003d arr[EVENT_DESCRIPTION_POSITION];"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    throw new DukeTaskException(\"Invalid date format detected. \""
+        "content": "                String at \u003d arr[EVENT_TIME_POSITION].split(\" \", MINIMUM_EVENT_LENGTH)[EVENT_TIME_POSITION];"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                            + \"Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).\");"
+        "content": "                if (isLocalDate(at)) {"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                }"
+        "content": "                    LocalDate eventDate \u003d LocalDate.parse(at);"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            } else {"
+        "content": "                    Event event \u003d new Event(description, eventDate);"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                throw new DukeTaskException(\"\\\u0027/at\\\u0027 field is missing.\");"
+        "content": "                    if (duplicatedTask(taskList, event)) {"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            }"
+        "content": "                        Ui.printWithBorder(\"This event is already in your task list.\");"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        }"
+        "content": "                    } else {"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    }"
+        "content": "                        taskList.add(event);"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": ""
+        "content": "                        Ui.printWithBorder(\"The following task has been added:\\n\""
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    /**"
+        "content": "                                + \"    \" + event.toString() + str + taskList.size());"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * Checks if input provided can be parsed into a LocalDate object."
+        "content": "                    }"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @param input Input from user."
+        "content": "                } else {"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @return True if input can be parsed, false otherwise."
+        "content": "                    throw new DukeTaskException(\"Invalid date format detected. \""
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     */"
+        "content": "                            + \"Please ensure date is in yyyy-mm-dd (e.g. 2019-02-28).\");"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    public static boolean isLocalDate(String input) {"
+        "content": "                }"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        try {"
+        "content": "            } else {"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            LocalDate.parse(input);"
+        "content": "                throw new DukeTaskException(\"\\\u0027/at\\\u0027 field is missing.\");"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } catch (DateTimeParseException err) {"
+        "content": "            }"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            return false;"
+        "content": "        }"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        return true;"
+        "content": ""
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": ""
+        "content": "     * Checks if input provided can be parsed into a LocalDate object."
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    /**"
+        "content": "     * @param input Input from user."
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * Marks the specified task as done."
+        "content": "     * @return True if input can be parsed, false otherwise."
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @param taskList User\u0027s TaskList."
+        "content": "     */"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @param userIndex Index of Task to be marked as done."
+        "content": "    public static boolean isLocalDate(String input) {"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @throws DukeArgumentException Throws exception related to invalid argument provided."
+        "content": "        try {"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     */"
+        "content": "            LocalDate.parse(input);"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    public void markTaskAsDone(TaskList taskList, String userIndex) throws DukeArgumentException {"
+        "content": "        } catch (DateTimeParseException err) {"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        int index \u003d Integer.parseInt(userIndex) - 1;"
+        "content": "            return false;"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        if (taskList.isEmpty()) {"
+        "content": "        }"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Ui.printWithBorder(\"There is no task in your list to be marked as done.\");"
+        "content": "        return true;"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } else if (index \u003c taskList.size()) {"
+        "content": "    }"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Task t \u003d taskList.get(index);"
+        "content": ""
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            t.markAsDone();"
+        "content": "    /**"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Ui.printWithBorder(\"As per requested, the following task has been marked as done:\\n\""
+        "content": "     * Marks the specified task as done."
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    + \"    \" + t.toString());"
+        "content": "     * @param taskList User\u0027s TaskList."
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } else {"
+        "content": "     * @param userIndex Index of Task to be marked as done."
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            throw new DukeArgumentException(\"Please provide a number between 1 and \" + taskList.size() + \".\");"
+        "content": "     * @throws DukeArgumentException Throws exception related to invalid argument provided."
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        }"
+        "content": "     */"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    }"
+        "content": "    public void markTaskAsDone(TaskList taskList, String userIndex) throws DukeArgumentException {"
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": ""
+        "content": "        int index \u003d Integer.parseInt(userIndex) - 1;"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    /**"
+        "content": "        if (taskList.isEmpty()) {"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * Deletes the specified task."
+        "content": "            Ui.printWithBorder(\"There is no task in your list to be marked as done.\");"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @param taskList User\u0027s TaskList."
+        "content": "        } else if (index \u003c taskList.size()) {"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @param userIndex Index of Task to be deleted."
+        "content": "            Task t \u003d taskList.get(index);"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @throws DukeArgumentException Throws exception related to invalid argument provided."
+        "content": "            t.markAsDone();"
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     */"
+        "content": "            Ui.printWithBorder(\"As per requested, the following task has been marked as done:\\n\""
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    public void deleteTask(TaskList taskList, String userIndex) throws DukeArgumentException {"
+        "content": "                    + \"    \" + t.toString());"
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        int index \u003d Integer.parseInt(userIndex) - 1;"
+        "content": "        } else {"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        if (taskList.isEmpty()) {"
+        "content": "            throw new DukeArgumentException(\"Please provide a number between 1 and \" + taskList.size() + \".\");"
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Ui.printWithBorder(\"There is no task in your list to be deleted.\");"
+        "content": "        }"
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } else if (index \u003c taskList.size()) {"
+        "content": "    }"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Task t \u003d taskList.get(index);"
+        "content": ""
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            taskList.remove(index);"
+        "content": "    /**"
       },
       {
         "lineNumber": 188,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Ui.printWithBorder(\"As per requested, the following task has been deleted:\\n\""
+        "content": "     * Deletes the specified task."
       },
       {
         "lineNumber": 189,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                    + \"    \" + t.toString() + \"\\nCurrent number of task(s): \" + taskList.size());"
+        "content": "     * @param taskList User\u0027s TaskList."
       },
       {
         "lineNumber": 190,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } else {"
+        "content": "     * @param userIndex Index of Task to be deleted."
       },
       {
         "lineNumber": 191,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            throw new DukeArgumentException(\"Please provide a number between 1 and \" + taskList.size() + \".\");"
+        "content": "     * @throws DukeArgumentException Throws exception related to invalid argument provided."
       },
       {
         "lineNumber": 192,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        }"
+        "content": "     */"
       },
       {
         "lineNumber": 193,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    }"
+        "content": "    public void deleteTask(TaskList taskList, String userIndex) throws DukeArgumentException {"
       },
       {
         "lineNumber": 194,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": ""
+        "content": "        int index \u003d Integer.parseInt(userIndex) - 1;"
       },
       {
         "lineNumber": 195,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    /**"
+        "content": "        if (taskList.isEmpty()) {"
       },
       {
         "lineNumber": 196,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * Displays a search result of Tasks that matches the keyword specified by user."
+        "content": "            Ui.printWithBorder(\"There is no task in your list to be deleted.\");"
       },
       {
         "lineNumber": 197,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @param taskList User\u0027s TaskList."
+        "content": "        } else if (index \u003c taskList.size()) {"
       },
       {
         "lineNumber": 198,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     * @param keyword Keyword used to search the TaskList."
+        "content": "            Task t \u003d taskList.get(index);"
       },
       {
         "lineNumber": 199,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "     */"
+        "content": "            taskList.remove(index);"
       },
       {
         "lineNumber": 200,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    public void findTask(TaskList taskList, String keyword) {"
+        "content": "            Ui.printWithBorder(\"As per requested, the following task has been deleted:\\n\""
       },
       {
         "lineNumber": 201,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        TaskList searchResult \u003d taskList.findTask(keyword);"
+        "content": "                    + \"    \" + t.toString() + \"\\nCurrent number of task(s): \" + taskList.size());"
       },
       {
         "lineNumber": 202,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        if (searchResult.isEmpty()) {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 203,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Ui.printWithBorder(\"Apologies, I could not find any matching task.\");"
+        "content": "            throw new DukeArgumentException(\"Please provide a number between 1 and \" + taskList.size() + \".\");"
       },
       {
         "lineNumber": 204,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        } else {"
+        "content": "        }"
       },
       {
         "lineNumber": 205,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            StringBuilder sb \u003d new StringBuilder(\"After much deliberation, I found these matching tasks:\");"
+        "content": "    }"
       },
       {
         "lineNumber": 206,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            for (int i \u003d 0; i \u003c searchResult.size(); i++) {"
+        "content": ""
       },
       {
         "lineNumber": 207,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                Task t \u003d searchResult.get(i);"
+        "content": "    /**"
       },
       {
         "lineNumber": 208,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                sb.append(\"\\n    \");"
+        "content": "     * Displays a search result of Tasks that matches the keyword specified by user."
       },
       {
         "lineNumber": 209,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "                sb.append(t.toString());"
+        "content": "     * @param taskList User\u0027s TaskList."
       },
       {
         "lineNumber": 210,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            }"
+        "content": "     * @param keyword Keyword used to search the TaskList."
       },
       {
         "lineNumber": 211,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "            Ui.printWithBorder(sb.toString());"
+        "content": "     */"
       },
       {
         "lineNumber": 212,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "        }"
+        "content": "    public void findTask(TaskList taskList, String keyword) {"
       },
       {
         "lineNumber": 213,
         "author": {
           "gitId": "shanecsj"
         },
-        "content": "    }"
+        "content": "        TaskList searchResult \u003d taskList.findTask(keyword);"
       },
       {
         "lineNumber": 214,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "        if (searchResult.isEmpty()) {"
+      },
+      {
+        "lineNumber": 215,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            Ui.printWithBorder(\"Apologies, I could not find any matching task.\");"
+      },
+      {
+        "lineNumber": 216,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 217,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            StringBuilder sb \u003d new StringBuilder(\"After much deliberation, I found these matching tasks:\");"
+      },
+      {
+        "lineNumber": 218,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            for (int i \u003d 0; i \u003c searchResult.size(); i++) {"
+      },
+      {
+        "lineNumber": 219,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "                Task t \u003d searchResult.get(i);"
+      },
+      {
+        "lineNumber": 220,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "                sb.append(\"\\n    \");"
+      },
+      {
+        "lineNumber": 221,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "                sb.append(t.toString());"
+      },
+      {
+        "lineNumber": 222,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 223,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            Ui.printWithBorder(sb.toString());"
+      },
+      {
+        "lineNumber": 224,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 225,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 226,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 227,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 228,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "     * Checks if there already exists a duplicated task in the user\u0027s TaskList."
+      },
+      {
+        "lineNumber": 229,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "     * @param taskList User\u0027s list of Tasks."
+      },
+      {
+        "lineNumber": 230,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "     * @param task New Task that is to be added."
+      },
+      {
+        "lineNumber": 231,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "     * @return True if a duplicated Task exists, false otherwise."
+      },
+      {
+        "lineNumber": 232,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 233,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "    public static boolean duplicatedTask(TaskList taskList, Task task) {"
+      },
+      {
+        "lineNumber": 234,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "        boolean isDuplicate \u003d false;"
+      },
+      {
+        "lineNumber": 235,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "        for (int i \u003d 0; i \u003c taskList.size(); i++) {"
+      },
+      {
+        "lineNumber": 236,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            Task current \u003d taskList.get(i);"
+      },
+      {
+        "lineNumber": 237,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            if (task.getDescription().equals(current.getDescription()) \u0026\u0026 current.getStatus().equals(\"[X]\")) {"
+      },
+      {
+        "lineNumber": 238,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "                isDuplicate \u003d true;"
+      },
+      {
+        "lineNumber": 239,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "                break;"
+      },
+      {
+        "lineNumber": 240,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            } else {"
+      },
+      {
+        "lineNumber": 241,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "                continue;"
+      },
+      {
+        "lineNumber": 242,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 243,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 244,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "        return isDuplicate;"
+      },
+      {
+        "lineNumber": 245,
+        "author": {
+          "gitId": "shanecsj"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 246,
         "author": {
           "gitId": "shanecsj"
         },
@@ -4754,7 +4978,7 @@
       }
     ],
     "authorContributionMap": {
-      "shanecsj": 214
+      "shanecsj": 246
     }
   },
   {

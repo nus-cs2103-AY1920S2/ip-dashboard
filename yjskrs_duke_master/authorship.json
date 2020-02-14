@@ -1748,42 +1748,42 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param isCompleted Whether the deadline is completed."
+        "content": "     * @param by Time the deadline is due."
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param by Time the deadline is due."
+        "content": "     */"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "    protected Deadline(String name, String by) {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    protected Deadline(String name, boolean isCompleted, LocalDate by) {"
+        "content": "        super(name);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        super(name, isCompleted);"
+        "content": "        assert !by.isEmpty() : \"Empty by string.\";"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        this.by \u003d by;"
+        "content": "        this.by \u003d LocalDate.parse(by);"
       },
       {
         "lineNumber": 26,
@@ -1804,77 +1804,77 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Deadline create(String name, String by) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return new Deadline(name, false, LocalDate.parse(by));"
+        "content": "     * Creates a new Deadline object."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "     * @param name The name of the deadline."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Deadline create(String name, boolean isCompleted, String by) {"
+        "content": "     * @param isCompleted Whether the deadline is completed."
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return new Deadline(name, isCompleted, LocalDate.parse(by));"
+        "content": "     * @param by Time the deadline is due."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    protected Deadline(String name, boolean isCompleted, String by) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    @Override"
+        "content": "        super(name, isCompleted);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String format() {"
+        "content": "        assert !by.isEmpty() : \"Empty by string.\";"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return \"D | \" + super.format() + \" | \" + by;"
+        "content": "        this.by \u003d LocalDate.parse(by);"
       },
       {
         "lineNumber": 39,
@@ -1888,7 +1888,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "    "
       },
       {
         "lineNumber": 41,
@@ -1902,59 +1902,94 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String toString() {"
+        "content": "    public String format() {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String month \u003d String.valueOf(by.getMonth());"
+        "content": "        return \"D | \" + super.format() + \" | \" + by;"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String formattedDate \u003d by.getDayOfMonth() + \" \""
+        "content": "    }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "                                + month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase() + \" \""
+        "content": ""
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "                                + by.getYear();"
+        "content": "    @Override"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return \"[D][\" + getStatusIcon() + \"] \" + super.toString() + \" (by: \" + formattedDate + \")\";"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }    "
+        "content": "        String month \u003d String.valueOf(by.getMonth());"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "}"
+        "content": "        String formattedDate \u003d by.getDayOfMonth() + \" \""
       },
       {
         "lineNumber": 50,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                                + month.substring(0, 1).toUpperCase() + month.substring(1).toLowerCase() + \" \""
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                                + by.getYear();"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        return \"[D][\" + getStatusIcon() + \"] \" + super.toString() + \" (by: \" + formattedDate + \")\";"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }    "
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "}"
+      },
+      {
+        "lineNumber": 55,
         "author": {
           "gitId": "yjskrs"
         },
@@ -1962,7 +1997,7 @@
       }
     ],
     "authorContributionMap": {
-      "yjskrs": 50
+      "yjskrs": 55
     }
   },
   {
@@ -2530,35 +2565,35 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param isCompleted Whether the event is completed."
+        "content": "     * @param at Time of event."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param at Time of event."
+        "content": "     */"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "    protected Event(String name, String at) {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    protected Event(String name, boolean isCompleted, String at) {"
+        "content": "        super(name);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        super(name, isCompleted);"
+        "content": "        assert !at.isEmpty() : \"Empty at string.\";"
       },
       {
         "lineNumber": 23,
@@ -2579,84 +2614,84 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "    "
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Event create(String name, String at) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return new Event(name, false, at);"
+        "content": "     * Creates a new Event object."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "     * @param name The name of the event."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Event create(String name, boolean isCompleted, String at) {"
+        "content": "     * @param isCompleted Whether the event is completed."
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return new Event(name, isCompleted, at);"
+        "content": "     * @param at Time of event."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    protected Event(String name, boolean isCompleted, String at) {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    @Override"
+        "content": "        super(name, isCompleted);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String format() {"
+        "content": "        assert !at.isEmpty() : \"Empty at string.\";"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return \"E | \" + super.format() + \" | \" + at;"
+        "content": "        this.at \u003d at;"
       },
       {
         "lineNumber": 37,
@@ -2684,14 +2719,14 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String toString() {"
+        "content": "    public String format() {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return \"[E][\" + getStatusIcon() + \"] \" + super.toString() + \" (at: \" + at + \")\";"
+        "content": "        return \"E | \" + super.format() + \" | \" + at;"
       },
       {
         "lineNumber": 42,
@@ -2705,11 +2740,46 @@
         "author": {
           "gitId": "yjskrs"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        return \"[E][\" + getStatusIcon() + \"] \" + super.toString() + \" (at: \" + at + \")\";"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "yjskrs"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "yjskrs": 43
+      "yjskrs": 48
     }
   },
   {
@@ -3043,7 +3113,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            Todo newTodo \u003d Todo.create(restOfInput);"
+        "content": "            Todo newTodo \u003d new Todo(restOfInput);"
       },
       {
         "lineNumber": 48,
@@ -3078,7 +3148,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            Deadline newDeadline \u003d Deadline.create(details[0].strip(), details[1].strip());"
+        "content": "            Deadline newDeadline \u003d new Deadline(details[0].strip(), details[1].strip());"
       },
       {
         "lineNumber": 53,
@@ -3113,7 +3183,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            Event newEvent \u003d Event.create(details1[0].strip(), details1[1].strip());"
+        "content": "            Event newEvent \u003d new Event(details1[0].strip(), details1[1].strip());"
       },
       {
         "lineNumber": 58,
@@ -3204,31 +3274,129 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        default:"
+        "content": "        case \"help\":"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return \"????????????? gomenasai wakarimasen :(((\";"
+        "content": "            return \"Looking for help? Help is here!\\n\""
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "                    + \"Here are some commands you can enter:\\n\""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }    "
+        "content": "                    + \"`list`: list tasks\\n\""
       },
       {
         "lineNumber": 74,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`find [(partial) task name]`: find tasks from existing tasks\\n\""
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`todo [todo name]`: add todo with name [todo name]\\n\""
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`deadline [deadline name] /by [date in YYYY-MM-DD format]`: add deadline with name [deadline name] and due on [date]\\n\""
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`event [event name] /at [datetime]`: add event with name [event name] at time [datetime]\\n\""
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`delete [task id]`: delete task with id [task id]\\n\""
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`done [task id]`: mark task with id [task id] as done\\n\""
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`undo [task id]`: mark task with id [task id] as not done\\n\""
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "                    + \"`bye`: exit program\\n\";"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "            return \"????????????? gomenasai wakarimasen :((( Enter `help` to get a list of commands.\";"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }    "
+      },
+      {
+        "lineNumber": 88,
         "author": {
           "gitId": "yjskrs"
         },
@@ -3236,7 +3404,7 @@
       }
     ],
     "authorContributionMap": {
-      "yjskrs": 74
+      "yjskrs": 88
     }
   },
   {
@@ -3684,21 +3852,21 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param isCompleted Whether the task is completed."
+        "content": "     */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "    protected Task(String name) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    protected Task(String name, boolean isCompleted) {"
+        "content": "        assert !name.isEmpty() : \"Empty task name.\";"
       },
       {
         "lineNumber": 20,
@@ -3712,7 +3880,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        this.isCompleted \u003d isCompleted;"
+        "content": "        this.isCompleted \u003d false;"
       },
       {
         "lineNumber": 22,
@@ -3740,343 +3908,343 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Marks the task as completed."
+        "content": "     * Creates a new Task object."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public void markAsCompleted() {"
+        "content": "     * @param name The name of the task."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        isCompleted \u003d true;"
+        "content": "     * @param isCompleted Whether the task is completed."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    protected Task(String name, boolean isCompleted) {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "        assert !name.isEmpty() : \"Empty task name.\";"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Marks the task as incomplete."
+        "content": "        this.name \u003d name;"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "        this.isCompleted \u003d isCompleted;"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public void markAsIncomplete() {"
+        "content": "    }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        isCompleted \u003d false;"
+        "content": "    "
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "     * Marks the task as completed."
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Returns icon for whether the task is completed or not."
+        "content": "    public void markAsCompleted() {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "        isCompleted \u003d true;"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return The string representing the whether the task is completed or not."
+        "content": "    }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "    "
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String getStatusIcon() {"
+        "content": "    /**"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return (isCompleted ? \"/\" : \"X\"); // return tick or X symbols"
+        "content": "     * Marks the task as incomplete."
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    public void markAsIncomplete() {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "        isCompleted \u003d false;"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Returns a string formatting the task for saving in a file."
+        "content": "    }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "    "
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return The string representing the task."
+        "content": "    /**"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "     * Returns icon for whether the task is completed or not."
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String format() {"
+        "content": "     *"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return (isCompleted ? \"1 | \" : \"0 | \") + name;"
+        "content": "     * @return The string representing the whether the task is completed or not."
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    public String getStatusIcon() {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public boolean matchesPartOfName(String str) {"
+        "content": "        return (isCompleted ? \"/\" : \"X\"); // return tick or X symbols"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return name.contains(str);"
+        "content": "    }"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    "
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    /**"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public boolean matchesName(String str) {"
+        "content": "     * Returns a string formatting the task for saving in a file."
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return str.equals(name);"
+        "content": "     *"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     * @return The string representing the task."
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    @Override"
+        "content": "    public String format() {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public boolean equals(Object obj) {"
+        "content": "        return (isCompleted ? \"1 | \" : \"0 | \") + name;"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        if (obj \u003d\u003d this) {"
+        "content": "    }"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return true;"
+        "content": "    "
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        } else if (obj instanceof Task) {"
+        "content": "    public boolean matchesPartOfName(String str) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            Task task \u003d (Task) obj;"
+        "content": "        return name.contains(str);"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return task.name.equals(this.name);"
+        "content": "    }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        } else {"
+        "content": "    "
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return false;"
+        "content": "    public boolean matchesName(String str) {"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "        return str.equals(name);"
       },
       {
         "lineNumber": 74,
@@ -4104,24 +4272,108 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String toString() {"
+        "content": "    public boolean equals(Object obj) {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return name;"
+        "content": "        if (obj \u003d\u003d this) {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "            return true;"
       },
       {
         "lineNumber": 80,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        } else if (obj instanceof Task) {"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "            Task task \u003d (Task) obj;"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "            return task.name.equals(this.name);"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "            return false;"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        return name;"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 92,
         "author": {
           "gitId": "yjskrs"
         },
@@ -4129,7 +4381,7 @@
       }
     ],
     "authorContributionMap": {
-      "yjskrs": 80
+      "yjskrs": 92
     }
   },
   {
@@ -4281,7 +4533,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        if (data.length() \u003d\u003d 0) {"
+        "content": "        if (data.isEmpty()) {"
       },
       {
         "lineNumber": 22,
@@ -4323,7 +4575,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            if (list[i].length() \u003d\u003d 0) {"
+        "content": "            if (list[i].isEmpty()) {"
       },
       {
         "lineNumber": 28,
@@ -4386,7 +4638,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "                addTask(Todo.create(name, isCompleted));"
+        "content": "                addTask(new Todo(name, isCompleted));"
       },
       {
         "lineNumber": 37,
@@ -4407,7 +4659,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "                addTask(Deadline.create(name, isCompleted, recArr[3]));"
+        "content": "                addTask(new Deadline(name, isCompleted, recArr[3]));"
       },
       {
         "lineNumber": 40,
@@ -4428,7 +4680,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "                addTask(Event.create(name, isCompleted, recArr[3]));"
+        "content": "                addTask(new Event(name, isCompleted, recArr[3]));"
       },
       {
         "lineNumber": 43,
@@ -4554,7 +4806,7 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Removes a task from the list."
+        "content": "     * Gets a task by its id (index + 1)."
       },
       {
         "lineNumber": 61,
@@ -4568,14 +4820,14 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param number The number of the task to be removed."
+        "content": "     * @param id Id of task that user sees."
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return The task removed."
+        "content": "     * @return The task."
       },
       {
         "lineNumber": 64,
@@ -4589,182 +4841,182 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Task removeTask(int number) {"
+        "content": "    private static Task getTask(int id) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        Task task \u003d tasks.get(number - 1);"
+        "content": "        return tasks.get(id - 1);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        tasks.remove(number - 1);"
+        "content": "    }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return task;"
+        "content": "    "
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "     * Removes a task from the list."
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Marks a task from the list as completed."
+        "content": "     * @param id The id of the task to be removed."
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * @return The task removed."
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param number The number of the task to be modified."
+        "content": "     */"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return The task modified."
+        "content": "    public static Task removeTask(int id) {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "        Task task \u003d getTask(id);"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Task markTaskAsCompleted(int number) {"
+        "content": "        tasks.remove(task);"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        tasks.get(number - 1).markAsCompleted();"
+        "content": "        return task;"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return tasks.get(number - 1);"
+        "content": "    }"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    "
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    /**"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "     * Marks a task from the list as completed."
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Marks a task from the list as incomplete."
+        "content": "     *"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * @param id The id of the task to be modified."
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param number The number of the task to be modified."
+        "content": "     * @return The task modified."
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return The task modified."
+        "content": "     */"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "    public static Task markTaskAsCompleted(int id) {"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Task markTaskAsIncomplete(int number) {"
+        "content": "        Task task \u003d getTask(id);"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        tasks.get(number - 1).markAsIncomplete();"
+        "content": "        task.markAsCompleted();"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return tasks.get(number - 1);"
+        "content": "        return task;"
       },
       {
         "lineNumber": 91,
@@ -4792,353 +5044,437 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Finds an array of tasks that match the string provided. Returns null if there are no"
+        "content": "     * Marks a task from the list as incomplete."
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * matching tasks."
+        "content": "     *"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * @param id The id of the task to be modified."
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param name The name of task to find."
+        "content": "     * @return The task modified."
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return Task array, if found, or null if no matching tasks found."
+        "content": "     */"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "    public static Task markTaskAsIncomplete(int id) {"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Task[] findTask(String name) {"
+        "content": "        Task task \u003d getTask(id);"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        List\u003cTask\u003e tasksMatched \u003d new ArrayList\u003c\u003e();"
+        "content": "        task.markAsIncomplete();"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        for (int i \u003d 0; i \u003c tasks.size(); ++i) {"
+        "content": "        return task;"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            if (tasks.get(i).matchesPartOfName(name)) {"
+        "content": "    }"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "                tasksMatched.add(tasks.get(i));"
+        "content": "    "
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            }"
+        "content": "    /**"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "     * Finds an array of tasks that match the string provided. Returns null if there are no"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        "
+        "content": "     * matching tasks."
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        if (tasksMatched.size() \u003d\u003d 0) {"
+        "content": "     *"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return null;"
+        "content": "     * @param name The name of task to find."
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        } else {"
+        "content": "     * @return Task array, if found, or null if no matching tasks found."
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return tasksMatched.toArray(Task[]::new);"
+        "content": "     */"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "    public static Task[] findTask(String name) {"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "        List\u003cTask\u003e tasksMatched \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "        for (Task task : tasks) {"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "            if (task.matchesPartOfName(name)) {"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Lists all tasks in the list."
+        "content": "                tasksMatched.add(task);"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "            }"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return String representing the list of tasks."
+        "content": "        }"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "        "
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static String listTasks() {"
+        "content": "        if (tasksMatched.isEmpty()) {"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        if (tasks.size() \u003d\u003d 0) {"
+        "content": "            return null;"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return \"There are no tasks!\";"
+        "content": "        } else {"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "            return tasksMatched.toArray(Task[]::new);"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        "
+        "content": "        }"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String output \u003d \"\";"
+        "content": "    }"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        for (int i \u003d 0; i \u003c tasks.size(); ++i) {"
+        "content": "    "
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            output +\u003d ((i + 1) + \". \" + tasks.get(i) + \"\\n\");"
+        "content": "    /**"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "     * Lists all tasks in the list."
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return output;"
+        "content": "     *"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     * @return String representing the list of tasks."
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "     */"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "    public static String listTasks() {"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Formats the list of tasks for storing in a file."
+        "content": "        if (tasks.isEmpty()) {"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "            return \"There are no tasks!\";"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return String representing the list of tasks."
+        "content": "        }"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "        "
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static String format() {"
+        "content": "        String output \u003d \"\";"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String formattedTaskList \u003d \"\";"
+        "content": "        for (int i \u003d 0; i \u003c tasks.size(); ++i) {"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        for (int i \u003d 0; i \u003c tasks.size(); ++i) {"
+        "content": "            output +\u003d ((i + 1) + \". \" + tasks.get(i) + \"\\n\");"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            formattedTaskList +\u003d (tasks.get(i).format() + \"\\n\");"
+        "content": "        }"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "        return output;"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return formattedTaskList;"
+        "content": "    }"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    "
       },
       {
         "lineNumber": 144,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 145,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "     * Formats the list of tasks for storing in a file."
+      },
+      {
+        "lineNumber": 146,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 147,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "     * @return String representing the list of tasks."
+      },
+      {
+        "lineNumber": 148,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 149,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    public static String format() {"
+      },
+      {
+        "lineNumber": 150,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        String formattedTaskList \u003d \"\";"
+      },
+      {
+        "lineNumber": 151,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        for (Task task : tasks) {"
+      },
+      {
+        "lineNumber": 152,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "            formattedTaskList +\u003d (task.format() + \"\\n\");"
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        return formattedTaskList;"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 156,
         "author": {
           "gitId": "yjskrs"
         },
@@ -5146,7 +5482,7 @@
       }
     ],
     "authorContributionMap": {
-      "yjskrs": 144
+      "yjskrs": 156
     }
   },
   {
@@ -5228,35 +5564,35 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": "    "
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Creates a new Todo object."
+        "content": "    /**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * Creates a new Todo object."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param name The name of the todo."
+        "content": "     *"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param isCompleted Whether the todo is completed."
+        "content": "     * @param name The name of the todo."
       },
       {
         "lineNumber": 16,
@@ -5270,14 +5606,14 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    protected Todo(String name, boolean isCompleted) {"
+        "content": "    protected Todo(String name) {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        super(name, isCompleted);"
+        "content": "        super(name);"
       },
       {
         "lineNumber": 19,
@@ -5291,136 +5627,150 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "    "
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Todo create(String name) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return new Todo(name, false);"
+        "content": "     * Creates a new Todo object."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "     * @param name The name of the todo."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static Todo create(String name, boolean isCompleted) {"
+        "content": "     * @param isCompleted Whether the todo is completed."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return new Todo(name, isCompleted);"
+        "content": "     */"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    protected Todo(String name, boolean isCompleted) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "        super(name, isCompleted);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    // return a string formatted for saving in file"
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String format() {"
+        "content": "    // return a string formatted for saving in file"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return \"T | \" + super.format();"
+        "content": "    @Override"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    public String format() {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "        return \"T | \" + super.format();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    @Override"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public String toString() {"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return \"[T][\" + getStatusIcon() + \"] \" + super.toString();"
+        "content": "    @Override"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 39,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        return \"[T][\" + getStatusIcon() + \"] \" + super.toString();"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
         "author": {
           "gitId": "yjskrs"
         },
@@ -5428,7 +5778,7 @@
       }
     ],
     "authorContributionMap": {
-      "yjskrs": 39
+      "yjskrs": 41
     }
   },
   {
@@ -5552,395 +5902,409 @@
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    "
+        "content": "    private static final String NEWLINE \u003d \"\\n\";"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static String getHelloMessage() {"
+        "content": "    "
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String welcomeMsg \u003d \"Hello, I\u0027m Duke!\";"
+        "content": "    public static String getHelloMessage() {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return welcomeMsg;"
+        "content": "        String welcomeMsg \u003d \"Hello, I\u0027m Duke!\";"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "        return welcomeMsg;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Prints a welcome message to standard output."
+        "content": "    /**"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * Prints a welcome message to standard output."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * \u003cp\u003eUsed when starting up program."
+        "content": "     *"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "     * \u003cp\u003eUsed when starting up program."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static void sayHello() {"
+        "content": "     */"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String welcomeMsg \u003d \"Hello from\\n\" + LOGO;"
+        "content": "    public static void sayHello() {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        welcomeMsg +\u003d parseOutput(getHelloMessage());"
+        "content": "        String welcomeMsg \u003d \"Hello from\\n\" + LOGO;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        System.out.println(welcomeMsg);"
+        "content": "        welcomeMsg +\u003d parseOutput(getHelloMessage());"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "        System.out.println(welcomeMsg);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Prints a goodbye message to standard output."
+        "content": "    /**"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * Prints a goodbye message to standard output."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * \u003cp\u003eUsed when closing program."
+        "content": "     *"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "     * \u003cp\u003eUsed when closing program."
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static void sayGoodbye() {"
+        "content": "     */"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String goodbyeMsg \u003d parseOutput(\"Awwww... Sad to see you go :( Hope to see you again soon!\");"
+        "content": "    public static void sayGoodbye() {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        System.out.println(goodbyeMsg);"
+        "content": "        String goodbyeMsg \u003d parseOutput(\"Awwww... Sad to see you go :( Hope to see you again soon!\");"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "        System.out.println(goodbyeMsg);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Prints to standard output."
+        "content": "    /**"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * Prints to standard output."
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param contents String to be output."
+        "content": "     *"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "     * @param contents String to be output."
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static void respond(String contents) {"
+        "content": "     */"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        System.out.println(parseOutput(contents));"
+        "content": "    public static void respond(String contents) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "        System.out.println(parseOutput(contents));"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * Handles program output and formats it for printing to standard output."
+        "content": "    /**"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     *"
+        "content": "     * Handles program output and formats it for printing to standard output."
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @param output String to be output."
+        "content": "     *"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     * @return The string to be printed to standard output."
+        "content": "     * @param output String to be output."
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "     */"
+        "content": "     * @return The string to be printed to standard output."
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    public static String parseOutput(String output) {"
+        "content": "     */"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        if (output.length() \u003d\u003d 0) {"
+        "content": "    public static String parseOutput(String output) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            return \"\";"
+        "content": "        if (output.isEmpty()) {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "            return \"\";"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String formattedOutput \u003d LINE_SEPARATOR + \"\\n\" + output + \"\\n\" + LINE_SEPARATOR;"
+        "content": "        }"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String[] outputArr \u003d formattedOutput.split(\"\\n\");"
+        "content": "        "
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        String indentedOutput \u003d \"\";"
+        "content": "        String formattedOutput \u003d LINE_SEPARATOR + NEWLINE + output + NEWLINE + LINE_SEPARATOR;"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        for (String line : outputArr) {"
+        "content": "        String[] outputArr \u003d formattedOutput.split(NEWLINE);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            if (line.length() \u003e 0) {"
+        "content": "        String indentedOutput \u003d \"\";"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "                indentedOutput +\u003d (INDENTATION + line.strip() + \"\\n\");"
+        "content": "        for (String line : outputArr) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "            }"
+        "content": "            if (!line.isEmpty()) {"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        }"
+        "content": "                indentedOutput +\u003d (INDENTATION + line.strip() + NEWLINE);"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "        return indentedOutput;"
+        "content": "            }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "yjskrs"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 73,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "        return indentedOutput;"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "yjskrs"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 75,
         "author": {
           "gitId": "yjskrs"
         },
@@ -5948,7 +6312,7 @@
       }
     ],
     "authorContributionMap": {
-      "yjskrs": 73
+      "yjskrs": 75
     }
   },
   {
