@@ -453,24 +453,10 @@
           "gitId": "joycelynteo"
         },
         "content": "D@1@project@2016-08-23T22:12:45"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "E@0@party @2016-08-23T22:12:55"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "T@0@sleep"
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 4
+      "joycelynteo": 2
     }
   },
   {
@@ -1121,7 +1107,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "public class Duke extends Application {"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 31,
@@ -1226,1025 +1212,283 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public Duke() {}"
+        "content": "    public Duke() {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public Duke(String filePath) throws DukeException, FileNotFoundException {"
+        "content": "        storage \u003d new Storage(\"data/duke.txt\");"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "        try {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        storage \u003d new Storage(filePath);"
+        "content": "            tasks \u003d new TaskList(storage.load());"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        try {"
+        "content": "        } catch (DukeException | FileNotFoundException e) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            tasks \u003d new TaskList(storage.load());"
+        "content": "            ui.showLoadingError();"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "            tasks \u003d new TaskList();"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            ui.showLoadingError();"
+        "content": "        }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            tasks \u003d new TaskList();"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "    public String run(String fullCommand) {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        if (fullCommand.equals(\"start\")) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void run() throws IOException {"
+        "content": "            return Ui.showWelcome();"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        ui.showWelcome();"
+        "content": "        }"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        boolean isExit \u003d false;"
+        "content": "        String output \u003d \"\";"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        while (!isExit) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            try {"
+        "content": "            output +\u003d ui.showLine() + \"\\n\";"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                String fullCommand \u003d ui.readCommand();"
+        "content": "            Command c \u003d Parser.parse(fullCommand);"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                ui.showLine();"
+        "content": "            output +\u003d c.execute(tasks, ui, storage) + \"\\n\";"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                Command c \u003d Parser.parse(fullCommand);"
+        "content": "        } catch (DukeException | IOException e) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                c.execute(tasks, ui, storage);"
+        "content": "            output +\u003d ui.showError(e.getMessage()) + \"\\n\";"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                isExit \u003d c.isExit();"
+        "content": "        }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } catch (DukeException e) {"
+        "content": "        output +\u003d ui.showLine();"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                ui.showError(e.getMessage());"
+        "content": "        return output;"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } finally {"
+        "content": "    }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                ui.showLine();"
+        "content": ""
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            }"
+        "content": "    /**"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        }"
+        "content": "     * You should have your own function to generate a response to user input."
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "     * Replace this stub with your completed method."
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {"
+        "content": "    public String getResponse(String input) {"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        new Duke(\"data/duke.txt\").run();"
+        "content": "        try {"
       },
       {
         "lineNumber": 78,
         "author": {
-          "gitId": "-"
+          "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "            Command c \u003d Parser.parse(input);"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "            return c.execute(tasks, ui, storage);"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    @Override"
+        "content": "        } catch (IOException | DukeException e) {"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void start(Stage stage) {"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        //Step 1. Setting up required components"
+        "content": ""
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        //The container for the content of the chat to scroll."
+        "content": "    }"
       },
       {
         "lineNumber": 85,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scrollPane \u003d new ScrollPane();"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        dialogContainer \u003d new VBox();"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scrollPane.setContent(dialogContainer);"
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        userInput \u003d new TextField();"
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        sendButton \u003d new Button(\"Send\");"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        AnchorPane mainLayout \u003d new AnchorPane();"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scene \u003d new Scene(mainLayout);"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        stage.setScene(scene);"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        stage.show();"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        //Step 2. Formatting the window to look as expected"
-      },
-      {
-        "lineNumber": 101,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        stage.setTitle(\"Duke\");"
-      },
-      {
-        "lineNumber": 102,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        stage.setResizable(false);"
-      },
-      {
-        "lineNumber": 103,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        stage.setMinHeight(600.0);"
-      },
-      {
-        "lineNumber": 104,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        stage.setMinWidth(400.0);"
-      },
-      {
-        "lineNumber": 105,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        mainLayout.setPrefSize(400.0, 600.0);"
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 108,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scrollPane.setPrefSize(385, 535);"
-      },
-      {
-        "lineNumber": 109,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);"
-      },
-      {
-        "lineNumber": 110,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);"
-      },
-      {
-        "lineNumber": 111,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 112,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scrollPane.setVvalue(1.0);"
-      },
-      {
-        "lineNumber": 113,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        scrollPane.setFitToWidth(true);"
-      },
-      {
-        "lineNumber": 114,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 115,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        // You will need to import `javafx.scene.layout.Region` for this."
-      },
-      {
-        "lineNumber": 116,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);"
-      },
-      {
-        "lineNumber": 117,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 118,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        userInput.setPrefWidth(325.0);"
-      },
-      {
-        "lineNumber": 119,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 120,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        sendButton.setPrefWidth(55.0);"
-      },
-      {
-        "lineNumber": 121,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 122,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        AnchorPane.setTopAnchor(scrollPane, 1.0);"
-      },
-      {
-        "lineNumber": 123,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 124,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        AnchorPane.setBottomAnchor(sendButton, 1.0);"
-      },
-      {
-        "lineNumber": 125,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        AnchorPane.setRightAnchor(sendButton, 1.0);"
-      },
-      {
-        "lineNumber": 126,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 127,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        AnchorPane.setLeftAnchor(userInput , 1.0);"
-      },
-      {
-        "lineNumber": 128,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        AnchorPane.setBottomAnchor(userInput, 1.0);"
-      },
-      {
-        "lineNumber": 129,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 130,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        //Step 3. Add functionality to handle user input."
-      },
-      {
-        "lineNumber": 131,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        sendButton.setOnMouseClicked((event) -\u003e {"
-      },
-      {
-        "lineNumber": 132,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));"
-      },
-      {
-        "lineNumber": 133,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "            userInput.clear();"
-      },
-      {
-        "lineNumber": 134,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        });"
-      },
-      {
-        "lineNumber": 135,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 136,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        userInput.setOnAction((event) -\u003e {"
-      },
-      {
-        "lineNumber": 137,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));"
-      },
-      {
-        "lineNumber": 138,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "            userInput.clear();"
-      },
-      {
-        "lineNumber": 139,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        });"
-      },
-      {
-        "lineNumber": 140,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 141,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        //Scroll down to the end every time dialogContainer\u0027s height changes."
-      },
-      {
-        "lineNumber": 142,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        dialogContainer.heightProperty().addListener((observable) -\u003e scrollPane.setVvalue(1.0));"
-      },
-      {
-        "lineNumber": 143,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 144,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        //Part 3. Add functionality to handle user input."
-      },
-      {
-        "lineNumber": 145,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        sendButton.setOnMouseClicked((event) -\u003e {"
-      },
-      {
-        "lineNumber": 146,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "            handleUserInput();"
-      },
-      {
-        "lineNumber": 147,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        });"
-      },
-      {
-        "lineNumber": 148,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 149,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        userInput.setOnAction((event) -\u003e {"
-      },
-      {
-        "lineNumber": 150,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "            handleUserInput();"
-      },
-      {
-        "lineNumber": 151,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        });"
-      },
-      {
-        "lineNumber": 152,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 153,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 154,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 155,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 156,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * Iteration 1:"
-      },
-      {
-        "lineNumber": 157,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * Creates a label with the specified text and adds it to the dialog container."
-      },
-      {
-        "lineNumber": 158,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * @param text String containing text to add"
-      },
-      {
-        "lineNumber": 159,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * @return a label with the specified text that has word wrap enabled."
-      },
-      {
-        "lineNumber": 160,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 161,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    private Label getDialogLabel(String text) {"
-      },
-      {
-        "lineNumber": 162,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        // You will need to import `javafx.scene.control.Label`."
-      },
-      {
-        "lineNumber": 163,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        Label textToAdd \u003d new Label(text);"
-      },
-      {
-        "lineNumber": 164,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        textToAdd.setWrapText(true);"
-      },
-      {
-        "lineNumber": 165,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 166,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        return textToAdd;"
-      },
-      {
-        "lineNumber": 167,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 168,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 169,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 170,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * Iteration 2:"
-      },
-      {
-        "lineNumber": 171,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
-      },
-      {
-        "lineNumber": 172,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * the dialog container. Clears the user input after processing."
-      },
-      {
-        "lineNumber": 173,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 174,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    private void handleUserInput() {"
-      },
-      {
-        "lineNumber": 175,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        String userText \u003d userInput.getText();"
-      },
-      {
-        "lineNumber": 176,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        String dukeText \u003d getResponse(userInput.getText());"
-      },
-      {
-        "lineNumber": 177,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        dialogContainer.getChildren().addAll("
-      },
-      {
-        "lineNumber": 178,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "                DialogBox.getUserDialog(userText, user),"
-      },
-      {
-        "lineNumber": 179,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "                DialogBox.getDukeDialog(dukeText, duke)"
-      },
-      {
-        "lineNumber": 180,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        );"
-      },
-      {
-        "lineNumber": 181,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        userInput.clear();"
-      },
-      {
-        "lineNumber": 182,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 183,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 184,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 185,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * You should have your own function to generate a response to user input."
-      },
-      {
-        "lineNumber": 186,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     * Replace this stub with your completed method."
-      },
-      {
-        "lineNumber": 187,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 188,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    public String getResponse(String input) {"
-      },
-      {
-        "lineNumber": 189,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        return \"Duke heard: \" + input;"
-      },
-      {
-        "lineNumber": 190,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 191,
         "author": {
           "gitId": "-"
         },
@@ -2252,8 +1496,8 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 189,
-      "-": 2
+      "joycelynteo": 84,
+      "-": 1
     }
   },
   {
@@ -2661,56 +1905,56 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "/**"
+        "content": "import java.io.IOException;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": " * Controller for MainWindow. Provides the layout for the other controls."
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": " */"
+        "content": "import duke.ui.Ui;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "public class MainWindow extends AnchorPane {"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    @FXML"
+        "content": "/**"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private ScrollPane scrollPane;"
+        "content": " * Controller for MainWindow. Provides the layout for the other controls."
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    @FXML"
+        "content": " */"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private VBox dialogContainer;"
+        "content": "public class MainWindow extends AnchorPane {"
       },
       {
         "lineNumber": 19,
@@ -2724,7 +1968,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private TextField userInput;"
+        "content": "    private ScrollPane scrollPane;"
       },
       {
         "lineNumber": 21,
@@ -2738,220 +1982,269 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private Button sendButton;"
+        "content": "    private VBox dialogContainer;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "    @FXML"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private Duke duke;"
+        "content": "    private TextField userInput;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "    @FXML"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/user.png\"));"
+        "content": "    private Button sendButton;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/duke.png\"));"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "    private Duke duke;"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    @FXML"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void initialize() {"
+        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/user.png\"));"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
+        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/duke.png\"));"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "    @FXML"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void setDuke(Duke d) {"
+        "content": "    public void initialize() {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        duke \u003d d;"
+        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "                DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    /**"
+        "content": "        );"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
+        "content": "    }"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "     * the dialog container. Clears the user input after processing."
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "     */"
+        "content": "    public void setDuke(Duke d) {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    @FXML"
+        "content": "        duke \u003d d;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    private void handleUserInput() {"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        String input \u003d userInput.getText();"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        String response \u003d duke.getResponse(input);"
+        "content": "    /**"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                DialogBox.getUserDialog(input, userImage),"
+        "content": "     * the dialog container. Clears the user input after processing."
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
+        "content": "     */"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        );"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        userInput.clear();"
+        "content": "    private void handleUserInput() throws IOException {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        String input \u003d userInput.getText();"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        String response \u003d duke.getResponse(input);"
       },
       {
         "lineNumber": 53,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        dialogContainer.getChildren().addAll("
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "                DialogBox.getUserDialog(input, userImage),"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        );"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        userInput.clear();"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 60,
         "author": {
           "gitId": "joycelynteo"
         },
@@ -2959,7 +2252,7 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 53
+      "joycelynteo": 60
     }
   },
   {
@@ -3132,7 +2425,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
       },
       {
         "lineNumber": 25,
@@ -3195,28 +2488,28 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                //CALL UI: print output"
+        "content": "                //CALL STORAGE: write new file"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                ui.printAddTask(tasks);"
+        "content": "                storage.addTodo(tasks);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                //CALL STORAGE: write new file"
+        "content": "                //CALL UI: print output"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                storage.addTodo(tasks);"
+        "content": "                return ui.printAddTask(tasks);"
       },
       {
         "lineNumber": 37,
@@ -3307,28 +2600,28 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    //CALL UI: print output"
+        "content": "                    //CALL STORAGE: write new file"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    ui.printAddTask(tasks);"
+        "content": "                    storage.addDeadline(tasks);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    //CALL STORAGE: write new file"
+        "content": "                    //CALL UI: print output"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    storage.addDeadline(tasks);"
+        "content": "                    return ui.printAddTask(tasks);"
       },
       {
         "lineNumber": 53,
@@ -3440,28 +2733,28 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    //CALL UI: print output"
+        "content": "                    //CALL STORAGE: write new file"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    ui.printAddTask(tasks);"
+        "content": "                    storage.addEvent(tasks);"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    //CALL STORAGE: write new file"
+        "content": "                    //CALL UI: print output"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                    storage.addEvent(tasks);"
+        "content": "                    return ui.printAddTask(tasks);"
       },
       {
         "lineNumber": 72,
@@ -3517,7 +2810,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        return \"\";"
       },
       {
         "lineNumber": 80,
@@ -3701,7 +2994,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException ;"
+        "content": "    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException ;"
       },
       {
         "lineNumber": 24,
@@ -3885,7 +3178,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
       },
       {
         "lineNumber": 25,
@@ -3948,28 +3241,28 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            //CALL UI: print output"
+        "content": "            //CALL STORAGE: write new file"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            ui.printDelete(tasks, deleteTask);"
+        "content": "            storage.deleteTask(deleteTask, tasks);"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            //CALL STORAGE: write new file"
+        "content": "            //CALL UI: print output"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            storage.deleteTask(deleteTask, tasks);"
+        "content": "            String output \u003d ui.printDelete(tasks, deleteTask);"
       },
       {
         "lineNumber": 37,
@@ -3997,31 +3290,38 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        } else {"
+        "content": "            return output;"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            throw new DukeException(\"☹ OOPS!!! Please specify which task to delete.\");"
+        "content": "        } else {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        }"
+        "content": "            throw new DukeException(\"☹ OOPS!!! Please specify which task to delete.\");"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 44,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
         "author": {
           "gitId": "joycelynteo"
         },
@@ -4029,7 +3329,7 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 44
+      "joycelynteo": 45
     }
   },
   {
@@ -4202,7 +3502,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
       },
       {
         "lineNumber": 25,
@@ -4279,66 +3579,59 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            //CALL UI: print output"
+        "content": "            //CALL STORAGE: write new file"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            ui.printDone(tasks, doneTask);"
+        "content": "            storage.updateTask(doneTask, tasks);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            //CALL STORAGE: write new file"
+        "content": "            //CALL UI: print output"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            storage.updateTask(doneTask, tasks);"
+        "content": "            return ui.printDone(tasks, doneTask);"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        } else {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        } else {"
+        "content": "            throw new DukeException(\"☹ OOPS!!! Please specify which task you\u0027ve done.\");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            throw new DukeException(\"☹ OOPS!!! Please specify which task you\u0027ve done.\");"
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "joycelynteo"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 44,
+        "lineNumber": 43,
         "author": {
           "gitId": "joycelynteo"
         },
@@ -4346,7 +3639,7 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 44
+      "joycelynteo": 43
     }
   },
   {
@@ -4519,14 +3812,14 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Bye. Hope to see you again soon!\");"
+        "content": "        return \"Bye. Hope to see you again soon!\";"
       },
       {
         "lineNumber": 26,
@@ -4738,115 +4031,129 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Here are the matching tasks in your list:\");"
+        "content": "        String output \u003d \"\";"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        List\u003cTask\u003e matchList \u003d new ArrayList\u003cTask\u003e();"
+        "content": "        output +\u003d \"Here are the matching tasks in your list:\" + \"\\n\";"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        String arr[] \u003d command.split(\" \", 2);"
+        "content": "        List\u003cTask\u003e matchList \u003d new ArrayList\u003cTask\u003e();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        String word \u003d arr[1];"
+        "content": "        String arr[] \u003d command.split(\" \", 2);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        String word \u003d arr[1];"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
+        "content": ""
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        for (int i \u003d 0; i \u003c list.size(); i++) {"
+        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            Task task \u003d list.get(i);"
+        "content": "        for (int i \u003d 0; i \u003c list.size(); i++) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            String taskDescription \u003d task.getDescription();"
+        "content": "            Task task \u003d list.get(i);"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            if (taskDescription.contains(word)) {"
+        "content": "            String taskDescription \u003d task.getDescription();"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                matchList.add(task);"
+        "content": "            if (taskDescription.contains(word)) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            }"
+        "content": "                matchList.add(task);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        ui.printList(matchList);"
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        output +\u003d ui.printList(matchList);"
       },
       {
         "lineNumber": 43,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        return output;"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
         "author": {
           "gitId": "joycelynteo"
         },
@@ -4854,7 +4161,7 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 43
+      "joycelynteo": 45
     }
   },
   {
@@ -5048,38 +4355,52 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Here are the tasks in your list:\");"
+        "content": "        String output \u003d \"\";"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
+        "content": "        output +\u003d \"Here are the tasks in your list:\" + \"\\n\";"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        ui.printList(list);"
+        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        output +\u003d ui.printList(list);"
       },
       {
         "lineNumber": 32,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        return output;"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 34,
         "author": {
           "gitId": "joycelynteo"
         },
@@ -5087,7 +4408,7 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 32
+      "joycelynteo": 34
     }
   },
   {
@@ -5246,14 +4567,14 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"\");"
+        "content": "        return \"\";"
       },
       {
         "lineNumber": 24,
@@ -5467,7 +4788,7 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public static Command parse(String command) {"
+        "content": "    public static Command parse(String command) throws DukeException {"
       },
       {
         "lineNumber": 16,
@@ -5502,199 +4823,143 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        try {"
+        "content": "        if (command.equals(\"bye\")) {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            if (command.equals(\"bye\")) {"
+        "content": "            return new ExitCommand(command);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new ExitCommand(command);"
+        "content": "        } else if (command.equals(\"list\")) {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else if (command.equals(\"list\")) {"
+        "content": "            return new ListCommand(command);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new ListCommand(command);"
+        "content": "        } else if (firstWord.equals(\"done\")) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else if (firstWord.equals(\"done\")) {"
+        "content": "            return new DoneCommand(command);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new DoneCommand(command);"
+        "content": "        } else if (firstWord.equals(\"delete\")) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else if (firstWord.equals(\"delete\")) {"
+        "content": "            return new DeleteCommand(command);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new DeleteCommand(command);"
+        "content": "        } else if (firstWord.equals(\"find\")) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else if (firstWord.equals(\"find\")) {"
+        "content": "            return new FindCommand(command);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new FindCommand(command);"
+        "content": "        } else if (firstWord.equals(\"todo\")) {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else if (firstWord.equals(\"todo\")) {"
+        "content": "            return new AddCommand(command);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new AddCommand(command);"
+        "content": "        } else if (firstWord.equals(\"deadline\")) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else if (firstWord.equals(\"deadline\")) {"
+        "content": "            return new AddCommand(command);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new AddCommand(command);"
+        "content": "        } else if (firstWord.equals(\"event\")) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else if (firstWord.equals(\"event\")) {"
+        "content": "            return new AddCommand(command);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                return new AddCommand(command);"
+        "content": "        } else {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            } else {"
+        "content": "            throw new DukeException(\"☹ OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                throw new DukeException(\"☹ OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+        "content": "        }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        //catch exceptions"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        catch (DukeException e){"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "            System.out.print(e.getMessage());"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "joycelynteo"
-        },
-        "content": "        return new NullCommand(command);"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "joycelynteo"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 48,
+        "lineNumber": 40,
         "author": {
           "gitId": "joycelynteo"
         },
@@ -5702,7 +4967,7 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 48
+      "joycelynteo": 40
     }
   },
   {
@@ -8365,21 +7630,21 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void showWelcome() {"
+        "content": "    public static String showWelcome() {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Hello I\u0027m Duke.\" + \"\\n\""
+        "content": "        return \"Hello I\u0027m Duke.\" + \"\\n\""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                + \"What can I do for you?\");"
+        "content": "                + \"What can I do for you?\";"
       },
       {
         "lineNumber": 25,
@@ -8400,14 +7665,14 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void showLine() {"
+        "content": "    public String showLine() {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"____________________________________________________________\");"
+        "content": "        return \"____________________________________________________________\";"
       },
       {
         "lineNumber": 29,
@@ -8463,14 +7728,14 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void showLoadingError() {"
+        "content": "    public String showLoadingError() {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"no data to load, new list is empty.\");"
+        "content": "        return \"no data to load, new list is empty.\";"
       },
       {
         "lineNumber": 38,
@@ -8491,14 +7756,14 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void showError(String message) {"
+        "content": "    public String showError(String message) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(message);"
+        "content": "        return message;"
       },
       {
         "lineNumber": 42,
@@ -8519,213 +7784,269 @@
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void printList(List\u003cTask\u003e list) {"
+        "content": "    public String printList(List\u003cTask\u003e list) {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        if (!list.isEmpty()) {"
+        "content": "        String output \u003d \"\";"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            for (int i \u003d 0; i \u003c list.size(); i++) {"
+        "content": "        if (!list.isEmpty()) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                Task t \u003d list.get(i);"
+        "content": "            for (int i \u003d 0; i \u003c list.size(); i++) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "                System.out.println((i+1) + \".\" + t.toString());"
+        "content": "                Task t \u003d list.get(i);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "            }"
+        "content": "                output +\u003d (i+1) + \".\" + t.toString() + \"\\n\";"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        return output;"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void printDone(TaskList tasks, int doneTask) {"
+        "content": "    }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Nice! I\u0027ve marked this task as done:\");"
+        "content": ""
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        Task t \u003d tasks.getList().get(doneTask);"
+        "content": "    public String printDone(TaskList tasks, int doneTask) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(t.toString());"
+        "content": "        String output \u003d \"\";"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        output +\u003d \"Nice! I\u0027ve marked this task as done:\" + \"\\n\";"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        Task t \u003d tasks.getList().get(doneTask);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void printDelete(TaskList tasks, int deleteTask) {"
+        "content": "        output +\u003d t.toString();"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
+        "content": "        return output;"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Noted. I\u0027ve removed this task:\");"
+        "content": "    }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        Task t \u003d list.get(deleteTask);"
+        "content": ""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(t.toString());"
+        "content": "    public String printDelete(TaskList tasks, int deleteTask) {"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Now you have \" + list.size() + \" tasks in the list.\");"
+        "content": "        String output \u003d \"\";"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": ""
+        "content": "        output +\u003d \"Noted. I\u0027ve removed this task:\" + \"\\n\";"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    public void printAddTask(TaskList tasks) {"
+        "content": "        Task t \u003d list.get(deleteTask);"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
+        "content": "        output +\u003d t.toString() + \"\\n\";"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        Task t \u003d list.get(list.size() - 1);"
+        "content": "        output +\u003d \"Now you have \" + (list.size() - 1) + \" tasks in the list.\";"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Got it. I\u0027ve added this task:\");"
+        "content": "        return output;"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(t.toString());"
+        "content": "    }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "        System.out.println(\"Now you have \" + list.size() + \" tasks in the list.\");"
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "joycelynteo"
         },
-        "content": "    }"
+        "content": "    public String printAddTask(TaskList tasks) {"
       },
       {
         "lineNumber": 74,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        String output \u003d \"\";"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        List\u003cTask\u003e list \u003d tasks.getList();"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        Task t \u003d list.get(list.size() - 1);"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        output +\u003d \"Got it. I\u0027ve added this task:\" + \"\\n\";"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        output +\u003d t.toString() + \"\\n\";"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        output +\u003d \"Now you have \" + list.size() + \" tasks in the list.\";"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "        return output;"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "joycelynteo"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 82,
         "author": {
           "gitId": "joycelynteo"
         },
@@ -8733,7 +8054,7 @@
       }
     ],
     "authorContributionMap": {
-      "joycelynteo": 74
+      "joycelynteo": 82
     }
   },
   {
