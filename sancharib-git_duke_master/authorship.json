@@ -331,9 +331,9 @@
       {
         "lineNumber": 1,
         "author": {
-          "gitId": "-"
+          "gitId": "sancharib-git"
         },
-        "content": "# User Guide"
+        "content": "# Duke User Guide"
       },
       {
         "lineNumber": 2,
@@ -627,42 +627,42 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "### `bye` - Saves tasks to storage"
+        "content": "### `help` - Shows list of commands"
       },
       {
         "lineNumber": 44,
         "author": {
-          "gitId": "-"
+          "gitId": "sancharib-git"
         },
-        "content": "Example of usage: "
+        "content": "Example of usage:"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "`bye`"
+        "content": "`help`"
       },
       {
         "lineNumber": 46,
         "author": {
-          "gitId": "-"
+          "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "### `bye` - Saves tasks to storage"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "-"
         },
-        "content": ""
+        "content": "Example of usage: "
       },
       {
         "lineNumber": 48,
         "author": {
-          "gitId": "-"
+          "gitId": "sancharib-git"
         },
-        "content": "Expected outcome:"
+        "content": "`bye`"
       },
       {
         "lineNumber": 49,
@@ -676,12 +676,26 @@
         "author": {
           "gitId": "-"
         },
-        "content": "`outcome`"
+        "content": ""
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "\u003cimg src \u003d \"Ui.png\"\u003e"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "-"
+        },
+        "content": ""
       }
     ],
     "authorContributionMap": {
-      "sancharib-git": 36,
-      "-": 14
+      "sancharib-git": 41,
+      "-": 11
     }
   },
   {
@@ -707,28 +721,28 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import main.java.Duke;"
+        "content": "import java.io.File;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import main.java.Task;"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import main.java.TaskList;"
+        "content": "import java.time.LocalDateTime;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
         "lineNumber": 7,
@@ -749,143 +763,1270 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "public class Command {"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    protected String command;"
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    protected ArrayList\u003cTask\u003e tasks;"
+        "content": " *"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    Duke duke \u003d new Duke();"
+        "content": " * Class to handle commands given by user"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    TaskList taskList \u003d new TaskList();"
+        "content": " * */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "public class Command {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private ArrayList\u003cTask\u003e Tasks \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private final String FILEPATH \u003d \"list.txt\";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public Command(String command) {"
+        "content": "    private final File FILE \u003d new File(FILEPATH);"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        this.command \u003d command;"
+        "content": "    private DateTimeFormatter dateFormatter \u003d DateTimeFormatter.ofPattern(\"yyyy-MM-dd\");"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        tasks \u003d  duke.TL;"
+        "content": "    private DateTimeFormatter dateTimeFormatter \u003d DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\");"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "    private Storage storage \u003d new Storage(FILEPATH);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private TaskList tl \u003d new TaskList(FILEPATH, Tasks);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String doTodo() {"
+        "content": "    private boolean isTaskListLoaded \u003d false;"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        Ui ui \u003d new Ui(command);"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        Todo todo \u003d new Todo(ui.getDescription());"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        taskList.TL.add(todo);"
+        "content": "    /**"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return ui.addedTask(todo);"
+        "content": "     *"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "     * Constructor"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 29,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    public Command(){}"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    protected void loadList() {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        if(isTaskListLoaded) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            System.out.println(isTaskListLoaded);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            System.out.println(\"load alr\" +"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                    \"\");"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            System.out.println(isTaskListLoaded);"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            isTaskListLoaded \u003d true;"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                tl.loadFromStorage();"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                e.getMessage();"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * You should have your own function to generate a response to user input."
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * Replace this stub with your completed method."
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * Deals with individual commands given by user"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * @param String input"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    protected String getResponse(String input) throws DukeException{"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        assert FILEPATH.equals(\"main/java/data/list.txt\") : \"wrong filepath\";"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        Ui ui \u003d new Ui(input);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        String command \u003d ui.getCommand();"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        String response \u003d \"\";"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        if (command.equals(\"todo\")) {"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //response \u003d \"todo\";"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                Todo todo \u003d new Todo(ui.getDescription());"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                tl.TL.add(todo);"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d ui.addedTask(todo);"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //response \u003d \"deadline\";"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String desc \u003d ui.getDescription();"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String date \u003d (desc.split(\"/by \"))[1];"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                LocalDateTime ldt \u003d LocalDateTime.parse(date, dateTimeFormatter);"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String sldt \u003d ldt.format(dateTimeFormatter);"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                Deadline deadline \u003d new Deadline(desc, sldt);"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                tl.TL.add(deadline);"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d ui.addedTask(deadline);"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //response \u003d \"event\";"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String desc \u003d ui.getDescription();"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String date \u003d (desc.split(\"/at \"))[1];"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                LocalDateTime ldt \u003d LocalDateTime.parse(date, dateTimeFormatter);"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String sldt \u003d ldt.format(dateTimeFormatter);"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                Event event \u003d new Event(desc, sldt);"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                tl.TL.add(event);"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d ui.addedTask(event);"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"done\")) {"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //response \u003d \"done\";"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                int taskNum \u003d Integer.parseInt(ui.getNumber());"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                Task t \u003d tl.TL.get(taskNum - 1);"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d t.markAsDone();"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //response \u003d \"delete\";"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                int taskNum \u003d Integer.parseInt(ui.getNumber());"
+      },
+      {
+        "lineNumber": 114,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                Task t \u003d tl.TL.get(taskNum - 1);"
+      },
+      {
+        "lineNumber": 115,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d ui.deleteTask(t.toString());"
+      },
+      {
+        "lineNumber": 116,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                tl.TL.remove(taskNum - 1);"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"find\")) {"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //response \u003d \"find\";"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String rest \u003d ui.getDescription();"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d (\"Here are the tasks in your list that matches:\" + rest + \"\\n\");"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response +\u003d (tl.getTaskFromKeyword(rest));"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"bye\")) {"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            //response \u003d \"bye\";"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String S \u003d \"\";"
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                for (int i \u003d 0; i \u003c tl.getTL().size(); i++) {"
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                    S +\u003d tl.TL.get(i).toString() + \u0027\\n\u0027;"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 137,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                storage.writeToFile(FILEPATH, S);"
+      },
+      {
+        "lineNumber": 138,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //return (\"bye see you soon\");"
+      },
+      {
+        "lineNumber": 139,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 140,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                System.out.println(e.getMessage());"
+      },
+      {
+        "lineNumber": 141,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 142,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"list\")) {"
+      },
+      {
+        "lineNumber": 143,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {//response \u003d \"list\";"
+      },
+      {
+        "lineNumber": 144,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 145,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d (ui.showList()+\"\\n\");"
+      },
+      {
+        "lineNumber": 146,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                //storage.printFileContents(FILEPATH);"
+      },
+      {
+        "lineNumber": 147,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 148,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                for (int i \u003d 0; i \u003c tl.TL.size(); i++) {"
+      },
+      {
+        "lineNumber": 149,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                    int j \u003d i + 1;"
+      },
+      {
+        "lineNumber": 150,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                    response +\u003d (j + tl.TL.get(i).toString() + \"\\n\");"
+      },
+      {
+        "lineNumber": 151,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 152,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 153,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d e.getMessage();"
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"begin\")) {"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                tl.loadFromStorage();"
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                isTaskListLoaded \u003d true;"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                e.getMessage();"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"viewschedule\")) {"
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String rest \u003d ui.getDescription();"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String date \u003d (rest.split(\"/at \"))[1];"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                LocalDate ldt \u003d LocalDate.parse(date, dateFormatter);"
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                String sldt \u003d ldt.format(dateFormatter);"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d (\"Here are the tasks scheduled for:\" + sldt + \"\\n\");"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response +\u003d (tl.getTaskFromKeyword(sldt));"
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        } else if (command.equals(\"help\")) {"
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            response \u003d ui.showHelp();"
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        else {"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                throw new  DukeException(\"IDK what you mean\");"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            } catch (Exception E) {"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                response \u003d E.getMessage();"
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 183,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 184,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        return response;"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 188,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 190,
         "author": {
           "gitId": "sancharib-git"
         },
@@ -893,7 +2034,7 @@
       }
     ],
     "authorContributionMap": {
-      "sancharib-git": 29
+      "sancharib-git": 190
     }
   },
   {
@@ -1488,11 +2629,18 @@
         "author": {
           "gitId": "sancharib-git"
         },
+        "content": "    //dialogbox.setstyle()"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "sancharib-git"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "sancharib-git": 63
+      "sancharib-git": 64
     }
   },
   {
@@ -1518,280 +2666,280 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.util.ArrayList;"
+        "content": ""
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.util.Scanner;"
+        "content": "import javafx.application.Application;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.io.BufferedReader;"
+        "content": "import javafx.geometry.Rectangle2D;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.io.FileReader;"
+        "content": "import javafx.scene.Scene;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.io.File;"
+        "content": "import javafx.scene.control.Button;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.io.FileWriter;"
+        "content": "import javafx.scene.control.Label;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.io.PrintWriter;"
+        "content": "import javafx.scene.control.ScrollPane;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.io.IOException;"
+        "content": "import javafx.scene.control.TextField;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.nio.file.Files;"
+        "content": "import javafx.scene.image.Image;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.nio.file.Paths;"
+        "content": "import javafx.scene.image.ImageView;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.nio.file.FileAlreadyExistsException;"
+        "content": "import javafx.scene.layout.*;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.io.FileNotFoundException;"
+        "content": "import javafx.stage.Screen;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "import javafx.stage.Stage;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.time.format.DateTimeFormatter;"
+        "content": ""
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "import java.io.FileInputStream;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.time.temporal.ChronoUnit;"
+        "content": "import java.io.FileNotFoundException;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.time.LocalDateTime;"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import java.util.stream.*;"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.application.Application;"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.Scene;"
+        "content": "public class Duke extends Application {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.control.Button;"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.control.ScrollPane;"
+        "content": "    /**"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.control.TextField;"
+        "content": "     * Constructor"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.layout.AnchorPane;"
+        "content": "     *"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.layout.VBox;"
+        "content": "     */"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.stage.Stage;"
+        "content": "    public Duke() {}"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.layout.Region;"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.control.Label;"
+        "content": "    /**"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.image.Image;"
+        "content": "     * Declaration of variables"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import javafx.scene.image.ImageView;"
+        "content": "     */"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private Command command \u003d new Command();"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private ScrollPane scrollPane;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private VBox dialogContainer;"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private TextField userInput;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private Image user \u003d new Image(this.getClass().getResourceAsStream(\"/main/resources/images/DaUser.jpg\"));"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private Image duke \u003d new Image(this.getClass().getResourceAsStream(\"/main/resources/images/DaDuke.jpg\"));"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "import main.java.*;"
+        "content": ""
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "//add javadocs"
+        "content": "    public void start(Stage stage) throws FileNotFoundException {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "public class Duke extends Application {"
+        "content": "        //Step 1. Setting up required components"
       },
       {
         "lineNumber": 43,
@@ -1805,175 +2953,175 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        //The container for the content of the chat to scroll."
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    /**"
+        "content": "        scrollPane \u003d new ScrollPane();"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * Declaration of variables"
+        "content": "        dialogContainer \u003d new VBox();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     */"
+        "content": "        scrollPane.setContent(dialogContainer);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    Scanner sc \u003d new Scanner(System.in);"
+        "content": ""
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    ArrayList\u003cTask\u003e Tasks \u003d new ArrayList\u003c\u003e();"
+        "content": "        userInput \u003d new TextField();"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    final String FILEPATH \u003d \"java/data/list.txt\";"
+        "content": "        Button sendButton \u003d new Button(\"Send\");"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    final File FILE \u003d new File(FILEPATH);"
+        "content": "        Button startButton \u003d new Button(\"Start\");"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    //final String SIZE \u003d \"/main/java/data/list.txt\";"
+        "content": ""
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    //final File SIZEFILE \u003d new File(SIZE);"
+        "content": ""
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    DateTimeFormatter formatter \u003d DateTimeFormatter.ofPattern(\"yyyy-MM-dd\");"
+        "content": "        AnchorPane mainLayout \u003d new AnchorPane();"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    Storage storage \u003d new Storage(FILEPATH);"
+        "content": "        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, startButton);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    TaskList tl \u003d new TaskList(FILEPATH, Tasks);"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    ArrayList\u003cTask\u003e TL \u003d tl.getTL();"
+        "content": "        Scene scene \u003d new Scene(mainLayout);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private boolean isTaskListLoaded \u003d false;"
+        "content": ""
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        stage.setScene(scene);"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        stage.show();"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private ScrollPane scrollPane;"
+        "content": ""
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private VBox dialogContainer;"
+        "content": "        //Step 2. Formatting the window to look as expected"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private TextField userInput;"
+        "content": "        stage.setTitle(\"Duke\");"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private Button sendButton;"
+        "content": "        stage.setResizable(false);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private Button startButton;"
+        "content": "        stage.setMinHeight(600.0);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private Scene scene;"
+        "content": "        stage.setMinWidth(400.0);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private Image user \u003d new Image(this.getClass().getResourceAsStream(\"/main/resources/images/DaUser.jpg\"));"
+        "content": ""
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private Image duke \u003d new Image(this.getClass().getResourceAsStream(\"/main/resources/images/DaDuke.jpg\"));"
+        "content": "        mainLayout.setPrefSize(400.0, 600.0);"
       },
       {
         "lineNumber": 69,
@@ -1987,147 +3135,147 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        scrollPane.setPrefSize(385, 535);"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    /**"
+        "content": "        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * Constructor"
+        "content": "        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     *"
+        "content": ""
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * @param String filepath"
+        "content": "        scrollPane.setVvalue(1.0);"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     */"
+        "content": "        scrollPane.setFitToWidth(true);"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public Duke() {}"
+        "content": ""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        // You will need to import `javafx.scene.layout.Region` for this."
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public void start(Stage stage) {"
+        "content": ""
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        //Step 1. Setting up required components"
+        "content": ""
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        userInput.setPrefWidth(275.0);"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        //The container for the content of the chat to scroll."
+        "content": ""
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scrollPane \u003d new ScrollPane();"
+        "content": ""
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        dialogContainer \u003d new VBox();"
+        "content": "        sendButton.setPrefWidth(55.0);"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scrollPane.setContent(dialogContainer);"
+        "content": ""
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        startButton.setPrefWidth(55.0);"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        userInput \u003d new TextField();"
+        "content": ""
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        sendButton \u003d new Button(\"Send\");"
+        "content": "        AnchorPane.setTopAnchor(scrollPane, 1.0);"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        startButton \u003d new Button(\"Start\");"
+        "content": "        AnchorPane.setRightAnchor(scrollPane, 1.0);"
       },
       {
         "lineNumber": 91,
@@ -2141,112 +3289,112 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        AnchorPane.setBottomAnchor(sendButton, 1.0);"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane mainLayout \u003d new AnchorPane();"
+        "content": "        AnchorPane.setRightAnchor(sendButton, 1.0);"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, startButton);"
+        "content": ""
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        AnchorPane.setBottomAnchor(startButton, 1.0);"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scene \u003d new Scene(mainLayout);"
+        "content": ""
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        AnchorPane.setRightAnchor(startButton, 65.0);"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        stage.setScene(scene);"
+        "content": ""
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        stage.show();"
+        "content": ""
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        AnchorPane.setLeftAnchor(userInput, 2.0);"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        //Step 2. Formatting the window to look as expected"
+        "content": "        AnchorPane.setBottomAnchor(userInput, 1.0);"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        stage.setTitle(\"Duke\");"
+        "content": ""
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        stage.setResizable(false);"
+        "content": "        // create a input stream"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        stage.setMinHeight(600.0);"
+        "content": "        FileInputStream input \u003d new FileInputStream(\"main/java/marble.jpg\");"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        stage.setMinWidth(400.0);"
+        "content": ""
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        // create a image"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        mainLayout.setPrefSize(400.0, 600.0);"
+        "content": "        Image image \u003d new Image(input);"
       },
       {
         "lineNumber": 108,
@@ -2260,42 +3408,42 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scrollPane.setPrefSize(385, 535);"
+        "content": "        // create a background image"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);"
+        "content": "        BackgroundImage backgroundimage \u003d new BackgroundImage(image,"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);"
+        "content": "                BackgroundRepeat.REPEAT,"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "                BackgroundRepeat.REPEAT,"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scrollPane.setVvalue(1.0);"
+        "content": "                BackgroundPosition.DEFAULT,"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        scrollPane.setFitToWidth(true);"
+        "content": "                BackgroundSize.DEFAULT);"
       },
       {
         "lineNumber": 115,
@@ -2309,14 +3457,14 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        // You will need to import `javafx.scene.layout.Region` for this."
+        "content": "        // create Background"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);"
+        "content": "        Background background \u003d new Background(backgroundimage);"
       },
       {
         "lineNumber": 118,
@@ -2330,21 +3478,21 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        userInput.setPrefWidth(325.0);"
+        "content": "        // set background"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        dialogContainer.setBackground(background);"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        sendButton.setPrefWidth(55.0);"
+        "content": ""
       },
       {
         "lineNumber": 122,
@@ -2358,35 +3506,35 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setTopAnchor(scrollPane, 1.0);"
+        "content": ""
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setRightAnchor(scrollPane, 1.0);"
+        "content": "        //Step 3. Add functionality to handle user input."
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        sendButton.setOnMouseClicked((event) -\u003e {"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setBottomAnchor(sendButton, 1.0);"
+        "content": "            handleUserInput();"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setRightAnchor(sendButton, 1.0);"
+        "content": "        });"
       },
       {
         "lineNumber": 128,
@@ -2400,35 +3548,35 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setTopAnchor(startButton, 1.0);"
+        "content": "        startButton.setOnMouseClicked((event) -\u003e {"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setLeftAnchor(startButton, 1.0);"
+        "content": "            //handleUserInput();"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "            command.loadList();"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setLeftAnchor(userInput, 2.0);"
+        "content": "            showWelcomeMessage();"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        AnchorPane.setBottomAnchor(userInput, 1.0);"
+        "content": "        });"
       },
       {
         "lineNumber": 134,
@@ -2442,1361 +3590,570 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        //Step 3. Add functionality to handle user input."
+        "content": "        userInput.setOnAction((event) -\u003e {"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        sendButton.setOnMouseClicked((event) -\u003e {"
+        "content": "            handleUserInput();"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            handleUserInput();"
+        "content": "        });"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        });"
+        "content": ""
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        //Scroll down to the end every time dialogContainer\u0027s height changes."
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        userInput.setOnAction((event) -\u003e {"
+        "content": "        dialogContainer.heightProperty().addListener((observable) -\u003e scrollPane.setVvalue(1.0));"
       },
       {
         "lineNumber": 141,
         "author": {
-          "gitId": "sancharib-git"
+          "gitId": "-"
         },
-        "content": "            handleUserInput();"
+        "content": "    }"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        });"
+        "content": ""
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        //Scroll down to the end every time dialogContainer\u0027s height changes."
+        "content": "     * Iteration 1:"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        dialogContainer.heightProperty().addListener((observable) -\u003e scrollPane.setVvalue(1.0));"
+        "content": "     * Creates a label with the specified text and adds it to the dialog container."
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     * @param text String containing text to add"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    /**"
+        "content": "     * @return a label with the specified text that has word wrap enabled."
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * Iteration 1:"
+        "content": "     */"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * Creates a label with the specified text and adds it to the dialog container."
+        "content": "    private Label getDialogLabel(String text) {"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     *"
+        "content": "        // You will need to import `javafx.scene.control.Label`."
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * @param text String containing text to add"
+        "content": "        Label textToAdd \u003d new Label(text);"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * @return a label with the specified text that has word wrap enabled."
+        "content": "        textToAdd.setWrapText(true);"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private Label getDialogLabel(String text) {"
+        "content": "        return textToAdd;"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        // You will need to import `javafx.scene.control.Label`."
+        "content": "    }"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        Label textToAdd \u003d new Label(text);"
+        "content": ""
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        textToAdd.setWrapText(true);"
+        "content": "    /**"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return textToAdd;"
+        "content": "     * Creates a label with a welcome message and adds it to the dialog container"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     * */"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    /**"
+        "content": "    private void showWelcomeMessage() {"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * Iteration 2:"
+        "content": "        Label dukeText \u003d null;"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
+        "content": "        try {"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * the dialog container. Clears the user input after processing."
+        "content": "            dukeText \u003d new Label(\"Hello I am Duke. What can I do for you?\");"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     */"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private void handleUserInput() {"
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        Label userText \u003d new Label(userInput.getText());"
+        "content": "        }"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        Label dukeText \u003d null;"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        try {"
+        "content": "                DialogBox.getDukeDialog(dukeText, new ImageView(duke))"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            dukeText \u003d new Label(getResponse(userInput.getText()));"
+        "content": "        );"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            e.printStackTrace();"
+        "content": ""
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        }"
+        "content": "    /**"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "     * Iteration 2:"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                DialogBox.getUserDialog(userText, new ImageView(user)),"
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing Duke\u0027s reply and then appends them to"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                DialogBox.getDukeDialog(dukeText, new ImageView(duke))"
+        "content": "     * the dialog container. Clears the user input after processing."
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        );"
+        "content": "     */"
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        userInput.clear();"
+        "content": ""
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    private void handleUserInput() {"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    /**"
+        "content": "        Label userText \u003d new Label(userInput.getText());"
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * You should have your own function to generate a response to user input."
+        "content": "        Label dukeText \u003d null;"
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     * Replace this stub with your completed method."
+        "content": "        try {"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "     */"
+        "content": "            if(userInput.getText().equals(\"bye\")) {"
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    private String getResponse(String input) throws DukeException{"
+        "content": "                command.getResponse(\"bye\");"
       },
       {
         "lineNumber": 188,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        assert FILEPATH.equals(\"java/data/list.txt\") : \"wrong filepath\";"
+        "content": "                dukeText \u003d new Label(\"bye see you soon\");"
       },
       {
         "lineNumber": 189,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        //return \"Duke heard: \" + input;"
+        "content": "                dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 190,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        Ui ui \u003d new Ui(input);"
+        "content": "                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))"
       },
       {
         "lineNumber": 191,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        String command \u003d ui.getCommand();"
+        "content": "                );"
       },
       {
         "lineNumber": 192,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        String response \u003d \"\";"
+        "content": "                System.exit(0);"
       },
       {
         "lineNumber": 193,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        if (command.equals(\"todo\")) {"
+        "content": "            } else {"
       },
       {
         "lineNumber": 194,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            try {"
+        "content": "                dukeText \u003d new Label(command.getResponse(userInput.getText()));"
       },
       {
         "lineNumber": 195,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                //response \u003d \"todo\";"
+        "content": "            }"
       },
       {
         "lineNumber": 196,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 197,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                Todo todo \u003d new Todo(ui.getDescription());"
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 198,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                tl.TL.add(todo);"
+        "content": "        }"
       },
       {
         "lineNumber": 199,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                response \u003d ui.addedTask(todo);"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 200,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            } catch (Exception e) {"
+        "content": "                DialogBox.getUserDialog(userText, new ImageView(user)),"
       },
       {
         "lineNumber": 201,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                response \u003d e.getMessage();"
+        "content": "                DialogBox.getDukeDialog(dukeText, new ImageView(duke))"
       },
       {
         "lineNumber": 202,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            }"
+        "content": "        );"
       },
       {
         "lineNumber": 203,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        } else if (command.equals(\"deadline\")) {"
+        "content": "        userInput.clear();"
       },
       {
         "lineNumber": 204,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            try {"
+        "content": "    }"
       },
       {
         "lineNumber": 205,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                //response \u003d \"deadline\";"
+        "content": ""
       },
       {
         "lineNumber": 206,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
-      },
-      {
-        "lineNumber": 207,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String desc \u003d ui.getDescription();"
-      },
-      {
-        "lineNumber": 208,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String date \u003d (desc.split(\"/by \"))[1];"
-      },
-      {
-        "lineNumber": 209,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                LocalDate ldt \u003d LocalDate.parse(date, formatter);"
-      },
-      {
-        "lineNumber": 210,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String sldt \u003d ldt.format(formatter);"
-      },
-      {
-        "lineNumber": 211,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                Deadline deadline \u003d new Deadline(desc, sldt);"
-      },
-      {
-        "lineNumber": 212,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                tl.TL.add(deadline);"
-      },
-      {
-        "lineNumber": 213,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d ui.addedTask(deadline);"
-      },
-      {
-        "lineNumber": 214,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 215,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d e.getMessage();"
-      },
-      {
-        "lineNumber": 216,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 217,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"event\")) {"
-      },
-      {
-        "lineNumber": 218,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 219,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                //response \u003d \"event\";"
-      },
-      {
-        "lineNumber": 220,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
-      },
-      {
-        "lineNumber": 221,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String desc \u003d ui.getDescription();"
-      },
-      {
-        "lineNumber": 222,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String date \u003d (desc.split(\"/at \"))[1];"
-      },
-      {
-        "lineNumber": 223,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                LocalDate ldt \u003d LocalDate.parse(date, formatter);"
-      },
-      {
-        "lineNumber": 224,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String sldt \u003d ldt.format(formatter);"
-      },
-      {
-        "lineNumber": 225,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                Event event \u003d new Event(desc, sldt);"
-      },
-      {
-        "lineNumber": 226,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                tl.TL.add(event);"
-      },
-      {
-        "lineNumber": 227,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d ui.addedTask(event);"
-      },
-      {
-        "lineNumber": 228,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 229,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d e.getMessage();"
-      },
-      {
-        "lineNumber": 230,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 231,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"done\")) {"
-      },
-      {
-        "lineNumber": 232,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 233,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                //response \u003d \"done\";"
-      },
-      {
-        "lineNumber": 234,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
-      },
-      {
-        "lineNumber": 235,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                int taskNum \u003d Integer.parseInt(ui.getNumber());"
-      },
-      {
-        "lineNumber": 236,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                Task t \u003d tl.TL.get(taskNum - 1);"
-      },
-      {
-        "lineNumber": 237,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d t.markAsDone();"
-      },
-      {
-        "lineNumber": 238,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 239,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d e.getMessage();"
-      },
-      {
-        "lineNumber": 240,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 241,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"delete\")) {"
-      },
-      {
-        "lineNumber": 242,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 243,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                //response \u003d \"delete\";"
-      },
-      {
-        "lineNumber": 244,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
-      },
-      {
-        "lineNumber": 245,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                int taskNum \u003d Integer.parseInt(ui.getNumber());"
-      },
-      {
-        "lineNumber": 246,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                Task t \u003d tl.TL.get(taskNum - 1);"
-      },
-      {
-        "lineNumber": 247,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d ui.deleteTask(t.toString());"
-      },
-      {
-        "lineNumber": 248,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                tl.TL.remove(taskNum - 1);"
-      },
-      {
-        "lineNumber": 249,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 250,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d e.getMessage();"
-      },
-      {
-        "lineNumber": 251,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 252,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"find\")) {"
-      },
-      {
-        "lineNumber": 253,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 254,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                //response \u003d \"find\";"
-      },
-      {
-        "lineNumber": 255,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
-      },
-      {
-        "lineNumber": 256,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String rest \u003d ui.getDescription();"
-      },
-      {
-        "lineNumber": 257,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d (\"Here are the tasks in your list that matches:\" + rest + \"\\n\");"
-      },
-      {
-        "lineNumber": 258,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response +\u003d (tl.getTaskFromKeyword(rest));"
-      },
-      {
-        "lineNumber": 259,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 260,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d e.getMessage();"
-      },
-      {
-        "lineNumber": 261,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 262,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"bye\")) {"
-      },
-      {
-        "lineNumber": 263,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            //response \u003d \"bye\";"
-      },
-      {
-        "lineNumber": 264,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 265,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String S \u003d \"\";"
-      },
-      {
-        "lineNumber": 266,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                for (int i \u003d 0; i \u003c TL.size(); i++) {"
-      },
-      {
-        "lineNumber": 267,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                    S +\u003d tl.TL.get(i).toString() + \u0027\\n\u0027;"
-      },
-      {
-        "lineNumber": 268,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 269,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                storage.writeToFile(FILEPATH, S);"
-      },
-      {
-        "lineNumber": 270,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d \"bye see you soon\";"
-      },
-      {
-        "lineNumber": 271,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 272,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 273,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                System.out.println(e.getMessage());"
-      },
-      {
-        "lineNumber": 274,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 275,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"list\")) {"
-      },
-      {
-        "lineNumber": 276,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {//response \u003d \"list\";"
-      },
-      {
-        "lineNumber": 277,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
-      },
-      {
-        "lineNumber": 278,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d (ui.showList()+\"\\n\");"
-      },
-      {
-        "lineNumber": 279,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                //storage.printFileContents(FILEPATH);"
-      },
-      {
-        "lineNumber": 280,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 281,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                for (int i \u003d 0; i \u003c tl.TL.size(); i++) {"
-      },
-      {
-        "lineNumber": 282,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                    int j \u003d i + 1;"
-      },
-      {
-        "lineNumber": 283,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                    response +\u003d (j + tl.TL.get(i).toString() + \"\\n\");"
-      },
-      {
-        "lineNumber": 284,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                }"
-      },
-      {
-        "lineNumber": 285,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 286,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d e.getMessage();"
-      },
-      {
-        "lineNumber": 287,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 288,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"begin\")) {"
-      },
-      {
-        "lineNumber": 289,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 290,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                tl.loadFromStorage();"
-      },
-      {
-        "lineNumber": 291,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                isTaskListLoaded \u003d true;"
-      },
-      {
-        "lineNumber": 292,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 293,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                e.getMessage();"
-      },
-      {
-        "lineNumber": 294,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 295,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        } else if (command.equals(\"viewschedule\")) {"
-      },
-      {
-        "lineNumber": 296,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 297,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                assert isTaskListLoaded : \"TaskList not loaded from storage\";"
-      },
-      {
-        "lineNumber": 298,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String rest \u003d ui.getDescription();"
-      },
-      {
-        "lineNumber": 299,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String date \u003d (rest.split(\"/at \"))[1];"
-      },
-      {
-        "lineNumber": 300,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                LocalDate ldt \u003d LocalDate.parse(date, formatter);"
-      },
-      {
-        "lineNumber": 301,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                String sldt \u003d ldt.format(formatter);"
-      },
-      {
-        "lineNumber": 302,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d (\"Here are the tasks scheduled for:\" + sldt + \"\\n\");"
-      },
-      {
-        "lineNumber": 303,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response +\u003d (tl.getTaskFromKeyword(sldt));"
-      },
-      {
-        "lineNumber": 304,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception e) {"
-      },
-      {
-        "lineNumber": 305,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 306,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 307,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 308,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        else {"
-      },
-      {
-        "lineNumber": 309,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 310,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                throw new  DukeException(\"IDK what you mean\");"
-      },
-      {
-        "lineNumber": 311,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            } catch (Exception E) {"
-      },
-      {
-        "lineNumber": 312,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                response \u003d E.getMessage();"
-      },
-      {
-        "lineNumber": 313,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 314,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 315,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        return response;"
-      },
-      {
-        "lineNumber": 316,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 317,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 318,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 319,
         "author": {
           "gitId": "-"
         },
         "content": "}"
       },
       {
-        "lineNumber": 320,
+        "lineNumber": 207,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": "/**"
       },
       {
-        "lineNumber": 321,
+        "lineNumber": 208,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " *todo:"
       },
       {
-        "lineNumber": 322,
+        "lineNumber": 209,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " * handle exceptions done"
       },
       {
-        "lineNumber": 323,
+        "lineNumber": 210,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " * more oop"
       },
       {
-        "lineNumber": 324,
+        "lineNumber": 211,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " * push to git"
       },
       {
-        "lineNumber": 325,
+        "lineNumber": 212,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " * do this week tasks"
       },
       {
-        "lineNumber": 326,
+        "lineNumber": 213,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " * close the program when input \u003d bye"
       },
       {
-        "lineNumber": 327,
+        "lineNumber": 214,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " * add instructions upon startup"
       },
       {
-        "lineNumber": 328,
+        "lineNumber": 215,
         "author": {
           "gitId": "sancharib-git"
         },
         "content": " * add B-viewschedules"
       },
       {
-        "lineNumber": 329,
+        "lineNumber": 216,
         "author": {
           "gitId": "sancharib-git"
         },
@@ -3804,7 +4161,7 @@
       }
     ],
     "authorContributionMap": {
-      "sancharib-git": 327,
+      "sancharib-git": 214,
       "-": 2
     }
   },
@@ -3934,288 +4291,6 @@
     ],
     "authorContributionMap": {
       "sancharib-git": 17
-    }
-  },
-  {
-    "path": "src/main/java/DukeGreeting.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "package main.java;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "/**Class to customize greetings/user outputs */"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "public class DukeGreeting {"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    "
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "/** Constructor */    "
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "public DukeGreeting(){}"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    /** Method to show welcome message */"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    public void showWelcomeMessage() {"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"-------------------------------------------------------------\");"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"Hello! I\u0027m Duke\\n\" + \"What can I do for you?\");"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println();"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"-------------------------------------------------------------\");"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println();"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    /**Methods to show Instructions on user inputs */"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    public void showInstructions() {"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"-------------------------------------------------------------\");"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"Instructions: Type in Commands\");"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"Examples:\");"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"1. ~todo task~\" + \u0027\\n\u0027 + \"2. ~deadline task /by yyyy-MM-dd HH:mm~\" + \u0027\\n\u0027 "
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        + \"3. ~event task /at yyyy-MM-dd HH:mm~\" + \u0027\\n\u0027 + \"4. ~delete taskname~\" + \u0027\\n\u0027 + \"5. ~done taskname~\" + \u0027\\n\u0027 + \"6. ~list~\");"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println();"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"-------------------------------------------------------------\");"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println();"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    /**Method to show goodbye message */"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    public void showGoodbyeMessage() {"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "        System.out.println(\"-------------------------------------------------------------\");"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                System.out.println(\"Bye. Hope to see you again soon!\");"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                System.out.println();"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                System.out.println(\"-------------------------------------------------------------\");"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "                System.out.println();"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "sancharib-git"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "sancharib-git": 39
     }
   },
   {
@@ -5838,35 +5913,35 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "public class TaskList{"
+        "content": " *"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": " * Class to keep track of tasks in local memory"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    protected String filepath;"
+        "content": " * */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    protected ArrayList\u003cTask\u003e TL;"
+        "content": "public class TaskList{"
       },
       {
         "lineNumber": 14,
@@ -5880,217 +5955,217 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public TaskList(String filepath, ArrayList\u003cTask\u003e TL) {"
+        "content": "    protected String filepath;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        this.filepath \u003d filepath;"
+        "content": "    protected ArrayList\u003cTask\u003e TL;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        this.TL \u003d TL;"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public TaskList() {"
+        "content": "     * Constructor"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     * @param String filepath"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "     * @param ArrayList where tasks will be stored locally"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     * */"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public void loadFromStorage() throws FileNotFoundException{"
+        "content": "    public TaskList(String filepath, ArrayList\u003cTask\u003e TL) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        Scanner s \u003d new Scanner(new File(filepath));"
+        "content": "        this.filepath \u003d filepath;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        while(s.hasNextLine()) {"
+        "content": "        this.TL \u003d TL;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            Task t \u003d new Task(s.nextLine());"
+        "content": "    }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            TL.add(t);"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        }"
+        "content": "    /**"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        s.close();"
+        "content": "     *"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "     * Loads the data from storage into local memory"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     * @throws FileNotFoundException"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public ArrayList\u003cTask\u003e getTL() {"
+        "content": "     *"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return this.TL;"
+        "content": "     */"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "    public void loadFromStorage() throws FileNotFoundException{"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        Scanner s \u003d new Scanner(new File(filepath));"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String getTaskFromKeyword(String kw) {"
+        "content": "        while(s.hasNextLine()) {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        String s \u003d \"\";"
+        "content": "            Task t \u003d new Task(s.nextLine());"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        for(int i \u003d 0; i \u003c TL.size(); i++) {"
+        "content": "            TL.add(t);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            if(TL.get(i).toString().contains(kw)) {"
+        "content": "        }"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                Task t \u003d TL.get(i);"
+        "content": "        s.close();"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "                s +\u003d t.toString() + \"\\n\";"
+        "content": "    }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        }"
+        "content": "    public ArrayList\u003cTask\u003e getTL() {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return s;"
+        "content": "        return this.TL;"
       },
       {
         "lineNumber": 46,
@@ -6111,11 +6186,130 @@
         "author": {
           "gitId": "sancharib-git"
         },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     *"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * Gets a task from the arraylist from a keyword"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * @param String kw"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * @return String task"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "     * */"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    public String getTaskFromKeyword(String kw) {"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        String s \u003d \"\";"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        for(int i \u003d 0; i \u003c TL.size(); i++) {"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            if(TL.get(i).toString().contains(kw)) {"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                Task t \u003d TL.get(i);"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "                s +\u003d t.toString() + \"\\n\";"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        return s;"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "sancharib-git"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "sancharib-git": 48
+      "sancharib-git": 65
     }
   },
   {
@@ -6402,234 +6596,269 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String getNumber() {"
+        "content": "    /**"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return (this.parseInput())[1];"
+        "content": "     *"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "     * Gets task number"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "     * */"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    public String getNumber() {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String showList() {"
+        "content": "        return (this.parseInput())[1];"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return (\"Here are the tasks in your list: \");"
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    public String showList() {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        return (\"Here are the tasks in your list: \");"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String errmessage() {"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return \"Invalid Input, Please check instructions\";"
+        "content": "    public String showHelp() {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "        return (\"Commands:\\n\" +"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "                \"list: Shows current tasks in list\\n\" +"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String doneTask(Task task) {"
+        "content": "                \"todo: add todo in format ~todo task~\\n\" +"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "                \"deadline: add task in format ~deadline task /by YYYY-mm-DD HH:mm~\\n\" +"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return (\"Nice I have marked this task as done\\n\" +"
+        "content": "                \"event: add task in format ~event task /at YYYY-mm-DD HH:mm~\\n\" +"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        \" \" + task.getDescription() + \"\\n\");"
+        "content": "                \"delete: delete task in format ~delete task num~\\n\" +"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "                \"done: mark task as done in format ~done task num~\\n\" +"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "                \"find: finds task with word in format ~find word~\\n\" +"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "                \"viewschedule: shows schedule for day in format ~viewschedule /at YYYY-mm-DD\\n\" +"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "                \"bye: saves tasks to storage\\n\");"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String deleteTask(String task) {"
+        "content": "    }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return (\"Deleted task: \" + task);"
+        "content": ""
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": "    public String doneTask(Task task) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        return (\"Nice I have marked this task as done\\n\" +"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    public String addedTask(Task todo) {"
+        "content": "        \" \" + task.getDescription() + \"\\n\");"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "        return (todo.toString() + \"\\n\");"
+        "content": "    }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    public String deleteTask(String task) {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "        return (\"Deleted task: \" + task);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 60,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    public String addedTask(Task todo) {"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "        return (\"Added task: \" + todo.toString() + \"\\n\");"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 65,
         "author": {
           "gitId": "sancharib-git"
         },
@@ -6637,7 +6866,7 @@
       }
     ],
     "authorContributionMap": {
-      "sancharib-git": 60
+      "sancharib-git": 65
     }
   },
   {
@@ -6670,25 +6899,39 @@
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "[D][✘]hw /by 2020-12-12 12:30"
+        "content": "[T][✓]timmy hehheehheh"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "[T][✓]blabla"
+        "content": "[T][✓]watch timmy host oscars"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "sancharib-git"
         },
-        "content": "[T][✘]timmy hehheehheh"
+        "content": "[D][✓]write a book /by 2020-12-12"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "[E][✘]wedding /at 2020-12-12 12:30"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "sancharib-git"
+        },
+        "content": "[D][✘]jar /by 2020-12-12 12:30"
       }
     ],
     "authorContributionMap": {
-      "sancharib-git": 6
+      "sancharib-git": 8
     }
   },
   {

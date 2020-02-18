@@ -2497,388 +2497,437 @@
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public String handleTaskCommand(String text, TaskList tasks, Ui ui) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        String[] textArray \u003d text.split(\" \");"
+        "content": "     * Handles commands represented as text and returns a string representing feedback."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        String instruction \u003d textArray[0];"
+        "content": "     * @param text String representing command."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        String response \u003d \"\";"
+        "content": "     * @param tasks TaskList that we act on given certain commands."
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        try {"
+        "content": "     * @param ui Ui that we use to retrieve replies."
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            if (instruction.equals(\"list\")) {"
+        "content": "     * @return String message in response to command."
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                response \u003d  tasks.getTasksAsString();"
+        "content": "     */"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if (instruction.equals(\"undo\")) {"
+        "content": "    public String handleTaskCommand(String text, TaskList tasks, Ui ui) {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                if (commands.empty()) {"
+        "content": "        String[] textArray \u003d text.split(\" \");"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    throw new InvalidInstructionException(\"Nothing to undo\");"
+        "content": "        String instruction \u003d textArray[0];"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                }"
+        "content": "        String response \u003d \"\";"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                response \u003d handleUndo(commands.pop(), tasks);"
+        "content": "        try {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if (instruction.equals(\"done\")) {"
+        "content": "            if (instruction.equals(\"list\")) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                commands.push(text);"
+        "content": "                response \u003d  tasks.getTasksAsString();"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                response \u003d tasks.setDone(textArray[1]);"
+        "content": "            } else if (instruction.equals(\"undo\")) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if (instruction.equals(\"delete\")) {"
+        "content": "                if (commands.empty()) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                commands.push(text);"
+        "content": "                    throw new InvalidInstructionException(\"Nothing to undo\");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                response \u003d tasks.deleteTask(textArray[1]);"
+        "content": "                }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if (instruction.equals(\"find\")) {"
+        "content": "                response \u003d handleUndo(commands.pop(), tasks);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                if (textArray.length \u003c\u003d 1) {"
+        "content": "            } else if (instruction.equals(\"done\")) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    throw new InvalidFormatException(\"Find nothing? Get nothing\");"
+        "content": "                commands.push(text);"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                }"
+        "content": "                response \u003d tasks.setDone(textArray[1]);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                response \u003d tasks.getListOfMatch(textArray[1]).getTasksAsString();"
+        "content": "            } else if (instruction.equals(\"delete\")) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if ((instruction.equals(\"todo\")"
+        "content": "                commands.push(text);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    || instruction.equals(\"deadline\")"
+        "content": "                response \u003d tasks.deleteTask(textArray[1]);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    || instruction.equals(\"event\"))) {"
+        "content": "            } else if (instruction.equals(\"find\")) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                commands.push(text);"
+        "content": "                if (textArray.length \u003c\u003d 1) {"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                response \u003d tasks.addNewTask(textArray);"
+        "content": "                    throw new InvalidFormatException(\"Find nothing? Get nothing\");"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if (instruction.equals(\"help\")) {"
+        "content": "                }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                response \u003d  ui.getHelpMessage();"
+        "content": "                response \u003d tasks.getListOfMatch(textArray[1]).getTasksAsString();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else {"
+        "content": "            } else if ((instruction.equals(\"todo\")"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                throw new InvalidInstructionException(\"You have entered invalid input.\""
+        "content": "                    || instruction.equals(\"deadline\")"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                        + \"\\nEnter help to all all possible commands.\");"
+        "content": "                    || instruction.equals(\"event\"))) {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            }"
+        "content": "                commands.push(text);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } catch (InvalidInstructionException e) {"
+        "content": "                response \u003d tasks.addNewTask(textArray);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            return e.getMessage();"
+        "content": "            } else if (instruction.equals(\"help\")) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } catch (InvalidFormatException e) {"
+        "content": "                response \u003d  ui.getHelpMessage();"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            return e.getMessage();"
+        "content": "            } else {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "                throw new InvalidInstructionException(\"You have entered invalid input.\""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        assert !response.equals(\"\") : \"you should have a proper response by now\";"
+        "content": "                        + \"\\nEnter help to all all possible commands.\");"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        return response;"
+        "content": "            }"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "        } catch (InvalidInstructionException e) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    private String handleUndo(String text, TaskList tasks) {"
+        "content": "        } catch (InvalidFormatException e) {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        String[] textArray \u003d text.split(\" \");"
+        "content": "            return e.getMessage();"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        String instruction \u003d textArray[0];"
+        "content": "        }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        switch (instruction) {"
+        "content": "        assert !response.equals(\"\") : \"you should have a proper response by now\";"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            case \"done\":"
+        "content": "        return response;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                return tasks.setNotDone(textArray[1]);"
+        "content": "    }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            case \"delete\":"
+        "content": ""
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                return tasks.undoDelete();"
+        "content": "    private String handleUndo(String text, TaskList tasks) {"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            default:"
+        "content": "        String[] textArray \u003d text.split(\" \");"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                return tasks.deleteTask(String.valueOf(tasks.getTaskCount()));"
+        "content": "        String instruction \u003d textArray[0];"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "        switch (instruction) {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "        case \"done\":"
       },
       {
         "lineNumber": 79,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "            return tasks.setNotDone(textArray[1]);"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        case \"delete\":"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "            return tasks.undoDelete();"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        default:"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "            return tasks.deleteTask(String.valueOf(tasks.getTaskCount()));"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 86,
         "author": {
           "gitId": "ray-97"
         },
@@ -2886,7 +2935,7 @@
       }
     ],
     "authorContributionMap": {
-      "ray-97": 79
+      "ray-97": 86
     }
   },
   {
@@ -3017,7 +3066,7 @@
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    // deals with loading tasks from the file and saving tasks in the file"
+        "content": ""
       },
       {
         "lineNumber": 19,
@@ -3122,290 +3171,311 @@
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public TaskList load() {"
+        "content": "    //Reused from https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        TaskList tasks \u003d new TaskList(new ArrayList\u003cTask\u003e(), true);"
+        "content": "    // and https://mkyong.com/java/how-to-create-directory-in-java/"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        try {"
+        "content": "    // with minor modifications"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            File file \u003d new File(this.filePath);"
+        "content": "    public TaskList load() {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            if (!file.exists()) {"
+        "content": "        TaskList tasks \u003d new TaskList(new ArrayList\u003cTask\u003e(), true);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                File directory \u003d new File(file.getParent());"
+        "content": "        try {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                if (!directory.exists()) {"
+        "content": "            File file \u003d new File(this.filePath);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    directory.mkdirs();"
+        "content": "            if (!file.exists()) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                }"
+        "content": "                File directory \u003d new File(file.getParent());"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                assert directory !\u003d null : \"directory should be created\";"
+        "content": "                if (!directory.exists()) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                file.createNewFile();"
+        "content": "                    directory.mkdirs();"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                assert file !\u003d null : \"new file should be created\";"
+        "content": "                }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else {"
+        "content": "                assert directory !\u003d null : \"directory should be created\";"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                FileInputStream fi \u003d new FileInputStream(file);"
+        "content": "                file.createNewFile();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                ObjectInputStream oi \u003d new ObjectInputStream(fi);"
+        "content": "                assert file !\u003d null : \"new file should be created\";"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                tasks \u003d new TaskList((List\u003cTask\u003e) oi.readObject(), true);"
+        "content": "            } else {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                oi.close();"
+        "content": "                FileInputStream fi \u003d new FileInputStream(file);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                fi.close();"
+        "content": "                ObjectInputStream oi \u003d new ObjectInputStream(fi);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            }"
+        "content": "                tasks \u003d new TaskList((List\u003cTask\u003e) oi.readObject(), true);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "                oi.close();"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            e.printStackTrace();"
+        "content": "                fi.close();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        return tasks;"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    /**"
+        "content": "        return tasks;"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * Saves our tasks in a file associated with this storage object."
+        "content": "    }"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @param tasks List of tasks to be saved."
+        "content": ""
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     */"
+        "content": "    /**"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public void save(TaskList tasks) {"
+        "content": "     * Saves our tasks in a file associated with this storage object."
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        assert new File(this.filePath) !\u003d null : \"file you are saving to should exist.\";"
+        "content": "     * @param tasks List of tasks to be saved."
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            FileOutputStream fo \u003d new FileOutputStream(new File(this.filePath));"
+        "content": "    public void save(TaskList tasks) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            ObjectOutputStream oo \u003d new ObjectOutputStream(fo);"
+        "content": "        assert new File(this.filePath) !\u003d null : \"file you are saving to should exist.\";"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            oo.writeObject(tasks.getTaskList());"
+        "content": "        try {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            oo.close();"
+        "content": "            FileOutputStream fo \u003d new FileOutputStream(new File(this.filePath));"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            fo.close();"
+        "content": "            ObjectOutputStream oo \u003d new ObjectOutputStream(fo);"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "            oo.writeObject(tasks.getTaskList());"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            e.printStackTrace();"
+        "content": "            oo.close();"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "            fo.close();"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 74,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "            e.printStackTrace();"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 77,
         "author": {
           "gitId": "ray-97"
         },
@@ -3413,7 +3483,7 @@
       }
     ],
     "authorContributionMap": {
-      "ray-97": 74
+      "ray-97": 77
     }
   },
   {
@@ -4642,567 +4712,567 @@
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public String setNotDone(String num) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        Task completedTask \u003d this.tasks.get(Integer.parseInt(num) - 1);"
+        "content": "     * Sets the done attribute of a task to not done."
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        completedTask.isDone \u003d false;"
+        "content": "     * @param num String representing position of task in list."
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        return \"You need to do this again:\\n\" + completedTask;"
+        "content": "     * @return String that reminds user a task needs to be done."
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "    public String setNotDone(String num) {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    /**"
+        "content": "        Task completedTask \u003d this.tasks.get(Integer.parseInt(num) - 1);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * Removes an existing task from our list."
+        "content": "        completedTask.isDone \u003d false;"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @param num Position of a task in the list."
+        "content": "        return \"You need to do this again:\\n\" + completedTask;"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @return String representing deleted task."
+        "content": "    }"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public String deleteTask(String num) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        try {"
+        "content": "     * Removes an existing task from our list."
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            Task deletedTask \u003d this.tasks.remove(Integer.parseInt(num) - 1);"
+        "content": "     * @param num Position of a task in the list."
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            deletedTasks.push(deletedTask);"
+        "content": "     * @return String representing deleted task."
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            return \"Deleted:\\n\" + deletedTask + \"\\nYou now have \" + getTaskCount() + \" tasks in the list\";"
+        "content": "     */"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "    public String deleteTask(String num) {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            throw new InvalidFormatException(\"Enter \\\"delete number\\\", make sure number exists in list!\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "            Task deletedTask \u003d this.tasks.remove(Integer.parseInt(num) - 1);"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "            deletedTasks.push(deletedTask);"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "            return \"Deleted:\\n\" + deletedTask + \"\\nYou now have \" + getTaskCount() + \" tasks in the list\";"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public String undoDelete() {"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        Task restoredTask \u003d deletedTasks.pop();"
+        "content": "            throw new InvalidFormatException(\"Enter \\\"delete number\\\", make sure number exists in list!\");"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        tasks.add(restoredTask);"
+        "content": "        }"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        return \"I have restored:\\n\" + restoredTask;"
+        "content": "    }"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    /**"
+        "content": "     * Undoes the last deleted task by adding it back into tasks."
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * Prints all our existing tasks, and their details."
+        "content": "     * @return String saying task has been added back."
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * Behavior when tasks is empty depends on whether the list was created from loading file."
+        "content": "     */"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @return String representing all tasks in list."
+        "content": "    public String undoDelete() {"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     */"
+        "content": "        Task restoredTask \u003d deletedTasks.pop();"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public String getTasksAsString() {"
+        "content": "        tasks.add(restoredTask);"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        if (this.tasks.isEmpty()) {"
+        "content": "        return \"I have restored:\\n\" + restoredTask;"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            return ("
+        "content": "    }"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    isLoadedList"
+        "content": ""
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    ? \"Nothing at the moment. The sith control everything, you just don\u0027t know it.\""
+        "content": "    /**"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    : \"No existing tasks has description that fits the keyword.\");"
+        "content": "     * Prints all our existing tasks, and their details."
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } else {"
+        "content": "     * Behavior when tasks is empty depends on whether the list was created from loading file."
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            StringBuilder sb \u003d new StringBuilder();"
+        "content": "     * @return String representing all tasks in list."
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            for (int i \u003d 0; i \u003c this.tasks.size(); i++) {"
+        "content": "     */"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                sb.append(String.valueOf(i + 1) + \" \" + this.tasks.get(i));"
+        "content": "    public String getTasksAsString() {"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                if (i !\u003d this.tasks.size() - 1) {"
+        "content": "        if (this.tasks.isEmpty()) {"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    sb.append(\"\\n\");"
+        "content": "            return ("
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                }"
+        "content": "                    isLoadedList"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            }"
+        "content": "                    ? \"Nothing at the moment. The sith control everything, you just don\u0027t know it.\""
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            return sb.toString();"
+        "content": "                    : \"No existing tasks has description that fits the keyword.\");"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "            StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "            for (int i \u003d 0; i \u003c this.tasks.size(); i++) {"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    /**"
+        "content": "                sb.append(String.valueOf(i + 1) + \" \" + this.tasks.get(i));"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * Adds a new task based on instructions given."
+        "content": "                if (i !\u003d this.tasks.size() - 1) {"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @param instArr Array that represents the instruction."
+        "content": "                    sb.append(\"\\n\");"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @return String representing the added task."
+        "content": "                }"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     */"
+        "content": "            }"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public String addNewTask(String[] instArr) {"
+        "content": "            return sb.toString();"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        List instList \u003d Arrays.asList(instArr);"
+        "content": "        }"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        String addTaskMessage \u003d \"\";"
+        "content": "    }"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        if (instArr[0].equals(\"todo\")) {"
+        "content": ""
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            if (instArr.length \u003d\u003d 1) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                throw new InvalidFormatException(\"Description should not be empty\");"
+        "content": "     * Adds a new task based on instructions given."
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            }"
+        "content": "     * @param instArr Array that represents the instruction."
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            String description \u003d String.join(\" \", Arrays.copyOfRange(instArr, 1, instArr.length));"
+        "content": "     * @return String representing the added task."
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            Task newTask \u003d new ToDo(description);"
+        "content": "     */"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            addTaskMessage \u003d addTaskHelper(newTask);"
+        "content": "    public String addNewTask(String[] instArr) {"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } else if (instArr[0].equals(\"deadline\")) {"
+        "content": "        List instList \u003d Arrays.asList(instArr);"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            // exception to handle non existence of /by and correspondingly /at"
+        "content": "        String addTaskMessage \u003d \"\";"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            int separator \u003d instList.indexOf(\"/by\");"
+        "content": "        if (instArr[0].equals(\"todo\")) {"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            if (separator \u003d\u003d -1) {"
+        "content": "            if (instArr.length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                throw new InvalidFormatException(\"correct format: deadline task /by date\");"
+        "content": "                throw new InvalidFormatException(\"Description should not be empty\");"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if (separator \u003d\u003d 1) {"
+        "content": "            }"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                throw new InvalidFormatException(\"Description should not be empty\");"
+        "content": "            String description \u003d String.join(\" \", Arrays.copyOfRange(instArr, 1, instArr.length));"
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            }"
+        "content": "            Task newTask \u003d new ToDo(description);"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            String description \u003d  String.join(\" \", Arrays.copyOfRange(instArr, 1, separator));"
+        "content": "            addTaskMessage \u003d addTaskHelper(newTask);"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            String dateTime \u003d String.join(\" \", Arrays.copyOfRange(instArr, separator + 1, instArr.length));"
+        "content": "        } else if (instArr[0].equals(\"deadline\")) {"
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            try {"
+        "content": "            // exception to handle non existence of /by and correspondingly /at"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                LocalDateTime by \u003d LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\"));"
+        "content": "            int separator \u003d instList.indexOf(\"/by\");"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                Task newTask \u003d new Deadline(description, by);"
+        "content": "            if (separator \u003d\u003d -1) {"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                addTaskMessage \u003d addTaskHelper(newTask);"
+        "content": "                throw new InvalidFormatException(\"correct format: deadline task /by date\");"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } catch (DateTimeParseException e) {"
+        "content": "            } else if (separator \u003d\u003d 1) {"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                throw new InvalidFormatException(\"Make sure you entered valid date: yyyy-MM-dd HH:mm\");"
+        "content": "                throw new InvalidFormatException(\"Description should not be empty\");"
       },
       {
         "lineNumber": 143,
@@ -5216,248 +5286,311 @@
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } else if (instArr[0].equals(\"event\")) {"
+        "content": "            String description \u003d  String.join(\" \", Arrays.copyOfRange(instArr, 1, separator));"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            int separator \u003d instList.indexOf(\"/at\");"
+        "content": "            String dateTime \u003d String.join(\" \", Arrays.copyOfRange(instArr, separator + 1, instArr.length));"
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            if (separator \u003d\u003d -1) {"
+        "content": "            try {"
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                throw new InvalidFormatException(\"correct format: event task /at place\");"
+        "content": "                LocalDateTime by \u003d LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\"));"
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            } else if (instArr.length \u003d\u003d separator"
+        "content": "                Task newTask \u003d new Deadline(description, by);"
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                    || separator \u003d\u003d 1) {"
+        "content": "                addTaskMessage \u003d addTaskHelper(newTask);"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                throw new InvalidFormatException(\"Description and place cannot be empty\");"
+        "content": "            } catch (DateTimeParseException e) {"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            }"
+        "content": "                throw new InvalidFormatException(\"Make sure you entered valid date: yyyy-MM-dd HH:mm\");"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            String description \u003d  String.join(\" \", Arrays.copyOfRange(instArr, 1, separator));"
+        "content": "            }"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            String at \u003d String.join(\" \", Arrays.copyOfRange(instArr, separator + 1, instArr.length));"
+        "content": "        } else if (instArr[0].equals(\"event\")) {"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            Task newTask \u003d new Event(description, at);"
+        "content": "            int separator \u003d instList.indexOf(\"/at\");"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            addTaskMessage \u003d addTaskHelper(newTask);"
+        "content": "            if (separator \u003d\u003d -1) {"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "                throw new InvalidFormatException(\"correct format: event task /at place\");"
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        return addTaskMessage;"
+        "content": "            } else if (instArr.length \u003d\u003d separator"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "                    || separator \u003d\u003d 1) {"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "                throw new InvalidFormatException(\"Description and place cannot be empty\");"
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    private String addTaskHelper(Task addedTask) {"
+        "content": "            }"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        this.tasks.add(addedTask);"
+        "content": "            String description \u003d  String.join(\" \", Arrays.copyOfRange(instArr, 1, separator));"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        return \"Added:\\n\" + addedTask + String.format(\"\\nYou now have %d tasks in the list\", getTaskCount());"
+        "content": "            String at \u003d String.join(\" \", Arrays.copyOfRange(instArr, separator + 1, instArr.length));"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "            Task newTask \u003d new Event(description, at);"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "            addTaskMessage \u003d addTaskHelper(newTask);"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * Returns a TaskList, tasks with description that contains keyword are included."
+        "content": "        return addTaskMessage;"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @param keyword String which we want to compare description against."
+        "content": "    }"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     * @return TaskList containing tasks that match."
+        "content": ""
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "     */"
+        "content": "    private String addTaskHelper(Task addedTask) {"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public TaskList getListOfMatch(String keyword) {"
+        "content": "        this.tasks.add(addedTask);"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        List\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e();"
+        "content": "        return \"Added:\\n\" + addedTask + String.format(\"\\nYou now have %d tasks in the list\", getTaskCount());"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        for (Task task: this.tasks) {"
+        "content": "    }"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            if (task.getDescription().contains(keyword)) {"
+        "content": ""
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "                tasks.add(task);"
+        "content": "    /**"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            }"
+        "content": "     * Returns a TaskList, tasks with description that contains keyword are included."
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "     * @param keyword String which we want to compare description against."
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        return new TaskList(tasks, false);"
+        "content": "     * @return TaskList containing tasks that match."
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 179,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "    public TaskList getListOfMatch(String keyword) {"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        List\u003cTask\u003e tasks \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        for (Task task: this.tasks) {"
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "            if (task.getDescription().contains(keyword)) {"
+      },
+      {
+        "lineNumber": 183,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "                tasks.add(task);"
+      },
+      {
+        "lineNumber": 184,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        return new TaskList(tasks, false);"
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 188,
         "author": {
           "gitId": "ray-97"
         },
@@ -5465,7 +5598,7 @@
       }
     ],
     "authorContributionMap": {
-      "ray-97": 179
+      "ray-97": 188
     }
   },
   {
@@ -6472,108 +6605,129 @@
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "import ui.Ui;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "import java.util.ArrayList;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "import java.util.ArrayList;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+        "content": "import java.util.Scanner;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "import static org.junit.jupiter.api.Assertions.fail;"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "ray-97"
         },
-        "content": ""
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "public class ParserTest {"
+        "content": "import static org.junit.jupiter.api.Assertions.fail;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    @Test"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    public void handleTaskCommand_invalidCommand_ExceptionCaught() {"
+        "content": "public class ParserTest {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        try {"
+        "content": "    @Test"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            new Parser().handleTaskCommand(\"Hello\", new TaskList(new ArrayList\u003cTask\u003e(), true));"
+        "content": "    public void handleTaskCommand_invalidCommand_ExceptionCaught() {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "            fail();"
+        "content": "            new Parser().handleTaskCommand(\"Hello\", new TaskList(new ArrayList\u003cTask\u003e(), true),"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "        }"
+        "content": "                    new Ui(new Scanner(System.in)));"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "ray-97"
         },
-        "content": "    }"
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 21,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "            fail();"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "ray-97"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
         "author": {
           "gitId": "ray-97"
         },
@@ -6581,7 +6735,7 @@
       }
     ],
     "authorContributionMap": {
-      "ray-97": 21
+      "ray-97": 24
     }
   },
   {

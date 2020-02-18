@@ -461,7 +461,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * The main entry point for the chat bot containing the main method"
+        "content": " * The main entry point for the chat bot containing the main method."
       },
       {
         "lineNumber": 7,
@@ -650,14 +650,14 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                // Ensure that status icon is now a tick"
+        "content": "                assert taskList.getStatusIcon(taskNumber).equals(\"\\u2713\")"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                assert taskList.getStatusIcon(taskNumber).equals(\"\\u2713\") : \"duke.task.Task status not done!\";"
+        "content": "                        : \"Task status not done!\"; // Ensure that status icon is now a tick"
       },
       {
         "lineNumber": 35,
@@ -727,255 +727,283 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                    message \u003d new StringBuilder(naruto.taskAddedMessage(taskList.getTask(taskNumber).toString(), taskNumber));"
+        "content": "                    message \u003d new StringBuilder(naruto.taskAddedMessage(taskList.getTask(taskNumber).toString(),"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                    storage.save(taskList.getUpdatedTasks());"
+        "content": "                            taskNumber));"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                    return message.toString();"
+        "content": "                    storage.save(taskList.getUpdatedTasks());"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                } catch (DukeException dE) {"
+        "content": "                    return message.toString();"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                    return naruto.say(\"☹ OOPS!!! The description of a todo cannot be empty.\");"
+        "content": "                } catch (DukeException de) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                }"
+        "content": "                    return naruto.say(\"☹ OOPS!!! The description of a todo cannot be empty.\");"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            case DEADLINE:"
+        "content": "                }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                taskNumber \u003d taskList.addDeadline(input);"
+        "content": "            case DEADLINE:"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                message \u003d new StringBuilder(naruto.taskAddedMessage(taskList.getTask(taskNumber).toString(), taskNumber));"
+        "content": "                taskNumber \u003d taskList.addDeadline(input);"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                storage.save(taskList.getUpdatedTasks());"
+        "content": "                message \u003d new StringBuilder(naruto.taskAddedMessage(taskList.getTask(taskNumber).toString(),"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                return message.toString();"
+        "content": "                        taskNumber));"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            case EVENT:"
+        "content": "                storage.save(taskList.getUpdatedTasks());"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                taskNumber \u003d taskList.addEvent(input);"
+        "content": "                return message.toString();"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                message \u003d new StringBuilder(naruto.taskAddedMessage(taskList.getTask(taskNumber).toString(), taskNumber));"
+        "content": "            case EVENT:"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                storage.save(taskList.getUpdatedTasks());"
+        "content": "                taskNumber \u003d taskList.addEvent(input);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                return message.toString();"
+        "content": "                message \u003d new StringBuilder(naruto.taskAddedMessage(taskList.getTask(taskNumber).toString(),"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            case DELETE:"
+        "content": "                        taskNumber));"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                int originalTaskCount \u003d taskList.getTaskCount();"
+        "content": "                storage.save(taskList.getUpdatedTasks());"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                taskNumber \u003d Integer.parseInt(input.substring(\"delete\".length() + 1)) - 1;"
+        "content": "                return message.toString();"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                message \u003d new StringBuilder(naruto.say(\"Noted. I\u0027ve removed this duke.task\"));"
+        "content": "            case DELETE:"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                message.append(naruto.format(\"[\" + taskList.getTaskIcon(taskNumber) + \"][\""
+        "content": "                taskNumber \u003d Integer.parseInt(input.substring(\"delete\".length() + 1)) - 1;"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                        + taskList.getStatusIcon(taskNumber) + \"] \" + taskList.getDescription(taskNumber)));"
+        "content": "                int originalTaskCount \u003d taskList.getTaskCount();"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                taskList.delete(taskNumber);"
+        "content": "                message \u003d new StringBuilder(naruto.say(\"Noted. I\u0027ve removed this duke.task\")).append(naruto.format(\"[\""
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                message.append(naruto.say(\"Now you have \" + taskList.getTaskCount() + \" tasks in the list\"));"
+        "content": "                        + taskList.getTaskIcon(taskNumber) + \"][\" + taskList.getStatusIcon(taskNumber) + \"] \""
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                // Ensure number of tasks falls by 1"
+        "content": "                        + taskList.getDescription(taskNumber)));"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                assert taskList.getTaskCount() \u003d\u003d originalTaskCount - 1 : \"Number of events unchanged!\";"
+        "content": "                taskList.delete(taskNumber);"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                storage.save(taskList.getUpdatedTasks());"
+        "content": "                // Ensure number of tasks falls by 1"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                return message.toString();"
+        "content": "                assert taskList.getTaskCount() \u003d\u003d originalTaskCount - 1 : \"Number of events unchanged!\";"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            case FIND:"
+        "content": "                message.append(naruto.say(\"Now you have \" + taskList.getTaskCount() + \" tasks in the list\"));"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                return naruto.matchingItems(taskList.getUpdatedTasks(), input.substring(\"find\".length() + 1));"
+        "content": "                storage.save(taskList.getUpdatedTasks());"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            }"
+        "content": "                return message.toString();"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        } catch (DukeException dE) {"
+        "content": "            case FIND:"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            return naruto.say(\"☹ OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+        "content": "                return naruto.matchingItems(taskList.getUpdatedTasks(), input.substring(\"find\".length() + 1));"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        }"
+        "content": "            default:"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return \"duke.Duke heard: \" + input;"
+        "content": "            }"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        } catch (DukeException de) {"
       },
       {
         "lineNumber": 80,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "            return naruto.say(\"☹ OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        return \"duke.Duke heard: \" + input;"
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 84,
         "author": {
           "gitId": "-"
         },
@@ -983,7 +1011,7 @@
       }
     ],
     "authorContributionMap": {
-      "shenghaoc": 78,
+      "shenghaoc": 82,
       "-": 2
     }
   },
@@ -1038,7 +1066,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * Class to process user input"
+        "content": " * Class to process user input."
       },
       {
         "lineNumber": 8,
@@ -1073,7 +1101,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Processes user input to determine type of command, represented by an anum"
+        "content": "     * Processes user input to determine type of command, represented by an enum."
       },
       {
         "lineNumber": 13,
@@ -1101,7 +1129,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @throws DukeException"
+        "content": "     * @throws DukeException exception specific to Duke"
       },
       {
         "lineNumber": 17,
@@ -1334,7 +1362,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * Class to store list of tasks"
+        "content": " * Class to store list of tasks."
       },
       {
         "lineNumber": 11,
@@ -1404,7 +1432,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Save list of tasks to hard disk"
+        "content": "     * Save list of tasks to hard disk."
       },
       {
         "lineNumber": 21,
@@ -1595,7 +1623,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * Class to represent a list of tasks"
+        "content": " * Class to represent a list of tasks."
       },
       {
         "lineNumber": 13,
@@ -1644,7 +1672,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Returns current list of tasks"
+        "content": "     * Returns current list of tasks."
       },
       {
         "lineNumber": 20,
@@ -1700,7 +1728,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Calls function to get description for specific duke.task in list"
+        "content": "     * Calls function to get description for specific duke.task in list."
       },
       {
         "lineNumber": 28,
@@ -1763,7 +1791,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Calls function to get status icon for specific duke.task in list"
+        "content": "     * Calls function to get status icon for specific duke.task in list."
       },
       {
         "lineNumber": 37,
@@ -1833,7 +1861,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Calls function to get duke.task icon for specific duke.task in list"
+        "content": "     * Calls function to get duke.task icon for specific duke.task in list."
       },
       {
         "lineNumber": 47,
@@ -1910,7 +1938,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Add new to do to list and return its index"
+        "content": "     * Add new to do to list and return its index."
       },
       {
         "lineNumber": 58,
@@ -1938,7 +1966,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @throws DukeException"
+        "content": "     * @throws DukeException exception specific to Duke"
       },
       {
         "lineNumber": 62,
@@ -2015,7 +2043,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Add new deadline to list and return its index"
+        "content": "     * Add new deadline to list and return its index."
       },
       {
         "lineNumber": 73,
@@ -2106,7 +2134,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Add new event to list and return its index"
+        "content": "     * Add new event to list and return its index."
       },
       {
         "lineNumber": 86,
@@ -2176,7 +2204,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     }"
+        "content": "    }"
       },
       {
         "lineNumber": 96,
@@ -2197,7 +2225,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Calls function for specific duke.task to mark itself as done"
+        "content": "     * Calls function for specific duke.task to mark itself as done."
       },
       {
         "lineNumber": 99,
@@ -2260,7 +2288,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Deletes specific duke.task at index from list"
+        "content": "     * Deletes specific duke.task at index from list."
       },
       {
         "lineNumber": 108,
@@ -2323,7 +2351,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Returns current number of tasks"
+        "content": "     * Returns current number of tasks."
       },
       {
         "lineNumber": 117,
@@ -2451,563 +2479,759 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "import java.util.Arrays;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "/**"
+        "content": "import java.util.stream.IntStream;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * Class to represent the user interface"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "public class Ui {"
+        "content": " * Class to represent the user interface."
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private String name;"
+        "content": "public class Ui {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private static final String LINE \u003d \"______________________________\";"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private static final String INDENT \u003d \"    \";"
+        "content": "    private String name;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    private static final String LINE \u003d \"______________________________\";"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    Ui(String name) {"
+        "content": "    private static final String INDENT \u003d \"    \";"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        this.name \u003d name;"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        say(\"Hi! I\u0027m \" + name);"
+        "content": "    Ui(String name) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        say(\"How may I help you?\");"
+        "content": "        this.name \u003d name;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        say(\"Hi! I\u0027m \" + name);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "        say(\"How may I help you?\");"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Prints text from chat bot"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @param message Text to be said"
+        "content": "    /**"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": "     * Prints text from chat bot."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    protected String say(String message) {"
+        "content": "     *"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return indent(name + \": \" + message) + System.lineSeparator();"
+        "content": "     * @param message Text to be said"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    protected String say(String message) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": "        return indent(name + \": \" + message) + System.lineSeparator();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Adds duke.task to list and prints message to indicate success"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @param message Information about added duke.task"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @param taskNumber Number of tasks in list - 1"
+        "content": "    /**"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": "     * Adds duke.task to list and prints message to indicate success."
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    protected String taskAddedMessage(String message, int taskNumber) {"
+        "content": "     *"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return say(\"Got it. I\u0027ve added this duke.task\") + format(message)"
+        "content": "     * @param message    Information about added duke.task"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                + say(\"Now you have \" + (taskNumber + 1) + \" tasks in the list\");"
+        "content": "     * @param taskNumber Number of tasks in list - 1"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    protected String taskAddedMessage(String message, int taskNumber) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": "        return say(\"Got it. I\u0027ve added this duke.task\") + format(message)"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Prints message between two horizontal bars"
+        "content": "                + say(\"Now you have \" + (taskNumber + 1) + \" tasks in the list\");"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @param message Message to be printed"
+        "content": "    }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    protected String format(String message) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return bar() + indent(message) +System.lineSeparator()+ bar() + System.lineSeparator();"
+        "content": "     * Prints message between two horizontal bars."
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "     * @param message Message to be printed"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Prints a horizontal bar"
+        "content": "    protected String format(String message) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": "        return bar() + indent(message) + System.lineSeparator() + bar() + System.lineSeparator();"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    protected String bar() {"
+        "content": "    }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return indent(LINE) + System.lineSeparator();"
+        "content": ""
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "     * Prints a horizontal bar."
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Prints the message with indentation of four spaces"
+        "content": "    protected String bar() {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @param message Message to be printed"
+        "content": "        return indent(LINE) + System.lineSeparator();"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": "    }"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    protected String indent(String message) {"
+        "content": ""
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return INDENT + message;"
+        "content": "    /**"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "     * Prints the message with indentation of four spaces."
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": "     * @param message Message to be printed"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Prints list of tasks"
+        "content": "     */"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * @param tasks List of tasks"
+        "content": "    protected String indent(String message) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": "        return INDENT + message;"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    protected String list(ArrayList\u003cTask\u003e tasks) {"
+        "content": "    }"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        StringBuilder message \u003d new StringBuilder(say(\"Here you go\"));"
+        "content": ""
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        message.append(bar());"
+        "content": "    /**"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
+        "content": "     * Prints list of tasks."
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            message.append(indent((i + 1) + \". \" + tasks.get(i).toString())).append(System.lineSeparator());"
+        "content": "     *"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        }"
+        "content": "     * @param tasks List of tasks"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return message.append(bar()).toString();"
+        "content": "     */"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "    protected String list(ArrayList\u003cTask\u003e tasks) {"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "        StringBuilder message \u003d new StringBuilder(say(\"Here you go\"));"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    protected String matchingItems(ArrayList\u003cTask\u003e tasks, String keyword) {"
+        "content": "        message.append(bar());"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        StringBuilder message \u003d new StringBuilder(say(\"Here are the matching tasks in your list\"));"
+        "content": "        IntStream"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        message.append(bar());"
+        "content": "                .range(0, tasks.size())"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
+        "content": "                .forEachOrdered(i -\u003e message.append(indent((i + 1) + \". \" + tasks.get(i).toString())).append(System.lineSeparator()));"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            if (tasks.get(i).getDescription().contains(keyword)) {"
+        "content": "        return message.append(bar()).toString();"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                message.append(indent((i + 1) + \". \" + tasks.get(i).toString())).append(System.lineSeparator());"
+        "content": "    }"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        }"
+        "content": "    protected String matchingItems(ArrayList\u003cTask\u003e tasks, String keyword) {"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return message.append(bar()).toString();"
+        "content": "        StringBuilder message \u003d new StringBuilder(say(\"Here are the matching tasks in your list\"));"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        message.append(bar());"
       },
       {
         "lineNumber": 86,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        int defaultLength \u003d message.length();"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        IntStream"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                .range(0, tasks.size())"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                .filter(i -\u003e tasks.get(i).getDescription().contains(keyword))"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                .forEachOrdered(i -\u003e message.append(indent((i + 1) + \". \""
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                        + tasks.get(i).toString())).append(System.lineSeparator()));"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        if (message.length() \u003d\u003d defaultLength) {"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "            return partialMatchingItems(tasks, keyword);"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        return message.append(bar()).toString();"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    protected String partialMatchingItems(ArrayList\u003cTask\u003e tasks, String keyword) {"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        StringBuilder message \u003d new StringBuilder("
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                say(\"No matching task found, here are the partially-matching tasks in your list\"));"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        message.append(bar());"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        String[] subkeywords \u003d keyword.split(\" \");"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        Arrays.stream(subkeywords).forEachOrdered(s -\u003e {"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "            message.append(indent(\"Match \\\"\" + s + \"\\\"\")).append(System.lineSeparator());"
+      },
+      {
+        "lineNumber": 105,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "            IntStream"
+      },
+      {
+        "lineNumber": 106,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                    .range(0, tasks.size())"
+      },
+      {
+        "lineNumber": 107,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                    .filter(i -\u003e tasks.get(i).getDescription().contains(s))"
+      },
+      {
+        "lineNumber": 108,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                    .forEachOrdered(i -\u003e message.append(indent((i + 1) + \". \""
+      },
+      {
+        "lineNumber": 109,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "                            + tasks.get(i).toString())).append(System.lineSeparator()));"
+      },
+      {
+        "lineNumber": 110,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "            message.append(System.lineSeparator());"
+      },
+      {
+        "lineNumber": 111,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        });"
+      },
+      {
+        "lineNumber": 112,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        return message.append(bar()).toString();"
+      },
+      {
+        "lineNumber": 113,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 114,
         "author": {
           "gitId": "shenghaoc"
         },
@@ -3015,7 +3239,7 @@
       }
     ],
     "authorContributionMap": {
-      "shenghaoc": 86
+      "shenghaoc": 114
     }
   },
   {
@@ -3213,381 +3437,416 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import javafx.scene.control.Label;"
+        "content": "import javafx.scene.image.Image;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import javafx.scene.image.Image;"
+        "content": "import javafx.scene.image.ImageView;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import javafx.scene.image.ImageView;"
+        "content": "import javafx.scene.layout.HBox;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import javafx.scene.layout.HBox;"
+        "content": "import javafx.scene.text.Text;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import javafx.scene.text.Text;"
+        "content": "import javafx.scene.text.TextAlignment;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import javafx.scene.text.TextAlignment;"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "/**"
+        "content": " * An example of a custom control using FXML."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * An example of a custom control using FXML."
+        "content": " * This control represents a dialog box consisting of an ImageView to represent the speaker\u0027s face and a label"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * This control represents a dialog box consisting of an ImageView to represent the speaker\u0027s face and a label"
+        "content": " * containing text from the speaker."
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * containing text from the speaker."
+        "content": " */"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " */"
+        "content": "public class DialogBox extends HBox {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "public class DialogBox extends HBox {"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": "    private Text dialog;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private Text dialog;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": "    private ImageView displayPicture;"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private ImageView displayPicture;"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    private DialogBox(String text, Image img) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private DialogBox(String text, Image img) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        try {"
+        "content": "            FXMLLoader fxmlLoader \u003d new FXMLLoader(MainWindow.class.getResource(\"/view/DialogBox.fxml\"));"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            FXMLLoader fxmlLoader \u003d new FXMLLoader(MainWindow.class.getResource(\"/view/DialogBox.fxml\"));"
+        "content": "            fxmlLoader.setController(this);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            fxmlLoader.setController(this);"
+        "content": "            fxmlLoader.setRoot(this);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            fxmlLoader.setRoot(this);"
+        "content": "            fxmlLoader.load();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            fxmlLoader.load();"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            e.printStackTrace();"
+        "content": "        }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "        dialog.setText(text);"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        dialog.setText(text);"
+        "content": "        dialog.setWrappingWidth(300);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        dialog.setWrappingWidth(300);"
+        "content": "        dialog.setTextAlignment(TextAlignment.RIGHT);"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        dialog.setTextAlignment(TextAlignment.RIGHT);"
+        "content": "        displayPicture.setImage(img);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        displayPicture.setImage(img);"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": "     * Flips the dialog box such that the ImageView is on the left and text on the right."
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Flips the dialog box such that the ImageView is on the left and text on the right."
+        "content": "     */"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": "    private void flip() {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private void flip() {"
+        "content": "        ObservableList\u003cNode\u003e tmp \u003d FXCollections.observableArrayList(this.getChildren());"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        ObservableList\u003cNode\u003e tmp \u003d FXCollections.observableArrayList(this.getChildren());"
+        "content": "        Collections.reverse(tmp);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        Collections.reverse(tmp);"
+        "content": "        getChildren().setAll(tmp);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        getChildren().setAll(tmp);"
+        "content": "        setAlignment(Pos.TOP_LEFT);"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        setAlignment(Pos.TOP_LEFT);"
+        "content": "        this.dialog.setTextAlignment(TextAlignment.LEFT);"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        this.dialog.setTextAlignment(TextAlignment.LEFT);"
+        "content": "    }"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    public static DialogBox getUserDialog(String text, Image img) {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public static DialogBox getUserDialog(String text, Image img) {"
+        "content": "        return new DialogBox(text, img);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return new DialogBox(text, img);"
+        "content": "    }"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public static DialogBox getDukeDialog(String text, Image img) {"
+        "content": "     * Returns Duke response in DialogBox with Duke avatar."
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        var db \u003d new DialogBox(text, img);"
+        "content": "     * @param text Duke response"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        db.flip();"
+        "content": "     * @param img Duke avatar"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return db;"
+        "content": "     * @return the DialogBox object"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 66,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    public static DialogBox getDukeDialog(String text, Image img) {"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        var db \u003d new DialogBox(text, img);"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        db.flip();"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        return db;"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 71,
         "author": {
           "gitId": "shenghaoc"
         },
@@ -3595,7 +3854,7 @@
       }
     ],
     "authorContributionMap": {
-      "shenghaoc": 66
+      "shenghaoc": 71
     }
   },
   {
@@ -4003,290 +4262,297 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " * Controller for duke.gui.MainWindow. Provides the layout for the other controls."
+        "content": "/**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": " */"
+        "content": " * Controller for duke.gui.MainWindow. Provides the layout for the other controls."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "public class MainWindow extends AnchorPane {"
+        "content": " */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": "public class MainWindow extends AnchorPane {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private ScrollPane scrollPane;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": "    private ScrollPane scrollPane;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private VBox dialogContainer;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": "    private VBox dialogContainer;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private TextField userInput;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": "    private TextField userInput;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private Button sendButton;"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    private Button sendButton;"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private Duke duke;"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    private Duke duke;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
+        "content": "    private Image userImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaUser.png\"));"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    private Image dukeImage \u003d new Image(this.getClass().getResourceAsStream(\"/images/DaDuke.png\"));"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public void initialize() {"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
+        "content": "    public void initialize() {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public void setDuke(Duke d) {"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        duke \u003d d;"
+        "content": "    public void setDuke(Duke d) {"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        duke \u003d d;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke\u0027s reply and then appends them to"
+        "content": "    /**"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * the dialog container. Clears the user input after processing."
+        "content": "     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke\u0027s reply and then appends them"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     */"
+        "content": "     * to the dialog container. Clears the user input after processing."
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @FXML"
+        "content": "     */"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    private void handleUserInput() {"
+        "content": "    @FXML"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        String input \u003d userInput.getText();"
+        "content": "    private void handleUserInput() {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        String response \u003d duke.getResponse(input);"
+        "content": "        String input \u003d userInput.getText();"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        dialogContainer.getChildren().addAll("
+        "content": "        String response \u003d duke.getResponse(input);"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                DialogBox.getUserDialog(input, userImage),"
+        "content": "        dialogContainer.getChildren().addAll("
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
+        "content": "                DialogBox.getUserDialog(input, userImage),"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        );"
+        "content": "                DialogBox.getDukeDialog(response, dukeImage)"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        userInput.clear();"
+        "content": "        );"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        userInput.clear();"
       },
       {
         "lineNumber": 52,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 53,
         "author": {
           "gitId": "shenghaoc"
         },
@@ -4294,7 +4560,7 @@
       }
     ],
     "authorContributionMap": {
-      "shenghaoc": 52
+      "shenghaoc": 53
     }
   },
   {
@@ -4369,196 +4635,196 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public Deadline(String description, String time) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        super(description);"
+        "content": "     * Constructor for Deadline class."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        this.time \u003d time;"
+        "content": "     * @param description details regarding task"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        try {"
+        "content": "     * @param time by which task has to be completed"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            processedTime \u003d LocalDate.parse(time);"
+        "content": "     */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        } catch (DateTimeException e) {"
+        "content": "    public Deadline(String description, String time) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "            dateProcessed \u003d false;"
+        "content": "        super(description);"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        }"
+        "content": "        this.time \u003d time;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        try {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "            processedTime \u003d LocalDate.parse(time);"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public String getTaskIcon() {"
+        "content": "        } catch (DateTimeException e) {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return \"D\";"
+        "content": "            dateProcessed \u003d false;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public boolean hasTime() {"
+        "content": ""
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return true;"
+        "content": "    public String getTaskIcon() {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        return \"D\";"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @Override"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public String getTime() {"
+        "content": "    public boolean hasTime() {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return dateProcessed"
+        "content": "        return true;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                ? processedTime.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"))"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "                : time;"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "    @Override"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    public String getTime() {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @Override"
+        "content": "        return dateProcessed"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    public String toString() {"
+        "content": "                ? processedTime.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"))"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return \"[D][\" + getStatusIcon() + \"] \" + description + (hasTime() ? \" (by: \" + time + \")\" : \"\");"
+        "content": "                : time;"
       },
       {
         "lineNumber": 38,
@@ -4572,11 +4838,46 @@
         "author": {
           "gitId": "shenghaoc"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "        return \"[D][\" + getStatusIcon() + \"] \" + description + (hasTime() ? \" (by: \" + time + \")\" : \"\");"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "shenghaoc"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "shenghaoc": 39
+      "shenghaoc": 44
     }
   },
   {
@@ -4721,7 +5022,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        return \"[E][\" + getStatusIcon() + \"] \" + description + (hasTime() ? \" (at: \" + time + \")\": \"\");"
+        "content": "        return \"[E][\" + getStatusIcon() + \"] \" + description + (hasTime() ? \" (at: \" + time + \")\" : \"\");"
       },
       {
         "lineNumber": 21,
@@ -5101,7 +5402,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Returns time of occurrence for event depending on type"
+        "content": "     * Returns time of occurrence for event depending on type."
       },
       {
         "lineNumber": 52,
@@ -5157,7 +5458,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "     * Returns true if event is associated with time, false otherwise"
+        "content": "     * Returns true if event is associated with time, false otherwise."
       },
       {
         "lineNumber": 60,
@@ -5527,7 +5828,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "\u003cAnchorPane maxHeight\u003d\"-Infinity\" maxWidth\u003d\"-Infinity\" minHeight\u003d\"-Infinity\" minWidth\u003d\"-Infinity\" prefHeight\u003d\"600.0\" prefWidth\u003d\"400.0\" xmlns\u003d\"http://javafx.com/javafx/8.0.171\" xmlns:fx\u003d\"http://javafx.com/fxml/1\" fx:controller\u003d\"duke.gui.MainWindow\"\u003e"
+        "content": "\u003cAnchorPane maxHeight\u003d\"-Infinity\" maxWidth\u003d\"-Infinity\" minHeight\u003d\"-Infinity\" minWidth\u003d\"-Infinity\" prefHeight\u003d\"600.0\" prefWidth\u003d\"400.0\" xmlns\u003d\"http://javafx.com/javafx/11.0.1\" xmlns:fx\u003d\"http://javafx.com/fxml/1\" fx:controller\u003d\"duke.gui.MainWindow\"\u003e"
       },
       {
         "lineNumber": 10,
@@ -5541,21 +5842,21 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        \u003cTextField fx:id\u003d\"userInput\" layoutY\u003d\"558.0\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"324.0\" AnchorPane.bottomAnchor\u003d\"1.0\" /\u003e"
+        "content": "        \u003cTextField fx:id\u003d\"userInput\" layoutY\u003d\"558.0\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"324.0\" AnchorPane.bottomAnchor\u003d\"1.0\" AnchorPane.leftAnchor\u003d\"0.0\" AnchorPane.rightAnchor\u003d\"76.0\" AnchorPane.topAnchor\u003d\"558.0\" /\u003e"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        \u003cButton fx:id\u003d\"sendButton\" layoutX\u003d\"324.0\" layoutY\u003d\"558.0\" mnemonicParsing\u003d\"false\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"76.0\" text\u003d\"Send\" /\u003e"
+        "content": "        \u003cButton fx:id\u003d\"sendButton\" layoutX\u003d\"324.0\" layoutY\u003d\"558.0\" mnemonicParsing\u003d\"false\" onAction\u003d\"#handleUserInput\" prefHeight\u003d\"41.0\" prefWidth\u003d\"76.0\" text\u003d\"Send\" AnchorPane.bottomAnchor\u003d\"1.0\" AnchorPane.leftAnchor\u003d\"324.0\" AnchorPane.rightAnchor\u003d\"0.0\" AnchorPane.topAnchor\u003d\"558.0\" /\u003e"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        \u003cScrollPane fx:id\u003d\"scrollPane\" hbarPolicy\u003d\"NEVER\" hvalue\u003d\"1.0\" prefHeight\u003d\"557.0\" prefWidth\u003d\"400.0\" vvalue\u003d\"1.0\"\u003e"
+        "content": "        \u003cScrollPane fx:id\u003d\"scrollPane\" hbarPolicy\u003d\"NEVER\" hvalue\u003d\"1.0\" prefHeight\u003d\"557.0\" prefWidth\u003d\"400.0\" vvalue\u003d\"1.0\" AnchorPane.leftAnchor\u003d\"0.0\" AnchorPane.rightAnchor\u003d\"0.0\"\u003e"
       },
       {
         "lineNumber": 14,
@@ -5634,94 +5935,101 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import static org.junit.jupiter.api.Assertions.*;"
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "import static org.junit.jupiter.api.Assertions.assertTrue;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "class DeadlineTest {"
+        "content": ""
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "class DeadlineTest {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @Test"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    void getTaskIcon() {"
+        "content": "    @Test"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        assertEquals(\"D\", new Deadline(\"Homework\", \"2012-11-11\").getTaskIcon());"
+        "content": "    void getTaskIcon() {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        assertEquals(\"D\", new Deadline(\"Homework\", \"2012-11-11\").getTaskIcon());"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    @Test"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    void hasTime() {"
+        "content": "    @Test"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "        assertTrue(new Deadline(\"Homework\", \"2012-11-11\").hasTime());"
+        "content": "    void hasTime() {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "    }"
+        "content": "        assertTrue(new Deadline(\"Homework\", \"2012-11-11\").hasTime());"
       },
       {
         "lineNumber": 17,
+        "author": {
+          "gitId": "shenghaoc"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
         "author": {
           "gitId": "shenghaoc"
         },
@@ -5729,7 +6037,7 @@
       }
     ],
     "authorContributionMap": {
-      "shenghaoc": 17
+      "shenghaoc": 18
     }
   },
   {
@@ -5762,7 +6070,7 @@
         "author": {
           "gitId": "shenghaoc"
         },
-        "content": "import static org.junit.jupiter.api.Assertions.*;"
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
       },
       {
         "lineNumber": 5,
