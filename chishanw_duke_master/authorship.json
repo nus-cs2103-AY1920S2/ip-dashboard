@@ -503,738 +503,367 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import java.util.Scanner;"
+        "content": "import java.io.File;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import java.io.File;"
+        "content": "import java.io.IOException;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import java.lang.StringBuilder;"
+        "content": ""
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import java.io.IOException;"
+        "content": "import duke.command.Command;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import duke.command.Command;"
+        "content": "import duke.exception.InvalidCommandException;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import duke.exception.InvalidCommandException;"
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": " * Main class for the Duke chatbot application."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "/**"
+        "content": " */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "chishanw"
         },
-        "content": " * Main class for the Duke chatbot application."
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "chishanw"
         },
-        "content": " */"
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "public class Duke {"
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    private TaskList tasks;"
+        "content": "    private String fileName;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    private Storage storage;"
+        "content": "    private Parser parser;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    private String fileName;"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    private Parser parser;"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    private Ui ui;"
+        "content": "    /**"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "     * Constructs a fresh Duke instance with a supplied file storing the task list."
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public Duke() {}"
+        "content": "     * @param fileName Path to the file storing the task list."
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": "    public Duke(String fileName) {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Constructs a fresh Duke instance with a supplied file storing the task list."
+        "content": "        this.fileName \u003d fileName;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param fileName Path to the file storing the task list."
+        "content": "        storage \u003d new Storage(fileName);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": "        tasks \u003d new TaskList(storage.loadTasks());"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public Duke(String fileName) {"
+        "content": "        parser \u003d new Parser();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        this.fileName \u003d fileName;"
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        storage \u003d new Storage(fileName);"
+        "content": "        File file \u003d new File(this.fileName);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        tasks \u003d new TaskList(storage.loadTasks());"
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        parser \u003d new Parser();"
+        "content": "        try {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "            file.createNewFile();"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        File file \u003d new File(this.fileName);"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "            Ui.printLines(\"File creation failed.\");"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        try {"
+        "content": "        }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            file.createNewFile();"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (IOException e) {"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            Ui.printLines(\"File creation failed.\");"
+        "content": "    public String getResponse(String input) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "        assert input.length() \u003e 0 : \"Input cannot be empty\";"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    "
+        "content": "        String result \u003d \"\";"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    // public static void main(String[] args) {"
+        "content": ""
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    //     new Duke(\"src/main/data/tasks.txt\").run();"
+        "content": "            try {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    // }"
+        "content": "                Command command \u003d parser.parseCommand(input);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "                result +\u003d command.execute(tasks, ui, storage);"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    // private void run() {"
+        "content": "            } catch (InvalidCommandException e) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    //     ui.printIntro();"
+        "content": "                result \u003d \"Sorry, invalid command. Try again with the following:\\ntodo, deadline, event\";"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    //     Scanner sc \u003d new Scanner(System.in);"
+        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "                result \u003d \"Sorry, invalid syntax or command. Please try again!\";"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    //     while (sc.hasNextLine()) {"
+        "content": "            }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    //         try {"
+        "content": ""
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    //             String input \u003d sc.nextLine();"
+        "content": "        return result;"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    //             String[] split \u003d input.split(\" \");"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             String command \u003d split[0];"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             if (parser.parseCommand(command, \"list\")) {"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 System.err.println(tasks);"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else if (parser.parseCommand(command, \"bye\")) {"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 ui.printGoodbye();"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 break;"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else if (parser.parseCommand(command, \"delete\")) {"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 int idx \u003d Integer.parseInt(split[1]);"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 tasks.deleteTask(idx - 1);"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 storage.deleteTask(idx);"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else if (parser.parseCommand(command, \"done\")) {"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 int idx \u003d Integer.parseInt(split[1]);"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 tasks.doTask(idx - 1);"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 storage.doTask(idx);"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else if (parser.parseCommand(command, \"find\")) {"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 String results \u003d tasks.findKeyword(input);"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 Ui.printLines(results);"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else if (parser.parseCommand(command, \"todo\")) {"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 tasks.manageTodo(storage, input, fileName);"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else if (parser.parseCommand(command, \"event\")) {"
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 tasks.manageEvent(storage, input, fileName);"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else if (parser.parseCommand(command, \"deadline\")) {"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 tasks.manageDeadline(storage, input, fileName);"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             } else {"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //                 throw new InvalidCommandException();"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             }"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //         } catch (InvalidCommandException e) {"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             Ui.printLines(\"Sorry, invalid command. Try again with the following:\\ntodo, deadline, event\");"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //         } catch (ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //             Ui.printLines(\"Sorry, invalid syntax or command. Please try again!\");"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //         }"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //     }"
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    //     sc.close();"
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    // }"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "    public String getResponse(String input) {"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "        StringBuilder response \u003d new StringBuilder();"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "        String result \u003d \"\";"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "                Command command \u003d parser.parseCommand(input);"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "                result +\u003d command.execute(tasks, ui, storage);"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "            } catch (InvalidCommandException e) {"
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "                result \u003d \"Sorry, invalid command. Try again with the following:\\ntodo, deadline, event\";"
-      },
-      {
-        "lineNumber": 101,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 102,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "                result \u003d \"Sorry, invalid syntax or command. Please try again!\";"
-      },
-      {
-        "lineNumber": 103,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 104,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 105,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "        response.append(result);"
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "chishanw"
-        },
-        "content": "        return response.toString();"
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "chishanw"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 108,
+        "lineNumber": 55,
         "author": {
           "gitId": "-"
         },
@@ -1243,7 +872,7 @@
     ],
     "authorContributionMap": {
       "-": 1,
-      "chishanw": 107
+      "chishanw": 54
     }
   },
   {
@@ -1509,112 +1138,112 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import duke.command.*;"
+        "content": "import duke.command.Command;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "import duke.command.ListCommand;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "import duke.command.ByeCommand;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import java.time.format.DateTimeFormatter;"
+        "content": "import duke.command.DeleteCommand;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "import duke.command.DoneCommand;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "import duke.exception.InvalidCommandException;"
+        "content": "import duke.command.FindCommand;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "import duke.command.UpdateDescriptionCommand;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "/**"
+        "content": "import duke.command.UpdateTimeCommand;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "chishanw"
         },
-        "content": " * Represents a parser to parse commands from input strings."
+        "content": "import duke.command.TodoCommand;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "chishanw"
         },
-        "content": " */"
+        "content": "import duke.command.EventCommand;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "public class Parser {"
+        "content": "import duke.command.DeadlineCommand;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Constructs a fresh Parser instance."
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public Parser() {"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "import duke.exception.InvalidCommandException;"
       },
       {
         "lineNumber": 19,
@@ -1628,182 +1257,182 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": "/**"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Parses the input string into a command."
+        "content": " * Represents a parser to parse commands from input strings."
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param input The given user input."
+        "content": " */"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param command The command to check against."
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @return"
+        "content": "    /**"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": "     * Constructs a fresh Parser instance."
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public Command parseCommand(String input) throws InvalidCommandException {"
+        "content": "     */"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        Command result;"
+        "content": "    public Parser() {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String[] split \u003d input.split(\" \");"
+        "content": "    }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String command \u003d split[0];"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        switch (command) {"
+        "content": "     * Parses the input string into a command."
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"list\":"
+        "content": "     * @param input The given user input."
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new ListCommand(input, false);"
+        "content": "     * @param command The command to check against."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            break;"
+        "content": "     * @return"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        "
+        "content": "     */"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"bye\":"
+        "content": "    public Command parseCommand(String input) throws InvalidCommandException {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new ByeCommand(input, true);"
+        "content": "        Command result \u003d new ByeCommand(input, true);"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            break;"
+        "content": "        String[] split \u003d input.split(\" \");"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        String command \u003d split[0];"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"delete\":"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new DeleteCommand(input, false);"
+        "content": "        assert split.length \u003e 1 : \"User input minimally must consist of one command and another argument\";"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            break;"
+        "content": ""
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        switch (command) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"done\":"
+        "content": "        case \"list\":"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new DoneCommand(input, false);"
+        "content": "            result \u003d new ListCommand(input, false);"
       },
       {
         "lineNumber": 46,
@@ -1817,21 +1446,21 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        "
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"find\":"
+        "content": "        case \"bye\":"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new FindCommand(input, false);"
+        "content": "            result \u003d new ByeCommand(input, true);"
       },
       {
         "lineNumber": 50,
@@ -1852,14 +1481,14 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"todo\":"
+        "content": "        case \"delete\":"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new TodoCommand(input, false);"
+        "content": "            result \u003d new DeleteCommand(input, false);"
       },
       {
         "lineNumber": 54,
@@ -1880,14 +1509,14 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"event\":"
+        "content": "        case \"done\":"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new EventCommand(input, false);"
+        "content": "            result \u003d new DoneCommand(input, false);"
       },
       {
         "lineNumber": 58,
@@ -1908,14 +1537,14 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        case \"deadline\":"
+        "content": "        case \"find\":"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result \u003d new DeadlineCommand(input, false);"
+        "content": "            result \u003d new FindCommand(input, false);"
       },
       {
         "lineNumber": 62,
@@ -1936,367 +1565,514 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        default:"
+        "content": "        case \"update\" :"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            throw new InvalidCommandException();"
+        "content": "            String secondCommand \u003d split[1];"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "            if (secondCommand.compareTo(\"description\") \u003d\u003d 0) {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "                result \u003d new UpdateDescriptionCommand(input, false);"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return result;"
+        "content": "            } else if (secondCommand.compareTo(\"time\") \u003d\u003d 0) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "                result \u003d new UpdateTimeCommand(input, false);"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "            }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": "            break;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Parses the input string into the right date and time format."
+        "content": ""
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param time The given user input."
+        "content": "        case \"todo\":"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @return The reformatted string."
+        "content": "            result \u003d new TodoCommand(input, false);"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": "            break;"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public static String reformatDateAndTime(String time) {"
+        "content": ""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String result \u003d \"\";"
+        "content": "        case \"event\":"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String dateRegex \u003d \"\\\\d{4}-\\\\d{2}-\\\\d{2}\";"
+        "content": "            result \u003d new EventCommand(input, false);"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String timeRegex \u003d \"([0-1][0-9]|2[0-3])[0-5][0-9]\";"
+        "content": "            break;"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String[] split \u003d time.split(\" \");"
+        "content": ""
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        for (String str : split) {"
+        "content": "        case \"deadline\":"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            Boolean dateMatches \u003d str.matches(dateRegex);"
+        "content": "            result \u003d new DeadlineCommand(input, false);"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            Boolean timeMatches \u003d str.matches(timeRegex);"
+        "content": "            break;"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            if (dateMatches) {"
+        "content": ""
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                result +\u003d parseDate(str) + \" \";"
+        "content": "        default:"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            } else if (timeMatches) {"
+        "content": "            throw new InvalidCommandException();"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                result +\u003d parseTime(str) + \" \";"
+        "content": "        }"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            } else {"
+        "content": ""
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                result +\u003d str + \" \";"
+        "content": "        return result;"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            }"
+        "content": "    }"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return result.trim();"
+        "content": "    /**"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "     * Parses the input string into the right date and time format."
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "     * @param time The given user input."
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    private static String parseDate(String date) {"
+        "content": "     * @return The reformatted string."
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        LocalDate localDate \u003d LocalDate.parse(date);"
+        "content": "     */"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String result \u003d localDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+        "content": "    public static String reformatDateAndTime(String time) {"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return result;"
+        "content": "        String result \u003d \"\";"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "        String dateRegex \u003d \"\\\\d{4}-\\\\d{2}-\\\\d{2}\";"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        String timeRegex \u003d \"([0-1][0-9]|2[0-3])[0-5][0-9]\";"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    private static String parseTime(String time) {"
+        "content": "        String[] split \u003d time.split(\" \");"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String result \u003d \"\";"
+        "content": "        for (String str : split) {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        int hour \u003d Integer.parseInt(time.substring(0,2));"
+        "content": "            Boolean dateMatches \u003d str.matches(dateRegex);"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String minutes \u003d time.substring(2);"
+        "content": "            Boolean timeMatches \u003d str.matches(timeRegex);"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        if (hour \u003c\u003d 12) {"
+        "content": "            if (dateMatches) {"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result +\u003d hour;"
+        "content": "                result +\u003d parseDate(str) + \" \";"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result +\u003d \":\" + minutes;"
+        "content": "            } else if (timeMatches) {"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } else {"
+        "content": "                result +\u003d parseTime(str) + \" \";"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result +\u003d hour - 12;"
+        "content": "            } else {"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result +\u003d \":\" + minutes;"
+        "content": "                result +\u003d str + \" \";"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        result +\u003d hour \u003c 12 ? \"am\" : \"pm\";"
+        "content": "        return result.trim();"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return result;"
+        "content": "    }"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    } "
+        "content": ""
       },
       {
         "lineNumber": 116,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    private static String parseDate(String date) {"
+      },
+      {
+        "lineNumber": 117,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        LocalDate localDate \u003d LocalDate.parse(date);"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        String result \u003d localDate.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 122,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    private static String parseTime(String time) {"
+      },
+      {
+        "lineNumber": 123,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        String result \u003d \"\";"
+      },
+      {
+        "lineNumber": 124,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        int hour \u003d Integer.parseInt(time.substring(0,2));"
+      },
+      {
+        "lineNumber": 125,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        String minutes \u003d time.substring(2);"
+      },
+      {
+        "lineNumber": 126,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        if (hour \u003c\u003d 12) {"
+      },
+      {
+        "lineNumber": 127,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            result +\u003d hour;"
+      },
+      {
+        "lineNumber": 128,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            result +\u003d \":\" + minutes;"
+      },
+      {
+        "lineNumber": 129,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 130,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            result +\u003d hour - 12;"
+      },
+      {
+        "lineNumber": 131,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            result +\u003d \":\" + minutes;"
+      },
+      {
+        "lineNumber": 132,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 133,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 134,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        result +\u003d hour \u003c 12 ? \"am\" : \"pm\";"
+      },
+      {
+        "lineNumber": 135,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 136,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    } "
+      },
+      {
+        "lineNumber": 137,
         "author": {
           "gitId": "chishanw"
         },
@@ -2304,7 +2080,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 116
+      "chishanw": 137
     }
   },
   {
@@ -3380,11 +3156,627 @@
         "author": {
           "gitId": "chishanw"
         },
+        "content": ""
+      },
+      {
+        "lineNumber": 154,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public void updateDescription(int idx, String input) {"
+      },
+      {
+        "lineNumber": 155,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        File originalFile \u003d new File(this.fileName);"
+      },
+      {
+        "lineNumber": 156,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        File tempFile \u003d new File(\"src/main/data/temp.txt\");"
+      },
+      {
+        "lineNumber": 157,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 158,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 159,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            FileWriter fw \u003d new FileWriter(\"src/main/data/temp.txt\", false);"
+      },
+      {
+        "lineNumber": 160,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            Scanner sc \u003d new Scanner(originalFile);"
+      },
+      {
+        "lineNumber": 161,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            int i \u003d 1;"
+      },
+      {
+        "lineNumber": 162,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 163,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            while (sc.hasNext()) {"
+      },
+      {
+        "lineNumber": 164,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                if (i \u003d\u003d idx) {"
+      },
+      {
+        "lineNumber": 165,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String originalTask \u003d sc.nextLine();"
+      },
+      {
+        "lineNumber": 166,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String[] splitTask \u003d originalTask.split(\"~\");"
+      },
+      {
+        "lineNumber": 167,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 168,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    int newDescriptionIndex \u003d input.indexOf(\"\" + idx);"
+      },
+      {
+        "lineNumber": 169,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String newDescription \u003d input.substring(newDescriptionIndex + 2);"
+      },
+      {
+        "lineNumber": 170,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 171,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    splitTask[2] \u003d newDescription;"
+      },
+      {
+        "lineNumber": 172,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String modifiedTask \u003d \"\";"
+      },
+      {
+        "lineNumber": 173,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    for (int j \u003d 0; j \u003c splitTask.length; j++) {"
+      },
+      {
+        "lineNumber": 174,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                        modifiedTask +\u003d splitTask[j];"
+      },
+      {
+        "lineNumber": 175,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                        if (j !\u003d splitTask.length -1) {"
+      },
+      {
+        "lineNumber": 176,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                            modifiedTask +\u003d \"~\";"
+      },
+      {
+        "lineNumber": 177,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 178,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 179,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    fw.write(modifiedTask + \"\\n\");"
+      },
+      {
+        "lineNumber": 180,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                } else {"
+      },
+      {
+        "lineNumber": 181,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    fw.write(sc.nextLine() + \"\\n\");"
+      },
+      {
+        "lineNumber": 182,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 183,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                i++;"
+      },
+      {
+        "lineNumber": 184,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 185,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            sc.close();"
+      },
+      {
+        "lineNumber": 186,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            fw.close();"
+      },
+      {
+        "lineNumber": 187,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 188,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            originalFile.delete();"
+      },
+      {
+        "lineNumber": 189,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "      "
+      },
+      {
+        "lineNumber": 190,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            tempFile.renameTo(originalFile);"
+      },
+      {
+        "lineNumber": 191,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } catch (FileNotFoundException e) {"
+      },
+      {
+        "lineNumber": 192,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            Ui.printLines(\"File not found. Try again!\");"
+      },
+      {
+        "lineNumber": 193,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 194,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            Ui.printLines(\"IOException\");"
+      },
+      {
+        "lineNumber": 195,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 196,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 197,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 198,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public void updateTime(int idx, String input) {"
+      },
+      {
+        "lineNumber": 199,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        File originalFile \u003d new File(this.fileName);"
+      },
+      {
+        "lineNumber": 200,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        File tempFile \u003d new File(\"src/main/data/temp.txt\");"
+      },
+      {
+        "lineNumber": 201,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 202,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 203,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            FileWriter fw \u003d new FileWriter(\"src/main/data/temp.txt\", false);"
+      },
+      {
+        "lineNumber": 204,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            Scanner sc \u003d new Scanner(originalFile);"
+      },
+      {
+        "lineNumber": 205,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            int i \u003d 1;"
+      },
+      {
+        "lineNumber": 206,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 207,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            while (sc.hasNext()) {"
+      },
+      {
+        "lineNumber": 208,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                if (i \u003d\u003d idx) {"
+      },
+      {
+        "lineNumber": 209,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String originalTask \u003d sc.nextLine();"
+      },
+      {
+        "lineNumber": 210,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String[] splitTask \u003d originalTask.split(\"~\");"
+      },
+      {
+        "lineNumber": 211,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 212,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    int newTimeIndex \u003d input.indexOf(\"\" + idx);"
+      },
+      {
+        "lineNumber": 213,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String newTime \u003d Parser.reformatDateAndTime(input.substring(newTimeIndex+ 2));"
+      },
+      {
+        "lineNumber": 214,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 215,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    splitTask[3] \u003d newTime;"
+      },
+      {
+        "lineNumber": 216,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    String modifiedTask \u003d \"\";"
+      },
+      {
+        "lineNumber": 217,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    for (int j \u003d 0; j \u003c splitTask.length; j++) {"
+      },
+      {
+        "lineNumber": 218,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                        modifiedTask +\u003d splitTask[j];"
+      },
+      {
+        "lineNumber": 219,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                        if (j !\u003d splitTask.length -1) {"
+      },
+      {
+        "lineNumber": 220,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                            modifiedTask +\u003d \"~\";"
+      },
+      {
+        "lineNumber": 221,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                        }"
+      },
+      {
+        "lineNumber": 222,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    }"
+      },
+      {
+        "lineNumber": 223,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    fw.write(modifiedTask + \"\\n\");"
+      },
+      {
+        "lineNumber": 224,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                } else {"
+      },
+      {
+        "lineNumber": 225,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                    fw.write(sc.nextLine() + \"\\n\");"
+      },
+      {
+        "lineNumber": 226,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                }"
+      },
+      {
+        "lineNumber": 227,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                i++;"
+      },
+      {
+        "lineNumber": 228,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 229,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            sc.close();"
+      },
+      {
+        "lineNumber": 230,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            fw.close();"
+      },
+      {
+        "lineNumber": 231,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 232,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            originalFile.delete();"
+      },
+      {
+        "lineNumber": 233,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "      "
+      },
+      {
+        "lineNumber": 234,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            tempFile.renameTo(originalFile);"
+      },
+      {
+        "lineNumber": 235,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } catch (FileNotFoundException e) {"
+      },
+      {
+        "lineNumber": 236,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            Ui.printLines(\"File not found. Try again!\");"
+      },
+      {
+        "lineNumber": 237,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 238,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            Ui.printLines(\"IOException\");"
+      },
+      {
+        "lineNumber": 239,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 240,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 241,
+        "author": {
+          "gitId": "chishanw"
+        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "chishanw": 153
+      "chishanw": 241
     }
   },
   {
@@ -3613,87 +4005,101 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        StringBuilder result \u003d new StringBuilder();"
+        "content": "        assert content.length() !\u003d 0 : \"Content should not be empty.\";"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        "
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        result.append(\"    ____________________________________________________________\");"
+        "content": "        StringBuilder result \u003d new StringBuilder();"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String[] split \u003d content.split(\"\\\\r?\\\\n\");"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        for (String str : split) {"
+        "content": "        result.append(\"    ____________________________________________________________\");"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result.append(\"\\n\" + \"     \");"
+        "content": "        String[] split \u003d content.split(\"\\\\r?\\\\n\");"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result.append(str);"
+        "content": "        for (String str : split) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "            result.append(\"\\n\" + \"     \");"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        result.append(\"    ____________________________________________________________\");"
+        "content": "            result.append(str);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return result.toString();"
+        "content": "        result.append(\"    ____________________________________________________________\");"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 44,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return result.toString();"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
         "author": {
           "gitId": "chishanw"
         },
@@ -3701,7 +4107,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 44
+      "chishanw": 46
     }
   },
   {
@@ -4812,6 +5218,276 @@
     ],
     "authorContributionMap": {
       "chishanw": 15
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/UpdateDescriptionCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "public class UpdateDescriptionCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public UpdateDescriptionCommand(String input, boolean isExit) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        super(input, isExit);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        String[] split \u003d this.input.split(\" \");"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        int idx \u003d Integer.parseInt(split[2]);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        storage.updateDescription(idx, input);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return tasks.updateDescription(idx - 1, input);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "chishanw": 18
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/UpdateTimeCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "import duke.Ui;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "import duke.Storage;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "public class UpdateTimeCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public UpdateTimeCommand(String input, boolean isExit) {"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        super(input, isExit);"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public String execute(TaskList tasks, Ui ui, Storage storage) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        String[] split \u003d this.input.split(\" \");"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        int idx \u003d Integer.parseInt(split[2]);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        storage.updateTime(idx, input);"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return tasks.updateTime(idx - 1, input);"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "chishanw": 18
     }
   },
   {
@@ -6149,87 +6825,115 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    @Override"
+        "content": "    public void setTime(String newTime) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public String toString() {"
+        "content": "        this.time \u003d newTime;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String str \u003d \"[D]\";"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        if (this.isDone) {"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            str +\u003d \"[O] \";"
+        "content": "    @Override"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } else {"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            str +\u003d \"[X] \";"
+        "content": "        String str \u003d \"[D]\";"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "        if (this.isDone) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        str +\u003d this.description;"
+        "content": "            str +\u003d \"[O] \";"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        str +\u003d \" (by: \" + this.time + \")\";"
+        "content": "        } else {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return str;"
+        "content": "            str +\u003d \"[X] \";"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 41,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        str +\u003d this.description;"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        str +\u003d \" (by: \" + this.time + \")\";"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return str;"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
         "author": {
           "gitId": "chishanw"
         },
@@ -6237,7 +6941,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 41
+      "chishanw": 45
     }
   },
   {
@@ -6445,87 +7149,115 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    @Override"
+        "content": "    public void setTime(String newTime) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public String toString() {"
+        "content": "        this.time \u003d newTime;"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String str \u003d \"[E]\";"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        if (this.isDone) {"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            str +\u003d \"[O] \";"
+        "content": "    @Override"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } else {"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            str +\u003d \"[X] \";"
+        "content": "        String str \u003d \"[E]\";"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "        if (this.isDone) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        str +\u003d this.description;"
+        "content": "            str +\u003d \"[O] \";"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        str +\u003d \" (at: \" + this.time + \")\";"
+        "content": "        } else {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return str;"
+        "content": "            str +\u003d \"[X] \";"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 41,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        str +\u003d this.description;"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        str +\u003d \" (at: \" + this.time + \")\";"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return str;"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 45,
         "author": {
           "gitId": "chishanw"
         },
@@ -6533,7 +7265,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 41
+      "chishanw": 45
     }
   },
   {
@@ -6587,7 +7319,7 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "public class Task {"
+        "content": "public abstract class Task {"
       },
       {
         "lineNumber": 8,
@@ -6825,52 +7557,94 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": "    public void setDescription(String newDescription) {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Sets the task as done."
+        "content": "        this.description \u003d newDescription;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param isDone A boolean marking the task as done or not."
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public void setIsDone(boolean isDone) {"
+        "content": "    public abstract void setTime(String newTime);"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        this.isDone \u003d isDone;"
+        "content": ""
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 48,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "     * Sets the task as done."
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "     * @param isDone A boolean marking the task as done or not."
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public void setIsDone(boolean isDone) {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        this.isDone \u003d isDone;"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 54,
         "author": {
           "gitId": "chishanw"
         },
@@ -6878,7 +7652,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 48
+      "chishanw": 54
     }
   },
   {
@@ -7541,273 +8315,273 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": "    public String updateDescription(int idx, String input) {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Manages a Todo task by parsing user input and storing it into the task list."
+        "content": "        try {"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param storage The Storage instance used to write the task into the task list file."
+        "content": "            Task task \u003d this.tasks.get(idx);"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param input The given user input."
+        "content": "            int newDescriptionIndex \u003d input.indexOf(\"\" + (idx + 1));"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param fileName The path to the task list file."
+        "content": "            String newDescription \u003d input.substring(newDescriptionIndex + 2);"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": "            task.setDescription(newDescription);"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public String manageTodo(Storage storage, String input, String fileName) {"
+        "content": "            return \"Noted. I\u0027ve updated this task:\\n\""
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        try {"
+        "content": "                + task.toString();"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            if (input.split(\" \").length \u003d\u003d 1) {"
+        "content": "        } catch (IndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                throw new EmptyDescriptionException(\"todo\");"
+        "content": "            return (\"Task index is invalid. Try again!\");"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            } else {"
+        "content": "        }"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String description \u003d input.substring(input.indexOf(\" \") + 1);"
+        "content": "    }"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                Todo todo \u003d new Todo(description, false);"
+        "content": ""
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "    public String updateTime(int idx, String input) {"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String result \u003d \"T~0~\" + description;"
+        "content": "        try {"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                storage.writeToFile(fileName, result);"
+        "content": "            Task task \u003d this.tasks.get(idx);"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "            int newTimeIndex \u003d input.indexOf(\"\" + (idx + 1));"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                return (addTask(todo));"
+        "content": "            String newTime \u003d Parser.reformatDateAndTime(input.substring(newTimeIndex + 2));"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            }"
+        "content": "            task.setTime(newTime);"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (EmptyDescriptionException e) {"
+        "content": "            return \"Noted. I\u0027ve updated this task:\\n\""
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            return (\"Oops! The description of a \" + e.getMessage() + \" cannot be empty.\");"
+        "content": "                + newTime;"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "        } catch (IndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "            return (\"Task index is invalid. Try again!\");"
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Manages an Event task by parsing user input and storing it into the task list."
+        "content": ""
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param storage The Storage instance used to write the task into the task list file."
+        "content": "    /**"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param input The given user input."
+        "content": "     * Manages a Todo task by parsing user input and storing it into the task list."
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param fileName The path to the task list file."
+        "content": "     * @param storage The Storage instance used to write the task into the task list file."
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": "     * @param input The given user input."
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public String manageEvent(Storage storage, String input, String fileName) {"
+        "content": "     * @param fileName The path to the task list file."
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            if (input.split(\" \").length \u003d\u003d 1) {"
+        "content": "    public String manageTodo(Storage storage, String input, String fileName) {"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                throw new EmptyDescriptionException(\"event\");"
+        "content": "        try {"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            } else {"
+        "content": "            if (input.split(\" \").length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String description \u003d input.substring(input.indexOf(\" \") + 1, input.indexOf(\"/\") - 1);"
+        "content": "                throw new EmptyDescriptionException(\"todo\");"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "            } else {"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String remaining \u003d input.substring(input.indexOf(\"/\") + 1);"
+        "content": "                String description \u003d input.substring(input.indexOf(\" \") + 1);"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String[] split \u003d remaining.split(\" \");"
+        "content": "                Todo todo \u003d new Todo(description, false);"
       },
       {
         "lineNumber": 133,
@@ -7821,514 +8595,696 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                if (split[0].compareTo(\"at\") \u003d\u003d 0) {"
+        "content": "                String result \u003d \"T~0~\" + description;"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    String time \u003d Parser.reformatDateAndTime(input.substring(input.indexOf(\"/\") + 4));"
+        "content": "                storage.writeToFile(fileName, result);"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    Event event \u003d new Event(description, false, time);"
+        "content": ""
       },
       {
         "lineNumber": 137,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    String result \u003d \"E~0~\" + description + \"~\" + time;"
+        "content": "                return (addTask(todo));"
       },
       {
         "lineNumber": 138,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    storage.writeToFile(fileName, result);"
+        "content": "            }"
       },
       {
         "lineNumber": 139,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        } catch (EmptyDescriptionException e) {"
       },
       {
         "lineNumber": 140,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    return addTask(event);"
+        "content": "            return (\"Oops! The description of a \" + e.getMessage() + \" cannot be empty.\");"
       },
       {
         "lineNumber": 141,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                } else {"
+        "content": "        }"
       },
       {
         "lineNumber": 142,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    throw new InvalidTimeFormatException();"
+        "content": "    }"
       },
       {
         "lineNumber": 143,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                }"
+        "content": ""
       },
       {
         "lineNumber": 144,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            }"
+        "content": "    /**"
       },
       {
         "lineNumber": 145,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (EmptyDescriptionException e) {"
+        "content": "     * Manages an Event task by parsing user input and storing it into the task list."
       },
       {
         "lineNumber": 146,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            return \"Oops! The description of an \" + e.getMessage() + \" cannot be empty.\";"
+        "content": "     * @param storage The Storage instance used to write the task into the task list file."
       },
       {
         "lineNumber": 147,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (InvalidTimeFormatException e) {"
+        "content": "     * @param input The given user input."
       },
       {
         "lineNumber": 148,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            return \"Your time format is incorrect. Try: /at yyyy-mm-dd 2300\";"
+        "content": "     * @param fileName The path to the task list file."
       },
       {
         "lineNumber": 149,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "     */"
       },
       {
         "lineNumber": 150,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            return \"Sorry, invalid syntax or command. Please try again!\";"
+        "content": "    public String manageEvent(Storage storage, String input, String fileName) {"
       },
       {
         "lineNumber": 151,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "        try {"
       },
       {
         "lineNumber": 152,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "            if (input.split(\" \").length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 153,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "                throw new EmptyDescriptionException(\"event\");"
       },
       {
         "lineNumber": 154,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    /**"
+        "content": "            } else {"
       },
       {
         "lineNumber": 155,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * Manages a Deadline task by parsing user input and storing it into the task list."
+        "content": "                String description \u003d input.substring(input.indexOf(\" \") + 1, input.indexOf(\"/\") - 1);"
       },
       {
         "lineNumber": 156,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param storage The Storage instance used to write the task into the task list file."
+        "content": ""
       },
       {
         "lineNumber": 157,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param input The given user input."
+        "content": "                String remaining \u003d input.substring(input.indexOf(\"/\") + 1);"
       },
       {
         "lineNumber": 158,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     * @param fileName The path to the task list file."
+        "content": "                String[] split \u003d remaining.split(\" \");"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public String manageDeadline(Storage storage, String input, String fileName) {"
+        "content": "                if (split[0].compareTo(\"at\") \u003d\u003d 0) {"
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        try {"
+        "content": "                    String time \u003d Parser.reformatDateAndTime(input.substring(input.indexOf(\"/\") + 4));"
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            if (input.split(\" \").length \u003d\u003d 1) {"
+        "content": "                    Event event \u003d new Event(description, false, time);"
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                throw new EmptyDescriptionException(\"deadline\");"
+        "content": "                    String result \u003d \"E~0~\" + description + \"~\" + time;"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            } else {"
+        "content": "                    storage.writeToFile(fileName, result);"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String description \u003d input.substring(input.indexOf(\" \") + 1, input.indexOf(\"/\") - 1);"
+        "content": ""
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                "
+        "content": "                    return addTask(event);"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String remaining \u003d input.substring(input.indexOf(\"/\") + 1);"
+        "content": "                } else {"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                String[] split \u003d remaining.split(\" \");"
+        "content": "                    throw new InvalidTimeFormatException();"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "                }"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                if (split[0].compareTo(\"by\") \u003d\u003d 0) {"
+        "content": "            }"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    String time \u003d Parser.reformatDateAndTime(input.substring(input.indexOf(\"/\") + 4));"
+        "content": "        } catch (EmptyDescriptionException e) {"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    Deadline deadline \u003d new Deadline(description, false, time);"
+        "content": "            return \"Oops! The description of an \" + e.getMessage() + \" cannot be empty.\";"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    String result \u003d \"D~0~\" + description + \"~\" + time;"
+        "content": "        } catch (InvalidTimeFormatException e) {"
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    storage.writeToFile(fileName, result);"
+        "content": "            return \"Your time format is incorrect. Try: /at yyyy-mm-dd 2300\";"
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "        } catch (Exception e) {"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    return addTask(deadline);"
+        "content": "            return \"Sorry, invalid syntax or command. Please try again!\";"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                } else {"
+        "content": "        }"
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                    throw new InvalidTimeFormatException();"
+        "content": "    }"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                }"
+        "content": ""
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            }"
+        "content": "    /**"
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (EmptyDescriptionException e) {"
+        "content": "     * Manages a Deadline task by parsing user input and storing it into the task list."
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            return \"Oops! The description of a \" + e.getMessage() + \" cannot be empty.\";"
+        "content": "     * @param storage The Storage instance used to write the task into the task list file."
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (InvalidTimeFormatException e) {"
+        "content": "     * @param input The given user input."
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            return \"Your time format is incorrect. Try: /by [time]\";"
+        "content": "     * @param fileName The path to the task list file."
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } catch (Exception e) {"
+        "content": "     */"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            return \"Sorry, invalid syntax or command. Please try again!\";"
+        "content": "    public String manageDeadline(Storage storage, String input, String fileName) {"
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "        try {"
       },
       {
         "lineNumber": 188,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "            if (input.split(\" \").length \u003d\u003d 1) {"
       },
       {
         "lineNumber": 189,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "                throw new EmptyDescriptionException(\"deadline\");"
       },
       {
         "lineNumber": 190,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    @Override"
+        "content": "            } else {"
       },
       {
         "lineNumber": 191,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public String toString() {"
+        "content": "                String description \u003d input.substring(input.indexOf(\" \") + 1, input.indexOf(\"/\") - 1);"
       },
       {
         "lineNumber": 192,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String result \u003d \"\";"
+        "content": "                "
       },
       {
         "lineNumber": 193,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        if (this.tasks.isEmpty()) {"
+        "content": "                String remaining \u003d input.substring(input.indexOf(\"/\") + 1);"
       },
       {
         "lineNumber": 194,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result +\u003d \"Sorry, your list is currently empty!\";"
+        "content": "                String[] split \u003d remaining.split(\" \");"
       },
       {
         "lineNumber": 195,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 196,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        for (int i \u003d 0; i \u003c this.tasks.size(); i++) {"
+        "content": "                if (split[0].compareTo(\"by\") \u003d\u003d 0) {"
       },
       {
         "lineNumber": 197,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            Task task \u003d this.tasks.get(i);"
+        "content": "                    String time \u003d Parser.reformatDateAndTime(input.substring(input.indexOf(\"/\") + 4));"
       },
       {
         "lineNumber": 198,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            String str \u003d (i + 1) + \".\" + task.toString();"
+        "content": "                    Deadline deadline \u003d new Deadline(description, false, time);"
       },
       {
         "lineNumber": 199,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            result +\u003d str;"
+        "content": "                    String result \u003d \"D~0~\" + description + \"~\" + time;"
       },
       {
         "lineNumber": 200,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "                    storage.writeToFile(fileName, result);"
       },
       {
         "lineNumber": 201,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            if (i !\u003d this.tasks.size() - 1) {"
+        "content": ""
       },
       {
         "lineNumber": 202,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "                result +\u003d \"\\n\";"
+        "content": "                    return addTask(deadline);"
       },
       {
         "lineNumber": 203,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            }"
+        "content": "                } else {"
       },
       {
         "lineNumber": 204,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "                    throw new InvalidTimeFormatException();"
       },
       {
         "lineNumber": 205,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return result;"
+        "content": "                }"
       },
       {
         "lineNumber": 206,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "            }"
       },
       {
         "lineNumber": 207,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } catch (EmptyDescriptionException e) {"
+      },
+      {
+        "lineNumber": 208,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            return \"Oops! The description of a \" + e.getMessage() + \" cannot be empty.\";"
+      },
+      {
+        "lineNumber": 209,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } catch (InvalidTimeFormatException e) {"
+      },
+      {
+        "lineNumber": 210,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            return \"Your time format is incorrect. Try: /by [time]\";"
+      },
+      {
+        "lineNumber": 211,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        } catch (Exception e) {"
+      },
+      {
+        "lineNumber": 212,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            return \"Sorry, invalid syntax or command. Please try again!\";"
+      },
+      {
+        "lineNumber": 213,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 214,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 215,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 216,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 217,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 218,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        String result \u003d \"\";"
+      },
+      {
+        "lineNumber": 219,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        if (this.tasks.isEmpty()) {"
+      },
+      {
+        "lineNumber": 220,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            result +\u003d \"Sorry, your list is currently empty!\";"
+      },
+      {
+        "lineNumber": 221,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 222,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        for (int i \u003d 0; i \u003c this.tasks.size(); i++) {"
+      },
+      {
+        "lineNumber": 223,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            Task task \u003d this.tasks.get(i);"
+      },
+      {
+        "lineNumber": 224,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            String str \u003d (i + 1) + \".\" + task.toString();"
+      },
+      {
+        "lineNumber": 225,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            result +\u003d str;"
+      },
+      {
+        "lineNumber": 226,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 227,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            if (i !\u003d this.tasks.size() - 1) {"
+      },
+      {
+        "lineNumber": 228,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "                result +\u003d \"\\n\";"
+      },
+      {
+        "lineNumber": 229,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 230,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 231,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 232,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 233,
         "author": {
           "gitId": "chishanw"
         },
@@ -8336,7 +9292,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 207
+      "chishanw": 233
     }
   },
   {
@@ -8460,80 +9416,101 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    @Override"
+        "content": "    public void setTime(String newTime) {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    public String toString() {"
+        "content": "    }"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        String str \u003d \"[T]\";"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        if (this.isDone) {"
+        "content": "    @Override"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            str +\u003d \"[O] \";"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        } else {"
+        "content": "        String str \u003d \"[T]\";"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "            str +\u003d \"[X] \";"
+        "content": "        if (this.isDone) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        }"
+        "content": "            str +\u003d \"[O] \";"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        str +\u003d this.description;"
+        "content": "        } else {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        return str;"
+        "content": "            str +\u003d \"[X] \";"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 28,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        str +\u003d this.description;"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "        return str;"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
         "author": {
           "gitId": "chishanw"
         },
@@ -8541,7 +9518,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 28
+      "chishanw": 31
     }
   },
   {
@@ -8814,52 +9791,66 @@
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    \u003cScrollPane fx:id\u003d\"scrollPane\" fitToHeight\u003d\"true\" fitToWidth\u003d\"true\" hbarPolicy\u003d\"NEVER\" hvalue\u003d\"1.0\" pannable\u003d\"true\" prefHeight\u003d\"557.0\" prefWidth\u003d\"400.0\" vvalue\u003d\"1.0\"\u003e"
+        "content": "    \u003cScrollPane fx:id\u003d\"scrollPane\" fitToHeight\u003d\"true\" fitToWidth\u003d\"true\" hbarPolicy\u003d\"NEVER\" "
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "      \u003ccontent\u003e"
+        "content": "    hvalue\u003d\"1.0\" pannable\u003d\"true\" prefHeight\u003d\"557.0\" prefWidth\u003d\"400.0\" vvalue\u003d\"1.0\"\u003e"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "        \u003cVBox fx:id\u003d\"dialogContainer\" maxHeight\u003d\"1.7976931348623157E308\" maxWidth\u003d\"1.7976931348623157E308\" minHeight\u003d\"-Infinity\" minWidth\u003d\"-Infinity\" prefWidth\u003d\"388.0\" /\u003e"
+        "content": "      \u003ccontent\u003e"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "      \u003c/content\u003e"
+        "content": "        \u003cVBox fx:id\u003d\"dialogContainer\" maxHeight\u003d\"1.7976931348623157E308\" maxWidth\u003d\"1.7976931348623157E308\" "
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "    \u003c/ScrollPane\u003e"
+        "content": "        minHeight\u003d\"-Infinity\" minWidth\u003d\"-Infinity\" prefWidth\u003d\"388.0\" /\u003e"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "chishanw"
         },
-        "content": ""
+        "content": "      \u003c/content\u003e"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "chishanw"
         },
-        "content": "  \u003c/children\u003e"
+        "content": "    \u003c/ScrollPane\u003e"
       },
       {
         "lineNumber": 28,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "chishanw"
+        },
+        "content": "  \u003c/children\u003e"
+      },
+      {
+        "lineNumber": 30,
         "author": {
           "gitId": "chishanw"
         },
@@ -8867,7 +9858,7 @@
       }
     ],
     "authorContributionMap": {
-      "chishanw": 28
+      "chishanw": 30
     }
   },
   {
