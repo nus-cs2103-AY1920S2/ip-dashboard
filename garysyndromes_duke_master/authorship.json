@@ -648,7 +648,7 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "2. "
+        "content": "2. The `jar` file, which can be found [here](https://github.com/garysyndromes/duke/releases)"
       },
       {
         "lineNumber": 33,
@@ -3654,35 +3654,35 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * Constructor for main class for the program to be run on the command line."
+        "content": "     * Constructor for main class for the program to be run"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     *"
+        "content": "     * String filePath relative path of the file that the data of to do list is saved in."
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * @param filePath relative path of the file that the data of to do list is saved in."
+        "content": "     */"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     */"
+        "content": "    public Duke() {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public Duke(String filePath) {"
+        "content": "        String filePath \u003d \"./data/duke.txt\";"
       },
       {
         "lineNumber": 21,
@@ -3829,885 +3829,703 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * Constructor for GUI."
+        "content": "     * Main driver for Duke program."
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * String filePath relative path of the file that the data of to do list is saved in."
+        "content": "     */"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     */"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public Duke() {"
+        "content": "        ui.welcomeMessage();"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        String filePath \u003d \"./data/duke.txt\";"
+        "content": "        tasks.showCurrentTasks();"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        ui \u003d new Ui();"
+        "content": "        ui.showLineBreak();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        storage \u003d new Storage(filePath);"
+        "content": "        boolean isFinished \u003d false;"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        try {"
+        "content": "        while (!(isFinished)) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            tasks \u003d new TaskList(storage.load());"
+        "content": "            String inputFromUser \u003d ui.handleInput();"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "            Command c \u003d Parser.parse(inputFromUser);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            ui.showLoadingError();"
+        "content": "            if (c \u003d\u003d null) {"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            File file \u003d new File(\"data\");"
+        "content": "                System.out.println(\"Input something into me!\");"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            if (!file.exists()) {"
+        "content": "            }"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                new File(\"data\").mkdir();"
+        "content": "            tasks.runCommand(c);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": "            if (c.getCommand().equals(\"bye\")) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            try {"
+        "content": "                isFinished \u003d true;"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                new File(filePath).createNewFile();"
+        "content": "            }"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            } catch (IOException IoError) {"
+        "content": "            this.storage.save(tasks);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                System.out.println(\"Error in creating new file duke.txt \" + IoError.getMessage());"
+        "content": "        }"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": "        ui.terminateMessage();"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            tasks \u003d new TaskList();"
+        "content": "    }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "     * Shows the welcome message for the GUI."
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "     *"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "     * @return String Welcome Message in the GUI."
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 68,
         "author": {
-          "gitId": "garysyndromes"
+          "gitId": "-"
         },
-        "content": "     * Main driver for Duke program."
+        "content": "    //@@author garysyndromes-reused"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     */"
+        "content": "    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public void run() {"
+        "content": "    public String getWelcomeMessage() {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        ui.welcomeMessage();"
+        "content": "        // Create a stream to hold the output"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        tasks.showCurrentTasks();"
+        "content": "        ByteArrayOutputStream baos \u003d new ByteArrayOutputStream();"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        ui.showLineBreak();"
+        "content": "        PrintStream ps \u003d new PrintStream(baos);"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        boolean isFinished \u003d false;"
+        "content": "        PrintStream old \u003d System.out;"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        while (!(isFinished)) {"
+        "content": "        System.setOut(ps);"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            String inputFromUser \u003d ui.handleInput();"
+        "content": ""
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            Command c \u003d Parser.parse(inputFromUser);"
+        "content": "        ui.welcomeMessage();"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            if (c \u003d\u003d null) {"
+        "content": "        tasks.showCurrentTasks();"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                System.out.println(\"Input something into me!\");"
+        "content": "        ui.showLineBreak();"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            tasks.runCommand(c);"
+        "content": "        System.out.flush();"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            if (c.getCommand().equals(\"bye\")) {"
+        "content": "        System.setOut(old);"
       },
       {
         "lineNumber": 83,
         "author": {
-          "gitId": "garysyndromes"
+          "gitId": "-"
         },
-        "content": "                isFinished \u003d true;"
+        "content": "        //@@author"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": "        return baos.toString();"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            this.storage.save(tasks);"
+        "content": "    }"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        ui.terminateMessage();"
+        "content": ""
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "    /**"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "     * Shows the current tasks in Duke for the GUI."
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    /**"
+        "content": "     *"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * Shows the welcome message for the GUI"
+        "content": "     * @return String of current tasks in duke for the GUI."
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     *"
+        "content": "     */"
       },
       {
         "lineNumber": 93,
         "author": {
-          "gitId": "garysyndromes"
+          "gitId": "-"
         },
-        "content": "     * @return String Welcome Message in the GUI"
+        "content": "    //@@author garysyndromes-reused"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     */"
+        "content": "    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications"
       },
       {
         "lineNumber": 95,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "    //@@author garysyndromes-reused"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "    public String getWelcomeMessage() {"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        // Create a stream to hold the output"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        ByteArrayOutputStream baos \u003d new ByteArrayOutputStream();"
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        PrintStream ps \u003d new PrintStream(baos);"
-      },
-      {
-        "lineNumber": 101,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        PrintStream old \u003d System.out;"
-      },
-      {
-        "lineNumber": 102,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        System.setOut(ps);"
-      },
-      {
-        "lineNumber": 103,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 104,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        ui.welcomeMessage();"
-      },
-      {
-        "lineNumber": 105,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        tasks.showCurrentTasks();"
-      },
-      {
-        "lineNumber": 106,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        ui.showLineBreak();"
-      },
-      {
-        "lineNumber": 107,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 108,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        System.out.flush();"
-      },
-      {
-        "lineNumber": 109,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        System.setOut(old);"
-      },
-      {
-        "lineNumber": 110,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "        //@@author"
-      },
-      {
-        "lineNumber": 111,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        return baos.toString();"
-      },
-      {
-        "lineNumber": 112,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 113,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 114,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 115,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 116,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "     * Shows the current tasks in Duke"
-      },
-      {
-        "lineNumber": 117,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "     *"
-      },
-      {
-        "lineNumber": 118,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "     * @return String of current tasks in duke"
-      },
-      {
-        "lineNumber": 119,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 120,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "    //@@author garysyndromes-reused"
-      },
-      {
-        "lineNumber": 121,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications"
-      },
-      {
-        "lineNumber": 122,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "    public String getCurrentTasksInDuke() {"
       },
       {
-        "lineNumber": 123,
+        "lineNumber": 96,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        // Create a stream to hold the output"
       },
       {
-        "lineNumber": 124,
+        "lineNumber": 97,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        ByteArrayOutputStream baos \u003d new ByteArrayOutputStream();"
       },
       {
-        "lineNumber": 125,
+        "lineNumber": 98,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        PrintStream ps \u003d new PrintStream(baos);"
       },
       {
-        "lineNumber": 126,
+        "lineNumber": 99,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        PrintStream old \u003d System.out;"
       },
       {
-        "lineNumber": 127,
+        "lineNumber": 100,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        System.setOut(ps);"
       },
       {
-        "lineNumber": 128,
+        "lineNumber": 101,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": ""
       },
       {
-        "lineNumber": 129,
+        "lineNumber": 102,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        tasks.showCurrentTasks();"
       },
       {
-        "lineNumber": 130,
+        "lineNumber": 103,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        ui.showLineBreak();"
       },
       {
-        "lineNumber": 131,
+        "lineNumber": 104,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": ""
       },
       {
-        "lineNumber": 132,
+        "lineNumber": 105,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        System.out.flush();"
       },
       {
-        "lineNumber": 133,
+        "lineNumber": 106,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        System.setOut(old);"
       },
       {
-        "lineNumber": 134,
+        "lineNumber": 107,
         "author": {
           "gitId": "-"
         },
         "content": "        //@@author"
       },
       {
-        "lineNumber": 135,
+        "lineNumber": 108,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        return baos.toString();"
       },
       {
-        "lineNumber": 136,
+        "lineNumber": 109,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 137,
+        "lineNumber": 110,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": ""
       },
       {
-        "lineNumber": 138,
+        "lineNumber": 111,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": ""
       },
       {
-        "lineNumber": 139,
+        "lineNumber": 112,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "    /**"
       },
       {
-        "lineNumber": 140,
+        "lineNumber": 113,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * Handles the responses of duke"
+        "content": "     * Handles the responses of Duke to display on the GUI."
       },
       {
-        "lineNumber": 141,
+        "lineNumber": 114,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "     *"
       },
       {
-        "lineNumber": 142,
+        "lineNumber": 115,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * @return String of current response to the input"
+        "content": "     * @return String of current response to the input on the GUI."
       },
       {
-        "lineNumber": 143,
+        "lineNumber": 116,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "     */"
       },
       {
-        "lineNumber": 144,
+        "lineNumber": 117,
         "author": {
           "gitId": "-"
         },
         "content": "    //@@author garysyndromes-reused"
       },
       {
-        "lineNumber": 145,
+        "lineNumber": 118,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "    //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications"
       },
       {
-        "lineNumber": 146,
+        "lineNumber": 119,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "    public String getResponse(String input) {"
       },
       {
-        "lineNumber": 147,
+        "lineNumber": 120,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        // Create a stream to hold the output"
       },
       {
-        "lineNumber": 148,
+        "lineNumber": 121,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        ByteArrayOutputStream baos \u003d new ByteArrayOutputStream();"
       },
       {
-        "lineNumber": 149,
+        "lineNumber": 122,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        PrintStream ps \u003d new PrintStream(baos);"
       },
       {
-        "lineNumber": 150,
+        "lineNumber": 123,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        PrintStream old \u003d System.out;"
       },
       {
-        "lineNumber": 151,
+        "lineNumber": 124,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        System.setOut(ps);"
       },
       {
-        "lineNumber": 152,
+        "lineNumber": 125,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 126,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        Command c \u003d Parser.parse(input);"
       },
       {
-        "lineNumber": 153,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        assert (c !\u003d null) : \"Input something correct into me! todo deadline (/by) event (/at) find list delete done\";"
-      },
-      {
-        "lineNumber": 154,
+        "lineNumber": 127,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        tasks.runCommand(c);"
       },
       {
-        "lineNumber": 155,
+        "lineNumber": 128,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        this.storage.save(tasks);"
       },
       {
-        "lineNumber": 156,
+        "lineNumber": 129,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 130,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        System.out.flush();"
       },
       {
-        "lineNumber": 157,
+        "lineNumber": 131,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        System.setOut(old);"
       },
       {
-        "lineNumber": 158,
+        "lineNumber": 132,
         "author": {
           "gitId": "-"
         },
         "content": "        //@@author"
       },
       {
-        "lineNumber": 159,
+        "lineNumber": 133,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        return baos.toString();"
       },
       {
-        "lineNumber": 160,
+        "lineNumber": 134,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": ""
       },
       {
-        "lineNumber": 161,
+        "lineNumber": 135,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 162,
+        "lineNumber": 136,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": ""
       },
       {
-        "lineNumber": 163,
+        "lineNumber": 137,
         "author": {
           "gitId": "-"
         },
         "content": "    public static void main(String[] args) {"
       },
       {
-        "lineNumber": 164,
+        "lineNumber": 138,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        Duke duke \u003d new Duke(\"./data/duke.txt\");"
+        "content": "        Duke duke \u003d new Duke();"
       },
       {
-        "lineNumber": 165,
+        "lineNumber": 139,
         "author": {
           "gitId": "garysyndromes"
         },
         "content": "        duke.run();"
       },
       {
-        "lineNumber": 166,
+        "lineNumber": 140,
         "author": {
           "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 167,
+        "lineNumber": 141,
         "author": {
           "gitId": "-"
         },
@@ -4716,7 +4534,7 @@
     ],
     "authorContributionMap": {
       "-": 10,
-      "garysyndromes": 157
+      "garysyndromes": 131
     }
   },
   {
@@ -6246,7 +6064,7 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    final static String exitInput \u003d \"bye\";"
+        "content": "    private final static String exitInput \u003d \"bye\";"
       },
       {
         "lineNumber": 10,
@@ -6491,7 +6309,7 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                 int neededHours \u003d -1;"
+        "content": "                int neededHours \u003d -1;"
       },
       {
         "lineNumber": 45,
@@ -6519,7 +6337,7 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                            neededHours \u003d Integer.parseInt(splitStr[i+1]);"
+        "content": "                        neededHours \u003d Integer.parseInt(splitStr[i + 1]);"
       },
       {
         "lineNumber": 49,
@@ -6533,633 +6351,612 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    } else {"
+        "content": "                    }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        fixedTaskDescription +\u003d splitStr[i] + \" \";"
+        "content": "                    fixedTaskDescription +\u003d splitStr[i] + \" \";"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    }"
+        "content": "                }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                if (neededHours \u003d\u003d -1) {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                if (neededHours \u003d\u003d -1) {"
+        "content": "                    throw new DukeException(\"☹ OOPS!!! How long is this FixedDurationTask????? use /needs \u003chours\u003e to tell me! ☹ OOPS!!!\");"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    throw new DukeException(\"☹ OOPS!!! How long is this FixedDurationTask????? use /needs \u003chours\u003e to tell me! ☹ OOPS!!!\");"
+        "content": "                } else {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                } else {"
+        "content": "                    fixedTaskDescription \u003d fixedTaskDescription.substring(0, fixedTaskDescription.length() - 1);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    fixedTaskDescription \u003d fixedTaskDescription.substring(0, fixedTaskDescription.length() - 1);"
+        "content": "                    FixedDurationTask fdt \u003d new FixedDurationTask(fixedTaskDescription, neededHours);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    FixedDurationTask fdt \u003d new FixedDurationTask(fixedTaskDescription, neededHours);"
+        "content": "                    return new FixedTaskCommand(fdt);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    return new FixedTaskCommand(fdt);"
+        "content": "                }"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "            } catch (DukeException error) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            } catch (DukeException error) {"
+        "content": "                System.out.println(error.getMessage());"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                System.out.println(error.getMessage());"
+        "content": "            }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "        if (splitStr[0].toLowerCase().equals(\"deadline\")) {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        if (splitStr[0].toLowerCase().equals(\"deadline\")) {"
+        "content": "            try {"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            try {"
+        "content": "                LocalDate date \u003d LocalDate.now().minus(1, ChronoUnit.MONTHS);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                LocalDate date \u003d LocalDate.now().minus(1, ChronoUnit.MONTHS);"
+        "content": "                String deadline \u003d \"\";"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                String deadline \u003d \"\";"
+        "content": "                for (int i \u003d 1; i \u003c splitStr.length; i++) {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                for (int i \u003d 1; i \u003c splitStr.length; i++) {"
+        "content": "                    if ((splitStr[i].equals(\"/by\"))) {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    if ((splitStr[i].equals(\"/by\"))) {"
+        "content": "                        date \u003d LocalDate.parse(splitStr[i + 1]);"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        date \u003d LocalDate.parse(splitStr[i + 1]);"
+        "content": "                        break;"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        break;"
+        "content": "                    }"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    } else {"
+        "content": "                    deadline +\u003d splitStr[i] + \" \";"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        deadline +\u003d splitStr[i] + \" \";"
+        "content": "                }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    }"
+        "content": "                deadline \u003d deadline.substring(0, deadline.length() - 1);"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": ""
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                deadline \u003d deadline.substring(0, deadline.length() - 1);"
+        "content": "                if (date.isBefore(LocalDate.now())) {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "                    throw new DukeException(\"☹ OOPS!!! You cannot set a date that is in the past! Format is yyyy-mm-dd ☹ OOPS!!!\");"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                if (date.isBefore(LocalDate.now())) {"
+        "content": "                } else {"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    throw new DukeException(\"☹ OOPS!!! You cannot set a date that is in the past! Format is yyyy-mm-dd ☹ OOPS!!!\");"
+        "content": "                    Deadline d \u003d new Deadline(deadline, date);"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                } else {"
+        "content": "                    return new DeadlineCommand(d);"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Deadline d \u003d new Deadline(deadline, date);"
+        "content": "                }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    return new DeadlineCommand(d);"
+        "content": "            } catch (DukeException e) {"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                System.out.println(e.getMessage());"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            } catch (DukeException e) {"
+        "content": "            }"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                System.out.println(e.getMessage());"
+        "content": "        }"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": ""
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": "        if (splitStr[0].toLowerCase().equals(\"event\")) {"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "            try {"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        if (splitStr[0].toLowerCase().equals(\"event\")) {"
+        "content": "                String at \u003d \"\";"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            try {"
+        "content": "                String event \u003d \"\";"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                String at \u003d \"\";"
+        "content": "                for (int i \u003d 1; i \u003c splitStr.length; i++) {"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                String event \u003d \"\";"
+        "content": "                    if ((splitStr[i].equals(\"/at\"))) {"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                for (int i \u003d 1; i \u003c splitStr.length; i++) {"
+        "content": "                        for (int j \u003d i + 1; j \u003c splitStr.length; j++) {"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    if ((splitStr[i].equals(\"/at\"))) {"
+        "content": "                            at +\u003d splitStr[j] + \" \";"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        for (int j \u003d i + 1; j \u003c splitStr.length; j++) {"
+        "content": "                        }"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                            at +\u003d splitStr[j] + \" \";"
+        "content": "                        break;"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        }"
+        "content": "                    }"
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        break;"
+        "content": "                    event +\u003d splitStr[i] + \" \";"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    } else {"
+        "content": "                }"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        event +\u003d splitStr[i] + \" \";"
+        "content": "                if (at.equals(\"\")) {"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    }"
+        "content": "                    throw new DukeException(\"☹ OOPS!!! Where is this event????? use /at to tell me! ☹ OOPS!!!\");"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                } else {"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                if (at.equals(\"\")) {"
+        "content": "                    event \u003d event.substring(0, event.length() - 1);"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    throw new DukeException(\"☹ OOPS!!! Where is this event????? use /at to tell me! ☹ OOPS!!!\");"
+        "content": "                    at \u003d at.substring(0, at.length() - 1);"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                } else {"
+        "content": ""
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    event \u003d event.substring(0, event.length() - 1);"
+        "content": "                    Event e \u003d new Event(event, at);"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    at \u003d at.substring(0, at.length() - 1);"
+        "content": "                    return new EventCommand(e);"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "                }"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Event e \u003d new Event(event, at);"
+        "content": "            } catch (DukeException error) {"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    return new EventCommand(e);"
+        "content": "                System.out.println(error.getMessage());"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "            }"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            } catch (DukeException error) {"
+        "content": "        }"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                System.out.println(error.getMessage());"
+        "content": ""
       },
       {
         "lineNumber": 117,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": "        if (splitStr[0].toLowerCase().equals(\"todo\")) {"
       },
       {
         "lineNumber": 118,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": "            try {"
       },
       {
         "lineNumber": 119,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "                if (splitStr.length \u003c 2) {"
       },
       {
         "lineNumber": 120,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        if (splitStr[0].toLowerCase().equals(\"todo\")) {"
+        "content": "                    throw new DukeException(\"☹ OOPS!!! The description of a todo cannot be empty. ☹ OOPS!!!\");"
       },
       {
         "lineNumber": 121,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            try {"
+        "content": "                } else {"
       },
       {
         "lineNumber": 122,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                if (splitStr.length \u003c 2) {"
+        "content": "                    String todo \u003d \"\";"
       },
       {
         "lineNumber": 123,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    throw new DukeException(\"☹ OOPS!!! The description of a todo cannot be empty. ☹ OOPS!!!\");"
+        "content": "                    for (int i \u003d 1; i \u003c splitStr.length; i++) {"
       },
       {
         "lineNumber": 124,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                } else {"
+        "content": "                        todo +\u003d splitStr[i] + \" \";"
       },
       {
         "lineNumber": 125,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    String todo \u003d \"\";"
+        "content": "                    }"
       },
       {
         "lineNumber": 126,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    for (int i \u003d 1; i \u003c splitStr.length; i++) {"
+        "content": "                    todo \u003d todo.substring(0, todo.length() - 1);"
       },
       {
         "lineNumber": 127,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                        todo +\u003d splitStr[i] + \" \";"
+        "content": "                    Todo t \u003d new Todo(todo);"
       },
       {
         "lineNumber": 128,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    }"
+        "content": "                    return new TodoCommand(t);"
       },
       {
         "lineNumber": 129,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    todo \u003d todo.substring(0, todo.length() - 1);"
+        "content": "                }"
       },
       {
         "lineNumber": 130,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Todo t \u003d new Todo(todo);"
+        "content": "            } catch (DukeException m) {"
       },
       {
         "lineNumber": 131,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    return new TodoCommand(t);"
+        "content": "                System.out.println(m.getMessage());"
       },
       {
         "lineNumber": 132,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "            }"
       },
       {
         "lineNumber": 133,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            } catch (DukeException m) {"
+        "content": ""
       },
       {
         "lineNumber": 134,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                System.out.println(m.getMessage());"
+        "content": "        }"
       },
       {
         "lineNumber": 135,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": "        return null;"
       },
       {
         "lineNumber": 136,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 137,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 138,
-        "author": {
-          "gitId": "garysyndromes"
-        },
-        "content": "        return null;"
-      },
-      {
-        "lineNumber": 139,
-        "author": {
-          "gitId": "garysyndromes"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 140,
+        "lineNumber": 137,
         "author": {
           "gitId": "garysyndromes"
         },
@@ -7167,7 +6964,7 @@
       }
     ],
     "authorContributionMap": {
-      "garysyndromes": 140
+      "garysyndromes": 137
     }
   },
   {
@@ -8548,752 +8345,787 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public TaskList(ArrayList\u003cTask\u003e listOfTasks) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        this.listOfTexts \u003d listOfTasks;"
+        "content": "     * Constructor for TaskList called when there is an existing task list to show"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "     *"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "     * @param listOfTasks is the list of tasks in duke.txt"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public TaskList() {"
+        "content": "     */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        this.listOfTexts \u003d new ArrayList\u003cTask\u003e();"
+        "content": "    public TaskList(ArrayList\u003cTask\u003e listOfTasks) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "        this.listOfTexts \u003d listOfTasks;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public void addTask(Task t) {"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        this.listOfTexts.add(t);"
+        "content": "    public TaskList() {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "        this.listOfTexts \u003d new ArrayList\u003cTask\u003e();"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public ArrayList\u003cTask\u003e getTasks() {"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        return this.listOfTexts;"
+        "content": "    public void addTask(Task t) {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "        this.listOfTexts.add(t);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * Prints out all tasks currently in the to do list."
+        "content": "    public ArrayList\u003cTask\u003e getTasks() {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     */"
+        "content": "        return this.listOfTexts;"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public void showCurrentTasks() {"
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        int counter \u003d 1;"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        if (listOfTexts.size() \u003d\u003d 0) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            System.out.println(\"To Do List is empty! Congratulations!\");"
+        "content": "     * Prints out all tasks currently in the to do list."
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": "     */"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        for (int i \u003d 0; i \u003c listOfTexts.size(); i++) {"
+        "content": "    public void showCurrentTasks() {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            System.out.println(counter + \". \" + listOfTexts.get(i));"
+        "content": "        int counter \u003d 1;"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            counter++;"
+        "content": "        if (listOfTexts.size() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": "            Ui.printEmptyToDoList();"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "        for (int i \u003d 0; i \u003c listOfTexts.size(); i++) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public void showSearch(String stringToSearch) {"
+        "content": "            System.out.println(counter + \". \" + listOfTexts.get(i));"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        ArrayList\u003cTask\u003e searchList \u003d new ArrayList\u003c\u003e();"
+        "content": "            counter++;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        for (int i \u003d 0; i \u003c listOfTexts.size(); i++) {"
+        "content": "        }"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            String taskDescription \u003d listOfTexts.get(i).getDescription();"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            if (taskDescription.contains(stringToSearch)) {"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                searchList.add(listOfTexts.get(i));"
+        "content": "    public void showSearch(String stringToSearch) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": "        ArrayList\u003cTask\u003e searchList \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": "        for (int i \u003d 0; i \u003c listOfTexts.size(); i++) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        Ui.printBeforeSearch();"
+        "content": "            String taskDescription \u003d listOfTexts.get(i).getDescription();"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        Ui.printSearch(searchList);"
+        "content": "            if (taskDescription.contains(stringToSearch)) {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "                searchList.add(listOfTexts.get(i));"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "            }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * Applies the action on the TaskList as indicated by the type of Command."
+        "content": "        Ui.printBeforeSearch();"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     *"
+        "content": "        Ui.printSearch(searchList);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     * @param command Type of Command described by .getCommand() which return a \u003ccode\u003eString\u003c/code\u003e description."
+        "content": "    }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "     */"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    public void runCommand(Command command) {"
+        "content": "    /**"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        assert (command !\u003d null) : \"Input something correct into me! todo/deadline(/by)/event(/at)/fixedtask(/needs)/find/list/delete/done\";"
+        "content": "     * Applies the action on the TaskList as indicated by the type of Command."
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        try {"
+        "content": "     *"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            switch (command.getCommand()) {"
+        "content": "     * @param command Type of Command described by .getCommand() which return a \u003ccode\u003eString\u003c/code\u003e description."
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"bye\": {"
+        "content": "     */"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "    public void runCommand(Command command) {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "        assert (command !\u003d null) : \"Input something correct into me or I will stop! todo/deadline(/by)/event(/at)/fixedtask(/needs)/find/list/delete/done\";"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"list\": {"
+        "content": "        try {"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    showCurrentTasks();"
+        "content": "            switch (command.getCommand()) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                case \"bye\": {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                    break;"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"find\": {"
+        "content": "                }"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    showSearch(command.getTaskToSearch());"
+        "content": "                case \"list\": {"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                    showCurrentTasks();"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                    break;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"done\": {"
+        "content": "                }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Task currentTask \u003d this.listOfTexts.get(command.getIndex());"
+        "content": "                case \"find\": {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    currentTask.markAsDone();"
+        "content": "                    showSearch(command.getTaskToSearch());"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Ui.printAfterDone(currentTask);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                case \"done\": {"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"delete\": {"
+        "content": "                    Task currentTask \u003d this.listOfTexts.get(command.getIndex());"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Task currentTask \u003d this.listOfTexts.get(command.getIndex());"
+        "content": "                    currentTask.markAsDone();"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    listOfTexts.remove(command.getIndex());"
+        "content": "                    Ui.printAfterDone(currentTask);"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Ui.printAfterDelete(currentTask, listOfTexts);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                }"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                case \"delete\": {"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"todo\": {"
+        "content": "                    Task currentTask \u003d this.listOfTexts.get(command.getIndex());"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Task currentTask \u003d command.getTask();"
+        "content": "                    listOfTexts.remove(command.getIndex());"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    addTask(currentTask);"
+        "content": "                    Ui.printAfterDelete(currentTask, listOfTexts);"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Ui.printAfterTodo((Todo) currentTask, listOfTexts);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                }"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                case \"todo\": {"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"deadline\": {"
+        "content": "                    Task currentTask \u003d command.getTask();"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Task currentTask \u003d command.getTask();"
+        "content": "                    addTask(currentTask);"
       },
       {
         "lineNumber": 92,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    addTask(currentTask);"
+        "content": "                    Ui.printAfterTodo((Todo) currentTask, listOfTexts);"
       },
       {
         "lineNumber": 93,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Ui.printAfterDeadline((Deadline) currentTask, listOfTexts);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 94,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                }"
       },
       {
         "lineNumber": 95,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "                case \"deadline\": {"
       },
       {
         "lineNumber": 96,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                    Task currentTask \u003d command.getTask();"
       },
       {
         "lineNumber": 97,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"event\": {"
+        "content": "                    addTask(currentTask);"
       },
       {
         "lineNumber": 98,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Task currentTask \u003d command.getTask();"
+        "content": "                    Ui.printAfterDeadline((Deadline) currentTask, listOfTexts);"
       },
       {
         "lineNumber": 99,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    addTask(currentTask);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 100,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Ui.printAfterEvent((Event) currentTask, listOfTexts);"
+        "content": ""
       },
       {
         "lineNumber": 101,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                }"
       },
       {
         "lineNumber": 102,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                case \"event\": {"
       },
       {
         "lineNumber": 103,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                case \"fixedTask\": {"
+        "content": "                    Task currentTask \u003d command.getTask();"
       },
       {
         "lineNumber": 104,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Task currentTask \u003d command.getTask();"
+        "content": "                    addTask(currentTask);"
       },
       {
         "lineNumber": 105,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    addTask(currentTask);"
+        "content": "                    Ui.printAfterEvent((Event) currentTask, listOfTexts);"
       },
       {
         "lineNumber": 106,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    Ui.printAfterFixedTask((FixedDurationTask) currentTask, listOfTexts);"
+        "content": "                    break;"
       },
       {
         "lineNumber": 107,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    break;"
+        "content": "                }"
       },
       {
         "lineNumber": 108,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                case \"fixedTask\": {"
       },
       {
         "lineNumber": 109,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                default: {"
+        "content": "                    Task currentTask \u003d command.getTask();"
       },
       {
         "lineNumber": 110,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                    throw new DukeException(\"☹ OOPS!!! I\u0027m sorry, you have entered wrong command. Error in TaskList! ☹ OOPS!!!\");"
+        "content": "                    addTask(currentTask);"
       },
       {
         "lineNumber": 111,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "                }"
+        "content": "                    Ui.printAfterFixedTask((FixedDurationTask) currentTask, listOfTexts);"
       },
       {
         "lineNumber": 112,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            }"
+        "content": "                    break;"
       },
       {
         "lineNumber": 113,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        } catch (DukeException e) {"
+        "content": "                }"
       },
       {
         "lineNumber": 114,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "            System.out.println(e.getMessage());"
+        "content": "                default: {"
       },
       {
         "lineNumber": 115,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "        }"
+        "content": "                    throw new DukeException(\"☹ OOPS!!! I\u0027m sorry, you have entered wrong command. Error in TaskList! ☹ OOPS!!!\");"
       },
       {
         "lineNumber": 116,
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    }"
+        "content": "                }"
       },
       {
         "lineNumber": 117,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 118,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": "        } catch (DukeException e) {"
+      },
+      {
+        "lineNumber": 119,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": "            System.out.println(e.getMessage());"
+      },
+      {
+        "lineNumber": 120,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 121,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 122,
         "author": {
           "gitId": "garysyndromes"
         },
@@ -9301,7 +9133,7 @@
       }
     ],
     "authorContributionMap": {
-      "garysyndromes": 117
+      "garysyndromes": 122
     }
   },
   {
@@ -10122,7 +9954,7 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    static void printBeforeSearch() {"
+        "content": "    public static void printBeforeSearch() {"
       },
       {
         "lineNumber": 89,
@@ -10150,7 +9982,7 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": "    static void printSearch(ArrayList\u003cTask\u003e searchList) {"
+        "content": "    public static void printSearch(ArrayList\u003cTask\u003e searchList) {"
       },
       {
         "lineNumber": 93,
@@ -10206,10 +10038,31 @@
         "author": {
           "gitId": "garysyndromes"
         },
-        "content": ""
+        "content": "    public static void printEmptyToDoList() {"
       },
       {
         "lineNumber": 101,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": "        System.out.println(\"To Do List is empty! Congratulations!\");"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "garysyndromes"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 104,
         "author": {
           "gitId": "garysyndromes"
         },
@@ -10217,7 +10070,7 @@
       }
     ],
     "authorContributionMap": {
-      "garysyndromes": 101
+      "garysyndromes": 104
     }
   },
   {
