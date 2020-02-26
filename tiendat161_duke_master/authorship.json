@@ -8,7 +8,7 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "D|0|kill Batman|2020-01-01"
+        "content": "D|1|kill Batman|2020-01-01"
       },
       {
         "lineNumber": 2,
@@ -37,7 +37,7 @@
     }
   },
   {
-    "path": "src/main/java/AccessHardDisk.java",
+    "path": "src/main/java/Duke.java",
     "fileType": "java",
     "lines": [
       {
@@ -45,63 +45,63 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.io.*;"
+        "content": "import duke.exception.DukeException;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "import duke.task.TaskList;"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.util.ArrayList;"
+        "content": "import duke.util.AccessHardDisk;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.io.File;"
+        "content": "import duke.util.Parser;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.io.FileNotFoundException;"
+        "content": "import duke.util.Ui;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.util.List;"
+        "content": "import duke.command.*;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.util.Scanner;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": ""
+        "content": "import java.io.IOException;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "public class AccessHardDisk {"
+        "content": ""
       },
       {
         "lineNumber": 10,
@@ -113,205 +113,205 @@
       {
         "lineNumber": 11,
         "author": {
-          "gitId": "tiendat161"
+          "gitId": "-"
         },
-        "content": "    String path \u003d \"./data/duke.txt\";"
+        "content": "public class Duke {"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    Scanner readFile;"
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": ""
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public AccessHardDisk(String path) {"
+        "content": "    private AccessHardDisk storage;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        try {"
+        "content": "    private Parser parser;"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            this.readFile \u003d new Scanner(new File(this.path \u003d path));"
+        "content": ""
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        } catch (FileNotFoundException error) {"
+        "content": "    private Duke(String path) throws DukeException {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            System.out.println(error);"
+        "content": "        storage \u003d new AccessHardDisk(path);"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            System.exit(0);"
+        "content": "        tasks \u003d storage.readTasksFromFile();"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        }"
+        "content": "        ui \u003d new Ui();"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    }"
+        "content": "        this.parser \u003d new Parser(tasks);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public TaskList readTasksFromFile() throws DukeException {"
+        "content": "    }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        ArrayList\u003cTask\u003e data \u003d new ArrayList\u003c\u003e();"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        while (readFile.hasNextLine()) {"
+        "content": "    public void run() {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            String input \u003d readFile.nextLine();"
+        "content": "        ui.showWelcome();"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            String[] line \u003d input.split(\"\\\\|\");"
+        "content": "        boolean isExit \u003d false;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            if (line[0].equals(\"T\")) {"
+        "content": "        while (!isExit) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "                data.add(new Todo(line[2]));"
+        "content": "            try {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            } else if (line[0].equals(\"D\")) {"
+        "content": "                String fullCommand \u003d ui.readCommand();"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "                data.add(new Deadline(line[2], line[3]));"
+        "content": "                ui.showLine(); // show the divider line (\"_______\")"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "                System.out.println(line[2]);"
+        "content": "                Command c \u003d parser.parse(fullCommand);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            } else if (line[0].equals(\"E\")) {"
+        "content": "                c.execute(tasks, storage);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "                data.add(new Event(line[2], line[3]));"
+        "content": "                isExit \u003d c.isExit();"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            }"
+        "content": "            } catch (DukeException | IOException e) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            if (line[1].equals(\"1\")) {"
+        "content": "                ui.showError(e.getMessage());"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "                data.get(data.size()-1).markDone();"
+        "content": "            } finally {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            }"
+        "content": "                ui.showLine();"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        }"
+        "content": "            }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        return new TaskList(data);"
+        "content": "        }"
       },
       {
         "lineNumber": 40,
@@ -325,71 +325,51 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public void saveFile(TaskList tasks) throws IOException {"
+        "content": ""
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        PrintWriter pw \u003d new PrintWriter(new FileOutputStream(path));"
+        "content": "    public static void main(String[] args) throws IOException, DukeException {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        for (Task task : tasks.getTaskList()) {"
+        "content": "        Duke duke \u003d new Duke(\"./data/duke.txt\");"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "            int binaryInx \u003d (task.isDone()) ? 1 : 0;"
+        "content": "        duke.run();"
       },
       {
         "lineNumber": 45,
         "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            pw.println(task.getType() + \"|\" + binaryInx + \"|\" + task.getDescription() + \"|\" + task.getTime().toString());"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        pw.close();"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "tiendat161"
+          "gitId": "-"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 49,
+        "lineNumber": 46,
         "author": {
-          "gitId": "tiendat161"
+          "gitId": "-"
         },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "tiendat161": 49
+      "-": 3,
+      "tiendat161": 43
     }
   },
   {
-    "path": "src/main/java/AddCommand.java",
+    "path": "src/main/java/duke/command/AddCommand.java",
     "fileType": "java",
     "lines": [
       {
@@ -397,7 +377,7 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.io.IOException;"
+        "content": "package duke.command;"
       },
       {
         "lineNumber": 2,
@@ -408,402 +388,125 @@
       },
       {
         "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.task.Task;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.task.TaskList;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.util.AccessHardDisk;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "public class AddCommand extends Command {"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 10,
         "author": {
           "gitId": "tiendat161"
         },
         "content": ""
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 11,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    private Task task;"
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 12,
         "author": {
           "gitId": "tiendat161"
         },
         "content": ""
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 13,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    public AddCommand(Task task) {"
       },
       {
-        "lineNumber": 8,
+        "lineNumber": 14,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "        this.task \u003d task;"
       },
       {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        tasks.addTask(task, storage);"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 14
-    }
-  },
-  {
-    "path": "src/main/java/Command.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.io.IOException;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "public abstract class Command {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    protected boolean isExit \u003d false;"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public boolean isExit() {"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return false;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public abstract void execute(TaskList tasks, AccessHardDisk storage) throws IOException;"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 11
-    }
-  },
-  {
-    "path": "src/main/java/Deadline.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.time.LocalDate;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.time.format.DateTimeFormatter;"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "public class Deadline extends Task {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    protected LocalDate time;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Deadline(String description, String time) throws DukeException {"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        super(description);"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.time \u003d LocalDate.parse(time);"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getType() {"
-      },
-      {
         "lineNumber": 15,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        return \"D\";"
+        "content": "    }"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    }"
+        "content": "    @Override"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": ""
+        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    @Override"
+        "content": "        tasks.addTask(task, storage);"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public String getTimeFormatted() {"
+        "content": "    }"
       },
       {
         "lineNumber": 20,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.time.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public LocalDate getTime() {"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.time;"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"[D]\" + super.toString() + \" (by: \" + this.getTimeFormatted() + \")\";"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
         "author": {
           "gitId": "tiendat161"
         },
@@ -811,11 +514,11 @@
       }
     ],
     "authorContributionMap": {
-      "tiendat161": 32
+      "tiendat161": 20
     }
   },
   {
-    "path": "src/main/java/DeleteCommand.java",
+    "path": "src/main/java/duke/command/Command.java",
     "fileType": "java",
     "lines": [
       {
@@ -823,7 +526,7 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.io.IOException;"
+        "content": "package duke.command;"
       },
       {
         "lineNumber": 2,
@@ -837,21 +540,21 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "public class DeleteCommand extends Command {"
+        "content": "import duke.task.*;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": ""
+        "content": "import duke.util.*;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    private int index;"
+        "content": "import java.io.IOException;"
       },
       {
         "lineNumber": 6,
@@ -865,56 +568,56 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public DeleteCommand(int index) {"
+        "content": "public abstract class Command {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        this.index \u003d index;"
+        "content": "    protected boolean isExit \u003d false;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": ""
+        "content": "    public boolean isExit() {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    @Override"
+        "content": "        return false;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {"
+        "content": "    }"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        tasks.delete(index, storage);"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    }"
+        "content": "    public abstract void execute(TaskList tasks, AccessHardDisk storage) throws IOException;"
       },
       {
         "lineNumber": 15,
@@ -929,7 +632,7 @@
     }
   },
   {
-    "path": "src/main/java/DoneCommand.java",
+    "path": "src/main/java/duke/command/DeleteCommand.java",
     "fileType": "java",
     "lines": [
       {
@@ -937,7 +640,7 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.io.IOException;"
+        "content": "package duke.command;"
       },
       {
         "lineNumber": 2,
@@ -951,42 +654,184 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "public class DoneCommand extends Command {"
+        "content": "import duke.task.*;"
       },
       {
         "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.util.*;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class DeleteCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    private int index;"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 10,
         "author": {
           "gitId": "tiendat161"
         },
         "content": ""
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 11,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public DoneCommand(int index) {"
+        "content": "    public DeleteCommand(int index) {"
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 12,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "        this.index \u003d index;"
       },
       {
-        "lineNumber": 8,
+        "lineNumber": 13,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        tasks.delete(index, storage);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 19
+    }
+  },
+  {
+    "path": "src/main/java/duke/command/DoneCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.command;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.util.*;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.task.*;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class DoneCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    private int index;"
       },
       {
         "lineNumber": 9,
@@ -1000,368 +845,71 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    @Override"
+        "content": "    public DoneCommand(int index) {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {"
+        "content": "        this.index \u003d index;"
       },
       {
         "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {"
+      },
+      {
+        "lineNumber": 16,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "        tasks.markDone(index, storage);"
       },
       {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 14
-    }
-  },
-  {
-    "path": "src/main/java/Duke.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.io.IOException;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.util.ArrayList;"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.util.NoSuchElementException;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.util.Scanner;"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.io.File;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.time.LocalDate;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.time.format.DateTimeFormatter;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.time.temporal.ChronoUnit;"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "public class Duke {"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    private TaskList tasks;"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    private Ui ui;"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    private AccessHardDisk storage;"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    private Parser parser;"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    private Duke(String path) throws DukeException {"
-      },
-      {
         "lineNumber": 17,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        storage \u003d new AccessHardDisk(path);"
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        tasks \u003d storage.readTasksFromFile();"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        ui \u003d new Ui();"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.parser \u003d new Parser(tasks);"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void run() {"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        ui.showWelcome();"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        boolean isExit \u003d false;"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        while (!isExit) {"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                String fullCommand \u003d ui.readCommand();"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                ui.showLine(); // show the divider line (\"_______\")"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                Command c \u003d parser.parse(fullCommand);"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                c.execute(tasks, storage);"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                isExit \u003d c.isExit();"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            } catch (DukeException | IOException e) {"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                ui.showError(e.getMessage());"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            } finally {"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                ui.showLine();"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public static void main(String[] args) throws IOException, DukeException {"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        Duke duke \u003d new Duke(\"./data/duke.txt\");"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        duke.run();"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "-"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "-"
-        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "-": 3,
-      "tiendat161": 42
+      "tiendat161": 18
     }
   },
   {
-    "path": "src/main/java/DukeException.java",
+    "path": "src/main/java/duke/command/ExitCommand.java",
     "fileType": "java",
     "lines": [
       {
@@ -1369,408 +917,115 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "public class DukeException extends Exception {"
+        "content": "package duke.command;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    DukeException(String s) {"
+        "content": ""
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        super(s);"
+        "content": "import duke.task.*;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    }"
+        "content": "import duke.util.*;"
       },
       {
         "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 5
-    }
-  },
-  {
-    "path": "src/main/java/EmptyArgumentException.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "public class EmptyArgumentException extends DukeException {"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    EmptyArgumentException(String s) {"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        super(s);"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 5
-    }
-  },
-  {
-    "path": "src/main/java/Event.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.time.LocalDate;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.time.format.DateTimeFormatter;"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "public class Event extends Task {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    protected LocalDate time;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Event(String description, String time) throws DukeException {"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        super(description);"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.time \u003d LocalDate.parse(time);"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getType() {"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"E\";"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getTimeFormatted() {"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.time.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public LocalDate getTime() {"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.time;"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"[E]\" + super.toString() + \" (on: \" + this.getTimeFormatted() + \")\";"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 32
-    }
-  },
-  {
-    "path": "src/main/java/ExitCommand.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "import java.io.IOException;"
       },
       {
-        "lineNumber": 2,
+        "lineNumber": 6,
         "author": {
           "gitId": "tiendat161"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 7,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "public class ExitCommand extends Command {"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 8,
         "author": {
           "gitId": "tiendat161"
         },
         "content": ""
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 9,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    @Override"
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 10,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    public boolean isExit() {"
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 11,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "        return true;"
       },
       {
-        "lineNumber": 8,
+        "lineNumber": 12,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 9,
+        "lineNumber": 13,
         "author": {
           "gitId": "tiendat161"
         },
         "content": ""
       },
       {
-        "lineNumber": 10,
+        "lineNumber": 14,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    @Override"
       },
       {
-        "lineNumber": 11,
+        "lineNumber": 15,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    public void execute(TaskList tasks, AccessHardDisk storage) throws IOException {"
       },
       {
-        "lineNumber": 12,
+        "lineNumber": 16,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 13,
+        "lineNumber": 17,
         "author": {
           "gitId": "tiendat161"
         },
@@ -1778,11 +1033,11 @@
       }
     ],
     "authorContributionMap": {
-      "tiendat161": 13
+      "tiendat161": 17
     }
   },
   {
-    "path": "src/main/java/InvalidTaskException.java",
+    "path": "src/main/java/duke/command/ShowCommand.java",
     "fileType": "java",
     "lines": [
       {
@@ -1790,51 +1045,7 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "public class InvalidTaskException extends DukeException {"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    InvalidTaskException(String s) {"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        super(s);"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 5
-    }
-  },
-  {
-    "path": "src/main/java/Parser.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.util.ArrayList;"
+        "content": "package duke.command;"
       },
       {
         "lineNumber": 2,
@@ -1848,14 +1059,14 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "public class Parser {"
+        "content": "import duke.task.*;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    protected TaskList tasks;"
+        "content": "import duke.util.*;"
       },
       {
         "lineNumber": 5,
@@ -1866,701 +1077,48 @@
       },
       {
         "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Parser(TaskList tasks) {"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.tasks \u003d tasks;"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Parser(ArrayList\u003cTask\u003e tasks) {"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.tasks \u003d new TaskList(tasks);"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Command parse(String fullCommand) throws DukeException {"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        if (fullCommand.toLowerCase().trim().equals(\"bye\")) {"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            System.out.println(\"Goodbye! See you soon!\");"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            return new ExitCommand();"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        if (fullCommand.toLowerCase().trim().equals(\"list\")) {"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            return new ShowCommand();"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        String[] action \u003d fullCommand.split(\" \");"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        if (action[0].toLowerCase().trim().equals(\"done\")) {"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            int index \u003d 0;"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                index \u003d Integer.parseInt(action[1]);"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            } catch (NumberFormatException e) {"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS! The argument of a \u0027done\u0027 command must be a number.\");"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            if (index \u003c\u003d 0 || index \u003e\u003d this.tasks.checkSize()) {"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS! The index of a \u0027done\u0027 command is out of bounce.\");"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            return new DoneCommand(index);"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        if (action[0].toLowerCase().trim().equals(\"delete\")) {"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            int index \u003d 0;"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                index \u003d Integer.parseInt(action[1]);"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            } catch (NumberFormatException e) {"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS! The argument of a \u0027delete\u0027 command must be a number.\");"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            if (index \u003c\u003d 0 || index \u003e this.tasks.checkSize()) {"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS! The index of a \u0027delete\u0027 command is out of bounce.\");"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            return new DeleteCommand(index);"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        if (action[0].toLowerCase().trim().equals(\"todo\")) {"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            if (action.length \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS! The description of a \u0027todo\u0027 command is missing.\");"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            return new AddCommand(new Todo(fullCommand.split(\" \", 2)[1]));"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        if (action[0].toLowerCase().trim().equals(\"deadline\")) {"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String time;"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String details;"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            if (action.length \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS! The description of a \u0027deadline\u0027 command is missing.\");"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String description \u003d fullCommand.split(\" \", 2)[1];"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String[] splitDescription \u003d description.split(\" /by \");"
-      },
-      {
-        "lineNumber": 67,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 68,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                details \u003d splitDescription[0];"
-      },
-      {
-        "lineNumber": 69,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                time \u003d splitDescription[1];"
-      },
-      {
-        "lineNumber": 70,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 71,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS!!! The format for \u0027deadline\u0027 command requires a description \" +"
-      },
-      {
-        "lineNumber": 72,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                        \"following by \u003c/by\u003e notation and a due date.\");"
-      },
-      {
-        "lineNumber": 73,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 74,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            return new AddCommand(new Deadline(details, time));"
-      },
-      {
-        "lineNumber": 75,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 76,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        if (action[0].toLowerCase().trim().equals(\"event\")) {"
-      },
-      {
-        "lineNumber": 78,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String time;"
-      },
-      {
-        "lineNumber": 79,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String details;"
-      },
-      {
-        "lineNumber": 80,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            if (action.length \u003d\u003d 1) {"
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS! The description of a \u0027event\u0027 command is missing.\");"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String description \u003d fullCommand.split(\" \", 2)[1];"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            String[] splitDescription \u003d description.split(\" /at \");"
-      },
-      {
-        "lineNumber": 85,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            try {"
-      },
-      {
-        "lineNumber": 86,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                details \u003d splitDescription[0];"
-      },
-      {
-        "lineNumber": 87,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                time \u003d splitDescription[1];"
-      },
-      {
-        "lineNumber": 88,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
-      },
-      {
-        "lineNumber": 89,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                throw new DukeException(\"☹ OOPS!!! The format for \u0027event\u0027 command requires a description \" +"
-      },
-      {
-        "lineNumber": 90,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "                        \"following by \u003c/at\u003e notation and a date time.\");"
-      },
-      {
-        "lineNumber": 91,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            return new AddCommand(new Event(details, time));"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return new UnknownCommand();"
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 97
-    }
-  },
-  {
-    "path": "src/main/java/ShowCommand.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "public class ShowCommand extends Command {"
       },
       {
-        "lineNumber": 2,
+        "lineNumber": 7,
         "author": {
           "gitId": "tiendat161"
         },
         "content": ""
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 8,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    @Override"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 9,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    public void execute(TaskList tasks, AccessHardDisk storage) {"
       },
       {
-        "lineNumber": 5,
+        "lineNumber": 10,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "        tasks.showTaskList();"
       },
       {
-        "lineNumber": 6,
+        "lineNumber": 11,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "    }"
       },
       {
-        "lineNumber": 7,
+        "lineNumber": 12,
         "author": {
           "gitId": "tiendat161"
         },
@@ -2568,11 +1126,11 @@
       }
     ],
     "authorContributionMap": {
-      "tiendat161": 7
+      "tiendat161": 12
     }
   },
   {
-    "path": "src/main/java/Task.java",
+    "path": "src/main/java/duke/command/UnknownCommand.java",
     "fileType": "java",
     "lines": [
       {
@@ -2580,7 +1138,7 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "import java.time.LocalDate;"
+        "content": "package duke.command;"
       },
       {
         "lineNumber": 2,
@@ -2594,1116 +1152,88 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "public class Task {"
+        "content": "import duke.task.*;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    protected String description;"
+        "content": "import duke.util.*;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    protected boolean isDone;"
+        "content": ""
       },
       {
         "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Task(String description) {"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.description \u003d description;"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.isDone \u003d false;"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public boolean isDone() {"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.isDone;"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getDescription() {"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.description;"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getType() {"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"Task\";"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getTimeFormatted() {"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"\";"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public LocalDate getTime() {"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return LocalDate.parse(\"1998-01-16\");"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getStatusIcon() {"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return (isDone ? \"\\u2713\" : \"\\u2718\"); //return tick or X symbols"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void markDone() {"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.isDone \u003d true;"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"[\" + this.getStatusIcon() + \"] \" + this.description;"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 44
-    }
-  },
-  {
-    "path": "src/main/java/TaskList.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.io.IOException;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.util.ArrayList;"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "public class TaskList {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    protected ArrayList\u003cTask\u003e tasks;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public TaskList() {"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.tasks \u003d new ArrayList\u003cTask\u003e();"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public TaskList(ArrayList\u003cTask\u003e tasks) {"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.tasks \u003d tasks;"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public TaskList(AccessHardDisk storage) throws DukeException {"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        tasks \u003d storage.readTasksFromFile().getTaskList();"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void markDone(int n, AccessHardDisk storage) throws IOException {"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        tasks.get(n-1).markDone();"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        storage.saveFile(this);"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"    Nice! I\u0027ve marked this task as done: \");"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"      \" + tasks.get(n - 1));"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void delete(int n, AccessHardDisk storage) throws IOException {"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        Task removedTask \u003d tasks.remove(n-1);"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        storage.saveFile(this);"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"    Noted. I\u0027ve removed this task: \");"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"      \" + removedTask);"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void addTask(Task task, AccessHardDisk storage) throws IOException {"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.tasks.add(task);"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        storage.saveFile(this);"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"    Got it. I\u0027ve added this task:\");"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"     \"+ this.tasks.size() + \": \" + task);"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Task checkTask(int n) {"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return tasks.get(n-1);"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public int checkSize() {"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return tasks.size();"
-      },
-      {
-        "lineNumber": 46,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 47,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void showTaskList() {"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        int i \u003d 1;"
-      },
-      {
-        "lineNumber": 50,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        for (Task task : this.tasks) {"
-      },
-      {
-        "lineNumber": 51,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "            System.out.println(\"     \" + i + \": \" + task); i++;"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.tasks;"
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 58
-    }
-  },
-  {
-    "path": "src/main/java/Todo.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "public class Todo extends Task {"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Todo(String description) {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        super(description);"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String getType() {"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"T\";"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return \"[T]\" + super.toString();"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 16
-    }
-  },
-  {
-    "path": "src/main/java/Ui.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "import java.util.Scanner;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "public class Ui {"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    protected String line \u003d \"    ____________________________________________________________\\n\";"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    protected Scanner sc \u003d new Scanner(System.in);"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public Ui() {"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void showLine() {"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(this.line);"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void showWelcome() {"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.showLine();"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"    Hello I\u0027m Dat\\n\" + \"    What can I do for you?\\n\" );"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.showLine();"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void showGoodbye() {"
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.showLine();"
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"    Goodbye, see you again!\\n\");"
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.showLine();"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public void showError(String errorMessage) {"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.showLine();"
-      },
-      {
-        "lineNumber": 29,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(\"☹ OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        System.out.println(errorMessage);"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        this.showLine();"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    public String readCommand() {"
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "        return this.sc.nextLine();"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "tiendat161"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "tiendat161": 37
-    }
-  },
-  {
-    "path": "src/main/java/UnknownCommand.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
         "author": {
           "gitId": "tiendat161"
         },
         "content": "public class UnknownCommand extends Command{"
       },
       {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"Unknown command, please try again\");"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 12
+    }
+  },
+  {
+    "path": "src/main/java/duke/exception/DukeException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.exception;"
+      },
+      {
         "lineNumber": 2,
         "author": {
           "gitId": "tiendat161"
@@ -3715,21 +1245,21 @@
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    @Override"
+        "content": "public class DukeException extends Exception {"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "    public void execute(TaskList tasks, AccessHardDisk storage) {"
+        "content": "    public DukeException(String s) {"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "tiendat161"
         },
-        "content": "        System.out.println(\"Unknown command, please try again\");"
+        "content": "        super(s);"
       },
       {
         "lineNumber": 6,
@@ -3748,6 +1278,2924 @@
     ],
     "authorContributionMap": {
       "tiendat161": 7
+    }
+  },
+  {
+    "path": "src/main/java/duke/exception/EmptyArgumentException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.exception;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class EmptyArgumentException extends DukeException {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    EmptyArgumentException(String s) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        super(s);"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 7
+    }
+  },
+  {
+    "path": "src/main/java/duke/exception/InvalidTaskException.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.exception;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class InvalidTaskException extends DukeException {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    InvalidTaskException(String s) {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        super(s);"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 7
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Deadline.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class Deadline extends Task {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected LocalDate time;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Deadline(String description, String time) throws DukeException {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.time \u003d LocalDate.parse(time);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getType() {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"D\";"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getTimeFormatted() {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.time.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public LocalDate getTime() {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.time;"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"[D]\" + super.toString() + \" (by: \" + this.getTimeFormatted() + \")\";"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 35
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Event.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.time.format.DateTimeFormatter;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class Event extends Task {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected LocalDate time;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Event(String description, String time) throws DukeException {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.time \u003d LocalDate.parse(time);"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getType() {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"E\";"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getTimeFormatted() {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.time.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public LocalDate getTime() {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.time;"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"[E]\" + super.toString() + \" (on: \" + this.getTimeFormatted() + \")\";"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 35
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Task.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class Task {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected String description;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected boolean isDone;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Task(String description) {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.description \u003d description;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.isDone \u003d false;"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public boolean isDone() {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.isDone;"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getDescription() {"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.description;"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getType() {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"Task\";"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getTimeFormatted() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"\";"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public LocalDate getTime() {"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return LocalDate.parse(\"1998-01-16\");"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getStatusIcon() {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return (isDone ? \"\\u2713\" : \"\\u2718\"); //return tick or X symbols"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void markDone() {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.isDone \u003d true;"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"[\" + this.getStatusIcon() + \"] \" + this.description;"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 46
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/TaskList.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.util.AccessHardDisk;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.io.IOException;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class TaskList {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected ArrayList\u003cTask\u003e tasks;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public TaskList() {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.tasks \u003d new ArrayList\u003cTask\u003e();"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public TaskList(ArrayList\u003cTask\u003e tasks) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.tasks \u003d tasks;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public TaskList(AccessHardDisk storage) throws DukeException {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        tasks \u003d storage.readTasksFromFile().getTaskList();"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void markDone(int n, AccessHardDisk storage) throws IOException {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        tasks.get(n-1).markDone();"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        storage.saveFile(this);"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"    Nice! I\u0027ve marked this task as done: \");"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"      \" + tasks.get(n - 1));"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void delete(int n, AccessHardDisk storage) throws IOException {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        Task removedTask \u003d tasks.remove(n-1);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        storage.saveFile(this);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"    Noted. I\u0027ve removed this task: \");"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"      \" + removedTask);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void addTask(Task task, AccessHardDisk storage) throws IOException {"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.tasks.add(task);"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        storage.saveFile(this);"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"    Got it. I\u0027ve added this task:\");"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"     \"+ this.tasks.size() + \": \" + task);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Task checkTask(int n) {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return tasks.get(n-1);"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public int checkSize() {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return tasks.size();"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void showTaskList() {"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        int i \u003d 1;"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        for (Task task : this.tasks) {"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            System.out.println(\"     \" + i + \": \" + task); i++;"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public ArrayList\u003cTask\u003e getTaskList() {"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.tasks;"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 63
+    }
+  },
+  {
+    "path": "src/main/java/duke/task/Todo.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.task;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class Todo extends Task {"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Todo(String description) {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        super(description);"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String getType() {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"T\";"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return \"[T]\" + super.toString();"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 18
+    }
+  },
+  {
+    "path": "src/main/java/duke/util/AccessHardDisk.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.util;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.task.*;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.io.*;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class AccessHardDisk {"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    String path \u003d \"./data/duke.txt\";"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    Scanner readFile;"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public AccessHardDisk(String path) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            this.readFile \u003d new Scanner(new File(this.path \u003d path));"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        } catch (FileNotFoundException error) {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            System.out.println(error);"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            System.exit(0);"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public TaskList readTasksFromFile() throws DukeException {"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        ArrayList\u003cTask\u003e data \u003d new ArrayList\u003c\u003e();"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        while (readFile.hasNextLine()) {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String input \u003d readFile.nextLine();"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String[] line \u003d input.split(\"\\\\|\");"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            if (line[0].equals(\"T\")) {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                data.add(new Todo(line[2]));"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            } else if (line[0].equals(\"D\")) {"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                data.add(new Deadline(line[2], line[3]));"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                System.out.println(line[2]);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            } else if (line[0].equals(\"E\")) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                data.add(new Event(line[2], line[3]));"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            if (line[1].equals(\"1\")) {"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                data.get(data.size()-1).markDone();"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return new TaskList(data);"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void saveFile(TaskList tasks) throws IOException {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        PrintWriter pw \u003d new PrintWriter(new FileOutputStream(path));"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        for (Task task : tasks.getTaskList()) {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            int binaryInx \u003d (task.isDone()) ? 1 : 0;"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            pw.println(task.getType() + \"|\" + binaryInx + \"|\" + task.getDescription() + \"|\" + task.getTime().toString());"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        pw.close();"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 51
+    }
+  },
+  {
+    "path": "src/main/java/duke/util/Parser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.util;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.exception.DukeException;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.task.*;"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import duke.command.*;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.util.ArrayList;"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class Parser {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected TaskList tasks;"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Parser(TaskList tasks) {"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.tasks \u003d tasks;"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Parser(ArrayList\u003cTask\u003e tasks) {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.tasks \u003d new TaskList(tasks);"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Command parse(String fullCommand) throws DukeException {"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        if (fullCommand.toLowerCase().trim().equals(\"bye\")) {"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            System.out.println(\"Goodbye! See you soon!\");"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            return new ExitCommand();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        if (fullCommand.toLowerCase().trim().equals(\"list\")) {"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            return new ShowCommand();"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        String[] action \u003d fullCommand.split(\" \");"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        if (action[0].toLowerCase().trim().equals(\"done\")) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            int index \u003d 0;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                index \u003d Integer.parseInt(action[1]);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            } catch (NumberFormatException e) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS! The argument of a \u0027done\u0027 command must be a number.\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            if (index \u003c\u003d 0 || index \u003e\u003d this.tasks.checkSize()) {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS! The index of a \u0027done\u0027 command is out of bounce.\");"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            return new DoneCommand(index);"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        if (action[0].toLowerCase().trim().equals(\"delete\")) {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            int index \u003d 0;"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                index \u003d Integer.parseInt(action[1]);"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            } catch (NumberFormatException e) {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS! The argument of a \u0027delete\u0027 command must be a number.\");"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            if (index \u003c\u003d 0 || index \u003e this.tasks.checkSize()) {"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS! The index of a \u0027delete\u0027 command is out of bounce.\");"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            return new DeleteCommand(index);"
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        if (action[0].toLowerCase().trim().equals(\"todo\")) {"
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            if (action.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS! The description of a \u0027todo\u0027 command is missing.\");"
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            return new AddCommand(new Todo(fullCommand.split(\" \", 2)[1]));"
+      },
+      {
+        "lineNumber": 63,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 64,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 65,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        if (action[0].toLowerCase().trim().equals(\"deadline\")) {"
+      },
+      {
+        "lineNumber": 66,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String time;"
+      },
+      {
+        "lineNumber": 67,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String details;"
+      },
+      {
+        "lineNumber": 68,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            if (action.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 69,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS! The description of a \u0027deadline\u0027 command is missing.\");"
+      },
+      {
+        "lineNumber": 70,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 71,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String description \u003d fullCommand.split(\" \", 2)[1];"
+      },
+      {
+        "lineNumber": 72,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String[] splitDescription \u003d description.split(\" /by \");"
+      },
+      {
+        "lineNumber": 73,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 74,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                details \u003d splitDescription[0];"
+      },
+      {
+        "lineNumber": 75,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                time \u003d splitDescription[1];"
+      },
+      {
+        "lineNumber": 76,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 77,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS!!! The format for \u0027deadline\u0027 command requires a description \" +"
+      },
+      {
+        "lineNumber": 78,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                        \"following by \u003c/by\u003e notation and a due date.\");"
+      },
+      {
+        "lineNumber": 79,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 80,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            return new AddCommand(new Deadline(details, time));"
+      },
+      {
+        "lineNumber": 81,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 82,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 83,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        if (action[0].toLowerCase().trim().equals(\"event\")) {"
+      },
+      {
+        "lineNumber": 84,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String time;"
+      },
+      {
+        "lineNumber": 85,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String details;"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            if (action.length \u003d\u003d 1) {"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS! The description of a \u0027event\u0027 command is missing.\");"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String description \u003d fullCommand.split(\" \", 2)[1];"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            String[] splitDescription \u003d description.split(\" /at \");"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            try {"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                details \u003d splitDescription[0];"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                time \u003d splitDescription[1];"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            } catch (ArrayIndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                throw new DukeException(\"☹ OOPS!!! The format for \u0027event\u0027 command requires a description \" +"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "                        \"following by \u003c/at\u003e notation and a date time.\");"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "            return new AddCommand(new Event(details, time));"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return new UnknownCommand();"
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 103
+    }
+  },
+  {
+    "path": "src/main/java/duke/util/Ui.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "package duke.util;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "import java.util.Scanner;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "public class Ui {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected String line \u003d \"    ____________________________________________________________\\n\";"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    protected Scanner sc \u003d new Scanner(System.in);"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public Ui() {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void showLine() {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(this.line);"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void showWelcome() {"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.showLine();"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"    Hello I\u0027m Dat\\n\" + \"    What can I do for you?\\n\" );"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.showLine();"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void showGoodbye() {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.showLine();"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"    Goodbye, see you again!\\n\");"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.showLine();"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public void showError(String errorMessage) {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.showLine();"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(\"☹ OOPS!!! I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        System.out.println(errorMessage);"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        this.showLine();"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    public String readCommand() {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "        return this.sc.nextLine();"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "tiendat161"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "tiendat161": 39
     }
   },
   {

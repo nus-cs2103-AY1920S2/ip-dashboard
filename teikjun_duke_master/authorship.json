@@ -362,339 +362,332 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "import java.util.ArrayList;"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "import java.util.Arrays;"
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "import java.util.List;"
+        "content": ""
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "public class Deadline extends Task {"
+        "content": " * Represents a deadline task"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    String date;"
+        "content": " */"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "public class Deadline extends Task {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    Deadline(String name, boolean isDone, String date) {"
+        "content": "    LocalDate date;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        super(name, isDone);"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.date \u003d date;"
+        "content": "    Deadline(String name, boolean isDone, LocalDate date) {"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "        super(name, isDone);"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "        this.date \u003d date;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public static Deadline createDeadline(String name, boolean isDone, String date) {"
+        "content": "    }"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new Deadline(name, isDone, date);"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "    public static Deadline decode(String text) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "        String[] parts \u003d text.split(\",\");"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public static Deadline decode(String text) {"
+        "content": "        boolean decodedIsDone \u003d parts[1].equals(\"1\");"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String[] parts \u003d text.split(\",\");"
+        "content": "        LocalDate decodedDate \u003d LocalDate.parse(parts[3], DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        boolean decodedIsDone \u003d parts[1].equals(\"1\");"
+        "content": "        return new Deadline(parts[2], decodedIsDone, decodedDate);"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return createDeadline(parts[2], decodedIsDone, parts[3]);"
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public String encodeTask() {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public String encodeTask() {"
+        "content": "        int encodedIsDone \u003d this.getIsDone() ? 1 : 0;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        int encodedIsDone \u003d this.getIsDone() ? 1 : 0;"
+        "content": "        return \"D,\" + encodedIsDone + \",\" + name + \",\" + this.getDateString();"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return \"D,\" + encodedIsDone + \",\" + name + \",\" + date;"
+        "content": "    }"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public Deadline complete() {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Deadline complete() {"
+        "content": "        return new Deadline(this.getName(), true, this.date);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return createDeadline(this.getName(), true, this.getDate());"
+        "content": "    }"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public Task setName(String newName) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Task setName(String newName) {"
+        "content": "        return new Deadline(newName, isDone, this.date);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return createDeadline(newName, isDone, date);"
+        "content": "    }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public String toString() {"
+        "content": "        String taskString \u003d super.toString();"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String taskString \u003d super.toString();"
+        "content": "        String result \u003d \"[D]\" + taskString + \" (by: \" + this.getDateString() + \")\";"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String result \u003d \"[D]\" + taskString + \" (by: \" + date + \")\";"
+        "content": "        return result;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return result;"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    public String getDateString() {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public String getDate() {"
+        "content": "        return this.date.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return this.date;"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "teikjun"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 49,
+        "lineNumber": 48,
         "author": {
           "gitId": "teikjun"
         },
@@ -702,7 +695,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 49
+      "teikjun": 48
     }
   },
   {
@@ -714,14 +707,14 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "import java.util.ArrayList;"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "import java.util.List;"
+        "content": "import java.time.format.DateTimeParseException;"
       },
       {
         "lineNumber": 3,
@@ -735,122 +728,234 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "public class DeadlineCommand extends Command {"
+        "content": "/**"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public static final String COMMAND_WORD \u003d \"deadline\";"
+        "content": " * Adds a deadline to the taskList"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    String firstArgumentText;"
+        "content": "public class DeadlineCommand extends Command {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    String secondArgumentText;"
+        "content": "    public static final String COMMAND_WORD \u003d \"deadline\";"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    String taskName;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    DeadlineCommand(String firstArgumentText, String secondArgumentText) {"
+        "content": "    LocalDate date;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.firstArgumentText \u003d firstArgumentText;"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.secondArgumentText \u003d secondArgumentText;"
+        "content": "    /**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "     * creates a DeadlineCommand"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "     * @param argumentText the arguments supplied by the user"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "     * @throws DukeException if either part of the command is empty"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public CommandResult execute() {"
+        "content": "     */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task newDeadline \u003d Deadline.createDeadline(firstArgumentText, false, secondArgumentText);"
+        "content": "    DeadlineCommand(String argumentText) throws DukeException, DateTimeParseException {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        taskList.addToList(newDeadline);"
+        "content": "        String[] deadlineParts \u003d argumentText.split(\" /by \");"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new CommandResult(getAddSuccessMessage(newDeadline));"
+        "content": "        if (deadlineParts[0].equals(\"\") || deadlineParts[1].equals(\"\")) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "            throw new DukeException(\"The description of a deadline cannot be empty\");"
       },
       {
         "lineNumber": 21,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            this.taskName \u003d deadlineParts[0];"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            this.date \u003d LocalDate.parse(deadlineParts[1]);"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * Creates a new deadline and adds it to the taskList"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * @return CommandResult with the success message"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public CommandResult execute() {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        Task newDeadline \u003d new Deadline(taskName, false, date);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        taskList.addToList(newDeadline);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new CommandResult(getAddSuccessMessage(newDeadline));"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
         "author": {
           "gitId": "teikjun"
         },
@@ -858,7 +963,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 21
+      "teikjun": 37
     }
   },
   {
@@ -884,7 +989,7 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    int taskNumber;"
+        "content": "    int taskNumberToDelete;"
       },
       {
         "lineNumber": 4,
@@ -898,14 +1003,14 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    DeleteCommand(int taskNumber) {"
+        "content": "    DeleteCommand(String[] words) {"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.taskNumber \u003d taskNumber;"
+        "content": "        this.taskNumberToDelete \u003d Integer.parseInt(words[1]);"
       },
       {
         "lineNumber": 7,
@@ -940,7 +1045,7 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task removedTask \u003d taskList.delete(taskNumber);"
+        "content": "        Task removedTask \u003d taskList.delete(taskNumberToDelete);"
       },
       {
         "lineNumber": 12,
@@ -1033,7 +1138,7 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    int taskNumber;"
+        "content": "    int taskNumberToComplete;"
       },
       {
         "lineNumber": 4,
@@ -1047,14 +1152,14 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    DoneCommand(int taskNumber) {"
+        "content": "    DoneCommand(String[] words) {"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.taskNumber \u003d taskNumber;"
+        "content": "        this.taskNumberToComplete \u003d Integer.parseInt(words[1]);"
       },
       {
         "lineNumber": 7,
@@ -1075,80 +1180,108 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    /**"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public CommandResult execute() {"
+        "content": "     * complete the task at taskNumberToComplete"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task completedTask \u003d taskList.markAsDone(taskNumber);"
+        "content": "     * @return CommandResult with success message"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new CommandResult(getDoneSuccessMessage(completedTask));"
+        "content": "     */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "    @Override"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    public CommandResult execute() {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public String getDoneSuccessMessage(Task completedTask) {"
+        "content": "        Task completedTask \u003d taskList.markAsDone(taskNumberToComplete);"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return \"Nice! I\u0027ve marked this task as done:\\n\""
+        "content": "        return new CommandResult(getDoneSuccessMessage(completedTask));"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                + completedTask + \"\\n\""
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                + \"Now you have \" + taskList.getSize() + \" tasks in the list.\";"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "    public String getDoneSuccessMessage(Task completedTask) {"
       },
       {
         "lineNumber": 20,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return \"Nice! I\u0027ve marked this task as done:\\n\""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                + completedTask + \"\\n\""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                + \"Now you have \" + taskList.getSize() + \" tasks in the list.\";"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
         "author": {
           "gitId": "teikjun"
         },
@@ -1156,7 +1289,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 20
+      "teikjun": 24
     }
   },
   {
@@ -1614,310 +1747,154 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "public class EditCommand extends Command {"
+        "content": "/**"
       },
       {
         "lineNumber": 2,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": " * Edits a task in the taskList"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "public class EditCommand extends Command {"
+      },
+      {
+        "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
         "content": "    public static final String COMMAND_WORD \u003d \"edit\";"
       },
       {
-        "lineNumber": 3,
+        "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    int taskNumber;"
+        "content": "    int taskNumberToEdit;"
       },
       {
-        "lineNumber": 4,
+        "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
         "content": "    String newName;"
       },
       {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    EditCommand(int taskNumber, String newName) {"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        this.taskNumber \u003d taskNumber;"
-      },
-      {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.newName \u003d newName;"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "    EditCommand(String argumentText) {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "        String[] editParts \u003d argumentText.split(\"/to\");"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "        this.taskNumberToEdit \u003d Integer.parseInt(editParts[0].trim());"
       },
       {
         "lineNumber": 12,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        this.newName \u003d editParts[1].trim();"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * Edit the task at taskNumberToEdit"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * @return CommandResult with success message"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 20,
         "author": {
           "gitId": "teikjun"
         },
         "content": "    public CommandResult execute() {"
       },
       {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        Task editedTask \u003d taskList.edit(taskNumber, newName);"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return new CommandResult(getEditSuccessMessage(editedTask));"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public String getEditSuccessMessage(Task editedTask) {"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return \"Got it. The task has been successfully updated to:\\n\""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "                + editedTask;"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
         "lineNumber": 21,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "teikjun": 21
-    }
-  },
-  {
-    "path": "src/main/java/Event.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "public class Event extends Task {"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    String date;"
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    Event(String name, boolean isDone, String date) {"
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        super(name, isDone);"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        this.date \u003d date;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public static Event createEvent(String name, boolean isDone, String date) {"
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return new Event(name, isDone, date);"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public static Event decode(String text) {"
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        String[] parts \u003d text.split(\",\");"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        boolean decodedIsDone \u003d parts[1].equals(\"1\");"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return createEvent(parts[2], decodedIsDone, parts[3]);"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public String encodeTask() {"
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        int encodedIsDone \u003d this.getIsDone() ? 1 : 0;"
+        "content": "        Task editedTask \u003d taskList.edit(taskNumberToEdit, newName);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return \"E,\" + encodedIsDone + \",\" + name + \",\" + date;"
+        "content": "        return new CommandResult(getEditSuccessMessage(editedTask));"
       },
       {
         "lineNumber": 23,
@@ -1938,21 +1915,21 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public String getEditSuccessMessage(Task editedTask) {"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Event complete() {"
+        "content": "        return \"Got it. The task has been successfully updated to:\\n\""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return createEvent(this.getName(), true, this.getDate());"
+        "content": "                + editedTask;"
       },
       {
         "lineNumber": 28,
@@ -1966,127 +1943,15 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 30,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 31,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public Task setName(String newName) {"
-      },
-      {
-        "lineNumber": 32,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return createEvent(newName, isDone, date);"
-      },
-      {
-        "lineNumber": 33,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 34,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 35,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    @Override"
-      },
-      {
-        "lineNumber": 36,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public String toString() {"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        String taskString \u003d super.toString();"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        String result \u003d \"[E]\" + taskString + \" (at: \" + date + \")\";"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return result;"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public String getDate() {"
-      },
-      {
-        "lineNumber": 43,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return this.date;"
-      },
-      {
-        "lineNumber": 44,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 45,
-        "author": {
-          "gitId": "teikjun"
-        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "teikjun": 45
+      "teikjun": 29
     }
   },
   {
-    "path": "src/main/java/EventCommand.java",
+    "path": "src/main/java/Event.java",
     "fileType": "java",
     "lines": [
       {
@@ -2094,14 +1959,14 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "public class EventCommand extends Command {"
+        "content": "import java.time.LocalDate;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public static final String COMMAND_WORD \u003d \"event\";"
+        "content": "import java.time.format.DateTimeFormatter;"
       },
       {
         "lineNumber": 3,
@@ -2115,49 +1980,401 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    String firstArgumentText;"
+        "content": "/**"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    String secondArgumentText;"
+        "content": " * Represents an event task"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    EventCommand(String firstArgumentText, String secondArgumentText) {"
+        "content": "public class Event extends Task {"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.firstArgumentText \u003d firstArgumentText;"
+        "content": "    LocalDate date;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.secondArgumentText \u003d secondArgumentText;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
+        "content": "    Event(String name, boolean isDone, LocalDate date) {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        super(name, isDone);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        this.date \u003d date;"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "teikjun"
+        },
         "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public static Event decode(String text) {"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        String[] parts \u003d text.split(\",\");"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        boolean decodedIsDone \u003d parts[1].equals(\"1\");"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        LocalDate decodedDate \u003d LocalDate.parse(parts[3], DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new Event(parts[2], decodedIsDone, decodedDate);"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public String encodeTask() {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        int encodedIsDone \u003d this.getIsDone() ? 1 : 0;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return \"E,\" + encodedIsDone + \",\" + this.getName() + \",\" + this.getDateString();"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public Event complete() {"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new Event(this.getName(), true, this.date);"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public Task setName(String newName) {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new Event(newName, isDone, this.date);"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public String toString() {"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        String taskString \u003d super.toString();"
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        String result \u003d \"[E]\" + taskString + \" (at: \" + this.getDateString() + \")\";"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public String getDateString() {"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return this.date.format(DateTimeFormatter.ofPattern(\"MMM d yyyy\"));"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "teikjun": 49
+    }
+  },
+  {
+    "path": "src/main/java/EventCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "import java.time.format.DateTimeParseException;"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": " * Adds an event to the taskList"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "public class EventCommand extends Command {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public static final String COMMAND_WORD \u003d \"event\";"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    String taskName;"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    LocalDate date;"
       },
       {
         "lineNumber": 11,
@@ -2171,45 +2388,178 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    /**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public CommandResult execute() {"
+        "content": "     * Creates an EventCommand"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task newEvent \u003d Event.createEvent(firstArgumentText, false, secondArgumentText);"
+        "content": "     * @param argumentText supplied by the user"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        taskList.addToList(newEvent);"
+        "content": "     * @throws DukeException if either part of the command is empty"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new CommandResult(getAddSuccessMessage(newEvent));"
+        "content": "     */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "    EventCommand(String argumentText) throws DukeException, DateTimeParseException {"
       },
       {
         "lineNumber": 18,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        String[] eventParts \u003d argumentText.split(\" /at \");"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        if (eventParts[0].equals(\"\") || eventParts[1].equals(\"\")) {"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            throw new DukeException(\"The description of an event cannot be empty\");"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            this.taskName \u003d eventParts[0];"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            this.date \u003d LocalDate.parse(eventParts[1]);"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * Creates an event and adds it to the taskList"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * @return CommandResult with the success message"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public CommandResult execute() {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        Task newEvent \u003d new Event(taskName, false, date);"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        taskList.addToList(newEvent);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new CommandResult(getAddSuccessMessage(newEvent));"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 37,
         "author": {
           "gitId": "teikjun"
         },
@@ -2217,7 +2567,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 18
+      "teikjun": 37
     }
   },
   {
@@ -2318,6 +2668,218 @@
     ],
     "authorContributionMap": {
       "teikjun": 13
+    }
+  },
+  {
+    "path": "src/main/java/FindCommand.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": " * Finds a list of task that matches the user\u0027s keyword"
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "public class FindCommand extends Command {"
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public static final String COMMAND_WORD \u003d \"find\";"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    String keyword;"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * Creates a FindCommand"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * @param argumentText the text supplied by the user"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * @throws DukeException if the argumentText is empty"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    FindCommand(String argumentText) throws DukeException {"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        if (argumentText.equals(\"\")) {"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            throw new DukeException(\"The find command must be followed by a keyword to search\");"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        } else {"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            this.keyword \u003d argumentText;"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * Find a list of task that matches the keyword"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * @return CommandResult with the list of matching tasks"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public CommandResult execute() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new CommandResult(taskList.findTasks(keyword));"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "teikjun": 29
     }
   },
   {
@@ -2443,31 +3005,59 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    /**"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public CommandResult execute() {"
+        "content": "     * list all the tasks in taskList"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new CommandResult(taskList.getAllTasks());"
+        "content": "     * @return CommandResult with a String representing the taskList"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 8,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public CommandResult execute() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new CommandResult(taskList.getAllTasks());"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 12,
         "author": {
           "gitId": "teikjun"
         },
@@ -2475,7 +3065,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 8
+      "teikjun": 12
     }
   },
   {
@@ -2487,126 +3077,126 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "/**"
+        "content": "import java.time.format.DateTimeParseException;"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "teikjun"
         },
-        "content": " * Parses user input."
+        "content": ""
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "teikjun"
         },
-        "content": " */"
+        "content": "/**"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "public class Parser {"
+        "content": " * Parses user input."
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Command parseCommand(String userCommandText) {"
+        "content": "public class Parser {"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String[] words \u003d userCommandText.split(\" \");"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String commandWord \u003d words[0];"
+        "content": "    public Command parseCommand(String userCommandText) {"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String argumentText \u003d words.length \u003d\u003d 1 ? \"\" : Parser.getArguments(words);"
+        "content": "        String[] words \u003d userCommandText.split(\" \");"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "        String commandWord \u003d words[0];"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        try {"
+        "content": "        String argumentText \u003d words.length \u003d\u003d 1 ? \"\" : Parser.getArguments(words);"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            switch (commandWord) {"
+        "content": ""
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            case ListCommand.COMMAND_WORD:"
+        "content": "        try {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                return new ListCommand();"
+        "content": "            switch (commandWord) {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            case DoneCommand.COMMAND_WORD:"
+        "content": "            case ListCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                // complete the task at number given by user"
+        "content": "                return new ListCommand();"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                int taskNumberToComplete \u003d Integer.parseInt(words[1]);"
+        "content": "            case DoneCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                return new DoneCommand(taskNumberToComplete);"
+        "content": "                return new DoneCommand(words);"
       },
       {
         "lineNumber": 19,
@@ -2620,332 +3210,220 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                int taskNumberToDelete \u003d Integer.parseInt(words[1]);"
+        "content": "                return new DeleteCommand(words);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                return new DeleteCommand(taskNumberToDelete);"
+        "content": "            case TodoCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            case TodoCommand.COMMAND_WORD:"
+        "content": "                return new TodoCommand(argumentText);"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                if (argumentText.equals(\"\")) {"
+        "content": "            case DeadlineCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    throw new DukeException(\"The description of a todo cannot be empty.\");"
+        "content": "                return new DeadlineCommand(argumentText);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                } else {"
+        "content": "            case EventCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    return new TodoCommand(argumentText);"
+        "content": "                return new EventCommand(argumentText);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                }"
+        "content": "            case ExitCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            case DeadlineCommand.COMMAND_WORD:"
+        "content": "                return new ExitCommand();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                String[] deadlineParts \u003d argumentText.split(\" /by \");"
+        "content": "            case EditCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                if (deadlineParts[0].equals(\"\") || deadlineParts[1].equals(\"\")) {"
+        "content": "                return new EditCommand(argumentText);"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    throw new DukeException(\"The description of a deadline cannot be empty\");"
+        "content": "            case FindCommand.COMMAND_WORD:"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                } else {"
+        "content": "                return new FindCommand(argumentText);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    return new DeadlineCommand(deadlineParts[0], deadlineParts[1]);"
+        "content": "            default:"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                }"
+        "content": "                throw new DukeException(\"I\u0027m sorry, but I don\u0027t know what that means :-(\");"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            case EventCommand.COMMAND_WORD:"
+        "content": "            }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                String[] eventParts \u003d argumentText.split(\" /at \");"
+        "content": "        } catch (DukeException | DateTimeParseException e) {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                if (eventParts[0].equals(\"\") || eventParts[1].equals(\"\")) {"
+        "content": "            return new IncorrectCommand(e.getMessage());"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    throw new DukeException(\"The description of an event cannot be empty\");"
+        "content": "        }"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                } else {"
+        "content": "    }"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    return new EventCommand(eventParts[0], eventParts[1]);"
+        "content": ""
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                }"
+        "content": "    /**"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            case ExitCommand.COMMAND_WORD:"
+        "content": "     * Combines a String array from index 1 to (length - 1)"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                return new ExitCommand();"
+        "content": "     */"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            case EditCommand.COMMAND_WORD:"
+        "content": "    public static String getArguments(String[] parts) {"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                String[] editParts \u003d argumentText.split(\"/to\");"
+        "content": "        String result \u003d parts[1];"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                int TaskNumberToEdit \u003d Integer.parseInt(editParts[0].trim());"
+        "content": "        for (int i \u003d 2; i \u003c parts.length; i++) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                String newName \u003d editParts[1].trim();"
+        "content": "            result +\u003d \" \" + parts[i];"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                return new EditCommand(TaskNumberToEdit, newName);"
+        "content": "        }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            default:"
+        "content": "        return result;"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                throw new DukeException(\"I\u0027m sorry, but I don\u0027t know what that means :-(\");"
+        "content": "    }"
       },
       {
         "lineNumber": 51,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 52,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        } catch (DukeException e) {"
-      },
-      {
-        "lineNumber": 53,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "            return new IncorrectCommand(e.getMessage());"
-      },
-      {
-        "lineNumber": 54,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 55,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 56,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 57,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 58,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "     * Combines a String array from index 1 to (length - 1)"
-      },
-      {
-        "lineNumber": 59,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    public static String getArguments(String[] parts) {"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        String result \u003d parts[1];"
-      },
-      {
-        "lineNumber": 62,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        for (int i \u003d 2; i \u003c parts.length; i++) {"
-      },
-      {
-        "lineNumber": 63,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "            result +\u003d \" \" + parts[i];"
-      },
-      {
-        "lineNumber": 64,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 65,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "        return result;"
-      },
-      {
-        "lineNumber": 66,
-        "author": {
-          "gitId": "teikjun"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 67,
         "author": {
           "gitId": "teikjun"
         },
@@ -2953,7 +3431,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 67
+      "teikjun": 51
     }
   },
   {
@@ -3056,14 +3534,14 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    Path path;"
+        "content": "    Path filePath;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    Path folderPath;"
       },
       {
         "lineNumber": 16,
@@ -3084,486 +3562,591 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        path \u003d Paths.get(userHome, \"duke\", \"data\", \"duke.txt\");"
+        "content": "        filePath \u003d Paths.get(userHome, \"DukeData\", \"duke.txt\");"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "        folderPath \u003d Paths.get(userHome, \"DukeData\");"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * Loads the TaskList that is stored in a predetermined filePath."
+        "content": "    /**"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @return TaskList"
+        "content": "     * Loads the TaskList that is stored in a predetermined filePath."
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     */"
+        "content": "     * @return TaskList"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public TaskList load() {"
+        "content": "     */"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        TaskList taskList \u003d null;"
+        "content": "    public TaskList load() {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        try {"
+        "content": "        TaskList taskList \u003d null;"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            List\u003cString\u003e encodedTasks \u003d Files.readAllLines(path, Charset.defaultCharset());"
+        "content": "        try {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            taskList \u003d this.decodeTaskList(encodedTasks);"
+        "content": "            createFileLocation();"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            List\u003cString\u003e encodedTasks \u003d Files.readAllLines(filePath, Charset.defaultCharset());"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            e.printStackTrace();"
+        "content": "            taskList \u003d this.decodeTaskList(encodedTasks);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        }"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return taskList;"
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "        return taskList;"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * Stores a Task List in a predetermined filePath"
+        "content": ""
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @param taskList"
+        "content": "    /**"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     */"
+        "content": "     * Creates the directory and/or file if they have not been created yet"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public void save(TaskList taskList) {"
+        "content": "     * @throws IOException"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        try {"
+        "content": "     */"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            List\u003cString\u003e encodedTasks \u003d this.encodeTaskList(taskList);"
+        "content": "    public void createFileLocation() throws IOException {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            Files.write(path, encodedTasks);"
+        "content": "        if (Files.notExists(folderPath)) {"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            Files.createDirectory(folderPath);"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            e.printStackTrace();"
+        "content": "        }"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        }"
+        "content": "        if (Files.notExists(filePath)) {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "            Files.createFile(filePath);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * Returns an encoded String representation of TaskList so that it can be stored"
+        "content": ""
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @return a String representation of TaskList"
+        "content": "    /**"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     */"
+        "content": "     * Stores a Task List in a predetermined filePath"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public List\u003cString\u003e encodeTaskList(TaskList taskList) {"
+        "content": "     * @param taskList the taskList object to be saved"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        List\u003cString\u003e encodedTasks \u003d new ArrayList\u003c\u003e();"
+        "content": "     */"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        for (Task t : taskList.getList()) {"
+        "content": "    public void save(TaskList taskList) {"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            encodedTasks.add(t.encodeTask());"
+        "content": "        try {"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        }"
+        "content": "            List\u003cString\u003e encodedTasks \u003d this.encodeTaskList(taskList);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return encodedTasks;"
+        "content": "            Files.write(filePath, encodedTasks);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "        } catch (IOException e) {"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "            e.printStackTrace();"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    /**"
+        "content": "        }"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * Returns a decoded TaskList so that it can be used by Duke"
+        "content": "    }"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * If the text is an empty String, an empty ArrayList will be returned as expected."
+        "content": ""
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @param encodedTasks the encoded text used to store the TaskList"
+        "content": "    /**"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @return a TaskList based on the encoded text"
+        "content": "     * Returns an encoded String representation of TaskList so that it can be stored"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     */"
+        "content": "     * @return a String representation of TaskList"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public TaskList decodeTaskList(List\u003cString\u003e encodedTasks) {"
+        "content": "     */"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        List\u003cTask\u003e decodedTasks \u003d new ArrayList\u003c\u003e();"
+        "content": "    public List\u003cString\u003e encodeTaskList(TaskList taskList) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        for (String s : encodedTasks) {"
+        "content": "        List\u003cString\u003e encodedTasks \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            switch(s.charAt(0)) {"
+        "content": "        for (Task t : taskList.getList()) {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                case (\u0027T\u0027):"
+        "content": "            encodedTasks.add(t.encodeTask());"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    decodedTasks.add(Todo.decode(s));"
+        "content": "        }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    break;"
+        "content": "        return encodedTasks;"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                case (\u0027D\u0027):"
+        "content": "    }"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    decodedTasks.add(Deadline.decode(s));"
+        "content": ""
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    break;"
+        "content": "    /**"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                case (\u0027E\u0027):"
+        "content": "     * Returns a decoded TaskList so that it can be used by Duke"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    decodedTasks.add(Event.decode(s));"
+        "content": "     * If the text is an empty String, an empty ArrayList will be returned as expected."
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    break;"
+        "content": "     * @param encodedTasks the encoded text used to store the TaskList"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                default:"
+        "content": "     * @return a TaskList based on the encoded text"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "                    break;"
+        "content": "     */"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            }"
+        "content": "    public TaskList decodeTaskList(List\u003cString\u003e encodedTasks) {"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        }"
+        "content": "        List\u003cTask\u003e decodedTasks \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new TaskList(decodedTasks);"
+        "content": "        for (String s : encodedTasks) {"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "            switch(s.charAt(0)) {"
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "                case (\u0027T\u0027):"
       },
       {
         "lineNumber": 87,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                    decodedTasks.add(Todo.decode(s));"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                case (\u0027D\u0027):"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                    decodedTasks.add(Deadline.decode(s));"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                case (\u0027E\u0027):"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                    decodedTasks.add(Event.decode(s));"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                default:"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                    break;"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new TaskList(decodedTasks);"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 102,
         "author": {
           "gitId": "teikjun"
         },
@@ -3571,7 +4154,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 87
+      "teikjun": 102
     }
   },
   {
@@ -4033,360 +4616,500 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    /**"
+        "content": ""
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * Deletes a task"
+        "content": "    /**"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @param taskNumber the target task number to delete"
+        "content": "     * Deletes a task"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @return the task that is deleted"
+        "content": "     * @param taskNumber the target task number to delete"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     */"
+        "content": "     * @return the task that has been deleted from the list"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Task delete(int taskNumber) {"
+        "content": "     */"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        int index \u003d taskNumber - 1;"
+        "content": "    public Task delete(int taskNumber) {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task removedTask \u003d tasks.remove(index);"
+        "content": "        int index \u003d taskNumber - 1;"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return removedTask;"
+        "content": "        Task removedTask \u003d tasks.remove(index);"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "        return removedTask;"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Task edit(int taskNumber, String newName) {"
+        "content": ""
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        int index \u003d taskNumber - 1;"
+        "content": "    /**"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task targetTask \u003d tasks.get(index);"
+        "content": "     * Edits a task"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task editedTask \u003d targetTask.setName(newName);"
+        "content": "     * @param taskNumber to be edited from the list"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        tasks.set(index, editedTask);"
+        "content": "     * @param newName the new name of the task"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return editedTask;"
+        "content": "     * @return the edited task"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "     */"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    public Task edit(int taskNumber, String newName) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    /**"
+        "content": "        int index \u003d taskNumber - 1;"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * Mark a task as done by substituting the current task with a completed task in the list"
+        "content": "        Task targetTask \u003d tasks.get(index);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @param taskNumber the target task number to delete"
+        "content": "        Task editedTask \u003d targetTask.setName(newName);"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @return the Task that is marked as done"
+        "content": "        tasks.set(index, editedTask);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     */"
+        "content": "        return editedTask;"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Task markAsDone(int taskNumber) {"
+        "content": "    }"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        // the index of a task in the list is one less than the taskNumber"
+        "content": ""
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        int index \u003d taskNumber - 1;"
+        "content": "    /**"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task currentTask \u003d tasks.get(index);"
+        "content": "     * Mark a task as done by substituting the current task with a completed task in the list"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task completedTask \u003d currentTask.complete();"
+        "content": "     * @param taskNumber the target task number to delete"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        tasks.set(index, completedTask);"
+        "content": "     * @return the Task that is marked as done"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return completedTask;"
+        "content": "     */"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "    public Task markAsDone(int taskNumber) {"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "        // the index of a task in the list is one less than the taskNumber"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    /**"
+        "content": "        int index \u003d taskNumber - 1;"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * Gets a String representation of all tasks in the list"
+        "content": "        Task currentTask \u003d tasks.get(index);"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     * @return a String representing all tasks in the list"
+        "content": "        Task completedTask \u003d currentTask.complete();"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "     */"
+        "content": "        tasks.set(index, completedTask);"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public String getAllTasks() {"
+        "content": "        return completedTask;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String result \u003d \"Here are the tasks in your list:\";"
+        "content": "    }"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
+        "content": ""
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            result +\u003d \"\\n\";"
+        "content": "    /**"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            Task currentTask \u003d tasks.get(i);"
+        "content": "     * Gets a String representation of all tasks in the list"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            int taskNumber \u003d i + 1;"
+        "content": "     * @return a String representing all tasks in the list"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "            result +\u003d taskNumber + \". \" + currentTask;"
+        "content": "     */"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        }"
+        "content": "    public String getAllTasks() {"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return result;"
+        "content": "        String result \u003d \"Here are the tasks in your list:\";"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "            result +\u003d \"\\n\";"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public List\u003cTask\u003e getList() {"
+        "content": "            Task currentTask \u003d tasks.get(i);"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return tasks;"
+        "content": "            int taskNumber \u003d i + 1;"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "            result +\u003d taskNumber + \". \" + currentTask;"
       },
       {
         "lineNumber": 85,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 86,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 87,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 88,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 89,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public String findTasks(String keyword) {"
+      },
+      {
+        "lineNumber": 90,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        String result \u003d \"Here are the matching tasks in your list:\";"
+      },
+      {
+        "lineNumber": 91,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        for (int i \u003d 0; i \u003c tasks.size(); i++) {"
+      },
+      {
+        "lineNumber": 92,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            Task currentTask \u003d tasks.get(i);"
+      },
+      {
+        "lineNumber": 93,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            if (currentTask.toString().contains(keyword)) {"
+      },
+      {
+        "lineNumber": 94,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                result +\u003d \"\\n\";"
+      },
+      {
+        "lineNumber": 95,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                int taskNumber \u003d i + 1;"
+      },
+      {
+        "lineNumber": 96,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "                result +\u003d taskNumber + \". \" + currentTask;"
+      },
+      {
+        "lineNumber": 97,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "            }"
+      },
+      {
+        "lineNumber": 98,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 99,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return result;"
+      },
+      {
+        "lineNumber": 100,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 101,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 102,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public List\u003cTask\u003e getList() {"
+      },
+      {
+        "lineNumber": 103,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return tasks;"
+      },
+      {
+        "lineNumber": 104,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 105,
         "author": {
           "gitId": "teikjun"
         },
@@ -4394,7 +5117,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 85
+      "teikjun": 105
     }
   },
   {
@@ -4406,269 +5129,262 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "public class Todo extends Task {"
+        "content": "/**"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    Todo(String name, boolean isDone) {"
+        "content": " * Represents a to-do task"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        super(name, isDone);"
+        "content": " */"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "public class Todo extends Task {"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    Todo(String name, boolean isDone) {"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public static Todo createTodo(String name, boolean isDone) {"
+        "content": "        super(name, isDone);"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new Todo(name, isDone);"
+        "content": "    }"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    public static Todo decode(String text) {"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public static Todo decode(String text) {"
+        "content": "        String[] parts \u003d text.split(\",\");"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String[] parts \u003d text.split(\",\");"
+        "content": "        boolean decodedIsDone \u003d parts[1].equals(\"1\");"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        boolean decodedIsDone \u003d parts[1].equals(\"1\");"
+        "content": "        return new Todo(parts[2], decodedIsDone);"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return createTodo(parts[2], decodedIsDone);"
+        "content": "    }"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public String encodeTask() {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public String encodeTask() {"
+        "content": "        int encodedIsDone \u003d this.getIsDone() ? 1 : 0;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        int encodedIsDone \u003d this.getIsDone() ? 1 : 0;"
+        "content": "        return \"T,\" + encodedIsDone + \",\" + name;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return \"T,\" + encodedIsDone + \",\" + name;"
+        "content": "    }"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public Todo complete() {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Todo complete() {"
+        "content": "        return new Todo(this.getName(), true);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return createTodo(this.getName(), true);"
+        "content": "    }"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public Task setName(String newName) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public Task setName(String newName) {"
+        "content": "        return new Todo(newName, isDone);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return createTodo(newName, isDone);"
+        "content": "    }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    @Override"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    public String toString() {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public String toString() {"
+        "content": "        String taskString \u003d super.toString();"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String taskString \u003d super.toString();"
+        "content": "        String result \u003d \"[T]\" + taskString;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        String result \u003d \"[T]\" + taskString;"
+        "content": "        return result;"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return result;"
+        "content": "    }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "teikjun"
-        },
         "content": "}"
       },
       {
-        "lineNumber": 39,
+        "lineNumber": 38,
         "author": {
           "gitId": "teikjun"
         },
@@ -4676,7 +5392,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 39
+      "teikjun": 38
     }
   },
   {
@@ -4688,21 +5404,21 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "import java.util.ArrayList;"
+        "content": "/**"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "import java.util.List;"
+        "content": " * Adds a to-do to the taskList"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": " */"
       },
       {
         "lineNumber": 4,
@@ -4723,101 +5439,185 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    String taskName;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    String argumentText;"
+        "content": ""
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    TodoCommand(String argumentText) {"
+        "content": "     * Creates a TodoCommand"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        this.argumentText \u003d argumentText;"
+        "content": "     * @param argumentText supplied by the user"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "     * @throws DukeException if the argumentText is empty"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "     */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    @Override"
+        "content": "    TodoCommand(String argumentText) throws DukeException {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    public CommandResult execute() {"
+        "content": "        if (argumentText.equals(\"\")) {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        Task newTodo \u003d Todo.createTodo(argumentText, false);"
+        "content": "            throw new DukeException(\"The description of a todo cannot be empty.\");"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        taskList.addToList(newTodo);"
+        "content": "        } else {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "        return new CommandResult(getAddSuccessMessage(newTodo));"
+        "content": "            this.taskName \u003d argumentText;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "teikjun"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 20,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * Creates a to-do and adds it to the taskList"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     * @return CommandResult with the success message"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Override"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public CommandResult execute() {"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        Task newTodo \u003d new Todo(taskName, false);"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        taskList.addToList(newTodo);"
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        return new CommandResult(getAddSuccessMessage(newTodo));"
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 32,
         "author": {
           "gitId": "teikjun"
         },
@@ -4825,7 +5625,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 20
+      "teikjun": 32
     }
   },
   {
@@ -5097,6 +5897,199 @@
     }
   },
   {
+    "path": "src/test/java/DeadlineTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "import java.time.LocalDate;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "public class DeadlineTest {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public void getDateString() {"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        LocalDate date \u003d LocalDate.parse(\"2020-03-19\");"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        Deadline deadline \u003d new Deadline(\"name\", false, date);"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        assertEquals(\"Mar 19 2020\", deadline.getDateString());"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "teikjun": 14
+    }
+  },
+  {
+    "path": "src/test/java/TodoTest.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "import org.junit.jupiter.api.Test;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "import static org.junit.jupiter.api.Assertions.assertEquals;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "public class TodoTest {"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    @Test"
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    public void complete() {"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        Todo todo \u003d new Todo(\"name\", false);"
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "        assertEquals(true, todo.complete().getIsDone());"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "teikjun": 11
+    }
+  },
+  {
     "path": "text-ui-test/EXPECTED.txt",
     "fileType": "txt",
     "lines": [
@@ -5252,7 +6245,7 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "Exiting Duke..."
+        "content": ":D"
       }
     ],
     "authorContributionMap": {
@@ -5771,66 +6764,143 @@
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/Deadline.java"
+        "content": "../src/main/java/Command.java"
       },
       {
         "lineNumber": 2,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/Duke.java"
+        "content": "../src/main/java/CommandResult.java"
       },
       {
         "lineNumber": 3,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/DukeException.java"
+        "content": "../src/main/java/Deadline.java"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/Event.java"
+        "content": "../src/main/java/DeadlineCommand.java"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/Parser.java"
+        "content": "../src/main/java/DeleteCommand.java"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/Storage.java"
+        "content": "../src/main/java/DoneCommand.java"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/Task.java"
+        "content": "../src/main/java/Duke.java"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/TaskList.java"
+        "content": "../src/main/java/DukeException.java"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "teikjun"
         },
-        "content": "../src/main/java/Todo.java"
+        "content": "../src/main/java/EditCommand.java"
       },
       {
         "lineNumber": 10,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/Event.java"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/EventCommand.java"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/ExitCommand.java"
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/IncorrectCommand.java"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/ListCommand.java"
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/Parser.java"
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/Storage.java"
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/Task.java"
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/TaskList.java"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/Todo.java"
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "teikjun"
+        },
+        "content": "../src/main/java/TodoCommand.java"
+      },
+      {
+        "lineNumber": 21,
         "author": {
           "gitId": "teikjun"
         },
@@ -5838,7 +6908,7 @@
       }
     ],
     "authorContributionMap": {
-      "teikjun": 10
+      "teikjun": 21
     }
   }
 ]
