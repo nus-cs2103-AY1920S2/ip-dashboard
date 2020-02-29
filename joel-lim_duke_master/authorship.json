@@ -2823,28 +2823,28 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.TaskList;"
+        "content": "import duke.storage.Storage;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.storage.Storage;"
+        "content": "import duke.tasks.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.exceptions.DukeException;"
+        "content": "import duke.ui.Ui;"
       },
       {
         "lineNumber": 7,
@@ -2858,101 +2858,388 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "/**"
+        "content": "import java.io.IOException;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Represents a command that can be run by Duke."
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " */"
+        "content": "import duke.exceptions.DukeException;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "public interface Command {"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    /**"
+        "content": "/**"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * Parses the given argument string and executes the Command."
+        "content": " * Represents a command that can be run by Duke."
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * "
+        "content": " */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @param arg   Arguments for the command (may be empty)."
+        "content": "public abstract class Command {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @param tasks List of Tasks."
+        "content": "    protected CommandParser commandParser;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @param ui    User interface for Duke."
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @param storage Storage for Duke."
+        "content": "    /**"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @throws DukeException If inputs are invalid."
+        "content": "     * Creates a Command object."
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     */"
+        "content": "     * "
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException;"
+        "content": "     * @param commandParser CommandParser to help parse arguments."
       },
       {
         "lineNumber": 22,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    public Command(CommandParser commandParser) {"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        this.commandParser \u003d commandParser;"
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * Saves the TaskList to Storage."
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param storage The storage medium."
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param tasks The in-memory list of tasks."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    protected void save(Storage storage, TaskList tasks) throws DukeException {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        try {"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            storage.save(tasks.getAllTasks());"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        } catch (IOException e) {"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            throw new DukeException(\"Error when saving to disk!\");"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 41,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * Separates a given string by a the first occurrence of a delimiter."
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param str       String to be split."
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param delimiter Delimiter that divides the string."
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @return Array of the two halves of the given string split by the delimiter,"
+      },
+      {
+        "lineNumber": 47,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     *         or array of the original string if delimiter is not present."
+      },
+      {
+        "lineNumber": 48,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 49,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    protected String[] split(String str, String delimiter) {"
+      },
+      {
+        "lineNumber": 50,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        return commandParser.splitByDelimiter(str, delimiter);"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * Executes the given command based on the argument string."
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 56,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param arg     Argument string for the command (may be empty)."
+      },
+      {
+        "lineNumber": 57,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param tasks   List of Tasks."
+      },
+      {
+        "lineNumber": 58,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param ui      User interface for Duke."
+      },
+      {
+        "lineNumber": 59,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param storage Storage for Duke."
+      },
+      {
+        "lineNumber": 60,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @throws DukeException If inputs are invalid."
+      },
+      {
+        "lineNumber": 61,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 62,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    abstract void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException;"
+      },
+      {
+        "lineNumber": 63,
         "author": {
           "gitId": "joel-lim"
         },
@@ -2960,7 +3247,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 22
+      "joel-lim": 63
     }
   },
   {
@@ -3000,161 +3287,161 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import javafx.util.Pair;"
+        "content": "import duke.ui.Ui;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "import duke.tasks.TaskList;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.storage.Storage;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.TaskList;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.storage.Storage;"
+        "content": "import duke.exceptions.DukeException;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.parsers.DateTimeParser;"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.exceptions.DukeException;"
+        "content": "/**"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": " * Parses user-entered strings and executes them as Commands. Remains active"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "/**"
+        "content": " * until user deactivates with \"bye\""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Parses user-entered strings and executes them as Commands."
+        "content": " */"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Remains active until user deactivates with \"bye\""
+        "content": "public class CommandHandler {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " */"
+        "content": "    private TaskList tasks;"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "public class CommandHandler {"
+        "content": "    private Ui ui;"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private TaskList tasks;"
+        "content": "    private Storage storage;"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private Ui ui;"
+        "content": "    private HashMap\u003cString, Command\u003e commands;"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private Storage storage;"
+        "content": "    private CommandParser commandParser;"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private HashMap\u003cString, Command\u003e commands;"
+        "content": "    private boolean isActive;"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private boolean isActive;"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    /**"
+        "content": "     * Creates a CommandHandler."
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * Creates a CommandHandler."
+        "content": "     * "
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @param tasks List of tasks."
+        "content": "     * @param tasks   List of tasks."
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @param ui User interface."
+        "content": "     * @param ui      User interface."
       },
       {
         "lineNumber": 28,
@@ -3210,472 +3497,402 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        isActive \u003d true;"
+        "content": "        this.commandParser \u003d new CommandParser();"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        isActive \u003d true;"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Create parsers"
+        "content": ""
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        DateTimeParser dtParser \u003d new DateTimeParser();"
+        "content": "        // Register commands"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        commands.put(\"list\", new ListAll(commandParser));"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Register commands"
+        "content": "        commands.put(\"done\", new MarkTaskAsDone(commandParser));"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"list\", new ListAll());"
+        "content": "        commands.put(\"todo\", new CreateTodo(commandParser));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"done\", new MarkTaskAsDone());"
+        "content": "        commands.put(\"deadline\", new CreateDeadline(commandParser));"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"todo\", new CreateTodo());"
+        "content": "        commands.put(\"event\", new CreateEvent(commandParser));"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"deadline\", new CreateDeadline(dtParser));"
+        "content": "        commands.put(\"delete\", new DeleteTask(commandParser));"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"event\", new CreateEvent(dtParser));"
+        "content": "        commands.put(\"find\", new FindTasks(commandParser));"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"delete\", new DeleteTask());"
+        "content": "        commands.put(\"reschedule\", new RescheduleTask(commandParser));"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"find\", new FindTasks());"
+        "content": "    }"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        commands.put(\"reschedule\", new RescheduleTask(dtParser));"
+        "content": ""
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "    public boolean isActive() {"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        return isActive;"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    /**"
+        "content": "    }"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * Parses the user string into a Command and executes it."
+        "content": ""
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     *"
+        "content": "    /**"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     * @param command User-entered string to be parsed."
+        "content": "     * Parses the user string into a Command and executes it."
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "     */"
+        "content": "     *"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public void handleCommand(String command) {"
+        "content": "     * @param command User-entered string to be parsed."
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Check if command is bye"
+        "content": "     */"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (command.equalsIgnoreCase(\"bye\")) {"
+        "content": "    public void handleCommand(String command) {"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            isActive \u003d false;"
+        "content": "        // Check if command is bye"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            return;"
+        "content": "        if (command.equalsIgnoreCase(\"bye\")) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "            isActive \u003d false;"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "            return;"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Extract out command word and arguments"
+        "content": "        }"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        Pair\u003cString, String\u003e commandAndArg \u003d getCommandAndArg(command);"
+        "content": ""
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String commandWord \u003d commandAndArg.getKey();"
+        "content": "        // Extract out command word and arguments"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String arg \u003d commandAndArg.getValue();"
+        "content": "        String[] commandAndArg \u003d commandParser.splitByDelimiter(command, \" \");"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        String commandWord \u003d commandAndArg[0].toLowerCase().strip();"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Execute command"
+        "content": ""
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        executeCommand(commandWord, arg);"
+        "content": "        // Execute command"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "        if (commandAndArg.length \u003c 2) {"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "            // No args provided"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public boolean isActive() {"
+        "content": "            executeCommand(commandWord, \"\");"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        return isActive;"
+        "content": "        } else {"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "            // Use provided args"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "            executeCommand(commandWord, commandAndArg[1]);"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private Pair\u003cString, String\u003e getCommandAndArg(String str) {"
+        "content": "        }"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        int spaceIndex \u003d str.indexOf(\" \");"
+        "content": "    }"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (spaceIndex \u003d\u003d -1) {"
+        "content": ""
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            // No spaces found, so must be single-word command"
+        "content": "    private void executeCommand(String commandWord, String arg) {"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            return new Pair\u003cString, String\u003e(str.toLowerCase(), \"\");"
+        "content": "        // Check if command exists"
       },
       {
         "lineNumber": 81,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } else {"
+        "content": "        if (!commands.containsKey(commandWord)) {"
       },
       {
         "lineNumber": 82,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            // Split string into command word and arguments"
+        "content": "            ui.showError(\"Command \" + commandWord + \" does not exist!\");"
       },
       {
         "lineNumber": 83,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            String commandWord \u003d str.substring(0, spaceIndex).toLowerCase();"
+        "content": "            return;"
       },
       {
         "lineNumber": 84,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            String arg \u003d str.substring(spaceIndex + 1);"
+        "content": "        }"
       },
       {
         "lineNumber": 85,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            return new Pair\u003cString, String\u003e(commandWord, arg);"
+        "content": ""
       },
       {
         "lineNumber": 86,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        try {"
       },
       {
         "lineNumber": 87,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "            commands.get(commandWord).execute(arg, tasks, ui, storage);"
       },
       {
         "lineNumber": 88,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        } catch (DukeException e) {"
       },
       {
         "lineNumber": 89,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private void executeCommand(String commandWord, String arg) {"
+        "content": "            ui.showError(e.getMessage());"
       },
       {
         "lineNumber": 90,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Check if command exists"
+        "content": "        }"
       },
       {
         "lineNumber": 91,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (!commands.containsKey(commandWord)) {"
-      },
-      {
-        "lineNumber": 92,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "            ui.showError(\"Command \" + commandWord + \" does not exist!\");"
-      },
-      {
-        "lineNumber": 93,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "            return;"
-      },
-      {
-        "lineNumber": 94,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 95,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 96,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        try {"
-      },
-      {
-        "lineNumber": 97,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "            commands.get(commandWord).execute(arg, tasks, ui, storage);"
-      },
-      {
-        "lineNumber": 98,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        } catch (DukeException e) {"
-      },
-      {
-        "lineNumber": 99,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "            ui.showError(e.getMessage());"
-      },
-      {
-        "lineNumber": 100,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 101,
-        "author": {
-          "gitId": "joel-lim"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 102,
+        "lineNumber": 92,
         "author": {
           "gitId": "joel-lim"
         },
@@ -3683,7 +3900,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 102
+      "joel-lim": 92
     }
   },
   {
@@ -3709,7 +3926,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import java.io.IOException;"
+        "content": "import java.time.LocalDateTime;"
       },
       {
         "lineNumber": 4,
@@ -3758,7 +3975,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.parsers.DateTimeParser;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 11,
@@ -3800,7 +4017,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class CreateDeadline extends TimedCommand {"
+        "content": "class CreateDeadline extends Command {"
       },
       {
         "lineNumber": 17,
@@ -3814,14 +4031,14 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public CreateDeadline(DateTimeParser dtParser) {"
+        "content": "    public CreateDeadline(CommandParser commandParser) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        super(dtParser);"
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 20,
@@ -3849,192 +4066,178 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Perform parsing of arguments"
+        "content": "        // Obtain command arguments from argument string"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String[] args \u003d arg.split(\"/by\");"
+        "content": "        String[] args \u003d split(arg, \"/by\");"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (args.length \u003c 2) {"
+        "content": "        String taskName \u003d getTaskName(args);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage: deadline [task name] /by [datetime]\");"
+        "content": "        LocalDateTime dateTime \u003d getDateTime(args);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        Task newTask \u003d new Deadline(taskName, dateTime);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String taskName \u003d args[0].strip();"
+        "content": "        tasks.add(newTask);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String dateTime \u003d args[1].strip();"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (taskName.length() \u003d\u003d 0 || dateTime.length() \u003d\u003d 0) {"
+        "content": "        save(storage, tasks);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage: deadline [task name] /by [datetime]\");"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        ui.showReply(String.format(\"Got it. I\u0027ve added this task:\\n  %s\\nNow you have %d tasks in the list.\", newTask,"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "                tasks.size()));"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Create parsed Deadline"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        Task newTask \u003d new Deadline(taskName, dtParser.parse(dateTime));"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        tasks.add(newTask);"
+        "content": "    private String getTaskName(String[] args) throws DukeException {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        String taskName \u003d args[0].strip();"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Save new Deadline to disk"
+        "content": "        if (args.length \u003c 2 || taskName.length() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "            throw new DukeException(\"Usage: deadline [task name] /by [due date]\");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            storage.save(tasks.getAllTasks());"
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        return taskName;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Error when saving to disk!\");"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "    private LocalDateTime getDateTime(String[] args) throws DukeException {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Display reply"
+        "content": "        return commandParser.parse(args[1].strip());"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        ui.showReply(String.format(\"Got it. I\u0027ve added this task:\\n  %s\\nNow you have %d tasks in the list.\", newTask,"
-      },
-      {
-        "lineNumber": 48,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "                tasks.size()));"
-      },
-      {
-        "lineNumber": 49,
-        "author": {
-          "gitId": "joel-lim"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 50,
+        "lineNumber": 48,
         "author": {
           "gitId": "joel-lim"
         },
@@ -4042,7 +4245,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 50
+      "joel-lim": 48
     }
   },
   {
@@ -4068,7 +4271,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import java.io.IOException;"
+        "content": "import java.time.LocalDateTime;"
       },
       {
         "lineNumber": 4,
@@ -4117,7 +4320,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.parsers.DateTimeParser;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 11,
@@ -4159,7 +4362,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class CreateEvent extends TimedCommand {"
+        "content": "class CreateEvent extends Command {"
       },
       {
         "lineNumber": 17,
@@ -4173,14 +4376,14 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public CreateEvent(DateTimeParser dtParser) {"
+        "content": "    public CreateEvent(CommandParser commandParser) {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        super(dtParser);"
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 20,
@@ -4208,192 +4411,234 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Perform parsing of arguments"
+        "content": "        // Obtain command arguments from argument string"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String[] args \u003d arg.split(\"/at\");"
+        "content": "        String[] args \u003d split(arg, \"/at\");"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (args.length \u003c 2) {"
+        "content": "        String taskName \u003d getTaskName(args);"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage: event [task name] /at [start datetime] to [end datetime]\");"
+        "content": "        LocalDateTime[] dateTimes \u003d getDateTimes(args);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        Task newTask \u003d new Event(taskName, dateTimes[0], dateTimes[1]);"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String taskName \u003d args[0].strip();"
+        "content": "        tasks.add(newTask);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String[] dateTimes \u003d args[1].strip().split(\"to\");"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (taskName.length() \u003d\u003d 0 || dateTimes.length \u003c 2) {"
+        "content": "        save(storage, tasks);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage: event [task name] /at [start datetime] to [end datetime]\");"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        ui.showReply(String.format(\"Got it. I\u0027ve added this task:\\n  %s\\nNow you have %d tasks in the list.\", newTask,"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "                tasks.size()));"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Create parsed Event"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        Task newTask \u003d new Event(taskName, dtParser.parse(dateTimes[0].strip()), dtParser.parse(dateTimes[1].strip()));"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        tasks.add(newTask);"
+        "content": "    private String getTaskName(String[] args) throws DukeException {"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        String taskName \u003d args[0].strip();"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Save new Event to disk"
+        "content": "        if (args.length \u003c 2 || taskName.length() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "            throw new DukeException(\"Usage: event [task name] /at [start datetime] to [end datetime]\");"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            storage.save(tasks.getAllTasks());"
+        "content": "        }"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        return taskName;"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Error when saving to disk!\");"
+        "content": "    }"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "    private LocalDateTime[] getDateTimes(String[] args) throws DukeException {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Display reply"
+        "content": "        String[] dateTimeStrings \u003d split(args[1].strip(), \"to\");"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        ui.showReply(String.format(\"Got it. I\u0027ve added this task:\\n  %s\\nNow you have %d tasks in the list.\", newTask,"
+        "content": "        if (dateTimeStrings.length \u003c 2) {"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "                tasks.size()));"
+        "content": "            throw new DukeException(\"Usage: event [task name] /at [start datetime] to [end datetime]\");"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 50,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        LocalDateTime[] dateTimes \u003d new LocalDateTime[2];"
+      },
+      {
+        "lineNumber": 51,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        for (int i \u003d 0; i \u003c 2; i++) {"
+      },
+      {
+        "lineNumber": 52,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            dateTimes[i] \u003d commandParser.parse(dateTimeStrings[i].strip());"
+      },
+      {
+        "lineNumber": 53,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 54,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        return dateTimes;"
+      },
+      {
+        "lineNumber": 55,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 56,
         "author": {
           "gitId": "joel-lim"
         },
@@ -4401,7 +4646,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 50
+      "joel-lim": 56
     }
   },
   {
@@ -4427,196 +4672,196 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import java.io.IOException;"
+        "content": "import duke.ui.Ui;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "import duke.tasks.Task;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.tasks.Todo;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.Task;"
+        "content": "import duke.tasks.TaskList;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.Todo;"
+        "content": "import duke.storage.Storage;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.TaskList;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.storage.Storage;"
+        "content": "import duke.exceptions.DukeException;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.exceptions.DukeException;"
+        "content": ""
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "/**"
+        "content": " * Creates a Todo Task and adds it to the TaskList."
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Creates a Todo Task and adds it to the TaskList."
+        "content": " */"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " */"
+        "content": "class CreateTodo extends Command {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class CreateTodo implements Command {"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "    public CreateTodo(CommandParser commandParser) {"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (arg.length() \u003d\u003d 0) {"
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage: todo [task name]\");"
+        "content": "    }"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Create new Task"
+        "content": "        String taskName \u003d getTaskName(arg);"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        Task newTask \u003d new Todo(arg);"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        tasks.add(newTask);"
+        "content": "        Task newTask \u003d new Todo(taskName);"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        tasks.add(newTask);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Save new Todo to disk"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "        save(storage, tasks);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            storage.save(tasks.getAllTasks());"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "        ui.showReply(String.format(\"Got it. I\u0027ve added this task:\\n  %s\\nNow you have %d tasks in the list.\", newTask,"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Error when saving to disk!\");"
+        "content": "                tasks.size()));"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 31,
@@ -4630,31 +4875,52 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Display reply"
+        "content": "    private String getTaskName(String arg) throws DukeException {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        ui.showReply(String.format(\"Got it. I\u0027ve added this task:\\n  %s\\nNow you have %d tasks in the list.\", newTask,"
+        "content": "        String taskName \u003d arg.strip();"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "                tasks.size()));"
+        "content": "        if (arg.length() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "            throw new DukeException(\"Usage: todo [task name]\");"
       },
       {
         "lineNumber": 36,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        return taskName;"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 39,
         "author": {
           "gitId": "joel-lim"
         },
@@ -4662,7 +4928,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 36
+      "joel-lim": 39
     }
   },
   {
@@ -4688,140 +4954,140 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import java.io.IOException;"
+        "content": "import duke.ui.Ui;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "import duke.tasks.Task;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.tasks.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.Task;"
+        "content": "import duke.storage.Storage;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.TaskList;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.storage.Storage;"
+        "content": "import duke.exceptions.DukeException;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.exceptions.DukeException;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "/**"
+        "content": " * Deletes a Task from the TaskList."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Deletes a Task from the TaskList."
+        "content": " */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " */"
+        "content": "class DeleteTask extends Command {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class DeleteTask implements Command {"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "    public DeleteTask(CommandParser commandParser) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Check if task number is valid"
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        int taskNo;"
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            taskNo \u003d Integer.parseInt(arg);"
+        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (NumberFormatException e) {"
+        "content": "        int taskNo \u003d getTaskNo(arg);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage: delete [int]\");"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        Task removed \u003d removeTask(tasks, taskNo);"
       },
       {
         "lineNumber": 23,
@@ -4835,129 +5101,157 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Delete task"
+        "content": "        ui.showReply(String.format(\"Noted. I\u0027ve removed this task:\\n  %s\\nNow you have %d tasks in the list.\", removed,"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "                tasks.size()));"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            Task removed \u003d tasks.remove(taskNo);"
+        "content": ""
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            String reply \u003d String.format(\"Noted. I\u0027ve removed this task:\\n  %s\\nNow you have %d tasks in the list.\","
+        "content": "        save(storage, tasks);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "                    removed, tasks.size());"
+        "content": "    }"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            ui.showReply(reply);"
+        "content": ""
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IndexOutOfBoundsException e) {"
+        "content": "    private int getTaskNo(String arg) throws DukeException {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Task number provided is out of bounds!\");"
+        "content": "        // Check if task number is valid"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        try {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "            return Integer.parseInt(arg);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Save changes to disk"
+        "content": "        } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "            throw new DukeException(\"Usage: delete [int]\");"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            storage.save(tasks.getAllTasks());"
+        "content": "        }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Error when saving to disk!\");"
+        "content": ""
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "    private Task removeTask(TaskList tasks, int taskNo) throws DukeException {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        try {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "            return tasks.remove(taskNo);"
       },
       {
         "lineNumber": 42,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            throw new DukeException(\"Task number provided is out of bounds!\");"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 46,
         "author": {
           "gitId": "joel-lim"
         },
@@ -4965,7 +5259,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 42
+      "joel-lim": 46
     }
   },
   {
@@ -5040,157 +5334,220 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class FindTasks implements Command {"
+        "content": ""
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "class FindTasks extends Command {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        List\u003cTask\u003e matchingTasks \u003d tasks.search(arg.strip());"
+        "content": "    public FindTasks(CommandParser commandParser) {"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (matchingTasks.isEmpty()) {"
+        "content": "    }"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            ui.showReply(\"No matching tasks found!\");"
+        "content": ""
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            return;"
+        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        // Search for matching tasks by the user-provided keyword"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        assert matchingTasks.size() \u003e 0;"
+        "content": "        List\u003cTask\u003e matchingTasks \u003d tasks.search(arg.strip());"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        int counter \u003d 1;"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        sb.append(\"Here are the matching tasks in your list:\\n\");"
+        "content": "        if (matchingTasks.isEmpty()) {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        for (Task task : matchingTasks) {"
+        "content": "            ui.showReply(\"No matching tasks found!\");"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            sb.append(counter + \".\");"
+        "content": "            return;"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            sb.append(task);"
+        "content": "        }"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            sb.append(\"\\n\");"
+        "content": "        assert matchingTasks.size() \u003e 0;"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            counter +\u003d 1;"
+        "content": ""
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        // Generate the list of matching tasks for the user"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        int counter \u003d 1;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        ui.showReply(sb.toString());"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "        sb.append(\"Here are the matching tasks in your list:\\n\");"
       },
       {
         "lineNumber": 32,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        for (Task task : matchingTasks) {"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            sb.append(counter + \".\");"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            sb.append(task);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            sb.append(\"\\n\");"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            counter +\u003d 1;"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 38,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 39,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        ui.showReply(sb.toString());"
+      },
+      {
+        "lineNumber": 40,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 41,
         "author": {
           "gitId": "joel-lim"
         },
@@ -5198,7 +5555,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 32
+      "joel-lim": 41
     }
   },
   {
@@ -5259,178 +5616,213 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "/**"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Displays all Tasks in the TaskList."
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " */"
+        "content": " * Displays all Tasks in the TaskList."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class ListAll implements Command {"
+        "content": " */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "class ListAll extends Command {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (tasks.size() \u003d\u003d 0) {"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"There are currently no tasks.\");"
+        "content": "    public ListAll(CommandParser commandParser) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Concat String representations of tasks"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        int counter \u003d 1;"
+        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        StringBuilder sb \u003d new StringBuilder();"
+        "content": "        if (tasks.size() \u003d\u003d 0) {"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        sb.append(\"Here are the tasks in your list:\\n\");"
+        "content": "            throw new DukeException(\"There are currently no tasks.\");"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        for (Task task : tasks.getAllTasks()) {"
+        "content": "        }"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            sb.append(counter);"
+        "content": ""
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            sb.append(\".\");"
+        "content": "        // Generate the list of tasks for the user"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            sb.append(task);"
+        "content": "        int counter \u003d 1;"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            sb.append(\"\\n\");"
+        "content": "        StringBuilder sb \u003d new StringBuilder();"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            counter +\u003d 1;"
+        "content": "        sb.append(\"Here are the tasks in your list:\\n\");"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        for (Task task : tasks.getAllTasks()) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        "
+        "content": "            sb.append(counter);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Display reply"
+        "content": "            sb.append(\".\");"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        ui.showReply(sb.toString());"
+        "content": "            sb.append(task);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "            sb.append(\"\\n\");"
       },
       {
         "lineNumber": 33,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            counter +\u003d 1;"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        ui.showReply(sb.toString());"
+      },
+      {
+        "lineNumber": 37,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 38,
         "author": {
           "gitId": "joel-lim"
         },
@@ -5438,7 +5830,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 33
+      "joel-lim": 38
     }
   },
   {
@@ -5464,140 +5856,140 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import java.io.IOException;"
+        "content": "import duke.ui.Ui;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "import duke.tasks.Task;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.tasks.TaskList;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.Task;"
+        "content": "import duke.storage.Storage;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.TaskList;"
+        "content": "import duke.exceptions.DukeException;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.storage.Storage;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.exceptions.DukeException;"
+        "content": ""
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "/**"
+        "content": " * Marks as a specific Task as completed."
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Marks as a specific Task as completed."
+        "content": " */"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " */"
+        "content": "class MarkTaskAsDone extends Command {"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class MarkTaskAsDone implements Command {"
+        "content": ""
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "    public MarkTaskAsDone(CommandParser commandParser) {"
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Check if task number is valid"
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        int taskNo;"
+        "content": "    }"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            taskNo \u003d Integer.parseInt(arg);"
+        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (NumberFormatException e) {"
+        "content": "        int taskNo \u003d getTaskNo(arg);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage: done [int]\");"
+        "content": ""
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        Task doneTask \u003d markAsDone(tasks, taskNo);"
       },
       {
         "lineNumber": 23,
@@ -5611,122 +6003,164 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Mark task as done"
+        "content": "        ui.showReply(\"Nice! I\u0027ve marked this task as done:\\n  \" + doneTask);"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            Task task \u003d tasks.get(taskNo);"
+        "content": "        save(storage, tasks);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            task.markAsDone();"
+        "content": "    }"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            ui.showReply(\"Nice! I\u0027ve marked this task as done:\\n  \" + task);"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IndexOutOfBoundsException e) {"
+        "content": "    private int getTaskNo(String arg) throws DukeException {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Task number provided is out of bounds!\");"
+        "content": "        // Check if task number is valid"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "        try {"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "            return Integer.parseInt(arg);"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Save changes to disk"
+        "content": "        } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "            throw new DukeException(\"Usage: delete [int]\");"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            storage.save(tasks.getAllTasks());"
+        "content": "        }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Error when saving to disk!\");"
+        "content": ""
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "    private Task markAsDone(TaskList tasks, int taskNo) throws DukeException {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        try {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "            Task task \u003d tasks.get(taskNo);"
       },
       {
         "lineNumber": 41,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            task.markAsDone();"
+      },
+      {
+        "lineNumber": 42,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            return task;"
+      },
+      {
+        "lineNumber": 43,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        } catch (IndexOutOfBoundsException e) {"
+      },
+      {
+        "lineNumber": 44,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "            throw new DukeException(\"Task number provided is out of bounds!\");"
+      },
+      {
+        "lineNumber": 45,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 46,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 47,
         "author": {
           "gitId": "joel-lim"
         },
@@ -5734,7 +6168,7 @@
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 41
+      "joel-lim": 47
     }
   },
   {
@@ -5760,294 +6194,294 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import java.io.IOException;"
+        "content": "import java.time.LocalDateTime;"
       },
       {
         "lineNumber": 4,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import java.time.LocalDateTime;"
+        "content": ""
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "import duke.ui.Ui;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.ui.Ui;"
+        "content": "import duke.tasks.Task;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.Task;"
+        "content": "import duke.tasks.TaskList;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.TaskList;"
+        "content": "import duke.tasks.Deadline;"
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.TimedTask;"
+        "content": "import duke.tasks.Event;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.Deadline;"
+        "content": "import duke.storage.Storage;"
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.tasks.Event;"
+        "content": "import duke.parsers.CommandParser;"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.storage.Storage;"
+        "content": "import duke.exceptions.DukeException;"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.parsers.DateTimeParser;"
+        "content": ""
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "import duke.exceptions.DukeException;"
+        "content": "/**"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": " * Reschedules an existing Task."
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "/**"
+        "content": " */"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " * Reschedules an existing Task."
+        "content": "class RescheduleTask extends Command {"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": " */"
+        "content": ""
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "class RescheduleTask extends TimedCommand {"
+        "content": "    public RescheduleTask(CommandParser commandParser) {"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    private final int NOT_FOUND \u003d -1;"
+        "content": "        super(commandParser);"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public RescheduleTask(DateTimeParser dtParser) {"
+        "content": ""
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        super(dtParser);"
+        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    }"
+        "content": "        // Extrack the task and datetime information"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        String[] args \u003d split(arg, \" \");"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    public void execute(String arg, TaskList tasks, Ui ui, Storage storage) throws DukeException {"
+        "content": "        Task task \u003d getTask(tasks, args);"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Split string into taskNo and datetimes"
+        "content": "        String dateTimeInfo \u003d getDateTimeInfo(args);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        int taskNo;"
+        "content": ""
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        String dateTimeInfo;"
+        "content": "        reschedule(task, dateTimeInfo);"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        int spaceIndex \u003d arg.indexOf(\" \");"
+        "content": ""
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (spaceIndex \u003d\u003d NOT_FOUND) {"
+        "content": "        save(storage, tasks);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            // No spaces found, so must be invalid usage"
+        "content": ""
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Usage for Deadline: reschedule [task number] [due date]\\n\""
+        "content": "        ui.showReply(String.format(\"I\u0027ve rescheduled this task:\\n  %s\", task));"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "                    + \"Usage for Event: reschedule [task number] [start time] to [end time]\");"
+        "content": "    }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } else {"
+        "content": ""
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            // Split string into taskNo and rest of string"
+        "content": "    private Task getTask(TaskList tasks, String[] args) throws DukeException {"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            try {"
+        "content": "        // Check if task number is valid"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "                taskNo \u003d Integer.parseInt(arg.substring(0, spaceIndex));"
+        "content": "        int taskNo;"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            } catch (NumberFormatException e) {"
+        "content": "        try {"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "                throw new DukeException(\"Task number provided is invalid!\");"
+        "content": "            taskNo \u003d Integer.parseInt(args[0]);"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            }"
+        "content": "        } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            dateTimeInfo \u003d arg.substring(spaceIndex + 1);"
+        "content": "            throw new DukeException(\"Usage for Deadline: reschedule [task number] [due date]\\n\""
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "            + \"Usage for Event: reschedule [task number] [start time] to [end time]\");"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 45,
@@ -6061,42 +6495,42 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        Task task;"
+        "content": "        try {"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "            return tasks.get(taskNo);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            task \u003d tasks.get(taskNo);"
+        "content": "        } catch (IndexOutOfBoundsException e) {"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IndexOutOfBoundsException e) {"
+        "content": "            throw new DukeException(\"Task number provided is out of bounds!\");"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Task number provided is out of bounds!\");"
+        "content": "        }"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 52,
@@ -6110,433 +6544,200 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Check for valid task type"
+        "content": "    private String getDateTimeInfo(String[] args) throws DukeException {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (!(task instanceof TimedTask)) {"
+        "content": "        if (args.length \u003c 2 || args[1].isEmpty()) {"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"This task cannot be rescheduled!\");"
+        "content": "            throw new DukeException(\"Usage for Deadline: reschedule [task number] [due date]\\n\""
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "                    + \"Usage for Event: reschedule [task number] [start time] to [end time]\");"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "        }"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Perform rescheduling"
+        "content": "        return args[1];"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        if (task instanceof Deadline) {"
+        "content": "    }"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            Deadline deadline \u003d (Deadline) task;"
+        "content": ""
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            LocalDateTime newDateTime \u003d dtParser.parse(dateTimeInfo);"
+        "content": "    private void reschedule(Task task, String dateTimeInfo) throws DukeException {"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            deadline.reschedule(newDateTime);"
+        "content": "        if (task instanceof Deadline) {"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } else if (task instanceof Event) {"
+        "content": "            Deadline deadline \u003d (Deadline) task;"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            String[] dateTimes \u003d dateTimeInfo.split(\"to\");"
+        "content": "            LocalDateTime newDateTime \u003d commandParser.parse(dateTimeInfo);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            if (dateTimes.length \u003c 2) {"
+        "content": "            deadline.reschedule(newDateTime);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "                throw new DukeException(\"Usage for Event: reschedule [task number] [start time] to [end time]\");"
+        "content": "        } else if (task instanceof Event) {"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            }"
+        "content": "            String[] dateTimes \u003d commandParser.splitByDelimiter(dateTimeInfo, \"to\");"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            Event event \u003d (Event) task;"
+        "content": "            if (dateTimes.length \u003c 2) {"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            LocalDateTime newStart \u003d dtParser.parse(dateTimes[0].trim());"
+        "content": "                throw new DukeException(\"Usage for Event: reschedule [task number] [start time] to [end time]\");"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            LocalDateTime newEnd \u003d dtParser.parse(dateTimes[1].trim());"
+        "content": "            }"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            event.reschedule(newStart, newEnd);"
+        "content": "            Event event \u003d (Event) task;"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "            LocalDateTime newStart \u003d commandParser.parse(dateTimes[0].strip());"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
+        "content": "            LocalDateTime newEnd \u003d commandParser.parse(dateTimes[1].strip());"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        // Save changes to disk"
+        "content": "            event.reschedule(newStart, newEnd);"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        try {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            storage.save(tasks.getAllTasks());"
+        "content": "            // If it is neither Deadline nor Event, it cannot be rescheduled"
       },
       {
         "lineNumber": 77,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        } catch (IOException e) {"
+        "content": "            throw new DukeException(\"This task cannot be rescheduled!\");"
       },
       {
         "lineNumber": 78,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "            throw new DukeException(\"Error when saving to disk!\");"
+        "content": "        }"
       },
       {
         "lineNumber": 79,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 80,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": ""
-      },
-      {
-        "lineNumber": 81,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        // Display reply"
-      },
-      {
-        "lineNumber": 82,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        ui.showReply(String.format(\"I\u0027ve rescheduled this task:\\n  %s\", task));"
-      },
-      {
-        "lineNumber": 83,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 84,
-        "author": {
-          "gitId": "joel-lim"
-        },
         "content": "}"
       }
     ],
     "authorContributionMap": {
-      "joel-lim": 84
-    }
-  },
-  {
-    "path": "src/main/java/duke/commands/TimedCommand.java",
-    "fileType": "java",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "package duke.commands;"
-      },
-      {
-        "lineNumber": 2,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 3,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "import java.time.LocalDateTime;"
-      },
-      {
-        "lineNumber": 4,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 5,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "import duke.parsers.DateTimeParser;"
-      },
-      {
-        "lineNumber": 6,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "import duke.exceptions.DukeException;"
-      },
-      {
-        "lineNumber": 7,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 8,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "/**"
-      },
-      {
-        "lineNumber": 9,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": " * Represents a command that requires parsing of DateTime information."
-      },
-      {
-        "lineNumber": 10,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": " */"
-      },
-      {
-        "lineNumber": 11,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "public abstract class TimedCommand implements Command {"
-      },
-      {
-        "lineNumber": 12,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "    DateTimeParser dtParser;"
-      },
-      {
-        "lineNumber": 13,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 14,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "    public TimedCommand(DateTimeParser dtParser) {"
-      },
-      {
-        "lineNumber": 15,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        this.dtParser \u003d dtParser;"
-      },
-      {
-        "lineNumber": 16,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 17,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": ""
-      },
-      {
-        "lineNumber": 18,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "    /**"
-      },
-      {
-        "lineNumber": 19,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "     * Converts a user-entered date/time string into LocalDateTime."
-      },
-      {
-        "lineNumber": 20,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "     * "
-      },
-      {
-        "lineNumber": 21,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "     * @param dateTime User-entered string representing date/time."
-      },
-      {
-        "lineNumber": 22,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "     * @return LocalDateTime parsed from user input."
-      },
-      {
-        "lineNumber": 23,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "     * @throws DukeException If unable to parse string."
-      },
-      {
-        "lineNumber": 24,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "     */"
-      },
-      {
-        "lineNumber": 25,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "    public LocalDateTime parseDateTime(String dateTime) throws DukeException {"
-      },
-      {
-        "lineNumber": 26,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "        return dtParser.parse(dateTime);"
-      },
-      {
-        "lineNumber": 27,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 28,
-        "author": {
-          "gitId": "joel-lim"
-        },
-        "content": "}"
-      }
-    ],
-    "authorContributionMap": {
-      "joel-lim": 28
+      "joel-lim": 80
     }
   },
   {
@@ -6616,6 +6817,267 @@
     ],
     "authorContributionMap": {
       "joel-lim": 10
+    }
+  },
+  {
+    "path": "src/main/java/duke/parsers/CommandParser.java",
+    "fileType": "java",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "package duke.parsers;"
+      },
+      {
+        "lineNumber": 2,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 3,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "import java.time.LocalDateTime;"
+      },
+      {
+        "lineNumber": 4,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 5,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "import duke.exceptions.DukeException;"
+      },
+      {
+        "lineNumber": 6,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 7,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "/**"
+      },
+      {
+        "lineNumber": 8,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": " * Parses commands and breaks a command down into its command arguments."
+      },
+      {
+        "lineNumber": 9,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": " */"
+      },
+      {
+        "lineNumber": 10,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "public class CommandParser {"
+      },
+      {
+        "lineNumber": 11,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    private DateTimeParser dateTimeParser \u003d new DateTimeParser();"
+      },
+      {
+        "lineNumber": 12,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 13,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 14,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * Separates a given string by a the first occurrence of a delimiter."
+      },
+      {
+        "lineNumber": 15,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 16,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param str       String to be split."
+      },
+      {
+        "lineNumber": 17,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param delimiter Delimiter that divides the string."
+      },
+      {
+        "lineNumber": 18,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @return Array of the two halves of the given string split by the delimiter,"
+      },
+      {
+        "lineNumber": 19,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     *         or array of the original string if delimiter is not present."
+      },
+      {
+        "lineNumber": 20,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 21,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    public String[] splitByDelimiter(String str, String delimiter) {"
+      },
+      {
+        "lineNumber": 22,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        return str.split(delimiter, 2);"
+      },
+      {
+        "lineNumber": 23,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 24,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": ""
+      },
+      {
+        "lineNumber": 25,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    /**"
+      },
+      {
+        "lineNumber": 26,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * Returns a LocalDateTime parsed from user-entered string. If no time is"
+      },
+      {
+        "lineNumber": 27,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * specified, it is automatically set to start of day."
+      },
+      {
+        "lineNumber": 28,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * "
+      },
+      {
+        "lineNumber": 29,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @param str User-entered string representing date/time."
+      },
+      {
+        "lineNumber": 30,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @return LocalDateTime parsed from user input."
+      },
+      {
+        "lineNumber": 31,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     * @throws DukeException If unable to parse string."
+      },
+      {
+        "lineNumber": 32,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "     */"
+      },
+      {
+        "lineNumber": 33,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    public LocalDateTime parse(String str) throws DukeException {"
+      },
+      {
+        "lineNumber": 34,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "        return dateTimeParser.parse(str);"
+      },
+      {
+        "lineNumber": 35,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 36,
+        "author": {
+          "gitId": "joel-lim"
+        },
+        "content": "}"
+      }
+    ],
+    "authorContributionMap": {
+      "joel-lim": 36
     }
   },
   {
@@ -7914,7 +8376,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    protected LocalDateTime dateTime;"
+        "content": "    private LocalDateTime dateTime;"
       },
       {
         "lineNumber": 10,
@@ -8119,14 +8581,14 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    protected LocalDateTime start;"
+        "content": "    private LocalDateTime start;"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "    protected LocalDateTime end;"
+        "content": "    private LocalDateTime end;"
       },
       {
         "lineNumber": 11,
@@ -8597,7 +9059,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        return isDone ? \"\\u2713\" : \"\\u2718\";"
+        "content": "        return isDone ? \"\\u2713\" : \"\\u2718\"; // Unicode tick : cross"
       },
       {
         "lineNumber": 36,
@@ -12204,7 +12666,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        assertEquals(\"\\u2718\", task.getStatus());"
+        "content": "        assertEquals(\"\\u2718\", task.getStatus()); // Unicode cross"
       },
       {
         "lineNumber": 12,
@@ -12218,7 +12680,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        assertEquals(\"\\u2713\", task.getStatus());"
+        "content": "        assertEquals(\"\\u2713\", task.getStatus()); // Unicode tick"
       },
       {
         "lineNumber": 14,
@@ -12388,7 +12850,7 @@
         "author": {
           "gitId": "joel-lim"
         },
-        "content": "        assertEquals(\"[T][\\u2718] read book\", new Todo(\"read book\").toString());"
+        "content": "        assertEquals(\"[T][\\u2718] read book\", new Todo(\"read book\").toString()); // Unicode cross"
       },
       {
         "lineNumber": 11,
