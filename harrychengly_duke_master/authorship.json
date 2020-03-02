@@ -4163,381 +4163,374 @@
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        else{"
+        "content": "            file.createNewFile();"
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            file.createNewFile();"
+        "content": "            FileWriter fileWriter \u003d new FileWriter(\"./out.txt\");"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            FileWriter fileWriter \u003d new FileWriter(\"./out.txt\");"
+        "content": "            fileWriter.write(list);"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            fileWriter.write(list);"
+        "content": "            fileWriter.close();"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            fileWriter.close();"
+        "content": "        }"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        }"
+        "content": "    }"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "    /**"
+        "content": "     * Loads saved TaskList to Duke."
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "     * Loads saved TaskList to Duke."
+        "content": "     *"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "     *"
+        "content": "     * @param filePath File path for duke\u0027s task list."
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "     * @param filePath File path for duke\u0027s task list."
+        "content": "     * @return ArrayList of saved TaskList if not new ArrayList would be returned."
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "     * @return ArrayList of saved TaskList if not new ArrayList would be returned."
+        "content": "     */"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "     */"
+        "content": "    public ArrayList\u003cTask\u003e loadList(String filePath) {"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "    public ArrayList\u003cTask\u003e loadList(String filePath) {"
+        "content": "        ArrayList\u003cTask\u003e arr \u003d new ArrayList\u003c\u003e();"
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        ArrayList\u003cTask\u003e arr \u003d new ArrayList\u003c\u003e();"
+        "content": "        try {"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        try {"
+        "content": "            Scanner s \u003d new Scanner(new File(filePath));"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            Scanner s \u003d new Scanner(new File(filePath));"
+        "content": "            while (s.hasNext()) {"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            while (s.hasNext()) {"
+        "content": "                String fileInput \u003d s.nextLine();"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                String fileInput \u003d s.nextLine();"
+        "content": "                String[] fileStringArr \u003d fileInput.split(\"\\\\[\");"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                String[] fileStringArr \u003d fileInput.split(\"\\\\[\");"
+        "content": "                if (fileStringArr[1].equalsIgnoreCase(\"T]\")) {"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                if (fileStringArr[1].equalsIgnoreCase(\"T]\")) {"
+        "content": "                    String[] todoSplit \u003d fileStringArr[2].split(\" \");"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String[] todoSplit \u003d fileStringArr[2].split(\" \");"
+        "content": "                    String[] todoDescription \u003d Arrays.copyOfRange(todoSplit, 1, todoSplit.length);"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String[] todoDescription \u003d Arrays.copyOfRange(todoSplit, 1, todoSplit.length);"
+        "content": "                    String str \u003d String.join(\" \", todoDescription);"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String str \u003d String.join(\" \", todoDescription);"
+        "content": "                    Todo readTodo \u003d new Todo(str);"
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    Todo readTodo \u003d new Todo(str);"
+        "content": "                    readTodo.isDone(todoSplit[0]);"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    readTodo.isDone(todoSplit[0]);"
+        "content": "                    arr.add(readTodo);"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    arr.add(readTodo);"
+        "content": "                } else if (fileStringArr[1].equalsIgnoreCase(\"D]\")) {"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                } else if (fileStringArr[1].equalsIgnoreCase(\"D]\")) {"
+        "content": "                    String[] deadlineSplit \u003d fileStringArr[2].split(\"\\\\(\");"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String[] deadlineSplit \u003d fileStringArr[2].split(\"\\\\(\");"
+        "content": "                    String checkIsDone \u003d deadlineSplit[0].substring(0, 2);"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String checkIsDone \u003d deadlineSplit[0].substring(0, 2);"
+        "content": "                    String deadlineDescription \u003d deadlineSplit[0].substring(3).strip();"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String deadlineDescription \u003d deadlineSplit[0].substring(3).strip();"
+        "content": "                    String deadlineDate \u003d deadlineSplit[1].substring(4, deadlineSplit[1].length() - 1);"
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String deadlineDate \u003d deadlineSplit[1].substring(4, deadlineSplit[1].length() - 1);"
+        "content": "                    Deadline readDeadline \u003d new Deadline(deadlineDescription, deadlineDate);"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    Deadline readDeadline \u003d new Deadline(deadlineDescription, deadlineDate);"
+        "content": "                    readDeadline.isDone(checkIsDone);"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    readDeadline.isDone(checkIsDone);"
+        "content": "                    arr.add(readDeadline);"
       },
       {
         "lineNumber": 60,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    arr.add(readDeadline);"
+        "content": "                } else if (fileStringArr[1].equalsIgnoreCase(\"E]\")) {"
       },
       {
         "lineNumber": 61,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                } else if (fileStringArr[1].equalsIgnoreCase(\"E]\")) {"
+        "content": "                    String[] eventSplit \u003d fileStringArr[2].split(\"\\\\(\");"
       },
       {
         "lineNumber": 62,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String[] eventSplit \u003d fileStringArr[2].split(\"\\\\(\");"
+        "content": "                    String checkIsDone \u003d eventSplit[0].substring(0, 2);"
       },
       {
         "lineNumber": 63,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String checkIsDone \u003d eventSplit[0].substring(0, 2);"
+        "content": "                    String eventDescription \u003d eventSplit[0].substring(3).strip();"
       },
       {
         "lineNumber": 64,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String eventDescription \u003d eventSplit[0].substring(3).strip();"
+        "content": "                    String eventDate \u003d eventSplit[1].substring(4, eventSplit[1].length() - 1);"
       },
       {
         "lineNumber": 65,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    String eventDate \u003d eventSplit[1].substring(4, eventSplit[1].length() - 1);"
+        "content": "                    Event readEvent \u003d new Event(eventDescription, eventDate);"
       },
       {
         "lineNumber": 66,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    Event readEvent \u003d new Event(eventDescription, eventDate);"
+        "content": "                    readEvent.isDone(checkIsDone);"
       },
       {
         "lineNumber": 67,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    readEvent.isDone(checkIsDone);"
+        "content": "                    arr.add(readEvent);"
       },
       {
         "lineNumber": 68,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                    arr.add(readEvent);"
+        "content": "                }"
       },
       {
         "lineNumber": 69,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "                }"
+        "content": "            }"
       },
       {
         "lineNumber": 70,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            }"
+        "content": "            s.close();"
       },
       {
         "lineNumber": 71,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            s.close();"
+        "content": "        } catch (FileNotFoundException | DukeException ex) {"
       },
       {
         "lineNumber": 72,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        } catch (FileNotFoundException | DukeException ex) {"
+        "content": "            ex.printStackTrace();"
       },
       {
         "lineNumber": 73,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "            ex.printStackTrace();"
+        "content": "        }"
       },
       {
         "lineNumber": 74,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        }"
+        "content": "        return arr;"
       },
       {
         "lineNumber": 75,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "        return arr;"
+        "content": "    }"
       },
       {
         "lineNumber": 76,
         "author": {
           "gitId": "harrychengly"
         },
-        "content": "    }"
-      },
-      {
-        "lineNumber": 77,
-        "author": {
-          "gitId": "harrychengly"
-        },
         "content": ""
       },
       {
-        "lineNumber": 78,
+        "lineNumber": 77,
         "author": {
           "gitId": "harrychengly"
         },
@@ -4545,7 +4538,7 @@
       }
     ],
     "authorContributionMap": {
-      "harrychengly": 78
+      "harrychengly": 77
     }
   },
   {
