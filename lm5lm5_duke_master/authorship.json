@@ -7943,210 +7943,210 @@
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private void checkIfFormatIsValid(String typeOfTask, int lengthOfArray, int indexOfByOrAt) throws DukeException {"
+        "content": "    /**"
       },
       {
         "lineNumber": 159,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        assert typeOfTask.equals(\"deadline\") || typeOfTask.equals(\"event\");"
+        "content": "     * Checks if the index of /by or /at is valid. If not, a DukeException is thrown."
       },
       {
         "lineNumber": 160,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (indexOfByOrAt \u003d\u003d -1 || indexOfByOrAt \u003d\u003d 1 || indexOfByOrAt \u003d\u003d (lengthOfArray - 1)) {"
+        "content": "     * The index of /by or /at cannot be -1, as that means the user input does not contain /by or /at."
       },
       {
         "lineNumber": 161,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            if (typeOfTask.equals(\"deadline\")) {"
+        "content": "     * The index cannot be 1 either, as that means the input does not contain a string description of the task."
       },
       {
         "lineNumber": 162,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                ui.throwWrongFormatException(\"\\n\\\"deadline a_string_describing_the_task /by YYYY-MM-DD\\\"\");"
+        "content": "     * Furthermore, /by or /at should be the second last string of the user input, as the last string is the date."
       },
       {
         "lineNumber": 163,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            } else {"
+        "content": "     */"
       },
       {
         "lineNumber": 164,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                ui.throwWrongFormatException(\"\\n\\\"event a_string_describing_the_task /at YYYY-MM-DD\\\"\");"
+        "content": "    private void checkIfFormatIsValid(String typeOfTask, int lengthOfArray, int indexOfByOrAt) throws DukeException {"
       },
       {
         "lineNumber": 165,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            }"
+        "content": "        assert typeOfTask.equals(\"deadline\") || typeOfTask.equals(\"event\");"
       },
       {
         "lineNumber": 166,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "        if (indexOfByOrAt \u003d\u003d -1 || indexOfByOrAt \u003d\u003d 1 || indexOfByOrAt !\u003d (lengthOfArray - 2)) {"
       },
       {
         "lineNumber": 167,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "            if (typeOfTask.equals(\"deadline\")) {"
       },
       {
         "lineNumber": 168,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "                ui.throwWrongFormatException(\"\\n\\\"deadline a_string_describing_the_task /by YYYY-MM-DD\\\"\");"
       },
       {
         "lineNumber": 169,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private Task constructDeadlineOrEventTask(String typeOfTask, String[] instructionByWord,"
+        "content": "            } else {"
       },
       {
         "lineNumber": 170,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                                              int lengthOfArray, int indexOfByOrAt) {"
+        "content": "                ui.throwWrongFormatException(\"\\n\\\"event a_string_describing_the_task /at YYYY-MM-DD\\\"\");"
       },
       {
         "lineNumber": 171,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        String description \u003d String.join(\" \","
+        "content": "            }"
       },
       {
         "lineNumber": 172,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                Arrays.copyOfRange(instructionByWord, 1, indexOfByOrAt));"
+        "content": "        }"
       },
       {
         "lineNumber": 173,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        String deadline \u003d String.join(\" \","
+        "content": "    }"
       },
       {
         "lineNumber": 174,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                Arrays.copyOfRange(instructionByWord, indexOfByOrAt + 1, lengthOfArray));"
+        "content": ""
       },
       {
         "lineNumber": 175,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        Task task;"
+        "content": "    private Task constructDeadlineOrEventTask(String typeOfTask, String[] instructionByWord,"
       },
       {
         "lineNumber": 176,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (typeOfTask.equals(\"deadline\")) {"
+        "content": "                                              int lengthOfArray, int indexOfByOrAt) {"
       },
       {
         "lineNumber": 177,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            task \u003d new Deadline(false, description, LocalDate.parse(deadline), PriorityLevel.NORMAL);"
+        "content": "        String description \u003d String.join(\" \","
       },
       {
         "lineNumber": 178,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        } else {"
+        "content": "                Arrays.copyOfRange(instructionByWord, 1, indexOfByOrAt));"
       },
       {
         "lineNumber": 179,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            task \u003d new Event(false, description, LocalDate.parse(deadline), PriorityLevel.NORMAL);"
+        "content": "        String deadline \u003d String.join(\" \","
       },
       {
         "lineNumber": 180,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "                Arrays.copyOfRange(instructionByWord, indexOfByOrAt + 1, lengthOfArray));"
       },
       {
         "lineNumber": 181,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return task;"
+        "content": "        Task task;"
       },
       {
         "lineNumber": 182,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "        if (typeOfTask.equals(\"deadline\")) {"
       },
       {
         "lineNumber": 183,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "            task \u003d new Deadline(false, description, LocalDate.parse(deadline), PriorityLevel.NORMAL);"
       },
       {
         "lineNumber": 184,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private String addAndStoreTask(Task t) throws DukeException {"
+        "content": "        } else {"
       },
       {
         "lineNumber": 185,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        String output \u003d tasks.addTaskToList(t);"
+        "content": "            task \u003d new Event(false, description, LocalDate.parse(deadline), PriorityLevel.NORMAL);"
       },
       {
         "lineNumber": 186,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        storage.writeToFile(tasks.getList());"
+        "content": "        }"
       },
       {
         "lineNumber": 187,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return output;"
+        "content": "        return task;"
       },
       {
         "lineNumber": 188,
@@ -8167,511 +8167,511 @@
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private String findTasks(String[] instructionByWords, int lengthOfArray) throws DukeException {"
+        "content": "    private String addAndStoreTask(Task t) throws DukeException {"
       },
       {
         "lineNumber": 191,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (lengthOfArray !\u003d 2) {"
+        "content": "        String output \u003d tasks.addTaskToList(t);"
       },
       {
         "lineNumber": 192,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwWrongFormatException(\"\\n\\\"find key_word (a character sequence without white space)\\\"\");"
+        "content": "        storage.writeToFile(tasks.getList());"
       },
       {
         "lineNumber": 193,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "        return output;"
       },
       {
         "lineNumber": 194,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        String keyword \u003d instructionByWords[1];"
+        "content": "    }"
       },
       {
         "lineNumber": 195,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        HashMap\u003cInteger, Task\u003e selectedList \u003d new HashMap\u003c\u003e();"
+        "content": ""
       },
       {
         "lineNumber": 196,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        int count \u003d 0;"
+        "content": "    private String findTasks(String[] instructionByWords, int lengthOfArray) throws DukeException {"
       },
       {
         "lineNumber": 197,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        count \u003d addAndCountTasksContainingKeyWord(keyword, selectedList, count);"
+        "content": "        if (lengthOfArray !\u003d 2) {"
       },
       {
         "lineNumber": 198,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        StringBuilder output \u003d new StringBuilder((count + \" task(s) were found containing keyword \" + keyword + \":\\n\"));"
+        "content": "            ui.throwWrongFormatException(\"\\n\\\"find key_word (a character sequence without white space)\\\"\");"
       },
       {
         "lineNumber": 199,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        for (Integer index : selectedList.keySet()) {"
+        "content": "        }"
       },
       {
         "lineNumber": 200,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            output.append(index).append(\") \").append(selectedList.get(index)).append(\"\\n\");"
+        "content": "        String keyword \u003d instructionByWords[1];"
       },
       {
         "lineNumber": 201,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "        HashMap\u003cInteger, Task\u003e selectedList \u003d new HashMap\u003c\u003e();"
       },
       {
         "lineNumber": 202,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return output.toString();"
+        "content": "        int count \u003d 0;"
       },
       {
         "lineNumber": 203,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "        count \u003d addAndCountTasksContainingKeyWord(keyword, selectedList, count);"
       },
       {
         "lineNumber": 204,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "        StringBuilder output \u003d new StringBuilder((count + \" task(s) were found containing keyword \" + keyword + \":\\n\"));"
       },
       {
         "lineNumber": 205,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private int addAndCountTasksContainingKeyWord(String keyword, HashMap\u003cInteger, Task\u003e selectedList, int count) {"
+        "content": "        for (Integer index : selectedList.keySet()) {"
       },
       {
         "lineNumber": 206,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        for (int j \u003d 0; j \u003c tasks.getList().size(); j++) {"
+        "content": "            output.append(index).append(\") \").append(selectedList.get(index)).append(\"\\n\");"
       },
       {
         "lineNumber": 207,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            Task task \u003d tasks.getTask(j);"
+        "content": "        }"
       },
       {
         "lineNumber": 208,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            String taskDescription \u003d task.getDescription();"
+        "content": "        return output.toString();"
       },
       {
         "lineNumber": 209,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            String[] descriptionByWord \u003d taskDescription.split(\" \");"
+        "content": "    }"
       },
       {
         "lineNumber": 210,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            for (String s : descriptionByWord) {"
+        "content": ""
       },
       {
         "lineNumber": 211,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                if (s.contains(keyword)) {"
+        "content": "    private int addAndCountTasksContainingKeyWord(String keyword, HashMap\u003cInteger, Task\u003e selectedList, int count) {"
       },
       {
         "lineNumber": 212,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    selectedList.put(j + 1, task);"
+        "content": "        for (int j \u003d 0; j \u003c tasks.getList().size(); j++) {"
       },
       {
         "lineNumber": 213,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    count++;"
+        "content": "            Task task \u003d tasks.getTask(j);"
       },
       {
         "lineNumber": 214,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    break;"
+        "content": "            String taskDescription \u003d task.getDescription();"
       },
       {
         "lineNumber": 215,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                }"
+        "content": "            String[] descriptionByWord \u003d taskDescription.split(\" \");"
       },
       {
         "lineNumber": 216,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            }"
+        "content": "            for (String s : descriptionByWord) {"
       },
       {
         "lineNumber": 217,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "                if (s.contains(keyword)) {"
       },
       {
         "lineNumber": 218,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return count;"
+        "content": "                    selectedList.put(j + 1, task);"
       },
       {
         "lineNumber": 219,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "                    count++;"
       },
       {
         "lineNumber": 220,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "                    break;"
       },
       {
         "lineNumber": 221,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private String printList(String[] instructionByWord, int lengthOfArray) throws DukeException {"
+        "content": "                }"
       },
       {
         "lineNumber": 222,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (lengthOfArray \u003d\u003d 1) {"
+        "content": "            }"
       },
       {
         "lineNumber": 223,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            return tasks.printList();"
+        "content": "        }"
       },
       {
         "lineNumber": 224,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        } else if (lengthOfArray \u003d\u003d 2) {"
+        "content": "        return count;"
       },
       {
         "lineNumber": 225,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            PriorityLevel level \u003d determinePriorityLevel(instructionByWord[1]);"
+        "content": "    }"
       },
       {
         "lineNumber": 226,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            return tasks.printListBasedOnPriority(level);"
+        "content": ""
       },
       {
         "lineNumber": 227,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        } else {"
+        "content": "    private String printList(String[] instructionByWord, int lengthOfArray) throws DukeException {"
       },
       {
         "lineNumber": 228,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwWrongFormatException(\"\\\"list\\\"\" + \" OR \" + \"\\\"list a_priority_level\""
+        "content": "        if (lengthOfArray \u003d\u003d 1) {"
       },
       {
         "lineNumber": 229,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    + \" (which include: l/low [not important], n/normal [ordinary],\""
+        "content": "            return tasks.printList();"
       },
       {
         "lineNumber": 230,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    + \" h/high [important], t/top [very important])\\\"\");"
+        "content": "        } else if (lengthOfArray \u003d\u003d 2) {"
       },
       {
         "lineNumber": 231,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "            PriorityLevel level \u003d determinePriorityLevel(instructionByWord[1]);"
       },
       {
         "lineNumber": 232,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return \"\";"
+        "content": "            return tasks.printListBasedOnPriority(level);"
       },
       {
         "lineNumber": 233,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "        } else {"
       },
       {
         "lineNumber": 234,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "            ui.throwWrongFormatException(\"\\\"list\\\"\" + \" OR \" + \"\\\"list a_priority_level\""
       },
       {
         "lineNumber": 235,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private String prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {"
+        "content": "                    + \" (which include: l/low [not important], n/normal [ordinary],\""
       },
       {
         "lineNumber": 236,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (lengthOfArray !\u003d 3) {"
+        "content": "                    + \" h/high [important], t/top [very important])\\\"\");"
       },
       {
         "lineNumber": 237,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwWrongFormatException(\"\\\"priority index_of_the_task\\n(a positive integer) level_of_priority\""
+        "content": "        }"
       },
       {
         "lineNumber": 238,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    + \" (which include: l/low\\n[not important], n/normal [ordinary],\""
+        "content": "        return \"\";"
       },
       {
         "lineNumber": 239,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    + \" h/high [important], t/top [very important])\\\"\");"
+        "content": "    }"
       },
       {
         "lineNumber": 240,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": ""
       },
       {
         "lineNumber": 241,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        int index \u003d getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;"
+        "content": "    private String prioritiseTask(String[] instructionByWord, int lengthOfArray) throws DukeException {"
       },
       {
         "lineNumber": 242,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        checkIfIndexIsValid(index);"
+        "content": "        if (lengthOfArray !\u003d 3) {"
       },
       {
         "lineNumber": 243,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        String output \u003d assignPriorityToTask(instructionByWord[2], index);"
+        "content": "            ui.throwWrongFormatException(\"\\\"priority index_of_the_task\\n(a positive integer) level_of_priority\""
       },
       {
         "lineNumber": 244,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        storage.writeToFile(tasks.getList());"
+        "content": "                    + \" (which include: l/low\\n[not important], n/normal [ordinary],\""
       },
       {
         "lineNumber": 245,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return output;"
+        "content": "                    + \" h/high [important], t/top [very important])\\\"\");"
       },
       {
         "lineNumber": 246,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 247,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "        int index \u003d getIndexOfTaskToBePrioritised(instructionByWord) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;"
       },
       {
         "lineNumber": 248,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private int getIndexOfTaskToBePrioritised(String[] instructionByWord) throws DukeException {"
+        "content": "        checkIfIndexIsValid(index);"
       },
       {
         "lineNumber": 249,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        int index \u003d -1;"
+        "content": "        String output \u003d assignPriorityToTask(instructionByWord[2], index);"
       },
       {
         "lineNumber": 250,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        try {"
+        "content": "        storage.writeToFile(tasks.getList());"
       },
       {
         "lineNumber": 251,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            index \u003d Integer.parseInt(instructionByWord[1]);"
+        "content": "        return output;"
       },
       {
         "lineNumber": 252,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        } catch (NumberFormatException e) {"
+        "content": "    }"
       },
       {
         "lineNumber": 253,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwWrongFormatException(\"\\\"priority index_of_the_task level_of_priority\""
+        "content": ""
       },
       {
         "lineNumber": 254,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                    + \"(which can be one of the following: h/high, t/top)\\\"\");"
+        "content": "    private int getIndexOfTaskToBePrioritised(String[] instructionByWord) throws DukeException {"
       },
       {
         "lineNumber": 255,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "        int index \u003d -1;"
       },
       {
         "lineNumber": 256,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return index;"
+        "content": "        try {"
       },
       {
         "lineNumber": 257,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "            index \u003d Integer.parseInt(instructionByWord[1]);"
       },
       {
         "lineNumber": 258,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "        } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 259,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private void checkIfIndexIsValid(int index) throws DukeException {"
+        "content": "            ui.throwWrongFormatException(\"\\\"priority index_of_the_task level_of_priority\""
       },
       {
         "lineNumber": 260,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (index \u003c 0 || index \u003e\u003d tasks.getList().size()) {"
+        "content": "                    + \"(which can be one of the following: h/high, t/top)\\\"\");"
       },
       {
         "lineNumber": 261,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwInvalidIndexException();"
+        "content": "        }"
       },
       {
         "lineNumber": 262,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "        return index;"
       },
       {
         "lineNumber": 263,
@@ -8692,472 +8692,514 @@
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private String assignPriorityToTask(String priorityLevel, int index) throws DukeException {"
+        "content": "    private void checkIfIndexIsValid(int index) throws DukeException {"
       },
       {
         "lineNumber": 266,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        PriorityLevel level \u003d determinePriorityLevel(priorityLevel);"
+        "content": "        if (index \u003c 0 || index \u003e\u003d tasks.getList().size()) {"
       },
       {
         "lineNumber": 267,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return tasks.assignPriorityToTask(index, level);"
+        "content": "            ui.throwInvalidIndexException();"
       },
       {
         "lineNumber": 268,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "        }"
       },
       {
         "lineNumber": 269,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "    }"
       },
       {
         "lineNumber": 270,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private PriorityLevel determinePriorityLevel(String priorityLevel) throws DukeException {"
+        "content": ""
       },
       {
         "lineNumber": 271,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        switch (priorityLevel) {"
+        "content": "    private String assignPriorityToTask(String priorityLevel, int index) throws DukeException {"
       },
       {
         "lineNumber": 272,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"h\":"
+        "content": "        PriorityLevel level \u003d determinePriorityLevel(priorityLevel);"
       },
       {
         "lineNumber": 273,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            // Fallthrough"
+        "content": "        return tasks.assignPriorityToTask(index, level);"
       },
       {
         "lineNumber": 274,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"high\":"
+        "content": "    }"
       },
       {
         "lineNumber": 275,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            return PriorityLevel.HIGH;"
+        "content": ""
       },
       {
         "lineNumber": 276,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"l\":"
+        "content": "    private PriorityLevel determinePriorityLevel(String priorityLevel) throws DukeException {"
       },
       {
         "lineNumber": 277,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            // Fallthrough"
+        "content": "        switch (priorityLevel) {"
       },
       {
         "lineNumber": 278,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"low\":"
+        "content": "        case \"h\":"
       },
       {
         "lineNumber": 279,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            return PriorityLevel.LOW;"
+        "content": "            // Fallthrough"
       },
       {
         "lineNumber": 280,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"n\":"
+        "content": "        case \"high\":"
       },
       {
         "lineNumber": 281,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            // Fallthrough"
+        "content": "            return PriorityLevel.HIGH;"
       },
       {
         "lineNumber": 282,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"normal\":"
+        "content": "        case \"l\":"
       },
       {
         "lineNumber": 283,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            return PriorityLevel.NORMAL;"
+        "content": "            // Fallthrough"
       },
       {
         "lineNumber": 284,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"t\":"
+        "content": "        case \"low\":"
       },
       {
         "lineNumber": 285,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            // Fallthrough"
+        "content": "            return PriorityLevel.LOW;"
       },
       {
         "lineNumber": 286,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        case \"top\":"
+        "content": "        case \"n\":"
       },
       {
         "lineNumber": 287,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            return PriorityLevel.TOP;"
+        "content": "            // Fallthrough"
       },
       {
         "lineNumber": 288,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        default:"
+        "content": "        case \"normal\":"
       },
       {
         "lineNumber": 289,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwInvalidLevelException();"
+        "content": "            return PriorityLevel.NORMAL;"
       },
       {
         "lineNumber": 290,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "        case \"t\":"
       },
       {
         "lineNumber": 291,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return PriorityLevel.NORMAL;"
+        "content": "            // Fallthrough"
       },
       {
         "lineNumber": 292,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "        case \"top\":"
       },
       {
         "lineNumber": 293,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "            return PriorityLevel.TOP;"
       },
       {
         "lineNumber": 294,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private String doneOrRemoveTask(String command, String[] instructionByWord, int lengthOfArray)"
+        "content": "        default:"
       },
       {
         "lineNumber": 295,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            throws DukeException {"
+        "content": "            ui.throwInvalidLevelException();"
       },
       {
         "lineNumber": 296,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        assert command.equals(\"done\") || command.equals(\"remove\") :"
+        "content": "        }"
       },
       {
         "lineNumber": 297,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                \"only two types of commands (done and remove) are considered for this method\";"
+        "content": "        return PriorityLevel.NORMAL;"
       },
       {
         "lineNumber": 298,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (lengthOfArray !\u003d 2) {"
+        "content": "    }"
       },
       {
         "lineNumber": 299,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            if (command.equals(\"done\")) {"
+        "content": ""
       },
       {
         "lineNumber": 300,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                ui.throwWrongFormatException("
+        "content": "    private String doneOrRemoveTask(String command, String[] instructionByWord, int lengthOfArray)"
       },
       {
         "lineNumber": 301,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                        \"\\n\\\"done index_of_the_task_completed (a positive integer)\\\"\");"
+        "content": "            throws DukeException {"
       },
       {
         "lineNumber": 302,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            } else {"
+        "content": "        assert command.equals(\"done\") || command.equals(\"remove\") :"
       },
       {
         "lineNumber": 303,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                ui.throwWrongFormatException("
+        "content": "                \"only two types of commands (done and remove) are considered for this method\";"
       },
       {
         "lineNumber": 304,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                        \"\\\"remove index_of_the_task_you_want_to_remove (a positive integer)\\\"\");"
+        "content": "        if (lengthOfArray !\u003d 2) {"
       },
       {
         "lineNumber": 305,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            }"
+        "content": "            if (command.equals(\"done\")) {"
       },
       {
         "lineNumber": 306,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "                ui.throwWrongFormatException("
       },
       {
         "lineNumber": 307,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        try {"
+        "content": "                        \"\\n\\\"done index_of_the_task_completed (a positive integer)\\\"\");"
       },
       {
         "lineNumber": 308,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            int index \u003d Integer.parseInt(instructionByWord[1]) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;"
+        "content": "            } else {"
       },
       {
         "lineNumber": 309,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            String output;"
+        "content": "                ui.throwWrongFormatException("
       },
       {
         "lineNumber": 310,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            checkIfIndexIsValid(index);"
+        "content": "                        \"\\\"remove index_of_the_task_you_want_to_remove (a positive integer)\\\"\");"
       },
       {
         "lineNumber": 311,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            if (command.equals(\"done\")) {"
+        "content": "            }"
       },
       {
         "lineNumber": 312,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                output \u003d tasks.markATaskDone(index);"
+        "content": "        }"
       },
       {
         "lineNumber": 313,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            } else {"
+        "content": "        try {"
       },
       {
         "lineNumber": 314,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                output \u003d tasks.removeATask(index);"
+        "content": "            int index \u003d Integer.parseInt(instructionByWord[1]) - ONE_TO_CONVERT_BETWEEN_1_BASED_AND_0_BASED_INDEX;"
       },
       {
         "lineNumber": 315,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            }"
+        "content": "            String output;"
       },
       {
         "lineNumber": 316,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            storage.writeToFile(tasks.getList());"
+        "content": "            checkIfIndexIsValid(index);"
       },
       {
         "lineNumber": 317,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            return output;"
+        "content": "            if (command.equals(\"done\")) {"
       },
       {
         "lineNumber": 318,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        } catch (NumberFormatException e) {"
+        "content": "                output \u003d tasks.markATaskDone(index);"
       },
       {
         "lineNumber": 319,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwWrongFormatException(\"\\\"done a_positive_integer\\\"\");"
+        "content": "            } else {"
       },
       {
         "lineNumber": 320,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "                output \u003d tasks.removeATask(index);"
       },
       {
         "lineNumber": 321,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return \"\";"
+        "content": "            }"
       },
       {
         "lineNumber": 322,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "            storage.writeToFile(tasks.getList());"
       },
       {
         "lineNumber": 323,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": ""
+        "content": "            return output;"
       },
       {
         "lineNumber": 324,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    private Task createATodoTask(String[] instructionByWord, int lengthOfArray) throws DukeException {"
+        "content": "        } catch (NumberFormatException e) {"
       },
       {
         "lineNumber": 325,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        if (lengthOfArray \u003d\u003d 1) {"
+        "content": "            ui.throwWrongFormatException(\"\\\"done a_positive_integer\\\"\");"
       },
       {
         "lineNumber": 326,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "            ui.throwWrongFormatException(\"\\n\\\"todo a_string_describing_the_task\\\"\");"
+        "content": "        }"
       },
       {
         "lineNumber": 327,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        }"
+        "content": "        return \"\";"
       },
       {
         "lineNumber": 328,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        String description \u003d String.join(\" \","
+        "content": "    }"
       },
       {
         "lineNumber": 329,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "                Arrays.copyOfRange(instructionByWord, 1, lengthOfArray));"
+        "content": ""
       },
       {
         "lineNumber": 330,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "        return new Todo(false, description, PriorityLevel.NORMAL);"
+        "content": "    private Task createATodoTask(String[] instructionByWord, int lengthOfArray) throws DukeException {"
       },
       {
         "lineNumber": 331,
         "author": {
           "gitId": "lm5lm5"
         },
-        "content": "    }"
+        "content": "        if (lengthOfArray \u003d\u003d 1) {"
       },
       {
         "lineNumber": 332,
+        "author": {
+          "gitId": "lm5lm5"
+        },
+        "content": "            ui.throwWrongFormatException(\"\\n\\\"todo a_string_describing_the_task\\\"\");"
+      },
+      {
+        "lineNumber": 333,
+        "author": {
+          "gitId": "lm5lm5"
+        },
+        "content": "        }"
+      },
+      {
+        "lineNumber": 334,
+        "author": {
+          "gitId": "lm5lm5"
+        },
+        "content": "        String description \u003d String.join(\" \","
+      },
+      {
+        "lineNumber": 335,
+        "author": {
+          "gitId": "lm5lm5"
+        },
+        "content": "                Arrays.copyOfRange(instructionByWord, 1, lengthOfArray));"
+      },
+      {
+        "lineNumber": 336,
+        "author": {
+          "gitId": "lm5lm5"
+        },
+        "content": "        return new Todo(false, description, PriorityLevel.NORMAL);"
+      },
+      {
+        "lineNumber": 337,
+        "author": {
+          "gitId": "lm5lm5"
+        },
+        "content": "    }"
+      },
+      {
+        "lineNumber": 338,
         "author": {
           "gitId": "lm5lm5"
         },
@@ -9165,7 +9207,7 @@
       }
     ],
     "authorContributionMap": {
-      "lm5lm5": 332
+      "lm5lm5": 338
     }
   },
   {
