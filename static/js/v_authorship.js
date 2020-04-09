@@ -41,16 +41,11 @@ window.vAuthorship = {
       totalBlankLineCount: '',
       filesSortType: 'lineOfCode',
       toReverseSortFiles: true,
-      hasActiveFile: true,
       filterSearch: '*',
     };
   },
 
   watch: {
-    selectedFiles() {
-      setTimeout(this.updateCount, 0);
-    },
-
     filterType() {
       if (this.filterType === 'checkboxes') {
         const searchBar = document.getElementById('search');
@@ -104,19 +99,22 @@ window.vAuthorship = {
       encodeHash();
     },
 
-    expandAll(hasActiveFile) {
-      const renameValue = hasActiveFile ? 'file active' : 'file';
-
-      const files = document.getElementsByClassName('file');
-      Array.from(files).forEach((file) => {
-        file.className = renameValue;
+    expandAll() {
+      this.selectedFiles.forEach((file) => {
+        file.active = true;
+        file.wasCodeLoaded = true;
       });
-
-      this.hasActiveFile = hasActiveFile;
     },
 
-    updateCount() {
-      this.hasActiveFile = document.getElementsByClassName('file active').length > 0;
+    collapseAll() {
+      this.selectedFiles.forEach((file) => {
+        file.active = false;
+      });
+    },
+
+    toggleFileActiveProperty(file) {
+      file.active = !file.active;
+      file.wasCodeLoaded = file.wasCodeLoaded || file.active;
     },
 
     hasCommits(info) {
@@ -164,6 +162,7 @@ window.vAuthorship = {
     },
 
     processFiles(files) {
+      const COLLAPSED_VIEW_LINE_COUNT_THRESHOLD = 2000;
       const res = [];
       const fileTypeBlanksInfoObj = {};
       let totalLineCount = 0;
@@ -176,6 +175,8 @@ window.vAuthorship = {
           const out = {};
           out.path = file.path;
           out.lineCount = lineCnt;
+          out.active = lineCnt <= COLLAPSED_VIEW_LINE_COUNT_THRESHOLD;
+          out.wasCodeLoaded = lineCnt <= COLLAPSED_VIEW_LINE_COUNT_THRESHOLD;
           out.fileType = file.fileType;
 
           const segmentInfo = this.splitSegments(file.lines);
@@ -281,6 +282,10 @@ window.vAuthorship = {
           .sort(this.sortingFunction);
     },
 
+    activeFilesCount() {
+      return this.selectedFiles.filter((file) => file.active).length;
+    },
+
     getFileTypeExistingLinesObj() {
       const numLinesModified = {};
       Object.entries(this.filesLinesObj)
@@ -296,6 +301,7 @@ window.vAuthorship = {
     this.initiate();
     this.setInfoHash();
   },
+
   components: {
     vSegment: window.vSegment,
   },
