@@ -3493,409 +3493,395 @@
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "import sharadhr.duke.exception.DukeInvalidArgumentException;"
+        "content": "import sharadhr.duke.exception.DukeInvalidDateTimeException;"
       },
       {
         "lineNumber": 5,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "import sharadhr.duke.exception.DukeInvalidDateTimeException;"
+        "content": "import sharadhr.duke.io.Output;"
       },
       {
         "lineNumber": 6,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "import sharadhr.duke.io.Output;"
+        "content": "import sharadhr.duke.io.Storage;"
       },
       {
         "lineNumber": 7,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "import sharadhr.duke.io.Storage;"
+        "content": "import sharadhr.duke.task.TaskList;"
       },
       {
         "lineNumber": 8,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "import sharadhr.duke.task.TaskList;"
+        "content": ""
       },
       {
         "lineNumber": 9,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": ""
+        "content": "/**"
       },
       {
         "lineNumber": 10,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "/**"
+        "content": " * Models a possible user command to the Duke program."
       },
       {
         "lineNumber": 11,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": " * Models a possible user command to the Duke program."
+        "content": " */"
       },
       {
         "lineNumber": 12,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": " */"
+        "content": "public abstract class Command {"
       },
       {
         "lineNumber": 13,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "public abstract class Command {"
+        "content": "    protected CommandName commandName;"
       },
       {
         "lineNumber": 14,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    protected CommandName commandName;"
+        "content": "    protected String[] argumentTokens;"
       },
       {
         "lineNumber": 15,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    protected String[] argumentTokens;"
+        "content": ""
       },
       {
         "lineNumber": 16,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 17,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    /**"
+        "content": "     * Creates a {@link Command}, with a {@link String}[] that contains the tokenised arguments"
       },
       {
         "lineNumber": 18,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * Creates a {@link Command}, with a {@link String}[] that contains the tokenised arguments"
+        "content": "     * to the command, from the user input."
       },
       {
         "lineNumber": 19,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * to the command, from the user input."
+        "content": "     *"
       },
       {
         "lineNumber": 20,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     *"
+        "content": "     * @param argumentTokens the tokenised input from the user minus the first token"
       },
       {
         "lineNumber": 21,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @param argumentTokens the tokenised input from the user minus the first token"
+        "content": "     */"
       },
       {
         "lineNumber": 22,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     */"
+        "content": "    public Command(String... argumentTokens) {"
       },
       {
         "lineNumber": 23,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    public Command(String... argumentTokens) {"
+        "content": "        this.argumentTokens \u003d argumentTokens;"
       },
       {
         "lineNumber": 24,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        this.argumentTokens \u003d argumentTokens;"
+        "content": "    }"
       },
       {
         "lineNumber": 25,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 26,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": ""
+        "content": "    public static CommandName whichCommand(String token) {"
       },
       {
         "lineNumber": 27,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    public static CommandName whichCommand(String token) {"
+        "content": "        for (CommandName cmdname : CommandName.values()) {"
       },
       {
         "lineNumber": 28,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        for (CommandName cmdname : CommandName.values()) {"
+        "content": "            if (token.equalsIgnoreCase(cmdname.toString())) {"
       },
       {
         "lineNumber": 29,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            if (token.equalsIgnoreCase(cmdname.toString())) {"
+        "content": "                return cmdname;"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "                return cmdname;"
+        "content": "            } else if (token.isBlank()) {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            } else if (token.isBlank()) {"
+        "content": "                return CommandName.EMPTY;"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "                return CommandName.EMPTY;"
+        "content": "            }"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            }"
+        "content": "        }"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        }"
+        "content": "        return CommandName.INVALID;"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        return CommandName.INVALID;"
+        "content": "    }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    }"
+        "content": ""
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": ""
+        "content": "    /**"
       },
       {
         "lineNumber": 38,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    /**"
+        "content": "     * Executes this command, by calling appropriate methods from the objects passed to this"
       },
       {
         "lineNumber": 39,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * Executes this command, by calling appropriate methods from the objects passed to this"
+        "content": "     * {@link Command}."
       },
       {
         "lineNumber": 40,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * {@link Command}."
+        "content": "     *"
       },
       {
         "lineNumber": 41,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     *"
+        "content": "     * @param tasks   A {@link TaskList} to be operated upon"
       },
       {
         "lineNumber": 42,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @param tasks   A {@link TaskList} to be operated upon"
+        "content": "     * @param storage A {@link Storage} object for file I/O"
       },
       {
         "lineNumber": 43,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @param storage A {@link Storage} object for file I/O"
+        "content": "     * @param output  An {@link Output} object to write to the standard output"
       },
       {
         "lineNumber": 44,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @param output  An {@link Output} object to write to the standard output"
+        "content": "     * @throws DukeEmptyDetailException     If the detail in this command is empty"
       },
       {
         "lineNumber": 45,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @throws DukeEmptyDetailException     If the detail in this command is empty"
+        "content": "     * @throws DukeInvalidDateTimeException If the date in this command cannot be parsed"
       },
       {
         "lineNumber": 46,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @throws DukeInvalidDateTimeException If the date in this command cannot be parsed"
+        "content": "     */"
       },
       {
         "lineNumber": 47,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @throws DukeInvalidArgumentException"
+        "content": "    public abstract void execute(TaskList tasks, Storage storage, Output output)"
       },
       {
         "lineNumber": 48,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     */"
+        "content": "        throws DukeEmptyDetailException, DukeInvalidDateTimeException;"
       },
       {
         "lineNumber": 49,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    public abstract void execute(TaskList tasks, Storage storage, Output output)"
+        "content": ""
       },
       {
         "lineNumber": 50,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        throws DukeEmptyDetailException, DukeInvalidDateTimeException, DukeInvalidArgumentException;"
+        "content": "    /**"
       },
       {
         "lineNumber": 51,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": ""
+        "content": "     * @return"
       },
       {
         "lineNumber": 52,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    /**"
+        "content": "     */"
       },
       {
         "lineNumber": 53,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     * @return"
+        "content": "    public boolean willTerminate() {"
       },
       {
         "lineNumber": 54,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "     */"
+        "content": "        return false;"
       },
       {
         "lineNumber": 55,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    public boolean willTerminate() {"
+        "content": "    }"
       },
       {
         "lineNumber": 56,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        return false;"
+        "content": ""
       },
       {
         "lineNumber": 57,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    }"
+        "content": "    public enum CommandName {"
       },
       {
         "lineNumber": 58,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": ""
+        "content": "        TODO, DEADLINE, EVENT, LIST, DONE, FIND, DELETE, FROM, BY, AT, ON, EMPTY, INVALID, BYE"
       },
       {
         "lineNumber": 59,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    public enum CommandName {"
-      },
-      {
-        "lineNumber": 60,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "        TODO, DEADLINE, EVENT, LIST, DONE, FIND, DELETE, FROM, BY, AT, ON, EMPTY, INVALID, BYE"
-      },
-      {
-        "lineNumber": 61,
-        "author": {
-          "gitId": "sharadhr"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 62,
+        "lineNumber": 60,
         "author": {
           "gitId": "sharadhr"
         },
@@ -3903,7 +3889,7 @@
       }
     ],
     "authorContributionMap": {
-      "sharadhr": 62
+      "sharadhr": 60
     }
   },
   {
@@ -4132,80 +4118,45 @@
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    @Override public void execute(TaskList tasks, Storage storage, Output output) throws DukeInvalidArgumentException"
+        "content": "    @Override public void execute(TaskList tasks, Storage storage, Output output) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    {"
+        "content": "        if (this.position \u003e\u003d 1 \u0026\u0026 this.position \u003c\u003d tasks.numberOfTasks()) {"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        if (this.position \u003e\u003d 1 \u0026\u0026 this.position \u003c\u003d tasks.numberOfTasks())"
+        "content": "            output.sayTaskDeleted(tasks.getTaskAtPosition(position));"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        {"
+        "content": "            tasks.deleteTaskAtPosition(position);"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            output.sayTaskDeleted(tasks.getTaskAtPosition(position));"
+        "content": "        }"
       },
       {
         "lineNumber": 37,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            tasks.deleteTaskAtPosition(position);"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "        else"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "            throw new DukeInvalidArgumentException(\"This item cannot be deleted.\", argumentTokens, commandName,"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "                    this.getClass().getSimpleName());"
-      },
-      {
-        "lineNumber": 42,
-        "author": {
-          "gitId": "sharadhr"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 43,
+        "lineNumber": 38,
         "author": {
           "gitId": "sharadhr"
         },
@@ -4213,7 +4164,7 @@
       }
     ],
     "authorContributionMap": {
-      "sharadhr": 43
+      "sharadhr": 38
     }
   },
   {
@@ -4421,94 +4372,59 @@
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    @Override public void execute(TaskList tasks, Storage storage, Output output) throws DukeInvalidArgumentException"
+        "content": "    @Override public void execute(TaskList tasks, Storage storage, Output output) {"
       },
       {
         "lineNumber": 30,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "    {"
+        "content": "        if ((this.position \u003e\u003d 1) \u0026\u0026 this.position \u003c\u003d tasks.numberOfTasks()) {"
       },
       {
         "lineNumber": 31,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        if ((this.position \u003e\u003d 1) \u0026\u0026 this.position \u003c\u003d tasks.numberOfTasks())"
+        "content": "            Task toComplete \u003d tasks.getTaskAtPosition(position);"
       },
       {
         "lineNumber": 32,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "        {"
+        "content": "            if (toComplete.markComplete()) {"
       },
       {
         "lineNumber": 33,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            Task toComplete \u003d tasks.getTaskAtPosition(position);"
+        "content": "                output.sayTaskMarkedComplete(toComplete);"
       },
       {
         "lineNumber": 34,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            if (toComplete.markComplete())"
+        "content": "            }"
       },
       {
         "lineNumber": 35,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "            {"
+        "content": "        }"
       },
       {
         "lineNumber": 36,
         "author": {
           "gitId": "sharadhr"
         },
-        "content": "                output.sayTaskMarkedComplete(toComplete);"
-      },
-      {
-        "lineNumber": 37,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "            }"
-      },
-      {
-        "lineNumber": 38,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "        }"
-      },
-      {
-        "lineNumber": 39,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "        throw new DukeInvalidArgumentException(\"There is no such item in the list.\", argumentTokens, commandName,"
-      },
-      {
-        "lineNumber": 40,
-        "author": {
-          "gitId": "sharadhr"
-        },
-        "content": "                this.getClass().getSimpleName());"
-      },
-      {
-        "lineNumber": 41,
-        "author": {
-          "gitId": "sharadhr"
-        },
         "content": "    }"
       },
       {
-        "lineNumber": 42,
+        "lineNumber": 37,
         "author": {
           "gitId": "sharadhr"
         },
@@ -4516,7 +4432,7 @@
       }
     ],
     "authorContributionMap": {
-      "sharadhr": 42
+      "sharadhr": 37
     }
   },
   {
