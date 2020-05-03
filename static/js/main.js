@@ -96,8 +96,6 @@ Vue.directive('hljs', {
   },
 });
 
-Vue.component('font-awesome-icon', window['vue-fontawesome'].FontAwesomeIcon);
-
 window.app = new window.Vue({
   el: '#app',
   data: {
@@ -193,7 +191,13 @@ window.app = new window.Vue({
       window.addHash('tabOpen', this.isTabActive);
       window.removeHash('tabType');
       this.removeZoomHashes();
+      this.removeAuthorshipHashes();
       window.encodeHash();
+    },
+
+    removeAuthorshipHashes() {
+      window.removeHash('tabAuthor');
+      window.removeHash('tabRepo');
     },
 
     removeZoomHashes() {
@@ -205,6 +209,10 @@ window.app = new window.Vue({
       window.removeHash('zFGS');
       window.removeHash('zFTF');
       window.removeHash('zMG');
+      window.removeHash('zSO');
+      window.removeHash('zSWO');
+      window.removeHash('zSD');
+      window.removeHash('zSWD');
     },
 
     updateTabAuthorship(obj) {
@@ -213,6 +221,7 @@ window.app = new window.Vue({
       this.activateTab('authorship');
     },
     updateTabZoom(obj) {
+      this.removeAuthorshipHashes();
       this.tabInfo.tabZoom = Object.assign({}, obj);
       this.activateTab('zoom');
     },
@@ -227,11 +236,10 @@ window.app = new window.Vue({
       const info = {
         author: hash.tabAuthor,
         repo: hash.tabRepo,
-        isMergeGroup: hash.authorshipIsMergeGroup === 'true',
         minDate,
         maxDate,
       };
-      const tabInfoLength = Object.values(info).filter((x) => x !== null).length;
+      const tabInfoLength = Object.values(info).filter((x) => x).length;
       if (Object.keys(info).length === tabInfoLength) {
         this.updateTabAuthorship(info);
       } else if (hash.tabOpen === 'false' || tabInfoLength > 2) {
@@ -250,6 +258,10 @@ window.app = new window.Vue({
         zFilterGroup: hash.zFGS,
         zTimeFrame: hash.zFTF,
         zIsMerge: hash.zMG === 'true',
+        zSorting: hash.zSO,
+        zSortingWithin: hash.zSWO,
+        zIsSortingDsc: hash.zSD === 'true',
+        zIsSortingWithinDsc: hash.zSWD === 'true',
       };
       const tabInfoLength = Object.values(zoomInfo).filter((x) => x !== null).length;
       if (Object.keys(zoomInfo).length === tabInfoLength) {

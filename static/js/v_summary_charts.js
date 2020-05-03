@@ -167,15 +167,6 @@ window.vSummaryCharts = {
       return fileTypes;
     },
 
-    getGroupTotalContribution(group) {
-      const property = this.filterBreakdown ? 'checkedFileTypeContribution' : 'totalCommits';
-      return group.reduce((acc, ele) => acc + ele[property], 0);
-    },
-
-    getUserTotalContribution(user) {
-      return this.filterBreakdown ? user.checkedFileTypeContribution : user.totalCommits;
-    },
-
     getContributionBars(totalContribution) {
       const res = [];
       const contributionLimit = (this.avgContributionSize * 2);
@@ -210,7 +201,7 @@ window.vSummaryCharts = {
 
     // triggering opening of tabs //
     openTabAuthorship(user, repo, index) {
-      const { minDate, maxDate, fileTypeColors } = this;
+      const { minDate, maxDate } = this;
 
       this.$parent.$emit('view-authorship', {
         minDate,
@@ -218,11 +209,9 @@ window.vSummaryCharts = {
         author: user.name,
         repo: user.repoName,
         name: user.displayName,
-        isMergeGroup: this.isMergeGroup,
         location: this.getRepoLink(repo[index]),
         repoIndex: index,
         totalCommits: user.totalCommits,
-        fileTypeColors,
       });
     },
 
@@ -239,7 +228,8 @@ window.vSummaryCharts = {
 
     openTabZoom(user, since, until) {
       const {
-        avgCommitSize, filterGroupSelection, filterTimeFrame, isMergeGroup,
+        avgCommitSize, filterGroupSelection, filterTimeFrame, isMergeGroup, sortingOption,
+        sortingWithinOption, isSortingDsc, isSortingWithinDsc,
       } = this;
       const clonedUser = Object.assign({}, user); // so that changes in summary won't affect zoom
       this.$parent.$emit('view-zoom', {
@@ -253,6 +243,10 @@ window.vSummaryCharts = {
         zSince: since,
         zUntil: until,
         zIsMerge: isMergeGroup,
+        zSorting: sortingOption,
+        zSortingWithin: sortingWithinOption,
+        zIsSortingDsc: isSortingDsc === 'dsc',
+        zIsSortingWithinDsc: isSortingWithinDsc === 'dsc',
       });
     },
 
@@ -261,6 +255,10 @@ window.vSummaryCharts = {
         return (Math.round((index + 1) * 1000 / this.filtered[0].length) / 10).toFixed(1);
       }
       return (Math.round((index + 1) * 1000 / this.filtered.length) / 10).toFixed(1);
+    },
+
+    getGroupTotalContribution(group) {
+      return group.reduce((accContribution, user) => accContribution + user.totalCommits, 0);
     },
   },
   components: {

@@ -1,3 +1,8 @@
+const commitSortDict = {
+  lineOfCode: (commit) => commit.insertions,
+  time: (commit) => commit.date,
+};
+
 window.vZoom = {
   props: ['info'],
   template: window.$('v_zoom').innerHTML,
@@ -12,12 +17,8 @@ window.vZoom = {
 
   computed: {
     sortingFunction() {
-      const commitSortFunction = this.commitsSortType === 'time'
-        ? (commit) => commit.date
-        : (commit) => commit.insertions;
-
       return (a, b) => (this.toReverseSortedCommits ? -1 : 1)
-        * window.comparator(commitSortFunction)(a, b);
+      * window.comparator(commitSortDict[this.commitsSortType])(a, b);
     },
     filteredUser() {
       const {
@@ -57,7 +58,7 @@ window.vZoom = {
     },
 
     getSliceLink(slice) {
-      if (this.info.zIsMerge) {
+      if (this.info.isMergeGroup) {
         return `${window.getBaseLink(slice.repoId)}/commit/${slice.hash}`;
       }
       return `${window.getBaseLink(this.info.zUser.repoId)}/commit/${slice.hash}`;
@@ -78,8 +79,8 @@ window.vZoom = {
     setInfoHash() {
       const { addHash, encodeHash } = window;
       const {
-        zAvgCommitSize, zSince, zUntil, zFilterGroup,
-        zTimeFrame, zIsMerge, zAuthor, zRepo,
+        zAvgCommitSize, zSince, zUntil, zFilterGroup, zTimeFrame, zIsMerge, zSorting,
+        zSortingWithin, zIsSortingDsc, zIsSortingWithinDsc, zAuthor, zRepo,
       } = this.info;
 
       addHash('zA', zAuthor);
@@ -90,6 +91,10 @@ window.vZoom = {
       addHash('zMG', zIsMerge);
       addHash('zFTF', zTimeFrame);
       addHash('zFGS', zFilterGroup);
+      addHash('zSO', zSorting);
+      addHash('zSWO', zSortingWithin);
+      addHash('zSD', zIsSortingDsc);
+      addHash('zSWD', zIsSortingWithinDsc);
       encodeHash();
     },
 
